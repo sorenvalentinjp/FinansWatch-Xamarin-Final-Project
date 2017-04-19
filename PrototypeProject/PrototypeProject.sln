@@ -16,6 +16,7 @@ Global
 		Prototype\Prototype\Prototype.projitems*{4cd99f4a-4dad-4937-b70b-46a1057e842d}*SharedItemsImports = 4
 		Prototype\Prototype\Prototype.projitems*{54181412-2709-414a-901f-e66fd6f4328d}*SharedItemsImports = 4
 		Prototype\Prototype\Prototype.projitems*{d76c2666-f5ad-4c5a-a3e5-b4b0c6a18560}*SharedItemsImports = 13
+		Prototype\Prototype\Prototype.projitems*{db8a585e-64d6-49ce-9205-18dca2e7a653}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
