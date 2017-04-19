@@ -1,4 +1,5 @@
 ﻿using Prototype.ModelControllers;
+using Prototype.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,9 @@ namespace Prototype
 
         async public void setLabelText()
         {
-            label1.Text = await articleController.getFrontPageArticles();
+            List<Article> articles = await articleController.getFrontPageArticles();
+
+            label1.Text = articles[0].title;
         }
 	}
 }

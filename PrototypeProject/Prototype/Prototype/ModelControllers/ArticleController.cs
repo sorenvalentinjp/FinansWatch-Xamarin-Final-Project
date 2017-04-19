@@ -1,4 +1,7 @@
-﻿using Prototype.Database;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Prototype.Database;
+using Prototype.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,18 +19,19 @@ namespace Prototype.ModelControllers
             contentAPI = new ContentAPI();
         }
 
-        public Task<string> getFrontPageArticles()
+        public async Task<List<Article>> getFrontPageArticles()
         {
+            List<Article> articles = new List<Article>();
+            //JObject json = JObject.Parse(await contentAPI.downloadFrontPageArticles());
+            dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadFrontPageArticles());
 
-            //Debug.WriteLine("BEFORE-----------------------------------------------");
+            foreach(var article in json)
+            {
+                string title = article.titles.FRONTPAGE;
+                articles.Add(new Article(title));
+            }
 
-            //Debug.WriteLine(contentAPI.downloadFrontPageArticles());
-
-            //Debug.WriteLine("AFTER-----------------------------------------------");
-
-
-
-            return contentAPI.downloadFrontPageArticles();
+            return articles;
         }
     }
 }

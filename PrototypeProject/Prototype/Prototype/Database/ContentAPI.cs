@@ -14,6 +14,7 @@ namespace Prototype.Database
 
         public ContentAPI()
         {
+            //Initialize httpclient using variables stored in the Constants class
             var authData = string.Format("{0}:{1}", Constants.contentAPIUsername, Constants.contentAPIkey);
             var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
 
@@ -22,6 +23,10 @@ namespace Prototype.Database
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
         }
 
+        /// <summary>
+        /// Downloads all front page articles and returns them as a string
+        /// </summary>
+        /// <returns></returns>
         public async Task<string> downloadFrontPageArticles()
         {
             var toReturn = "";
@@ -35,7 +40,6 @@ namespace Prototype.Database
                 if(response.IsSuccessStatusCode)
                 {
                     toReturn = await response.Content.ReadAsStringAsync();
-                    //Debug.WriteLine(toReturn);
                 }
             } catch(Exception ex)
             {
