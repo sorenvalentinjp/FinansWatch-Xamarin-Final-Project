@@ -15,9 +15,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\ContentAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\IContentAPI.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)ModelControllers\ArticleController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Article.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\FrontPageView.xaml.cs">
@@ -29,10 +26,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

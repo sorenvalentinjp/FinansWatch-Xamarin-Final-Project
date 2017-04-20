@@ -51,22 +51,7 @@ namespace Prototype.ModelControllers
                 String publishedDateString = article.publishedDate;
                 DateTime publishedDate = DateTime.ParseExact(publishedDateString, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
 
-
-                //string Title = article.titles.FRONTPAGE;
-                //string ContentURL = article.contentUrl;
-                //string BodyText 
-                //string Section 
-                //Boolean Locked 
-                //DateTime PublishedDate 
-                //DateTime LastModified
-                //string ImageBigURL
-                //string ImageSmallURL
-                //string ImageThumbURL
-                //string PublishInfo
-                //int HomeSectionId
-                //int Id
-                //string ImageCaption
-
+                //Save fields
                 newArt.Title = title;
                 newArt.ContentURL = contentURL;
                 newArt.HomeSectionId = homeSectionId;
