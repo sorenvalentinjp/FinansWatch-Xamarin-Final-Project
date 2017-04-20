@@ -24090,14 +24090,14 @@
     "UAP,Version=v10.0": []
   },
   "packageFolders": {
-    "C:\\Users\\duck2412\\.nuget\\packages\\": {}
+    "C:\\Users\\micha\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Users\\duck2412\\Documents\\GitRepos\\Xamarin-app\\PrototypeProject\\Prototype\\Prototype.UWP\\Prototype.UWP.csproj",
+      "projectUniqueName": "C:\\Users\\micha\\Documents\\Git - JP\\Xamarin-app\\PrototypeProject\\Prototype\\Prototype.UWP\\Prototype.UWP.csproj",
       "projectName": "Prototype.UWP",
-      "projectPath": "C:\\Users\\duck2412\\Documents\\GitRepos\\Xamarin-app\\PrototypeProject\\Prototype\\Prototype.UWP\\Prototype.UWP.csproj",
-      "projectJsonPath": "C:\\Users\\duck2412\\Documents\\GitRepos\\Xamarin-app\\PrototypeProject\\Prototype\\Prototype.UWP\\project.json",
+      "projectPath": "C:\\Users\\micha\\Documents\\Git - JP\\Xamarin-app\\PrototypeProject\\Prototype\\Prototype.UWP\\Prototype.UWP.csproj",
+      "projectJsonPath": "C:\\Users\\micha\\Documents\\Git - JP\\Xamarin-app\\PrototypeProject\\Prototype\\Prototype.UWP\\project.json",
       "projectStyle": "ProjectJson"
     },
     "dependencies": {
