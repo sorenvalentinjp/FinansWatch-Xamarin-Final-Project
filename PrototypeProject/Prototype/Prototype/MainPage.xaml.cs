@@ -24,7 +24,7 @@ namespace Prototype
         {
             List<Article> articles = await articleController.getFrontPageArticles();
 
-            label1.Text = articles[0].title;
+            label1.Text = articles[0].Title;
         }
 	}
 }
