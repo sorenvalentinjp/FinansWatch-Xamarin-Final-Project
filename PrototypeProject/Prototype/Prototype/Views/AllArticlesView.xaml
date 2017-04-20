@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.Views.AllArticlesView"
+             Title="Alle NYHEDER">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="ALL"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Margin="5">
+        <Label Text="Artikel 1"/>
+        <Label Text="Artikel 2"/>
+        <Label Text="Artikel 3"/>
+        <Label Text="Artikel 4"/>
+        <Label Text="Artikel 5"/>
+        <Label Text="Artikel 6"/>
+    </StackLayout>
+
+
+</ContentPage>

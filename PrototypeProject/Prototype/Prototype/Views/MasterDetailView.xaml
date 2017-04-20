@@ -4,32 +4,35 @@
              xmlns:local="clr-namespace:Prototype.Views;assembly=Prototype.Views"
              x:Class="Prototype.Views.MasterDetailView"
              Title="I am master"
-             MasterBehavior="Popover">
+             MasterBehavior="Default">
     
     <MasterDetailPage.Master>
         
         <ContentPage Padding="10" Title="Master">
+
+            
+            
             <ContentPage.Content>
                 <StackLayout Margin="5,30,5,5">
 
                     <Button Text="FORSIDE" BackgroundColor="Aqua" Clicked="FrontPageAction"/>
-                    <!--<Button Text="ALLE NYHEDER" BackgroundColor="Yellow" Clicked="AllArticlesAction"/>
+                    <Button Text="ALLE NYHEDER" BackgroundColor="Yellow" Clicked="AllArticlesAction"/>
                     <Button Text="LÆSELISTE" BackgroundColor="Yellow" Clicked="SavedArticlesAction"/>
-                    <Button Text="SEKTIONER" BackgroundColor="Yellow" Clicked="SectionsAction"/>
+                    <Button Text="SEKTIONER" BackgroundColor="Yellow" Clicked="SectionAction"/>
                     <Button Text="LOGIN" BackgroundColor="Yellow" Clicked="LoginAction"/>
-                    <Button Text="SØG ARTIKLER" BackgroundColor="Yellow" Clicked="SearchArticlesAction"/>-->
+                    <Button Text="SØG ARTIKLER" BackgroundColor="Yellow" Clicked="SearchArticlesAction"/>
 
                 </StackLayout>
             </ContentPage.Content>
         </ContentPage>
-        
-        <!--<pages:MasterDetailViewMaster x:Name="MasterPage" />-->
         
     </MasterDetailPage.Master>
     
     <MasterDetailPage.Detail>
         <NavigationPage>
             
+
+
         </NavigationPage>
     </MasterDetailPage.Detail>
 </MasterDetailPage>

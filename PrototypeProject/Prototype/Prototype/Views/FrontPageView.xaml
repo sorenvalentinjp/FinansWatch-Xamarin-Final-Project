@@ -2,8 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.Views.FrontPageView"
+             Title="FORSIDE"
              >
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="ALL"/>
+    </ContentPage.ToolbarItems>
+    
+    
     <StackLayout Margin="5">
         <Label Text="Artikel 1" Font="20"/>
         <Label Text="Artikel 2" Font="20"/>

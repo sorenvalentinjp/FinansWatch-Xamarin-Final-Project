@@ -10,12 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace Prototype.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class FrontPageView : ContentPage
+	public partial class LoginView : ContentPage
 	{
-		public FrontPageView ()
+		public LoginView ()
 		{
 			InitializeComponent ();
-            
 		}
 	}
 }

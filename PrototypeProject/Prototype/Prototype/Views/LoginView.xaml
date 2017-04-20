@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.Views.LoginView"
+             Title="LOG IND">
+
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="ALL"/>
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout Margin="5">
+        <Label Text="E-mail"/>
+        <Entry Placeholder="Eksempel@mail.dk"/>
+        <Label Text="Adgangskode"/>
+        <Entry Placeholder="Adgangskode"/>
+        <Button Text="LOG IND"/>
+        <Button Text="GLEMT ADGANGSKODE?"/>
+    </StackLayout>
+
+</ContentPage>
