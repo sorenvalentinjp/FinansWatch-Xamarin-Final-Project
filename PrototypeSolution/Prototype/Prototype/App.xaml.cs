@@ -13,7 +13,7 @@ namespace Prototype
 		{
 			InitializeComponent();
 
-			MainPage = new Prototype.MainPage();
+            MainPage = new Prototype.Views.MasterDetailView();
 		}
 
 		protected override void OnStart ()
