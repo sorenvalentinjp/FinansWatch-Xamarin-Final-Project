@@ -8,5 +8,7 @@ namespace Prototype.Database
     interface IContentAPI
     {
         Task<String> downloadFrontPageArticles();
+        Task<String> downloadArticle(String contentURL);
+        Task<String> downloadJSON(Uri uri);
     }
 }

@@ -12,7 +12,6 @@ namespace Prototype.Models
         public string HomeSectionName { get; set; }
         public Boolean Locked { get; set; }
         public DateTime PublishedDate { get; set; }
-        public DateTime LastModified { get; set; }
         public string PublishInfo { get; set; }
         public int HomeSectionId { get; set; }
         public int Id { get; set; }
@@ -20,6 +19,7 @@ namespace Prototype.Models
         public string Teaser { get; set; }
         public string ImageBigURL { get; set; }
         public string ImageSmallURL { get; set; }
+        public string ImageThumbURL { get; set; }
 
         public Article()
         {

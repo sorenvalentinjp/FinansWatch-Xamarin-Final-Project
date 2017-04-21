@@ -20,6 +20,11 @@ namespace Prototype.ModelControllers
             return articleController.getFrontPageArticles();
         }
 
+        public Task<Article> getArticleDetails(Article article)
+        {
+            return articleController.getArticleDetails(article);
+        }
+
     }
 
 }

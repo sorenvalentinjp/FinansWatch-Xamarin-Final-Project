@@ -23,15 +23,38 @@ namespace Prototype.Database
         }
 
         /// <summary>
+        /// Downloads a single article and returns it as a task json string
+        /// </summary>
+        /// <param name="contentURL"></param>
+        /// <returns></returns>
+        public Task<string> downloadArticle(String contentURL)
+        {
+            //Full url example: https://content.watchmedier.dk/api/finanswatch/content/article/9517468
+            var uri = new Uri(contentURL);
+
+            return downloadJSON(uri);
+        }
+
+        /// <summary>
         /// Downloads all front page articles and returns them as a string
         /// </summary>
         /// <returns></returns>
-        public async Task<string> downloadFrontPageArticles()
+        public Task<string> downloadFrontPageArticles()
+        {
+            //Full url example: https://content.watchmedier.dk/api/finanswatch/content/frontpagearticles
+            var uri = new Uri(Constants.contentAPIUrl + "finanswatch/content/frontpagearticles");
+
+            return downloadJSON(uri);
+        }
+
+        /// <summary>
+        /// Downloads and returns json using an Uri.
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns></returns>
+        public async Task<string> downloadJSON(Uri uri)
         {
             var toReturn = "";
-
-            //Full url: https://content.watchmedier.dk/api/finanswatch/content/frontpagearticles
-            var uri = new Uri(Constants.contentAPIUrl + "finanswatch/content/frontpagearticles");
 
             try
             {

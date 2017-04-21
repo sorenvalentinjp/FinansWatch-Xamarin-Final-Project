@@ -9,7 +9,7 @@
     </ContentPage.ToolbarItems>
 
     <StackLayout Margin="5">
-        <Label Text="Artikel 1"/>
+        <Label Text="Artikel 1" x:Name="label1"/>
         <Label Text="Artikel 2"/>
         <Label Text="Artikel 3"/>
         <Label Text="Artikel 4"/>
