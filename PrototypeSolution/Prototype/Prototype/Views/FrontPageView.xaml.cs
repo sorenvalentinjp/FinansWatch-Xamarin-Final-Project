@@ -56,19 +56,24 @@ namespace Prototype.Views
         {
             IsRefreshing = true; //to show 'busy' indicator
             List<Article> fetchedArticles = await this.StateController.getFrontPageArticles();
-
-            //sets which article is considered the 'topArticle'
-            for(int i = 0; i < fetchedArticles.Count; i++)
-            {
-                if (i == 0)
-                    fetchedArticles[i].IsTopArticle = true;
-                else
-                    fetchedArticles[i].IsTopArticle = false;
-
-            }
-
+            determineTopArticle(fetchedArticles);
             this.Articles = new ObservableCollection<Article>(fetchedArticles);
             IsRefreshing = false; //to remove 'busy' indicator again
+        }
+
+        /// <summary>
+        /// Sets the proporty 'IsTopArticle' for all articles in the list.
+        /// </summary>
+        /// <param name="articles">The list containing the articles</param>
+        private void determineTopArticle(List<Article> articles)
+        {
+            for (int i = 0; i < articles.Count; i++)
+            {
+                if (i == 0)
+                    articles[i].IsTopArticle = true;
+                else
+                    articles[i].IsTopArticle = false;
+            }
         }
 
         //--------------------------- REFRESH STUFF --------------------------
@@ -103,6 +108,5 @@ namespace Prototype.Views
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
-
     }
 }
