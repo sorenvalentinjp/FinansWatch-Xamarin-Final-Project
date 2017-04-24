@@ -56,6 +56,17 @@ namespace Prototype.Views
         {
             IsRefreshing = true; //to show 'busy' indicator
             List<Article> fetchedArticles = await this.StateController.getFrontPageArticles();
+
+            //sets which article is considered the 'topArticle'
+            for(int i = 0; i < fetchedArticles.Count; i++)
+            {
+                if (i == 0)
+                    fetchedArticles[i].IsTopArticle = true;
+                else
+                    fetchedArticles[i].IsTopArticle = false;
+
+            }
+
             this.Articles = new ObservableCollection<Article>(fetchedArticles);
             IsRefreshing = false; //to remove 'busy' indicator again
         }

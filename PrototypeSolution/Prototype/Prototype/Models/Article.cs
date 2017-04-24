@@ -175,6 +175,19 @@ namespace Prototype.Models
             }
         }
 
+        //added to be able to know if an article is the top article on the frontpage
+        Boolean isTopArticle;
+        public Boolean IsTopArticle
+        {
+            get { return isTopArticle; }
+            set
+            {
+                if (isTopArticle == value) { return; }
+                isTopArticle = value;
+                notify("IsTopArticle");
+            }
+        }
+
         public Article() { }
 
 

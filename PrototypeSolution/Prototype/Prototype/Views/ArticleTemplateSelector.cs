@@ -11,14 +11,11 @@ namespace Prototype.Views
         public DataTemplate TopArticleTemplate { get; set; }
         public DataTemplate ArticlesTemplate { get; set; }
 
-        public ArticleTemplateSelector()
-        {
-
-        }
+        public ArticleTemplateSelector() { }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            return ((Article)item).Title.Length < 40 ? TopArticleTemplate : ArticlesTemplate;
+            return ((Article)item).IsTopArticle ? TopArticleTemplate : ArticlesTemplate;
         }
     }
 }
