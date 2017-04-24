@@ -19,37 +19,33 @@ namespace Prototype.Views
         private ObservableCollection<Article> Articles { get; set; }
         private StateController StateController { get; set; }
 
-        public FrontPageView ()
+        public FrontPageView()
 		{
-			InitializeComponent ();
+			InitializeComponent();
 
             StateController = new StateController();
             Articles = new ObservableCollection<Article>();
 
             getFrontPageArticles();
 
-
             //-----test - simple objects to test binding is working
             //List<Article> articles = new List<Article>();
             //Article a1 = new Article();
-            //a1.Title = "Title 1";
+            //a1.Title = "Title 1 - LOOOOOOONG";
+            //a1.Teaser = "Teaser1";
             //Article a2 = new Article();
-            //a2.Title = "Title 2";
+            //a2.Title = "Title 2 - SHORT";
+            //a2.Teaser = "Teaser2";
             //articles.Add(a1);
             //articles.Add(a2);
-            //this.BindingContext = articles;
+            //listView.BindingContext = articles;
         }
 
         public async void getFrontPageArticles()
         {
             List<Article> fetchedArticles = await StateController.getFrontPageArticles();
-            this.TopArticle = fetchedArticles[0];
-
-            stackTopArticle.BindingContext = this.TopArticle;
-
-            fetchedArticles.RemoveAt(0);
             this.Articles = new ObservableCollection<Article>(fetchedArticles);
-            lstView.BindingContext = this.Articles;
+            listView.BindingContext = this.Articles;
         }
     }
 }
