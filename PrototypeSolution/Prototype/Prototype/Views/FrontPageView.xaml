@@ -11,7 +11,7 @@
 
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
-            <StackLayout Orientation="Vertical" BindingContext="{Binding topArticle}">
+            <StackLayout x:Name="stackTopArticle" Orientation="Vertical">
                 <!--<Image Source="{Binding BigImage}" HorizontalOptions="Start"/>-->
                 <Label Text="{Binding Title}"/>
                 <Label Text="{Binding Teaser}"/>

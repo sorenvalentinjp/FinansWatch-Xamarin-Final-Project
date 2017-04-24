@@ -15,16 +15,16 @@ namespace Prototype.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class FrontPageView : ContentPage
 	{
-        private Article topArticle { get; set; }
-        private ObservableCollection<Article> articles { get; set; }
-        private StateController statecontroller { get; set; }
+        private Article TopArticle { get; set; }
+        private ObservableCollection<Article> Articles { get; set; }
+        private StateController StateController { get; set; }
 
         public FrontPageView ()
 		{
 			InitializeComponent ();
 
-            statecontroller = new StateController();
-            articles = new ObservableCollection<Article>();
+            StateController = new StateController();
+            Articles = new ObservableCollection<Article>();
 
             getFrontPageArticles();
 
@@ -42,12 +42,14 @@ namespace Prototype.Views
 
         public async void getFrontPageArticles()
         {
-            List<Article> fetchedArticles = await statecontroller.getFrontPageArticles();
-            this.topArticle = fetchedArticles[0];
+            List<Article> fetchedArticles = await StateController.getFrontPageArticles();
+            this.TopArticle = fetchedArticles[0];
+
+            stackTopArticle.BindingContext = this.TopArticle;
 
             fetchedArticles.RemoveAt(0);
-            this.articles = new ObservableCollection<Article>(fetchedArticles);
-            lstView.BindingContext = this.articles;
+            this.Articles = new ObservableCollection<Article>(fetchedArticles);
+            lstView.BindingContext = this.Articles;
         }
     }
 }
