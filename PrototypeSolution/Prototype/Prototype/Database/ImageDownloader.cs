@@ -21,6 +21,8 @@ namespace Prototype.Database
         {
             return await Task.Run(() =>
             {
+                if (URL == null) return null;
+
                 //Download the image async
                 var URI = new Uri(URL);
                 var imageAsBytes = WebClient.DownloadData(URI); // get the downloaded data
