@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Prototype.ModelControllers
 {
-    class StateController
+    public class StateController
     {
         private ArticleController articleController;
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prototype.ModelControllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,9 @@ namespace Prototype
 		{
 			InitializeComponent();
 
-            MainPage = new Prototype.Views.MasterDetailView();
+            StateController stateController = new StateController();
+
+            MainPage = new Views.MasterDetailView(stateController);
 		}
 
 		protected override void OnStart ()

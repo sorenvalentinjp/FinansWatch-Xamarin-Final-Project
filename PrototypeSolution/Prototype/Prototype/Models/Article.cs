@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Prototype.Models
 {
-    class Article
+    public class Article
     {
         public string Title { get; set; }
         public string ContentURL { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prototype.ModelControllers;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,9 +8,13 @@ namespace Prototype.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MasterDetailView : MasterDetailPage
     {
-        public MasterDetailView()
+        public StateController StateController { get; set; }
+
+        public MasterDetailView(StateController stateController)
         {
             InitializeComponent();
+            this.StateController = stateController;
+            this.StateController.getFrontPageArticles();
             Detail = new NavigationPage(new FrontPageView());
         }
 
