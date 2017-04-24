@@ -10,10 +10,10 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="topArticleTemplate">
-                <ViewCell>
+                <ViewCell Height="300">
                     <ViewCell.View>
                         <StackLayout Orientation="Vertical">
-                            <!--<Image Source="{Binding BigImage}" HorizontalOptions="Start"/>-->
+                            <Image Source="{Binding ImageSourceBig}"/>
                             <Label Text="{Binding Title}"
                                    HorizontalOptions="FillAndExpand"
                                    Font="Bold, 20"/>

@@ -16,10 +16,12 @@ namespace Prototype.ModelControllers
     class ArticleController
     {
         private ContentAPI contentAPI;
+        private ImageDownloader imageDownloader;
 
         public ArticleController()
         {
             contentAPI = new ContentAPI();
+            imageDownloader = new ImageDownloader();
         }
 
         public async Task<List<Article>> getFrontPageArticles()
@@ -51,7 +53,6 @@ namespace Prototype.ModelControllers
                     //string imageEURL = article.image.versions.e.url;
                     //string imageDURL = article.image.versions.d.url;
                     string imageCaption = article.image.imageCaption;
-
                     newArt.ImageBigURL = image460URL;
                     newArt.ImageSmallURL = image220URL;
                     newArt.ImageCaption = imageCaption;
@@ -73,9 +74,17 @@ namespace Prototype.ModelControllers
                 newArt.HomeSectionName = homeSectionName;
                 newArt.Teaser = teaser;
                 newArt.Locked = locked;
-                newArt.PublishedDate = publishedDate;                
+                newArt.PublishedDate = publishedDate;
+                
 
                 articles.Add(newArt);
+            }
+
+            foreach(Article a in articles)
+            {
+                downloadArticleBigImage(a);
+                downloadArticleSmallImage(a);
+                //downloadArticleThumbImage(newArt);
             }
 
             return articles;
@@ -101,22 +110,19 @@ namespace Prototype.ModelControllers
         public async void downloadArticleBigImage(Article article)
         {
             //Set the article imagesource async
-            ImageDownloader imgDown = new ImageDownloader();
-            article.ImageSourceBig = await imgDown.downloadImage(article.ImageBigURL);
+            article.ImageSourceBig = await imageDownloader.downloadImage(article.ImageBigURL);
         }
 
         public async void downloadArticleSmallImage(Article article)
         {
             //Set the article imagesource async
-            ImageDownloader imgDown = new ImageDownloader();
-            article.ImageSourceSmall = await imgDown.downloadImage(article.ImageSmallURL);
+            article.ImageSourceSmall = await imageDownloader.downloadImage(article.ImageSmallURL);
         }
 
         public async void downloadArticleThumbImage(Article article)
         {
             //Set the article imagesource async
-            ImageDownloader imgDown = new ImageDownloader();
-            article.ImageSourceThumb = await imgDown.downloadImage(article.ImageThumbURL);
+            article.ImageSourceThumb = await imageDownloader.downloadImage(article.ImageThumbURL);
         }
 
     }

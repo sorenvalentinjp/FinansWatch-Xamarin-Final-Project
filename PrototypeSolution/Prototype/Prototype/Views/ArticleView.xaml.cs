@@ -24,7 +24,7 @@ namespace Prototype.Views
             this.Article = article;
             BindingContext = Article;
 
-            stateController.downloadArticleBigImage(article);
+            //stateController.downloadArticleBigImage(article);
         }
 
     }
