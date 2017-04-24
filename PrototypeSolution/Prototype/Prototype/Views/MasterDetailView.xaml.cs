@@ -26,7 +26,7 @@ namespace Prototype.Views
 
         private void AllArticlesAction(object sender, EventArgs e)
         {
-            Detail = new NavigationPage(new AllArticlesView());
+            Detail = new NavigationPage(new AllArticlesView(StateController));
             IsPresented = false;
         }
 

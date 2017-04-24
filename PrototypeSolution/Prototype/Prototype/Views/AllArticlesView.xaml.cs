@@ -14,9 +14,13 @@ namespace Prototype.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AllArticlesView : ContentPage
 	{
-		public AllArticlesView ()
+        private StateController StateController;
+        private Article Article;
+
+        public AllArticlesView (StateController stateController)
 		{
 			InitializeComponent ();
+            this.StateController = stateController;
             setLabel();
 		}
 
@@ -24,9 +28,14 @@ namespace Prototype.Views
         {
             StateController st = new StateController();
             List<Article> articles = await st.getFrontPageArticles();
-            Article art = await st.getArticleDetails(articles[0]);
-            label1.Text = art.PublishedDate.ToString() + ", " + art.Title;
+            Article = await st.getArticleDetails(articles[0]);
+            label1.Text = Article.PublishedDate.ToString() + ", " + Article.Title;
         }
 
-	}
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new ArticleView(StateController, Article));
+            }
+        }
 }
