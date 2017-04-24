@@ -30,6 +30,7 @@
       <DependentUpon>ArticleView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\CustomRenderers\HtmlFormattedLabel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\FrontPageView.xaml.cs">
       <DependentUpon>FrontPageView.xaml</DependentUpon>
       <SubType>Code</SubType>
