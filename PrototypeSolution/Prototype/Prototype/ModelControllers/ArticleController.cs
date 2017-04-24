@@ -6,8 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Prototype.ModelControllers
 {
@@ -95,6 +97,28 @@ namespace Prototype.ModelControllers
 
             return article;
         }
+
+        public async void downloadArticleBigImage(Article article)
+        {
+            //Set the article imagesource async
+            ImageDownloader imgDown = new ImageDownloader();
+            article.ImageSourceBig = await imgDown.downloadImage(article.ImageBigURL);
+        }
+
+        public async void downloadArticleSmallImage(Article article)
+        {
+            //Set the article imagesource async
+            ImageDownloader imgDown = new ImageDownloader();
+            article.ImageSourceSmall = await imgDown.downloadImage(article.ImageSmallURL);
+        }
+
+        public async void downloadArticleThumbImage(Article article)
+        {
+            //Set the article imagesource async
+            ImageDownloader imgDown = new ImageDownloader();
+            article.ImageSourceThumb = await imgDown.downloadImage(article.ImageThumbURL);
+        }
+
     }
 
 
