@@ -3,9 +3,11 @@ using Prototype.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,19 +15,28 @@ using Xamarin.Forms.Xaml;
 namespace Prototype.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class FrontPageView : ContentPage
-	{
-        private Article TopArticle { get; set; }
-        private ObservableCollection<Article> Articles { get; set; }
+	public partial class FrontPageView : ContentPage, INotifyPropertyChanged
+    {
+        private ObservableCollection<Article> articles;
+        public ObservableCollection<Article> Articles
+        {
+            get { return articles; }
+            set
+            {
+                if (articles == value) { return; }
+                articles = value;
+                notify("Articles");
+            }
+        }
+        
         private StateController StateController { get; set; }
 
-        public FrontPageView()
+        public FrontPageView(StateController stateController)
 		{
 			InitializeComponent();
 
-            StateController = new StateController();
-            Articles = new ObservableCollection<Article>();
-
+            Content.BindingContext = this;
+            this.StateController = stateController;
             getFrontPageArticles();
 
             //-----test - simple objects to test binding is working
@@ -43,9 +54,44 @@ namespace Prototype.Views
 
         public async void getFrontPageArticles()
         {
-            List<Article> fetchedArticles = await StateController.getFrontPageArticles();
+            IsRefreshing = true; //to show 'busy' indicator
+            List<Article> fetchedArticles = await this.StateController.getFrontPageArticles();
             this.Articles = new ObservableCollection<Article>(fetchedArticles);
-            listView.BindingContext = this.Articles;
+            IsRefreshing = false; //to remove 'busy' indicator again
         }
+
+        //--------------------------- REFRESH STUFF --------------------------
+        private bool isRefreshning = false;
+        public bool IsRefreshing
+        {
+            get { return isRefreshning; }
+            set
+            {
+                isRefreshning = value;
+                notify("IsRefreshing");
+            }
+        }
+
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    getFrontPageArticles();
+                });
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void notify(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
+
     }
 }

@@ -42,35 +42,14 @@
         <ToolbarItem Text="ALL"/>
     </ContentPage.ToolbarItems>
 
-    
+    <!--This view only contains a listview-->
     <ContentPage.Content>
-        <ListView x:Name="listView" ItemTemplate="{StaticResource articleTemplateSelector}" ItemsSource="{Binding}"/>
+        <ListView x:Name="listView" 
+                  ItemTemplate="{StaticResource articleTemplateSelector}" 
+                  ItemsSource="{Binding Articles}" 
+                  IsPullToRefreshEnabled="True"
+                  RefreshCommand="{Binding RefreshCommand}"
+                  IsRefreshing="{Binding IsRefreshing}"/>
     </ContentPage.Content>
-
-    <!--<ContentPage.Content>
-        <StackLayout Orientation="Vertical">
-            <StackLayout x:Name="stackTopArticle" Orientation="Vertical">
-                <Image Source="{Binding BigImage}" HorizontalOptions="Start"/>
-                <Label Text="{Binding Title}"/>
-                <Label Text="{Binding Teaser}"/>
-            </StackLayout>
-
-            <ListView x:Name="lstView" ItemsSource="{Binding}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.View>
-                                <StackLayout Orientation="Horizontal">
-                                    <Image Source="{Binding SmallImage}" HorizontalOptions="Start"/>
-                                    <Label Text="{Binding Title}"/>
-                                    <Label Text="{Binding Teaser}"/>
-                                </StackLayout>
-                            </ViewCell.View>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
-    </ContentPage.Content>-->
 
 </ContentPage>

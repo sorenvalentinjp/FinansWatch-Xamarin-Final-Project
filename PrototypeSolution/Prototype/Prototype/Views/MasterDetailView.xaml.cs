@@ -15,12 +15,12 @@ namespace Prototype.Views
             InitializeComponent();
             this.StateController = stateController;
             this.StateController.getFrontPageArticles();
-            Detail = new NavigationPage(new FrontPageView());
+            Detail = new NavigationPage(new FrontPageView(this.StateController));
         }
 
         private void FrontPageAction(object sender, EventArgs e)
         {
-            Detail = new NavigationPage(new FrontPageView());
+            Detail = new NavigationPage(new FrontPageView(this.StateController));
             IsPresented = false;
         }
 
