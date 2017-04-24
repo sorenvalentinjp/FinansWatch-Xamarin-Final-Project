@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using Xamarin.Forms;
 
 namespace Prototype.Models
 {
@@ -185,6 +186,42 @@ namespace Prototype.Models
                 if (isTopArticle == value) { return; }
                 isTopArticle = value;
                 notify("IsTopArticle");
+            }
+        }
+
+        ImageSource imageSourceBig;
+        public ImageSource ImageSourceBig
+        {
+            get { return imageSourceBig; }
+            set
+            {
+                if (imageSourceBig == value) { return; }
+                imageSourceBig = value;
+                notify("ImageSourceBig");
+            }
+        }
+
+        ImageSource imageSourceSmall;
+        public ImageSource ImageSourceSmall
+        {
+            get { return imageSourceSmall; }
+            set
+            {
+                if (imageSourceSmall == value) { return; }
+                imageSourceSmall = value;
+                notify("ImageSourceSmall");
+            }
+        }
+
+        ImageSource imageSourceThumb;
+        public ImageSource ImageSourceThumb
+        {
+            get { return imageSourceThumb; }
+            set
+            {
+                if (imageSourceThumb == value) { return; }
+                imageSourceThumb = value;
+                notify("ImageSourceThumb");
             }
         }
 

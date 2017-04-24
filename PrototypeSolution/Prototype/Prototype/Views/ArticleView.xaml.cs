@@ -2,6 +2,7 @@
 using Prototype.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,9 @@ namespace Prototype.Views
             this.StateController = stateController;
             this.Article = article;
             BindingContext = Article;
-		}
-	}
+
+            stateController.downloadArticleBigImage(article);
+        }
+
+    }
 }

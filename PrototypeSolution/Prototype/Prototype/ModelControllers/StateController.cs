@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Prototype.ModelControllers
 {
@@ -25,6 +26,20 @@ namespace Prototype.ModelControllers
             return articleController.getArticleDetails(article);
         }
 
+        public void downloadArticleBigImage(Article article)
+        {
+            articleController.downloadArticleBigImage(article);
+        }
+
+        public void downloadArticleSmallImage(Article article)
+        {
+            articleController.downloadArticleSmallImage(article);
+        }
+
+        public void downloadArticleThumbImage(Article article)
+        {
+            articleController.downloadArticleThumbImage(article);
+        }
     }
 
 }
