@@ -29,7 +29,10 @@ namespace Prototype.Droid.CustomRenderers
             if (view == null) return;
 
             Control.SetMaxLines(1000);
-            Control.SetText(Html.FromHtml(view.Text.ToString().Trim()), TextView.BufferType.Spannable);                        
+            if(view.Text != null && view.Text != "")
+            {
+                Control.SetText(Html.FromHtml(view.Text.ToString().Trim()), TextView.BufferType.Spannable);
+            }                 
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)

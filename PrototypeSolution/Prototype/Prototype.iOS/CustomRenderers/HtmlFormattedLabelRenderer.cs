@@ -40,9 +40,12 @@ namespace Prototype.iOS.CustomRenderers
                     var nsError = new NSError();
                     attr.DocumentType = NSDocumentType.HTML;
 
-                    var myHtmlData = NSData.FromString(Element.Text, NSStringEncoding.Unicode);
-                    Control.Lines = 0;
-                    Control.AttributedText = new NSAttributedString(myHtmlData, attr, ref nsError);
+                    if (Element.Text != null && Element.Text != "")
+                    {
+                        var myHtmlData = NSData.FromString(Element.Text, NSStringEncoding.Unicode);
+                        Control.Lines = 0;
+                        Control.AttributedText = new NSAttributedString(myHtmlData, attr, ref nsError);
+                    }
                 }
             }
         }

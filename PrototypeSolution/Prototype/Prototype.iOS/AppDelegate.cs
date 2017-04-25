@@ -28,7 +28,7 @@ namespace Prototype.iOS
 
             LoadApplication (new Prototype.App ());
 
-            
+            App.Init(new IosDisplaySettings());
 
             return base.FinishedLaunching (app, options);
 		}

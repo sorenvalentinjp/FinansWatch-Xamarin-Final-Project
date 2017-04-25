@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +15,8 @@ using Xamarin.Forms.Xaml;
 
 namespace Prototype.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class FrontPageView : ContentPage, INotifyPropertyChanged
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class FrontPageView : ContentPage, INotifyPropertyChanged
     {
         private ObservableCollection<Article> articles;
         public ObservableCollection<Article> Articles
@@ -28,16 +29,32 @@ namespace Prototype.Views
                 notify("Articles");
             }
         }
-        
+
+        public int ScreenHeight 
+        {
+            get { return App.DisplaySettings.GetHeight(); }
+        }
+        public int ScreenWidth 
+        {
+            get { return App.DisplaySettings.GetWidth(); }
+        }
+        public int ScreenWidthForCells
+        {
+            get { return App.DisplaySettings.GetWidth() / 4; }
+        }
+
         private StateController StateController { get; set; }
 
         public FrontPageView(StateController stateController)
 		{
 			InitializeComponent();
             disableItemSelectedAction();
+            
             Content.BindingContext = this;
             this.StateController = stateController;
             getFrontPageArticles();
+
+            
         }
 
         public async void getFrontPageArticles()

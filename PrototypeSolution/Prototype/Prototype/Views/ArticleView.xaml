@@ -14,7 +14,7 @@
     <ScrollView>
         <StackLayout>
             <ffimageloading:CachedImage 
-                HeightRequest="250" 
+                WidthRequest="{Binding ScreenWidth}"
                 DownsampleToViewSize="true" 
                 Source="{Binding ImageSourceBig}"
                 HorizontalOptions="FillAndExpand"/>

@@ -16,11 +16,9 @@
 
                         <StackLayout Orientation="Vertical">
                             <ffimageloading:CachedImage 
-                                HeightRequest="250" 
+                                WidthRequest="{Binding ScreenWidth}" 
                                 DownsampleToViewSize="true" 
-                                Source="{Binding ImageSourceBig}"
-                                VerticalOptions="StartAndExpand"
-                                HorizontalOptions="FillAndExpand"/>
+                                Source="{Binding ImageSourceBig}"/>
                             <StackLayout Orientation="Vertical"
                                          Padding="10,0,10,0">
                                 <Label Text="{Binding Title}"
