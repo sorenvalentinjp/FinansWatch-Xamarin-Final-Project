@@ -35,7 +35,7 @@
                 <ViewCell>
                     <ViewCell.View>
                         <StackLayout Orientation="Horizontal" 
-                                     Padding="5">
+                                     Padding="10,0,10,0">
                             <Image Source="{Binding ImageSourceBig}"
                                    WidthRequest="110"
                                    HeightRequest="80"
@@ -49,7 +49,9 @@
                 </ViewCell>
             </DataTemplate>
             
-            <local:ArticleTemplateSelector x:Key="articleTemplateSelector" TopArticleTemplate="{StaticResource topArticleTemplate}" ArticlesTemplate="{StaticResource articlesTemplate}"/>
+            <local:ArticleTemplateSelector x:Key="articleTemplateSelector" 
+                                           TopArticleTemplate="{StaticResource topArticleTemplate}" 
+                                           ArticlesTemplate="{StaticResource articlesTemplate}"/>
             
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -68,7 +70,8 @@
                   RefreshCommand="{Binding RefreshCommand}"
                   IsRefreshing="{Binding IsRefreshing}"
                   HasUnevenRows="True"
-                  HeightRequest="200"/>
+                  HeightRequest="200"
+                  ItemTapped="listViewTabbedAction"/>
     </ContentPage.Content>
 
 </ContentPage>

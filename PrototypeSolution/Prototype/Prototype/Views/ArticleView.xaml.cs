@@ -23,9 +23,12 @@ namespace Prototype.Views
             this.StateController = stateController;
             this.Article = article;
             BindingContext = Article;
-
-            //stateController.downloadArticleBigImage(article);
+            getArticle();
         }
 
+        private async void getArticle()
+        {
+            Article = await StateController.getArticleDetails(Article);
+        }
     }
 }

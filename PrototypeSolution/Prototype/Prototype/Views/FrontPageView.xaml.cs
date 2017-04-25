@@ -34,22 +34,10 @@ namespace Prototype.Views
         public FrontPageView(StateController stateController)
 		{
 			InitializeComponent();
-
+            disableItemSelectedAction();
             Content.BindingContext = this;
             this.StateController = stateController;
             getFrontPageArticles();
-
-            //-----test - simple objects to test binding is working
-            //List<Article> articles = new List<Article>();
-            //Article a1 = new Article();
-            //a1.Title = "Title 1 - LOOOOOOONG";
-            //a1.Teaser = "Teaser1";
-            //Article a2 = new Article();
-            //a2.Title = "Title 2 - SHORT";
-            //a2.Teaser = "Teaser2";
-            //articles.Add(a1);
-            //articles.Add(a2);
-            //listView.BindingContext = articles;
         }
 
         public async void getFrontPageArticles()
@@ -107,6 +95,21 @@ namespace Prototype.Views
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
+        }
+
+        //Disables selection on the frontpage
+        private void disableItemSelectedAction()
+        {
+            listView.ItemSelected += (sender, e) =>
+            {
+                ((ListView)sender).SelectedItem = null;
+            };
+        }
+
+        private async void listViewTabbedAction(object sender, ItemTappedEventArgs e)
+        {
+            Article tabbedArticle = (Article)e.Item;
+            await Navigation.PushModalAsync(new NavigationPage(new ArticleView(StateController, tabbedArticle)));
         }
     }
 }

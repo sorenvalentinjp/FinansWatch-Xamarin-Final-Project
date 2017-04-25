@@ -225,7 +225,21 @@ namespace Prototype.Models
             }
         }
 
-        public Article() { }
+        public Article() {
+            title = "";
+            contentURL = "";
+            bodyText = "";
+            homeSectionName = "";
+            publishInfo = "";
+            homeSectionId = -1;
+            id = -1;
+            ImageCaption = "";
+            teaser = "";
+            ImageBigURL = "";
+            imageSmallURL = "";
+            imageThumbURL = "";
+            isTopArticle = false;
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
