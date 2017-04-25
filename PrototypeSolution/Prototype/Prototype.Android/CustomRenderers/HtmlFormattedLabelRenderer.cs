@@ -41,7 +41,10 @@ namespace Prototype.Droid.CustomRenderers
 
             if (e.PropertyName == Label.TextProperty.PropertyName)
             {
-                Control?.SetText(Html.FromHtml(Element.Text), TextView.BufferType.Spannable);
+                if (Element.Text != null && Element.Text != "")
+                {
+                    Control?.SetText(Html.FromHtml(Element.Text), TextView.BufferType.Spannable);
+                }
             }
         }
     }
