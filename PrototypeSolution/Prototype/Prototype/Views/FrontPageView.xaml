@@ -10,14 +10,22 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="topArticleTemplate">
-                <ViewCell Height="300">
+                <ViewCell>
                     <ViewCell.View>
+
                         <StackLayout Orientation="Vertical">
-                            <Image Source="{Binding ImageSourceBig}"/>
-                            <Label Text="{Binding Title}"
+                            <Image Source="{Binding ImageSourceBig}"
                                    HorizontalOptions="FillAndExpand"
-                                   Font="Bold, 20"/>
-                            <customRenderers:HtmlFormattedLabel Text="{Binding Teaser}"/>
+                                   HeightRequest="200"
+                                   Aspect="AspectFill"/>
+                            <StackLayout Orientation="Vertical"
+                                         Padding="10,10,0,0">
+                                <Label Text="{Binding Title}"
+                                       HorizontalOptions="FillAndExpand"
+                                       Font="Bold, 20"/>
+                                <customRenderers:HtmlFormattedLabel Text="{Binding Teaser}"
+                                                                    Font="15"/>
+                            </StackLayout>
                         </StackLayout>
                     </ViewCell.View>
                 </ViewCell>
@@ -26,8 +34,13 @@
             <DataTemplate x:Key="articlesTemplate">
                 <ViewCell>
                     <ViewCell.View>
-                        <StackLayout Orientation="Horizontal">
-                            <!--<Image Source="{Binding SmallImage}" HorizontalOptions="Start"/>-->
+                        <StackLayout Orientation="Horizontal" 
+                                     Padding="10">
+                            <Image Source="{Binding ImageSourceSmall}" 
+                                   Aspect="AspectFit"
+                                   HeightRequest="70"
+                                   WidthRequest="100"
+                                   />
                             <Label Text="{Binding Title}"
                                    Font="15"
                                    />
@@ -36,6 +49,10 @@
                 </ViewCell>
             </DataTemplate>
 
+            <!--HorizontalOptions="StartAndExpand"
+                                   HeightRequest="70"
+                                   Aspect="AspectFill"-->
+            
             <local:ArticleTemplateSelector x:Key="articleTemplateSelector" TopArticleTemplate="{StaticResource topArticleTemplate}" ArticlesTemplate="{StaticResource articlesTemplate}"/>
             
         </ResourceDictionary>
