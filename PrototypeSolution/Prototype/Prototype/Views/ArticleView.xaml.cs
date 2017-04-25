@@ -23,8 +23,6 @@ namespace Prototype.Views
             this.StateController = stateController;
             this.Article = article;
             BindingContext = Article;
-
-            //stateController.downloadArticleBigImage(article);
         }
 
     }

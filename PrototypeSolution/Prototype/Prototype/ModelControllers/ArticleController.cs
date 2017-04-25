@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -46,22 +47,40 @@ namespace Prototype.ModelControllers
                     string image460URL = article.image.versions.big_article_460.url;
                     //string image380URL = article.image.versions.frontpage_large_380.url;
                     //string image300URL = article.image.versions.medium_frontpage_300.url;
-                    string image220URL = article.image.versions.small_article_220.url;
+                    //string image220URL = article.image.versions.small_article_220.url;
                     //string imageFURL = article.image.versions.f.url;
                     //string imageEURL = article.image.versions.e.url;
                     //string imageDURL = article.image.versions.d.url;
-                    string imageCaption = article.image.imageCaption;
+
                     newArt.ImageBigURL = image460URL;
                     newArt.ImageSourceBig = new UriImageSource { CachingEnabled = true, Uri = new Uri(newArt.ImageBigURL) };
-                    newArt.ImageSmallURL = image220URL;
-                    newArt.ImageSourceSmall = new UriImageSource { CachingEnabled = true, Uri = new Uri(newArt.ImageSmallURL) };
-                    newArt.ImageCaption = imageCaption;
+                    
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine(@"getFrontPageArticles {0}", ex.Message);
                 }
 
+                try
+                {
+                    string image220URL = article.image.versions.small_article_220.url;
+                    newArt.ImageSmallURL = image220URL;
+                    newArt.ImageSourceSmall = new UriImageSource { CachingEnabled = true, Uri = new Uri(newArt.ImageSmallURL) };
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(@"getFrontPageArticles {0}", ex.Message);
+                }
+
+                try
+                {
+                    string imageCaption = article.image.imageCaption;
+                    newArt.ImageCaption = imageCaption;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(@"getFrontPageArticles {0}", ex.Message);
+                }
 
                 //Dates
                 String publishedDateString = article.publishedDate;
@@ -72,7 +91,7 @@ namespace Prototype.ModelControllers
                 newArt.ContentURL = contentURL;
                 newArt.HomeSectionId = homeSectionId;
                 newArt.HomeSectionName = homeSectionName;
-                newArt.Teaser = teaser;
+                newArt.Teaser = stripAllHtmlParagraphTags(teaser);
                 newArt.Locked = locked;
                 newArt.PublishedDate = publishedDate;
                 
@@ -98,6 +117,12 @@ namespace Prototype.ModelControllers
             article.PublishInfo = publishInfo;
 
             return article;
+        }
+
+        private string stripAllHtmlParagraphTags(string html)
+        {          
+            var pattern = "<p>|<\\/p>";
+            return Regex.Replace(html, pattern, "");            
         }
 
     }
