@@ -7,16 +7,17 @@
 
     <MasterDetailPage.Master>
 
-        <ContentPage Padding="10" Title="Master">
+        <ContentPage Title="Master">
             <ContentPage.Content>
-                <StackLayout Margin="5,30,5,5">
+                <StackLayout Padding="5,30,5,5"
+                             BackgroundColor="#213c68">
 
-                    <Button Text="FORSIDE" BackgroundColor="Aqua" Clicked="FrontPageAction"/>
-                    <Button Text="ALLE NYHEDER" BackgroundColor="Yellow" Clicked="AllArticlesAction"/>
-                    <Button Text="LÆSELISTE" BackgroundColor="Yellow" Clicked="SavedArticlesAction"/>
-                    <Button Text="SEKTIONER" BackgroundColor="Yellow" Clicked="SectionAction"/>
-                    <Button Text="LOGIN" BackgroundColor="Yellow" Clicked="LoginAction"/>
-                    <Button Text="SØG ARTIKLER" BackgroundColor="Yellow" Clicked="SearchArticlesAction"/>
+                    <Button Text="FORSIDE" TextColor="White" BackgroundColor="#213c68" Clicked="FrontPageAction"/>
+                    <Button Text="ALLE NYHEDER" TextColor="White" BackgroundColor="#213c68" Clicked="AllArticlesAction"/>
+                    <Button Text="LÆSELISTE" TextColor="White" BackgroundColor="#213c68" Clicked="SavedArticlesAction"/>
+                    <Button Text="SEKTIONER" TextColor="White" BackgroundColor="#213c68" Clicked="SectionAction"/>
+                    <Button Text="LOGIN" TextColor="White" BackgroundColor="#213c68" Clicked="LoginAction"/>
+                    <Button Text="SØG ARTIKLER" TextColor="White" BackgroundColor="#213c68" Clicked="SearchArticlesAction"/>
 
                 </StackLayout>
             </ContentPage.Content>
