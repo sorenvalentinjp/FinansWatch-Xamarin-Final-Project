@@ -55,13 +55,14 @@ namespace Prototype.Views
         /// <param name="articles">The list containing the articles</param>
         private void determineTopArticle(List<Article> articles)
         {
-            for (int i = 0; i < articles.Count; i++)
-            {
-                if (i == 0)
-                    articles[i].IsTopArticle = true;
-                else
-                    articles[i].IsTopArticle = false;
-            }
+            articles[0].IsTopArticle = true;
+            //for (int i = 0; i < articles.Count; i++)
+            //{
+            //    if (i == 0)
+            //        articles[i].IsTopArticle = true;
+            //    else
+            //        articles[i].IsTopArticle = false;
+            //}
         }
 
         //--------------------------- REFRESH STUFF --------------------------
