@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using FFImageLoading.Forms.Droid;
 
 namespace Prototype.Droid
 {
@@ -19,10 +20,12 @@ namespace Prototype.Droid
 
 			base.OnCreate (bundle);
 
-			global::Xamarin.Forms.Forms.Init (this, bundle);
+            CachedImageRenderer.Init();
+
+            global::Xamarin.Forms.Forms.Init (this, bundle);
 			LoadApplication (new Prototype.App ());
-            Window.SetStatusBarColor(Android.Graphics.Color.Rgb(0, 0, 0));
-		}
+            Window.SetStatusBarColor(Android.Graphics.Color.Rgb(0, 0, 0));            
+        }
 	}
 }
 

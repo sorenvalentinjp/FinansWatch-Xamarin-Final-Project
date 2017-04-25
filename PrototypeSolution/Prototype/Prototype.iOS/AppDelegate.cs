@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using FFImageLoading.Forms.Touch;
 
 namespace Prototype.iOS
 {
@@ -23,9 +24,13 @@ namespace Prototype.iOS
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init ();
-			LoadApplication (new Prototype.App ());
+            CachedImageRenderer.Init();
 
-			return base.FinishedLaunching (app, options);
+            LoadApplication (new Prototype.App ());
+
+            
+
+            return base.FinishedLaunching (app, options);
 		}
 	}
 }

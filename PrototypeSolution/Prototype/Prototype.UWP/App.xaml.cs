@@ -57,6 +57,7 @@ namespace Prototype.UWP
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
+                FFImageLoading.Forms.WinUWP.CachedImageRenderer.Init();
 
                 Xamarin.Forms.Forms.Init(e);
 
