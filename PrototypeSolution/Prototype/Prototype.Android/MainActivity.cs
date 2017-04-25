@@ -21,6 +21,7 @@ namespace Prototype.Droid
 
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 			LoadApplication (new Prototype.App ());
+            Window.SetStatusBarColor(Android.Graphics.Color.Rgb(0, 0, 0));
 		}
 	}
 }
