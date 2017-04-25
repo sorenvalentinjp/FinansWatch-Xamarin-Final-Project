@@ -22,10 +22,5 @@ namespace Prototype.Views
             this.StateController = stateController;
 		}
 
-
-        private async void Button_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new ArticleView(StateController, Article));
-        }
-        }
+    }
 }

@@ -9,17 +9,10 @@ namespace Prototype.Database
 {
     class ContentAPI : IContentAPI
     {
-        private HttpClient client;
 
         public ContentAPI()
         {
-            //Initialize httpclient using variables stored in the Constants class
-            var authData = string.Format("{0}:{1}", Constants.contentAPIUsername, Constants.contentAPIkey);
-            var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
 
-            client = new HttpClient();
-            client.MaxResponseContentBufferSize = 256000;
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
         }
 
         /// <summary>
@@ -56,17 +49,29 @@ namespace Prototype.Database
         {
             var toReturn = "";
 
-            try
+            //Initialize httpclient using variables stored in the Constants class
+            var authData = string.Format("{0}:{1}", Constants.contentAPIUsername, Constants.contentAPIkey);
+            var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
+
+            using (HttpClient client = new HttpClient())
             {
-                var response = await client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
+                client.MaxResponseContentBufferSize = 256000;
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
+
+                try
                 {
-                    toReturn = await response.Content.ReadAsStringAsync();
+                    var response = await client.GetAsync(uri);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        toReturn = await response.Content.ReadAsStringAsync();
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"ERROR {0}", ex.Message);
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(@"ERROR {0}", ex.Message);
+                    client.Dispose();
+                }
+                client.Dispose();
             }
 
             return toReturn;

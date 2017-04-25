@@ -15,7 +15,6 @@
         <Label Text="Artikel 4"/>
         <Label Text="Artikel 5"/>
         <Label Text="Artikel 6"/>
-        <Button Text="Go to article" Clicked="Button_Clicked"/>
     </StackLayout>
     
 </ContentPage>

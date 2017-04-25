@@ -23,12 +23,12 @@ namespace Prototype.Views
             this.StateController = stateController;
             this.Article = article;
             BindingContext = Article;
-            //getArticle();
+            getArticle();
         }
 
-        //private async void getArticle()
-        //{
-        //    Article = await StateController.getArticleDetails(Article);
-        //}
+        private async void getArticle()
+        {
+            Article = await StateController.getArticleDetails(Article);
+        }
     }
 }

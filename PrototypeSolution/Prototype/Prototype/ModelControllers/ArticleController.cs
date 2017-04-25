@@ -95,15 +95,13 @@ namespace Prototype.ModelControllers
                 newArt.Locked = locked;
                 newArt.PublishedDate = publishedDate;
 
-                getArticleDetails(newArt);
-
                 articles.Add(newArt);
             }
 
             return articles;
         }
 
-        public async void getArticleDetails(Article article)
+        public async Task<Article> getArticleDetails(Article article)
         {             
             dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadArticle(article.ContentURL));
                 
@@ -116,6 +114,8 @@ namespace Prototype.ModelControllers
             article.BodyText = bodyText;
             article.Id = id;
             article.PublishInfo = publishInfo;
+
+            return article;
 
         }
 
