@@ -25,13 +25,10 @@ namespace Prototype.Droid.CustomRenderers
         {
             base.OnElementChanged(e);
 
-            var view = (HtmlFormattedLabel)Element;
-            if (view == null) return;
-
             Control.SetMaxLines(1000);
-            if(view.Text != null && view.Text != "")
+            if(Element.Text != null && Element.Text != "")
             {
-                Control.SetText(Html.FromHtml(view.Text.ToString().Trim()), TextView.BufferType.Spannable);
+                Control.SetText(Html.FromHtml(Element.Text.ToString().Trim()), TextView.BufferType.Spannable);
             }                 
         }
 
