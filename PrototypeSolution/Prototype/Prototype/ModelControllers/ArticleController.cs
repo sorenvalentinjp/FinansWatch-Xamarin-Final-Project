@@ -16,12 +16,10 @@ namespace Prototype.ModelControllers
     class ArticleController
     {
         private ContentAPI contentAPI;
-        private ImageDownloader imageDownloader;
 
         public ArticleController()
         {
             contentAPI = new ContentAPI();
-            imageDownloader = new ImageDownloader();
         }
 
         public async Task<List<Article>> getFrontPageArticles()
@@ -54,7 +52,9 @@ namespace Prototype.ModelControllers
                     //string imageDURL = article.image.versions.d.url;
                     string imageCaption = article.image.imageCaption;
                     newArt.ImageBigURL = image460URL;
+                    newArt.ImageSourceBig = new UriImageSource { CachingEnabled = true, Uri = new Uri(newArt.ImageBigURL) };
                     newArt.ImageSmallURL = image220URL;
+                    newArt.ImageSourceSmall = new UriImageSource { CachingEnabled = true, Uri = new Uri(newArt.ImageSmallURL) };
                     newArt.ImageCaption = imageCaption;
                 }
                 catch (Exception ex)
@@ -80,13 +80,6 @@ namespace Prototype.ModelControllers
                 articles.Add(newArt);
             }
 
-            foreach(Article a in articles)
-            {
-                downloadArticleBigImage(a);
-                downloadArticleSmallImage(a);
-                //downloadArticleThumbImage(newArt);
-            }
-
             return articles;
         }
 
@@ -105,24 +98,6 @@ namespace Prototype.ModelControllers
             article.PublishInfo = publishInfo;
 
             return article;
-        }
-
-        public async void downloadArticleBigImage(Article article)
-        {
-            //Set the article imagesource async
-            article.ImageSourceBig = await imageDownloader.downloadImage(article.ImageBigURL);
-        }
-
-        public async void downloadArticleSmallImage(Article article)
-        {
-            //Set the article imagesource async
-            article.ImageSourceSmall = await imageDownloader.downloadImage(article.ImageSmallURL);
-        }
-
-        public async void downloadArticleThumbImage(Article article)
-        {
-            //Set the article imagesource async
-            article.ImageSourceThumb = await imageDownloader.downloadImage(article.ImageThumbURL);
         }
 
     }
