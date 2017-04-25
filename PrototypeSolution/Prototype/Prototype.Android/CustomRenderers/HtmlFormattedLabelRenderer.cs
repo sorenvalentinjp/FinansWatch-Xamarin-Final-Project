@@ -14,6 +14,7 @@ using Prototype.Views.CustomRenderers;
 using Prototype.Droid.CustomRenderers;
 using Xamarin.Forms;
 using Android.Text;
+using System.ComponentModel;
 
 [assembly: ExportRenderer(typeof(HtmlFormattedLabel), typeof(HtmlFormattedLabelRenderer))]
 namespace Prototype.Droid.CustomRenderers
@@ -27,7 +28,18 @@ namespace Prototype.Droid.CustomRenderers
             var view = (HtmlFormattedLabel)Element;
             if (view == null) return;
 
-            Control.SetText(Html.FromHtml(view.Text.ToString()), TextView.BufferType.Spannable);
+            Control.SetMaxLines(1000);
+            Control.SetText(Html.FromHtml(view.Text.ToString().Trim()), TextView.BufferType.Spannable);                        
+        }
+
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+
+            if (e.PropertyName == Label.TextProperty.PropertyName)
+            {
+                Control?.SetText(Html.FromHtml(Element.Text), TextView.BufferType.Spannable);
+            }
         }
     }
 }

@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:Prototype.Views.CustomRenderers"
              x:Class="Prototype.Views.ArticleView"
              BindingContext="{Binding Article}"
-             Title="SEKTION HER!!!">
+             Title="{Binding HomeSectionName}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="ALL"/>
@@ -15,7 +15,7 @@
 
             <Image Source="{Binding ImageSourceBig}"
                    Aspect="AspectFill"
-                   HeightRequest="250"/>
+                   HeightRequest="200"/>
             <Label Text="{Binding ImageCaption}" Margin="10,0,30,0" FontSize="Small"/>
             <Label Text="{Binding Title}" Margin="15,10,30,0" FontSize="Large" FontAttributes="Bold"/>
             <local:HtmlFormattedLabel Text="{Binding Teaser}" Margin="15,10,30,0" FontSize="Medium" FontAttributes="Bold"/>

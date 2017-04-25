@@ -94,7 +94,8 @@ namespace Prototype.ModelControllers
                 newArt.Teaser = stripAllHtmlParagraphTags(teaser);
                 newArt.Locked = locked;
                 newArt.PublishedDate = publishedDate;
-                
+
+                getArticleDetails(newArt);
 
                 articles.Add(newArt);
             }
@@ -102,8 +103,8 @@ namespace Prototype.ModelControllers
             return articles;
         }
 
-        public async Task<Article> getArticleDetails(Article article)
-        { 
+        public async void getArticleDetails(Article article)
+        {             
             dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadArticle(article.ContentURL));
                 
             //Get fields
@@ -116,7 +117,6 @@ namespace Prototype.ModelControllers
             article.Id = id;
             article.PublishInfo = publishInfo;
 
-            return article;
         }
 
         private string stripAllHtmlParagraphTags(string html)
