@@ -161,6 +161,9 @@
   <ItemGroup>
     <BundleResource Include="Resources\imagePlaceholderSmall.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\imageTransparentSmall.png" />
+  </ItemGroup>
   <Import Project="..\Prototype\Prototype.projitems" Label="Shared" Condition="Exists('..\Prototype\Prototype.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

@@ -249,6 +249,18 @@ namespace Prototype.Models
             }
         }
 
+        ImageSource imageTransparentSmall;
+        public ImageSource ImageTransparentSmall
+        {
+            get { return imageTransparentSmall; }
+            set
+            {
+                if (imageTransparentSmall == value) { return; }
+                imageTransparentSmall = value;
+                notify("ImageTransparentSmall");
+            }
+        }
+
         public Article() {
             title = "";
             contentURL = "";
@@ -264,6 +276,7 @@ namespace Prototype.Models
             imageThumbURL = "";
             imagePlaceholderBig = ImageSource.FromFile("imagePlaceholderBig.png");
             imagePlaceholderSmall = ImageSource.FromFile("imagePlaceholderSmall.png");
+            imageTransparentSmall = ImageSource.FromFile("imageTransparentSmall.png");
             isTopArticle = false;
         }
 

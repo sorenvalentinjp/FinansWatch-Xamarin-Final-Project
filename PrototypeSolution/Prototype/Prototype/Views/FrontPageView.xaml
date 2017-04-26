@@ -101,7 +101,7 @@
                                 DownsampleToViewSize="True"
                                 TransparencyEnabled="True"                                
                                 VerticalOptions="Start"
-                                Source="{Binding ImagePlaceholderSmall}"
+                                Source="{Binding ImageTransparentSmall}"
                                 IsVisible="True"/>
                             <!--<BoxView Grid.Row="0" Grid.Column="0"
                                      WidthRequest="220"
