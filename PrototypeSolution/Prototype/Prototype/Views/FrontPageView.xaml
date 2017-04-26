@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Prototype.Views"
+             xmlns:local="clr-namespace:Prototype.Views.TemplateSelectors"
              xmlns:project="clr-namespace:Prototype;assembly=Prototype"
              xmlns:customRenderers="clr-namespace:Prototype.Views.CustomRenderers"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
@@ -12,7 +12,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <!--Template for the top article-->
-            <DataTemplate x:Key="topArticleTemplate">
+            <DataTemplate x:Key="articleLargeTemplate">
                 <ViewCell>
                     <ViewCell.View>
                         <StackLayout Orientation="Vertical">
@@ -35,7 +35,7 @@
             </DataTemplate>
 
             <!--Template for the top article in case a picture is not provided by the contentAPI--> 
-            <DataTemplate x:Key="topArticleNoImgTemplate">
+            <DataTemplate x:Key="articleLargeNoImageTemplate">
                 <ViewCell>
                     <ViewCell.View>
                         <StackLayout Orientation="Vertical">
@@ -57,11 +57,11 @@
             </DataTemplate>
             
             <!--Creating a templateselector and assigns the above templates to it-->
-            <local:ArticleTemplateSelector x:Key="articleTemplateSelector" 
-                                           TopArticleTemplate="{StaticResource topArticleTemplate}"
-                                           TopArticleNoImgTemplate="{StaticResource topArticleNoImgTemplate}"
-                                           ArticlesTemplate="{StaticResource articleMediumTemplate}"
-                                           ArticlesNoImgTemplate="{StaticResource articleMediumNoImageTemplate}"/>
+            <local:SectionTemplateSelector x:Key="sectionTemplateSelector" 
+                                           ArticleLargeTemplate="{StaticResource articleLargeTemplate}"
+                                           ArticleLargeNoImageTemplate="{StaticResource articleLargeNoImageTemplate}"
+                                           ArticleMediumTemplate="{StaticResource articleMediumTemplate}"
+                                           ArticleMediumNoImageTemplate="{StaticResource articleMediumNoImageTemplate}"/>
 
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -74,7 +74,7 @@
     <!--This view only contains a listview. The template is set by the created templateselector-->
     <ContentPage.Content>
         <ListView x:Name="listView" 
-                  ItemTemplate="{StaticResource articleTemplateSelector}" 
+                  ItemTemplate="{StaticResource sectionTemplateSelector}" 
                   ItemsSource="{Binding Articles}" 
                   IsPullToRefreshEnabled="True"
                   RefreshCommand="{Binding RefreshCommand}"
