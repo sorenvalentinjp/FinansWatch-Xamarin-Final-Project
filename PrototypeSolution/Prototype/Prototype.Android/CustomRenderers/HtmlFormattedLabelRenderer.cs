@@ -29,6 +29,7 @@ namespace Prototype.Droid.CustomRenderers
             if(Element.Text != null && Element.Text != "")
             {
                 Control.SetText(Html.FromHtml(Element.Text.ToString().Trim()), TextView.BufferType.Spannable);
+                Control.MovementMethod = Android.Text.Method.LinkMovementMethod.Instance;
             }                 
         }
 
@@ -40,7 +41,8 @@ namespace Prototype.Droid.CustomRenderers
             {
                 if (Element.Text != null && Element.Text != "")
                 {
-                    Control?.SetText(Html.FromHtml(Element.Text), TextView.BufferType.Spannable);
+                    Control.SetText(Html.FromHtml(Element.Text), TextView.BufferType.Spannable);
+                    Control.MovementMethod = Android.Text.Method.LinkMovementMethod.Instance;
                 }
             }
         }
