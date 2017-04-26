@@ -45,7 +45,7 @@ namespace Prototype.Views
 		{
 			InitializeComponent();
             disableItemSelectedAction();
-            
+
             Content.BindingContext = this;
             this.StateController = stateController;
             getFrontPageArticles();

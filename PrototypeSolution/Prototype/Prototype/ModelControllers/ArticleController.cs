@@ -56,7 +56,7 @@ namespace Prototype.ModelControllers
 
                     newArt.ImageBigURL = image460URL;
                     newArt.ImageSourceBig = new UriImageSource { CachingEnabled = true, Uri = new Uri(newArt.ImageBigURL) };
-                    
+
                 }
                 catch (Exception ex)
                 {

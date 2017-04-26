@@ -47,8 +47,9 @@
 
                             <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" 
                                 DownsampleToViewSize="True"
-                                TransparencyEnabled="False"
+                                TransparencyEnabled="False"                                
                                 VerticalOptions="Start"
+                                LoadingPlaceholder="{Binding BigPlaceholder}"
                                 Source="{Binding ImageSourceBig}"/>
                             <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                                    VerticalOptions="Start"

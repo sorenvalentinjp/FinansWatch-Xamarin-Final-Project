@@ -237,6 +237,18 @@ namespace Prototype.Models
             }
         }
 
+        ImageSource bigPlaceholder;
+        public ImageSource BigPlaceholder
+        {
+            get { return bigPlaceholder; }
+            set
+            {
+                if (bigPlaceholder == value) { return; }
+                bigPlaceholder = value;
+                notify("BigPlaceholder");
+            }
+        }
+
         public Article() {
             title = "";
             contentURL = "";
@@ -250,6 +262,7 @@ namespace Prototype.Models
             ImageBigURL = "";
             imageSmallURL = "";
             imageThumbURL = "";
+            bigPlaceholder = ImageSource.FromFile("loading.png");
             isTopArticle = false;
         }
 
