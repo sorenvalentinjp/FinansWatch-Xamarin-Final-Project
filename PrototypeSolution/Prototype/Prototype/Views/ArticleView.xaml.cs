@@ -17,14 +17,6 @@ namespace Prototype.Views
 	{
         private StateController StateController;
         private Article Article;
-        public int ScreenHeight
-        {
-            get { return App.DisplaySettings.GetHeight(); }
-        }
-        public int ScreenWidth
-        {
-            get { return App.DisplaySettings.GetWidth(); }
-        }
 
         public ArticleView (StateController stateController, Article article)
 		{

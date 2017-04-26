@@ -69,8 +69,6 @@ namespace Prototype.ModelControllers
                     string image220URL = article.image.versions.small_article_220.url;
                     newArt.ImageSmallURL = image220URL;
                     newArt.ImageSourceSmall = new UriImageSource { CachingEnabled = true, Uri = new Uri(newArt.ImageSmallURL) };
-                    //Hack for getting a third of the screens width. Not sure if this works on all displays
-                    newArt.ViewCellImageWidth = App.DisplaySettings.GetWidth() / 10;
                 }
                 catch (Exception ex)
                 {

@@ -21,7 +21,6 @@ namespace Prototype.Droid
 			base.OnCreate (bundle);
 
             CachedImageRenderer.Init();
-            App.Init(new AndroidDisplaySettings());
 
             global::Xamarin.Forms.Forms.Init (this, bundle);
 			LoadApplication (new Prototype.App ());
