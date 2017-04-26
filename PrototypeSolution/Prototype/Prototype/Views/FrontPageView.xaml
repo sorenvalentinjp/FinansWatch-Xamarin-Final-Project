@@ -24,9 +24,10 @@
                                          Padding="10,0,10,10">
                                 <Label Text="{Binding Title}"
                                        HorizontalOptions="FillAndExpand"
-                                       Font="Bold, 25"/>
+                                       FontSize="Large"
+                                       FontAttributes="Bold"/>
                                 <customRenderers:HtmlFormattedLabel Text="{Binding Teaser}"
-                                                                    Font="15"/>
+                                                                    FontSize="16"/>
                             </StackLayout>
                         </StackLayout>
                     </ViewCell.View>
@@ -45,9 +46,10 @@
                                          Padding="10,0,10,10">
                                 <Label Text="{Binding Title}"
                                        HorizontalOptions="FillAndExpand"
-                                       Font="Bold, 25"/>
+                                       FontSize="Large"
+                                       FontAttributes="Bold"/>
                                 <customRenderers:HtmlFormattedLabel Text="{Binding Teaser}"
-                                                                    Font="15"/>
+                                                                    Font="16"/>
                             </StackLayout>
                         </StackLayout>
                     </ViewCell.View>
@@ -76,7 +78,7 @@
                                 Source="{Binding ImageSourceSmall}"/>
                             <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                                    VerticalOptions="Start"
-                                   Font="15"/>
+                                   Font="16"/>
                         </Grid>
                     </ViewCell.View>
                 </ViewCell>
@@ -103,12 +105,9 @@
                                 VerticalOptions="Start"
                                 Source="{Binding ImageTransparentSmall}"
                                 IsVisible="True"/>
-                            <!--<BoxView Grid.Row="0" Grid.Column="0"
-                                     WidthRequest="220"
-                                     HeightRequest="124"/>-->
                             <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                                    VerticalOptions="Start"
-                                   Font="15"/>
+                                   Font="16"/>
                         </Grid>
                     </ViewCell.View>
                 </ViewCell>

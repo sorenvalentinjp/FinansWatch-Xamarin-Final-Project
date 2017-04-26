@@ -15,21 +15,21 @@ namespace Prototype.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ArticleView : ContentPage
 	{
-        private StateController StateController;
-        private Article Article;
+        private StateController stateController;
+        private Article article;
 
-        public ArticleView (StateController stateController, Article article)
+        public ArticleView(StateController stateController, Article article)
 		{
-			InitializeComponent ();
-            this.StateController = stateController;
-            this.Article = article;
-            BindingContext = Article;
-            getArticle();
+			InitializeComponent();
+            this.stateController = stateController;
+            this.article = article;
+            BindingContext = this.article;
+            GetArticle();
         }
 
-        private async void getArticle()
+        private async void GetArticle()
         {
-            Article = await StateController.getArticleDetails(Article);
+            article = await this.stateController.getArticleDetails(article);
         }
     }
 }
