@@ -21,7 +21,7 @@
                                 LoadingPlaceholder="{Binding ImagePlaceholderBig}"
                                 Source="{Binding ImageSourceBig}"/>
                             <StackLayout Orientation="Vertical"
-                                         Padding="10,0,10,0">
+                                         Padding="10,0,10,10">
                                 <Label Text="{Binding Title}"
                                        HorizontalOptions="FillAndExpand"
                                        Font="Bold, 25"/>
@@ -42,7 +42,7 @@
                                 DownsampleToViewSize="true"
                                 Source="{Binding ImagePlaceholderBig}"/>
                             <StackLayout Orientation="Vertical"
-                                         Padding="10,0,10,0">
+                                         Padding="10,0,10,10">
                                 <Label Text="{Binding Title}"
                                        HorizontalOptions="FillAndExpand"
                                        Font="Bold, 25"/>
@@ -58,7 +58,7 @@
             <DataTemplate x:Key="articlesTemplate">
                 <ViewCell>
                     <ViewCell.View>
-                        <Grid Margin="10,5,10,5">
+                        <Grid Margin="10,10,10,10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
@@ -99,10 +99,13 @@
                             <!--In this case we dont have a picture. The placeholder is set as the source so the height of the row is set right. We dont want the placeholder image to be seen, so IsVisible is set to false-->
                             <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" 
                                 DownsampleToViewSize="True"
-                                TransparencyEnabled="False"                                
+                                TransparencyEnabled="True"                                
                                 VerticalOptions="Start"
                                 Source="{Binding ImagePlaceholderSmall}"
-                                IsVisible="False"/>
+                                IsVisible="True"/>
+                            <!--<BoxView Grid.Row="0" Grid.Column="0"
+                                     WidthRequest="220"
+                                     HeightRequest="124"/>-->
                             <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                                    VerticalOptions="Start"
                                    Font="15"/>
