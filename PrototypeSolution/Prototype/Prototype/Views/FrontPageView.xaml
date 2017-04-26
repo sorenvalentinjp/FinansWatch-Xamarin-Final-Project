@@ -17,7 +17,7 @@
                     <ViewCell.View>
                         <StackLayout Orientation="Vertical">
                             <ffimageloading:CachedImage 
-                                DownsampleToViewSize="true"
+                                DownsampleToViewSize="True"
                                 LoadingPlaceholder="{Binding ImagePlaceholderBig}"
                                 Source="{Binding ImageSourceBig}"/>
                             <StackLayout Orientation="Vertical"
@@ -40,7 +40,7 @@
                     <ViewCell.View>
                         <StackLayout Orientation="Vertical">
                             <ffimageloading:CachedImage 
-                                DownsampleToViewSize="true"
+                                DownsampleToViewSize="True"
                                 Source="{Binding ImagePlaceholderBig}"/>
                             <StackLayout Orientation="Vertical"
                                          Padding="10,0,10,10">
