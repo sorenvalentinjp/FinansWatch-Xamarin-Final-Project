@@ -21,6 +21,7 @@ namespace Prototype.Views
         public ArticleView(StateController stateController, Article article)
 		{
 			InitializeComponent();
+            DisableItemSelectedAction();
             this.stateController = stateController;
             this.article = article;
             BindingContext = this.article;
@@ -39,5 +40,20 @@ namespace Prototype.Views
         {
             article = await this.stateController.getArticleDetails(article);
         }
+
+        private void DisableItemSelectedAction()
+        {
+            listView.ItemSelected += (sender, e) =>
+            {
+                ((ListView)sender).SelectedItem = null;
+            };
+        }
+
+        private async void ListViewTabbedAction(object sender, ItemTappedEventArgs e)
+        {
+            Article tabbedArticle = (Article)e.Item;
+            await Navigation.PushModalAsync(new NavigationPage(new ArticleView(this.stateController, tabbedArticle)));
+        }
+
     }
 }

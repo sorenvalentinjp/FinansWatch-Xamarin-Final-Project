@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 
-namespace Prototype.Views
+namespace Prototype.Views.TemplateSelectors
 {
     /// <summary>
     /// This class defines which template a given article should be using in related articles listviews and similar medium sized cell listviews..
