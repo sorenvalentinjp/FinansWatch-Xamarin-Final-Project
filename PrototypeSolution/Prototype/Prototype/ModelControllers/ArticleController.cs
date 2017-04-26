@@ -113,9 +113,22 @@ namespace Prototype.ModelControllers
             string bodyText = json.bodyText;
             int id = json.id;
             string publishInfo = json.publishData.publishInfo;
+            //Relatedarticles
+            var relatedArticles = json.relatedArticles;
+            foreach(var relatedArticleJson in relatedArticles)
+            {
+                Article relatedArticle = new Article();
+                relatedArticle.ContentURL = relatedArticleJson.url;
+                relatedArticle.Title = relatedArticleJson.title;
+                relatedArticle.HomeSectionName = relatedArticleJson.sectionName;
+                relatedArticle.Teaser = relatedArticleJson.teaser.DEFAULT;
+                relatedArticle.Locked = relatedArticleJson.locked;
+                article.RelatedArticles.Add(relatedArticle);
+            }
 
             //Save fields
-            article.BodyText = bodyText;
+            //Strip related articles used on the website, at the end of the bodytext.
+            article.BodyText = stripRelatedArticles(bodyText);            
             article.Id = id;
             article.PublishInfo = publishInfo;
 
@@ -126,7 +139,19 @@ namespace Prototype.ModelControllers
         private string stripAllHtmlParagraphTags(string html)
         {          
             var pattern = "<p>|<\\/p>";
-            return Regex.Replace(html, pattern, "");            
+            return Regex.Replace(html, pattern, "");
+        }
+
+        /// <summary>
+        /// Strips html text with related articles from a html string. Used in every article at the end of its bodytext.
+        /// Works by stripping <ul></ul> tags, so it might strip lists who arent meant to be stripped.
+        /// </summary>
+        /// <param name="html"></param>
+        /// <returns></returns>
+        private string stripRelatedArticles(string html)
+        {
+            var pattern = "<ul.*</ul>";
+            return Regex.Replace(html, pattern, "");
         }
 
     }
