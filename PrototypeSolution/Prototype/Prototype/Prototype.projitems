@@ -43,6 +43,7 @@
       <DependentUpon>MasterDetailView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MediumArticleTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\SavedArticlesView.xaml.cs">
       <DependentUpon>SavedArticlesView.xaml</DependentUpon>
       <SubType>Code</SubType>

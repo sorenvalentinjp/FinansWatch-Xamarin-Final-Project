@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Prototype.Views.CustomRenderers"
+             xmlns:customRenderers="clr-namespace:Prototype.Views.CustomRenderers"
+             xmlns:local="clr-namespace:Prototype.Views"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Prototype.Views.ArticleView"
              BindingContext="{Binding article}"
@@ -20,9 +21,21 @@
                 LoadingPlaceholder="{Binding ImagePlaceholderBig}"/>
             <Label Text="{Binding ImageCaption}" Margin="10,0,30,0" FontSize="12" x:Name="imageCaptionLabel"/>
             <Label Text="{Binding Title}" Margin="10,10,30,0" FontSize="Large" FontAttributes="Bold"/>
-            <local:HtmlFormattedLabel Text="{Binding Teaser}" Margin="10,10,30,0" FontSize="Medium" FontAttributes="Bold"/>
+            <customRenderers:HtmlFormattedLabel Text="{Binding Teaser}" Margin="10,10,30,0" FontSize="Medium" FontAttributes="Bold"/>
             <Label Text="{Binding PublishInfo}" Margin="10,10,30,0" FontSize="12" />
-            <local:HtmlFormattedLabel Text="{Binding BodyText}" Margin="10,15,20,10" FontSize="16"/>
+            <customRenderers:HtmlFormattedLabel Text="{Binding BodyText}" Margin="10,15,20,10" FontSize="16"/>
+
+            <local:MediumArticleTemplateSelector x:Key="articleTemplateSelector" 
+                                           ArticleMediumTemplate="{StaticResource articleMediumTemplate}"
+                                           ArticleMediumNoImageTemplate="{StaticResource articleMediumNoImageTemplate}"/>
+
+
+            <!--<ListView 
+                ItemsSource="{Binding RelatedArticles}"
+                ItemTemplate="{StaticResource articleTemplateSelector}">
+
+
+            </ListView>-->
             
         </StackLayout>
     </ScrollView>
