@@ -46,12 +46,14 @@
                             </Grid.ColumnDefinitions>
 
                             <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" 
-                                DownsampleToViewSize="true" 
+                                DownsampleToViewSize="True"
+                                TransparencyEnabled="False"
+                                VerticalOptions="Start"
                                 Source="{Binding ImageSourceBig}"/>
                             <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                                   VerticalOptions="Start"
                                    Font="15"/>
                         </Grid>
-
                     </ViewCell.View>
                 </ViewCell>
             </DataTemplate>
@@ -76,6 +78,7 @@
                   IsPullToRefreshEnabled="True"
                   RefreshCommand="{Binding RefreshCommand}"
                   IsRefreshing="{Binding IsRefreshing}"
+                  HeightRequest="200"
                   HasUnevenRows="True"
                   ItemTapped="listViewTabbedAction"/>
     </ContentPage.Content>
