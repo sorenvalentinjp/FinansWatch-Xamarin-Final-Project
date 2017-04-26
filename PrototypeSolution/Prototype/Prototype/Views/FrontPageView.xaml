@@ -10,14 +10,14 @@
     <!--Setting up resources for the view-->
     <ContentPage.Resources>
         <ResourceDictionary>
+            <!--Template for the top article-->
             <DataTemplate x:Key="topArticleTemplate">
                 <ViewCell>
                     <ViewCell.View>
-
                         <StackLayout Orientation="Vertical">
                             <ffimageloading:CachedImage 
-                                WidthRequest="{Binding ScreenWidth}" 
-                                DownsampleToViewSize="true" 
+                                DownsampleToViewSize="true"
+                                LoadingPlaceholder="{Binding ImagePlaceholderBig}"
                                 Source="{Binding ImageSourceBig}"/>
                             <StackLayout Orientation="Vertical"
                                          Padding="10,0,10,0">
@@ -32,6 +32,28 @@
                 </ViewCell>
             </DataTemplate>
 
+            <!--Template for the top article in case a picture is not provided by the contentAPI--> 
+            <DataTemplate x:Key="topArticleNoImgTemplate">
+                <ViewCell>
+                    <ViewCell.View>
+                        <StackLayout Orientation="Vertical">
+                            <ffimageloading:CachedImage 
+                                DownsampleToViewSize="true"
+                                Source="{Binding ImagePlaceholderBig}"/>
+                            <StackLayout Orientation="Vertical"
+                                         Padding="10,0,10,0">
+                                <Label Text="{Binding Title}"
+                                       HorizontalOptions="FillAndExpand"
+                                       Font="Bold, 25"/>
+                                <customRenderers:HtmlFormattedLabel Text="{Binding Teaser}"
+                                                                    Font="15"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+            
+            <!--Template for all the other articles that require smaller cells-->
             <DataTemplate x:Key="articlesTemplate">
                 <ViewCell>
                     <ViewCell.View>
@@ -49,8 +71,8 @@
                                 DownsampleToViewSize="True"
                                 TransparencyEnabled="False"                                
                                 VerticalOptions="Start"
-                                LoadingPlaceholder="{Binding BigPlaceholder}"
-                                Source="{Binding ImageSourceBig}"/>
+                                LoadingPlaceholder="{Binding ImagePlaceholderSmall}"
+                                Source="{Binding ImageSourceSmall}"/>
                             <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                                    VerticalOptions="Start"
                                    Font="15"/>
@@ -58,11 +80,43 @@
                     </ViewCell.View>
                 </ViewCell>
             </DataTemplate>
-            
+
+            <!--Template for all other articlesin case a picture is not provided by the contentAPI-->
+            <DataTemplate x:Key="articlesNoImgTemplate">
+                <ViewCell>
+                    <ViewCell.View>
+                        <Grid Margin="10,5,10,5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!--In this case we dont have a picture. The placeholder is set as the source so the height of the row is set right. We dont want the placeholder image to be seen, so IsVisible is set to false-->
+                            <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" 
+                                DownsampleToViewSize="True"
+                                TransparencyEnabled="False"                                
+                                VerticalOptions="Start"
+                                Source="{Binding ImagePlaceholderSmall}"
+                                IsVisible="False"/>
+                            <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                                   VerticalOptions="Start"
+                                   Font="15"/>
+                        </Grid>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+
+            <!--Creating a templateselector and assigns the above templates to it-->
             <local:ArticleTemplateSelector x:Key="articleTemplateSelector" 
-                                           TopArticleTemplate="{StaticResource topArticleTemplate}" 
-                                           ArticlesTemplate="{StaticResource articlesTemplate}"/>
-            
+                                           TopArticleTemplate="{StaticResource topArticleTemplate}"
+                                           TopArticleNoImgTemplate="{StaticResource topArticleNoImgTemplate}"
+                                           ArticlesTemplate="{StaticResource articlesTemplate}"
+                                           ArticlesNoImgTemplate="{StaticResource articlesNoImgTemplate}"/>
+
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -71,7 +125,7 @@
         <ToolbarItem Text="ALL"/>
     </ContentPage.ToolbarItems>
 
-    <!--This view only contains a listview-->
+    <!--This view only contains a listview. The template is set by the created templateselector-->
     <ContentPage.Content>
         <ListView x:Name="listView" 
                   ItemTemplate="{StaticResource articleTemplateSelector}" 
@@ -83,5 +137,4 @@
                   HasUnevenRows="True"
                   ItemTapped="listViewTabbedAction"/>
     </ContentPage.Content>
-
 </ContentPage>

@@ -9,13 +9,30 @@ namespace Prototype.Views
     public class ArticleTemplateSelector : DataTemplateSelector
     {
         public DataTemplate TopArticleTemplate { get; set; }
+        public DataTemplate TopArticleNoImgTemplate { get; set; }
         public DataTemplate ArticlesTemplate { get; set; }
+        public DataTemplate ArticlesNoImgTemplate { get; set; }
 
         public ArticleTemplateSelector() { }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            return ((Article)item).IsTopArticle ? TopArticleTemplate : ArticlesTemplate;
+            Article article = (Article)item;
+
+            if(article.IsTopArticle)
+            {
+                if (article.ImageBigURL == "")
+                    return TopArticleNoImgTemplate;
+                else
+                    return TopArticleTemplate;
+            }
+            else
+            {
+                if (article.ImageSmallURL == "")
+                    return ArticlesNoImgTemplate;
+                else
+                    return ArticlesTemplate;
+            }
         }
     }
 }
