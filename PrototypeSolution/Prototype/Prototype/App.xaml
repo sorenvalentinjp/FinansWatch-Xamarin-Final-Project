@@ -29,7 +29,6 @@
 
                             <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" 
                                 DownsampleToViewSize="True"
-                                TransparencyEnabled="False"                                
                                 VerticalOptions="Start"
                                 LoadingPlaceholder="{Binding ImagePlaceholderSmall}"
                                 Source="{Binding ImageSourceSmall}"/>
@@ -55,13 +54,11 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <!--In this case we dont have a picture. The placeholder is set as the source so the height of the row is set right. We dont want the placeholder image to be seen, so IsVisible is set to false-->
+                            <!--In this case we dont have a picture. Therefore a a local transparent image is used in its place-->
                             <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" 
                                 DownsampleToViewSize="True"
-                                TransparencyEnabled="False"                                
                                 VerticalOptions="Start"
-                                Source="{Binding ImageTransparentSmall}"
-                                IsVisible="True"/>
+                                Source="{Binding ImageTransparentSmall}"/>
                             <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                                    VerticalOptions="Start"
                                    Font="16"/>
