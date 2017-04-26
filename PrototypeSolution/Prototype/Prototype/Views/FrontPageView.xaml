@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Prototype.Views"
+             xmlns:project="clr-namespace:Prototype;assembly=Prototype"
              xmlns:customRenderers="clr-namespace:Prototype.Views.CustomRenderers"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Prototype.Views.FrontPageView"
@@ -49,8 +50,8 @@
                                 DownsampleToViewSize="True"
                                 TransparencyEnabled="False"                                
                                 VerticalOptions="Start"
-                                LoadingPlaceholder="{Binding BigPlaceholder}"
-                                Source="{Binding ImageSourceBig}"/>
+                                LoadingPlaceholder="{Binding ImagePlaceholderSmall}"
+                                Source="{Binding ImageSourceSmall}"/>
                             <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                                    VerticalOptions="Start"
                                    Font="15"/>

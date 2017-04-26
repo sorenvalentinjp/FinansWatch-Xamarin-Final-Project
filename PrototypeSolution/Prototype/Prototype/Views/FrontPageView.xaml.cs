@@ -30,15 +30,6 @@ namespace Prototype.Views
             }
         }
 
-        public int ScreenHeight 
-        {
-            get { return App.DisplaySettings.GetHeight(); }
-        }
-        public int ScreenWidth 
-        {
-            get { return App.DisplaySettings.GetWidth(); }
-        }
-
         private StateController StateController { get; set; }
 
         public FrontPageView(StateController stateController)

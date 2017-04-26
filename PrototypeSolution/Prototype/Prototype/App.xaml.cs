@@ -10,11 +10,6 @@ namespace Prototype
 {
 	public partial class App : Application
 	{
-        public static IDisplaySettings DisplaySettings { get; private set; }
-        public static void Init(IDisplaySettings displaySettings)
-        {
-            App.DisplaySettings = displaySettings;
-        }
 
         public App ()
 		{

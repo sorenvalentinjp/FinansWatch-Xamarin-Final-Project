@@ -225,27 +225,27 @@ namespace Prototype.Models
             }
         }
 
-        int viewCellImageWidth;
-        public int ViewCellImageWidth
+        ImageSource imagePlaceholderBig;
+        public ImageSource ImagePlaceholderBig
         {
-            get { return viewCellImageWidth; }
+            get { return imagePlaceholderBig; }
             set
             {
-                if (viewCellImageWidth == value) { return; }
-                viewCellImageWidth = value;
-                notify("ViewCellImageWidth");
+                if (imagePlaceholderBig == value) { return; }
+                imagePlaceholderBig = value;
+                notify("ImagePlaceholderBig");
             }
         }
 
-        ImageSource bigPlaceholder;
-        public ImageSource BigPlaceholder
+        ImageSource imagePlaceholderSmall;
+        public ImageSource ImagePlaceholderSmall
         {
-            get { return bigPlaceholder; }
+            get { return imagePlaceholderSmall; }
             set
             {
-                if (bigPlaceholder == value) { return; }
-                bigPlaceholder = value;
-                notify("BigPlaceholder");
+                if (imagePlaceholderSmall == value) { return; }
+                imagePlaceholderSmall = value;
+                notify("ImagePlaceholderSmall");
             }
         }
 
@@ -262,7 +262,8 @@ namespace Prototype.Models
             ImageBigURL = "";
             imageSmallURL = "";
             imageThumbURL = "";
-            bigPlaceholder = ImageSource.FromFile("loading.png");
+            imagePlaceholderBig = ImageSource.FromFile("imagePlaceholderBig.png");
+            imagePlaceholderSmall = ImageSource.FromFile("imagePlaceholderSmall.png");
             isTopArticle = false;
         }
 

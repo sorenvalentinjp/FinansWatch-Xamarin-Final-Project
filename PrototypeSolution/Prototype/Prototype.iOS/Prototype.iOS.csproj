@@ -89,7 +89,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CustomRenderers\HtmlFormattedLabelRenderer.cs" />
-    <Compile Include="IosDisplaySettings.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
@@ -157,7 +156,10 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\loading.png" />
+    <BundleResource Include="Resources\imagePlaceholderBig.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\imagePlaceholderSmall.png" />
   </ItemGroup>
   <Import Project="..\Prototype\Prototype.projitems" Label="Shared" Condition="Exists('..\Prototype\Prototype.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
