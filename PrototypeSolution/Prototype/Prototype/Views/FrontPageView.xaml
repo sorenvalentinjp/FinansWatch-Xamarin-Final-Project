@@ -138,6 +138,6 @@
                   IsRefreshing="{Binding IsRefreshing}"
                   HeightRequest="200"
                   HasUnevenRows="True"
-                  ItemTapped="listViewTabbedAction"/>
+                  ItemTapped="ListViewTabbedAction"/>
     </ContentPage.Content>
 </ContentPage>
