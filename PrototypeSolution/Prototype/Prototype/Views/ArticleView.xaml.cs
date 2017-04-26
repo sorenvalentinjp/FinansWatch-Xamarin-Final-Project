@@ -25,6 +25,14 @@ namespace Prototype.Views
             this.article = article;
             BindingContext = this.article;
             GetArticle();
+
+            if (imageView.Source == null)
+            {
+                imageView.IsVisible = false;
+                imageCaptionLabel.IsVisible = false;
+            }
+
+
         }
 
         private async void GetArticle()

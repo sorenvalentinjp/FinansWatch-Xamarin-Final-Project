@@ -14,15 +14,16 @@
     <!--The article view uses a custom renderer to display the teaser and the bodytext.-->
     <ScrollView>
         <StackLayout>
-            <ffimageloading:CachedImage 
+            <ffimageloading:CachedImage x:Name="imageView"
                 DownsampleToViewSize="true" 
                 Source="{Binding ImageSourceBig}"
-                HorizontalOptions="FillAndExpand"/>
-            <Label Text="{Binding ImageCaption}" Margin="10,0,30,0" FontSize="12"/>
+                LoadingPlaceholder="{Binding ImagePlaceholderBig}"/>
+            <Label Text="{Binding ImageCaption}" Margin="10,0,30,0" FontSize="12" x:Name="imageCaptionLabel"/>
             <Label Text="{Binding Title}" Margin="10,10,30,0" FontSize="Large" FontAttributes="Bold"/>
             <local:HtmlFormattedLabel Text="{Binding Teaser}" Margin="10,10,30,0" FontSize="Medium" FontAttributes="Bold"/>
             <Label Text="{Binding PublishInfo}" Margin="10,10,30,0" FontSize="12" />
             <local:HtmlFormattedLabel Text="{Binding BodyText}" Margin="10,15,20,10" FontSize="16"/>
+            
         </StackLayout>
     </ScrollView>
 </ContentPage>
