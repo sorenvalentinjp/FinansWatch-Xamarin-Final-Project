@@ -38,7 +38,7 @@
                         <StackLayout Orientation="Horizontal" 
                                      Padding="10,0,10,0">
                             <ffimageloading:CachedImage 
-                                HeightRequest="80" 
+                                WidthRequest="{Binding ViewCellImageWidth}"
                                 DownsampleToViewSize="true" 
                                 Source="{Binding ImageSourceBig}"
                                 Margin="0,10,0,10"/>

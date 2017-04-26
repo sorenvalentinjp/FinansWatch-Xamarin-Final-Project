@@ -225,6 +225,18 @@ namespace Prototype.Models
             }
         }
 
+        int viewCellImageWidth;
+        public int ViewCellImageWidth
+        {
+            get { return viewCellImageWidth; }
+            set
+            {
+                if (viewCellImageWidth == value) { return; }
+                viewCellImageWidth = value;
+                notify("ViewCellImageWidth");
+            }
+        }
+
         public Article() {
             title = "";
             contentURL = "";
@@ -242,14 +254,14 @@ namespace Prototype.Models
         }
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
+            public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void notify(string propName)
-        {
-            if(this.PropertyChanged != null)
+            protected void notify(string propName)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+                if(this.PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs(propName));
+                }
             }
-        }
     }
 }

@@ -38,10 +38,6 @@ namespace Prototype.Views
         {
             get { return App.DisplaySettings.GetWidth(); }
         }
-        public int ScreenWidthForCells
-        {
-            get { return App.DisplaySettings.GetWidth() / 4; }
-        }
 
         private StateController StateController { get; set; }
 

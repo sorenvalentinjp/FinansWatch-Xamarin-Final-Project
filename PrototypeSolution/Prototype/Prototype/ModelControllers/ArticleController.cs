@@ -41,6 +41,8 @@ namespace Prototype.ModelControllers
                 Boolean locked = article.locked;
 
                 //Imageversions
+
+                //BigImage
                 try
                 {
                     //string image620URL = article.image.versions.huge_article_620.url;
@@ -61,17 +63,21 @@ namespace Prototype.ModelControllers
                     Debug.WriteLine(@"getFrontPageArticles {0}", ex.Message);
                 }
 
+                //SmallImage
                 try
                 {
                     string image220URL = article.image.versions.small_article_220.url;
                     newArt.ImageSmallURL = image220URL;
                     newArt.ImageSourceSmall = new UriImageSource { CachingEnabled = true, Uri = new Uri(newArt.ImageSmallURL) };
+                    //Hack for getting a third of the screens width. Not sure if this works on all displays
+                    newArt.ViewCellImageWidth = App.DisplaySettings.GetWidth() / 10;
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine(@"getFrontPageArticles {0}", ex.Message);
                 }
 
+                //ImageCaption
                 try
                 {
                     string imageCaption = article.image.imageCaption;
