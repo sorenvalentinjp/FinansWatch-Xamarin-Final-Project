@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
 using Xamarin.Forms;
@@ -261,6 +262,18 @@ namespace Prototype.Models
             }
         }
 
+        ObservableCollection<Article> relatedArticles;
+        public ObservableCollection<Article> RelatedArticles
+        {
+            get { return relatedArticles; }
+            set
+            {
+                if (relatedArticles == value) { return; }
+                relatedArticles = value;
+                notify("RelatedArticles");
+            }
+        }
+
         public Article() {
             title = "";
             contentURL = "";
@@ -278,6 +291,7 @@ namespace Prototype.Models
             imagePlaceholderSmall = ImageSource.FromFile("imagePlaceholderSmall.png");
             imageTransparentSmall = ImageSource.FromFile("imageTransparentSmall.png");
             isTopArticle = false;
+            relatedArticles = new ObservableCollection<Article>();
         }
 
 
