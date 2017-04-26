@@ -6,6 +6,9 @@ using Xamarin.Forms;
 
 namespace Prototype.Views
 {
+    /// <summary>
+    /// This class defines which template a given article should be using on the frontpage.
+    /// </summary>
     public class ArticleTemplateSelector : DataTemplateSelector
     {
         public DataTemplate TopArticleTemplate { get; set; }
