@@ -29,7 +29,7 @@
 
                             <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" 
                                 Source="{Binding ImageSourceSmall}"
-                                LoadingPlaceholder="{Binding ImagePlaceholderSmall}"
+                                LoadingPlaceholder="{Binding ImageTransparentSmall}"
                                 />
                             <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                                    Font="16"/>
@@ -55,7 +55,7 @@
                             <!--In this case we dont have a picture. Therefore a a local transparent image is used in its place-->
                             <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" 
                                 Source="{Binding ImageTransparentSmall}"
-                                LoadingPlaceholder="{Binding ImagePlaceholderSmall}"
+                                LoadingPlaceholder="{Binding ImageTransparentSmall}"
                                 />
                             <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                                    Font="16"/>
