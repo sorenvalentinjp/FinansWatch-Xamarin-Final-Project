@@ -27,11 +27,15 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" 
-                                Source="{Binding ImageSourceSmall}"
-                                LoadingPlaceholder="{Binding ImageTransparentSmall}"
-                                />
-                            <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                            <ffimageloading:CachedImage Grid.Row="0" 
+                                                        Grid.Column="0" 
+                                                        LoadingPlaceholder="{Binding ImageTransparentSmall}"
+                                                        Source="{Binding ImageSourceSmall}"
+                                                        HorizontalOptions="StartAndExpand"/>
+                            <Label Text="{Binding Title}" 
+                                   Grid.Row="0" 
+                                   Grid.Column="1" 
+                                   Grid.ColumnSpan="2"
                                    Font="16"/>
                         </Grid>
                     </ViewCell.View>
@@ -54,10 +58,12 @@
 
                             <!--In this case we dont have a picture. Therefore a a local transparent image is used in its place-->
                             <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" 
-                                Source="{Binding ImageTransparentSmall}"
-                                LoadingPlaceholder="{Binding ImageTransparentSmall}"
-                                />
-                            <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                                                        LoadingPlaceholder="{Binding ImageTransparentSmall}"
+                                                        Source="{Binding ImageTransparentSmall}"/>
+                            <Label Text="{Binding Title}" 
+                                   Grid.Row="0" 
+                                   Grid.Column="1" 
+                                   Grid.ColumnSpan="2"
                                    Font="16"/>
                         </Grid>
                     </ViewCell.View>
