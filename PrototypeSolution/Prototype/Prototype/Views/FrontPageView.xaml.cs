@@ -33,12 +33,11 @@ namespace Prototype.Views
             DisableItemSelectedAction();
             Content.BindingContext = this;
             this.stateController = stateController;
-            //GetFrontPageArticles();
+            GetFrontPageArticles();
         }
 
         override protected void OnAppearing()
         {
-            GetFrontPageArticles();
         }
 
         /// <summary>

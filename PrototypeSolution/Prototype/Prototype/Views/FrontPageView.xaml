@@ -17,7 +17,6 @@
                     <ViewCell.View>
                         <StackLayout Orientation="Vertical">
                             <ffimageloading:CachedImage 
-                                HorizontalOptions="Fill"
                                 Source="{Binding ImageSourceBig}"/>
                             <StackLayout Orientation="Vertical"
                                          Padding="10,0,10,10">
@@ -38,7 +37,6 @@
                     <ViewCell.View>
                         <StackLayout Orientation="Vertical">
                             <ffimageloading:CachedImage 
-                                HorizontalOptions="Fill"
                                 Source="{Binding ImagePlaceholderBig}"/>
                             <StackLayout Orientation="Vertical"
                                          Padding="10,0,10,10">
