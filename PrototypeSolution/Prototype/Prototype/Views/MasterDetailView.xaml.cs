@@ -8,6 +8,9 @@ namespace Prototype.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MasterDetailView : MasterDetailPage
     {
+
+        private NavigationPage frontPageView;
+
         public StateController StateController { get; set; }
 
         public MasterDetailView(StateController stateController)
@@ -15,12 +18,13 @@ namespace Prototype.Views
             InitializeComponent();
             this.StateController = stateController;
             this.StateController.getFrontPageArticles();
-            Detail = new NavigationPage(new FrontPageView(this.StateController));
+            this.frontPageView = new NavigationPage(new FrontPageView(this.StateController));
+            Detail = this.frontPageView;
         }
 
         private void FrontPageAction(object sender, EventArgs e)
         {
-            Detail = new NavigationPage(new FrontPageView(this.StateController));
+            Detail = this.frontPageView;
             IsPresented = false;
         }
 
