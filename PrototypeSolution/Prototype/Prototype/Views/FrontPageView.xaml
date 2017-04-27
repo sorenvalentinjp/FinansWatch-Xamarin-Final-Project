@@ -17,7 +17,6 @@
                     <ViewCell.View>
                         <StackLayout Orientation="Vertical">
                             <ffimageloading:CachedImage 
-                                LoadingPlaceholder="{Binding ImagePlaceholderBig}"
                                 Source="{Binding ImageSourceBig}"/>
                             <StackLayout Orientation="Vertical"
                                          Padding="10,0,10,10">

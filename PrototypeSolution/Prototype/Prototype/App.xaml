@@ -28,7 +28,6 @@
                             </Grid.ColumnDefinitions>
 
                             <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" 
-                                LoadingPlaceholder="{Binding ImagePlaceholderSmall}"
                                 Source="{Binding ImageSourceSmall}"/>
                             <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                                    Font="16"/>

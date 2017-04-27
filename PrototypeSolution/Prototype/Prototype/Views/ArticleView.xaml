@@ -35,7 +35,7 @@
                     <ffimageloading:CachedImage x:Name="imageView"
                             DownsampleToViewSize="true" 
                             Source="{Binding ImageSourceBig}"
-                            LoadingPlaceholder="{Binding ImagePlaceholderBig}"/>
+                            HorizontalOptions="Fill"/>
                     <Label Text="{Binding ImageCaption}" Margin="10,0,30,0" FontSize="12" x:Name="imageCaptionLabel"/>
                     <Label Text="{Binding Title}" Margin="10,10,30,0" FontSize="Large" FontAttributes="Bold"/>
                     <customRenderers:HtmlFormattedLabel Text="{Binding Teaser}" Margin="10,10,30,0" FontSize="Medium" FontAttributes="Bold"/>
