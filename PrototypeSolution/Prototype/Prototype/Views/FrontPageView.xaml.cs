@@ -33,9 +33,6 @@ namespace Prototype.Views
             DisableItemSelectedAction();
             Content.BindingContext = this;
             this.stateController = stateController;
-
-            
-
             GetFrontPageArticles();
         }
 
@@ -46,10 +43,8 @@ namespace Prototype.Views
         public async void GetFrontPageArticles()
         {
             IsRefreshing = true; //to show 'busy' indicator
-
             List<Article> fetchedArticles = await this.stateController.getFrontPageArticles();
             DetermineTopArticle(fetchedArticles);
-
             this.Articles = new ObservableCollection<Article>(fetchedArticles);
             IsRefreshing = false; //to remove 'busy' indicator again
         }
