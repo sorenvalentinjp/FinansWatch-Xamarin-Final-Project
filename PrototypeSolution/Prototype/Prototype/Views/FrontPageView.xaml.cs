@@ -3,6 +3,7 @@ using Prototype.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -32,6 +33,9 @@ namespace Prototype.Views
             DisableItemSelectedAction();
             Content.BindingContext = this;
             this.stateController = stateController;
+
+            
+
             GetFrontPageArticles();
         }
 
@@ -42,8 +46,10 @@ namespace Prototype.Views
         public async void GetFrontPageArticles()
         {
             IsRefreshing = true; //to show 'busy' indicator
+
             List<Article> fetchedArticles = await this.stateController.getFrontPageArticles();
             DetermineTopArticle(fetchedArticles);
+
             this.Articles = new ObservableCollection<Article>(fetchedArticles);
             IsRefreshing = false; //to remove 'busy' indicator again
         }
