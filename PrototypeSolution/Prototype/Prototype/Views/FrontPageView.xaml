@@ -73,7 +73,8 @@
 
     <!--This view only contains a listview. The template is set by the created templateselector-->
     <ContentPage.Content>
-        <ListView x:Name="listView" 
+        <ListView CachingStrategy="RecycleElement"
+                  x:Name="listView" 
                   ItemTemplate="{StaticResource sectionTemplateSelector}" 
                   ItemsSource="{Binding Articles}" 
                   IsPullToRefreshEnabled="True"
