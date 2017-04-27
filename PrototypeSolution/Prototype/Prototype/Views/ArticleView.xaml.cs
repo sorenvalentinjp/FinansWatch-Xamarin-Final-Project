@@ -2,6 +2,8 @@
 using Prototype.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -13,19 +15,33 @@ using Xamarin.Forms.Xaml;
 namespace Prototype.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ArticleView : ContentPage
-	{
+	public partial class ArticleView : ContentPage, INotifyPropertyChanged
+    {
         private StateController stateController;
         private Article article;
+        public Article Article
+        {
+            get { return article; }
+            set
+            {
+                if (article == value) { return; }
+                article = value;
+                Notify("Article");
+            }
+        }
 
         public ArticleView(StateController stateController, Article article)
 		{
-			InitializeComponent();
-            DisableItemSelectedAction();
+            InitializeComponent();
+            
             this.stateController = stateController;
             this.article = article;
-            BindingContext = this.article;
+
             GetArticle();
+
+            BindingContext = this.article;
+
+            DisableItemSelectedAction();
 
             if (imageView.Source == null)
             {
@@ -38,7 +54,7 @@ namespace Prototype.Views
 
         private async void GetArticle()
         {
-            article = await this.stateController.getArticleDetails(article);
+            this.article = await this.stateController.getArticleDetails(this.article);
         }
 
         private void DisableItemSelectedAction()
@@ -53,6 +69,16 @@ namespace Prototype.Views
         {
             Article tabbedArticle = (Article)e.Item;
             await Navigation.PushModalAsync(new NavigationPage(new ArticleView(this.stateController, tabbedArticle)));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void Notify(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
         }
 
     }
