@@ -13,8 +13,8 @@ namespace Prototype.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FrontPageView : ContentPage, INotifyPropertyChanged
     {
-        private ObservableCollection<Article> articles;
-        public ObservableCollection<Article> Articles
+        private IList<Article> articles;
+        public IList<Article> Articles
         {
             get { return articles; }
             set
@@ -45,7 +45,7 @@ namespace Prototype.Views
             IsRefreshing = true; //to show 'busy' indicator
             List<Article> fetchedArticles = await this.stateController.getFrontPageArticles();
             DetermineTopArticle(fetchedArticles);
-            this.Articles = new ObservableCollection<Article>(fetchedArticles);
+            this.Articles = fetchedArticles;
             IsRefreshing = false; //to remove 'busy' indicator again
         }
 
