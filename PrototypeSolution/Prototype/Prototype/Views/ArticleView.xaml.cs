@@ -61,7 +61,7 @@ namespace Prototype.Views
         private async void ListViewTabbedAction(object sender, ItemTappedEventArgs e)
         {
             Article tabbedArticle = (Article)e.Item;
-            await Navigation.PushModalAsync(new NavigationPage(new ArticleView(this.stateController, tabbedArticle)), false);
+            await Navigation.PushModalAsync(new NavigationPage(new ArticleView(this.stateController, tabbedArticle)), true);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
