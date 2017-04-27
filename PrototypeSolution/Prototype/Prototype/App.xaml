@@ -28,12 +28,9 @@
                             </Grid.ColumnDefinitions>
 
                             <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" 
-                                DownsampleToViewSize="True"
-                                VerticalOptions="Start"
                                 LoadingPlaceholder="{Binding ImagePlaceholderSmall}"
                                 Source="{Binding ImageSourceSmall}"/>
                             <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
-                                   VerticalOptions="Start"
                                    Font="16"/>
                         </Grid>
                     </ViewCell.View>
@@ -56,11 +53,8 @@
 
                             <!--In this case we dont have a picture. Therefore a a local transparent image is used in its place-->
                             <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" 
-                                DownsampleToViewSize="True"
-                                VerticalOptions="Start"
                                 Source="{Binding ImageTransparentSmall}"/>
                             <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
-                                   VerticalOptions="Start"
                                    Font="16"/>
                         </Grid>
                     </ViewCell.View>
