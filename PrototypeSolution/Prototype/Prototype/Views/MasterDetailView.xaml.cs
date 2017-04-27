@@ -18,7 +18,9 @@ namespace Prototype.Views
             InitializeComponent();
             this.StateController = stateController;
             this.StateController.getFrontPageArticles();
+
             this.frontPageView = new NavigationPage(new FrontPageView(this.StateController));
+
             Detail = this.frontPageView;
         }
 
