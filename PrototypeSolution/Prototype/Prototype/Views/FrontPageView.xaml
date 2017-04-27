@@ -17,6 +17,7 @@
                     <ViewCell.View>
                         <StackLayout Orientation="Vertical">
                             <ffimageloading:CachedImage 
+                                HorizontalOptions="Fill"
                                 Source="{Binding ImageSourceBig}"/>
                             <StackLayout Orientation="Vertical"
                                          Padding="10,0,10,10">
@@ -37,6 +38,7 @@
                     <ViewCell.View>
                         <StackLayout Orientation="Vertical">
                             <ffimageloading:CachedImage 
+                                HorizontalOptions="Fill"
                                 Source="{Binding ImagePlaceholderBig}"/>
                             <StackLayout Orientation="Vertical"
                                          Padding="10,0,10,10">
@@ -68,8 +70,7 @@
 
     <!--This view only contains a listview. The template is set by the created templateselector-->
     <ContentPage.Content>
-        <ListView CachingStrategy="RecycleElement"
-                  x:Name="listView" 
+        <ListView x:Name="listView" 
                   ItemTemplate="{StaticResource sectionTemplateSelector}" 
                   ItemsSource="{Binding Articles}" 
                   IsPullToRefreshEnabled="True"
