@@ -13,8 +13,8 @@ namespace Prototype.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FrontPageView : ContentPage, INotifyPropertyChanged
     {
-        private IList<Article> articles;
-        public IList<Article> Articles
+        private ObservableCollection<Article> articles;
+        public ObservableCollection<Article> Articles
         {
             get { return articles; }
             set
@@ -30,10 +30,11 @@ namespace Prototype.Views
         public FrontPageView(StateController stateController)
 		{
 			InitializeComponent();
-            DisableItemSelectedAction();
-            Content.BindingContext = this;
+            BindingContext = this;
+            DisableItemSelectedAction();            
             this.stateController = stateController;
             GetFrontPageArticles();
+            
         }
 
         override protected void OnAppearing()
@@ -47,7 +48,7 @@ namespace Prototype.Views
         public async void GetFrontPageArticles()
         {
             IsRefreshing = true; //to show 'busy' indicator
-            List<Article> fetchedArticles = await this.stateController.getFrontPageArticles();
+            ObservableCollection<Article> fetchedArticles = new ObservableCollection<Article>(await this.stateController.getFrontPageArticles());
             DetermineTopArticle(fetchedArticles);
             this.Articles = fetchedArticles;
             IsRefreshing = false; //to remove 'busy' indicator again
@@ -58,7 +59,7 @@ namespace Prototype.Views
         /// This is to be able to assign the correct template to the article.
         /// </summary>
         /// <param name="articles">The list containing the articles</param>
-        private void DetermineTopArticle(List<Article> articles)
+        private void DetermineTopArticle(ObservableCollection<Article> articles)
         {
             articles[0].IsTopArticle = true;
         }

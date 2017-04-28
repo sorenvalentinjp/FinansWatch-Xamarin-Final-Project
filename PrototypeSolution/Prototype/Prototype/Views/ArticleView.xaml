@@ -10,6 +10,35 @@
     <ContentPage.Resources>
 
         <ResourceDictionary>
+
+            <DataTemplate x:Key="articleMediumTemplate">
+                <ViewCell>
+                    <ViewCell.View>
+                        <Grid Margin="10,10,10,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <ffimageloading:CachedImage Grid.Row="0" 
+                                                        Grid.Column="0" 
+                                                        LoadingPlaceholder="{Binding ImageTransparentSmall}"
+                                                        Source="{Binding ImageSourceThumb}"
+                                                        HorizontalOptions="StartAndExpand"/>
+                            <Label Text="{Binding Title}" 
+                                   Grid.Row="0" 
+                                   Grid.Column="1" 
+                                   Grid.ColumnSpan="2"
+                                   Font="16"/>
+                        </Grid>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+
             <templateSelectors:MediumArticleTemplateSelector x:Key="articleTemplateSelector" 
                                                ArticleMediumTemplate="{StaticResource articleMediumTemplate}"
                                                ArticleMediumNoImageTemplate="{StaticResource articleMediumNoImageTemplate}"/>
@@ -34,9 +63,9 @@
                 <StackLayout>
                     <ffimageloading:CachedImage x:Name="imageView"
                             DownsampleToViewSize="true" 
-                            Source="{Binding ImageSourceBig}"
+                            Source="{Binding ImageSourceSmall}"
                             HorizontalOptions="Fill"/>
-                    <Label Text="{Binding ImageCaption}" Margin="10,0,30,0" FontSize="12" x:Name="imageCaptionLabel"/>
+                    <Label Text="{Binding ArticleImage.ImageCaption}" Margin="10,0,30,0" FontSize="12" x:Name="imageCaptionLabel"/>
                     <Label Text="{Binding Title}" Margin="10,10,30,0" FontSize="Large" FontAttributes="Bold"/>
                     <customRenderers:HtmlFormattedLabel Text="{Binding Teaser}" Margin="10,10,30,0" FontSize="Medium" FontAttributes="Bold"/>
                     <Label Text="{Binding PublishInfo}" Margin="10,10,30,0" FontSize="12" />

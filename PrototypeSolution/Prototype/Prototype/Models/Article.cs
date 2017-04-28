@@ -165,18 +165,6 @@ namespace Prototype.Models
             }
         }
 
-        string imageThumbURL;
-        public string ImageThumbURL
-        {
-            get { return imageThumbURL; }
-            set
-            {
-                if (imageThumbURL == value) { return; }
-                imageThumbURL = value;
-                notify("ImageThumbURL");
-            }
-        }
-
         //added to be able to know if an article is the top article on the frontpage
         Boolean isTopArticle;
         public Boolean IsTopArticle
@@ -217,12 +205,36 @@ namespace Prototype.Models
         ImageSource imageSourceThumb;
         public ImageSource ImageSourceThumb
         {
-            get { return imageSourceThumb; }
+            get { return imageSourceSmall; }
             set
             {
                 if (imageSourceThumb == value) { return; }
                 imageSourceThumb = value;
                 notify("ImageSourceThumb");
+            }
+        }
+
+        ImageSource imageSourceFrontPageSmall;
+        public ImageSource ImageSourceFrontPageSmall
+        {
+            get { return imageSourceFrontPageSmall; }
+            set
+            {
+                if (imageSourceFrontPageSmall == value) { return; }
+                imageSourceFrontPageSmall = value;
+                notify("ImageSourceFrontPageSmall");
+            }
+        }
+
+        ImageSource imageSourceFrontPageBig;
+        public ImageSource ImageSourceFrontPageBig
+        {
+            get { return imageSourceFrontPageBig; }
+            set
+            {
+                if (imageSourceFrontPageBig == value) { return; }
+                imageSourceFrontPageBig = value;
+                notify("ImageSourceFrontPageBig");
             }
         }
 
@@ -262,8 +274,8 @@ namespace Prototype.Models
             }
         }
 
-        ObservableCollection<Article> relatedArticles;
-        public ObservableCollection<Article> RelatedArticles
+        IList<Article> relatedArticles;
+        public IList<Article> RelatedArticles
         {
             get { return relatedArticles; }
             set
@@ -284,14 +296,13 @@ namespace Prototype.Models
             id = -1;
             ImageCaption = "";
             teaser = "";
-            ImageBigURL = "";
-            imageSmallURL = "";
-            imageThumbURL = "";
+            //ImageBigURL = "";
+            //imageSmallURL = "";
             imagePlaceholderBig = ImageSource.FromFile("imagePlaceholderBig.png");
             imagePlaceholderSmall = ImageSource.FromFile("imagePlaceholderSmall.png");
             imageTransparentSmall = ImageSource.FromFile("imageTransparentSmall.png");
             isTopArticle = false;
-            relatedArticles = new ObservableCollection<Article>();
+            relatedArticles = new List<Article>();
         }
 
 

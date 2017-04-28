@@ -16,7 +16,7 @@ namespace Prototype.ModelControllers
             articleController = new ArticleController();
         }
 
-        public Task<List<Article>> getFrontPageArticles()
+        public Task<IList<Article>> getFrontPageArticles()
         {
             return articleController.getFrontPageArticles();
         }
@@ -25,6 +25,7 @@ namespace Prototype.ModelControllers
         {
             return articleController.getArticleDetails(article);
         }
+
     }
 
 }

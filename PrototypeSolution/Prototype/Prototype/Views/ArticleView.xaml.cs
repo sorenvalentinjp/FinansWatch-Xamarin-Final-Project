@@ -35,13 +35,15 @@ namespace Prototype.Views
             InitializeComponent();
             DisableItemSelectedAction();
             this.stateController = stateController;
+            Article = article;
+            BindingContext = Article;
             GetArticle(article);
         }
 
         private async void GetArticle(Article article)
         {
             this.article = await this.stateController.getArticleDetails(article);
-            BindingContext = this.article;
+            BindingContext = Article;
 
             if (imageView.Source == null)
             {
@@ -61,7 +63,7 @@ namespace Prototype.Views
         private async void ListViewTabbedAction(object sender, ItemTappedEventArgs e)
         {
             Article tabbedArticle = (Article)e.Item;
-            await Navigation.PushModalAsync(new NavigationPage(new ArticleView(this.stateController, tabbedArticle)), true);
+            await Navigation.PushModalAsync(new NavigationPage(new ArticleView(this.stateController, await stateController.getArticleDetails(tabbedArticle))), true);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
