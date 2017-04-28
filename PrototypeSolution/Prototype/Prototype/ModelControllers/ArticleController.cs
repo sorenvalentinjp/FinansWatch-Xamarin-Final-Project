@@ -14,27 +14,28 @@ using Xamarin.Forms;
 
 namespace Prototype.ModelControllers
 {
-    class ArticleController
+    public class ArticleController
     {
         private ContentAPI contentAPI;
+        public event Action<Article> articleIsReady;
+        public event Action<bool> isRefreshing;
 
         public ArticleController()
         {
             contentAPI = new ContentAPI();
         }
 
-        public async Task<IList<Article>> getFrontPageArticles()
+        public async void getFrontPageArticlesAsync()
         {
-            IList<Article> articles = new List<Article>();
-
+            isRefreshing(true);
             dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadFrontPageArticles());
             foreach (var articleJson in json)
             {
                 Article newArt = new Article();
 
                 //Other fields
-                string title = articleJson.titles.FRONTPAGE;
                 string contentURL = articleJson.contentUrl;
+                string title = articleJson.titles.FRONTPAGE;                
                 string teaser = articleJson.teasers.FRONTPAGE;
                 Boolean locked = articleJson.locked;
 
@@ -47,15 +48,36 @@ namespace Prototype.ModelControllers
                 newArt.Teaser = stripAllHtmlParagraphTags(teaser);
                 newArt.Locked = locked;
 
-                newArt = await getArticleDetails(newArt);
+                newArt = await getArticleDetailsAsync(newArt);
 
-                articles.Add(newArt);
+                articleIsReady(newArt);
             }
-
-            return articles;
+            isRefreshing(false);
         }
 
-        public async Task<Article> getArticleDetails(Article article)
+        public async void getRelatedArticlesAsync(Article article)
+        {
+            dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadArticle(article.ContentURL));
+
+            article.RelatedArticles.Clear();
+
+            foreach (var relatedArticleJson in json.relatedArticles)
+            {
+                Article relatedArticle = new Article();
+                relatedArticle.ContentURL = relatedArticleJson.url;
+                relatedArticle.Title = relatedArticleJson.title;
+                relatedArticle.Locked = relatedArticleJson.locked;
+
+                //Download the related article json and fetch images
+                dynamic relatedArticleDetailsJson = JsonConvert.DeserializeObject(await contentAPI.downloadArticle(relatedArticle.ContentURL));
+                relatedArticle.ArticleImage = getArticleImage(relatedArticleDetailsJson);
+
+                //Add the new related article
+                article.RelatedArticles.Add(relatedArticle);
+            }
+        }
+
+        public async Task<Article> getArticleDetailsAsync(Article article)
         {
             dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadArticle(article.ContentURL));
 
@@ -80,37 +102,9 @@ namespace Prototype.ModelControllers
             article.Teaser = teaser;
             article.PublishInfo = publishInfo;
             article.HomeSectionName = homeSectionName;
-            article.RelatedArticles = await getRelatedArticles(json.relatedArticles);
 
             return article;
 
-        }
-
-        /// <summary>
-        /// Takes a json string with a list of related articles. Returns a list of related article objects including their small images.
-        /// </summary>
-        /// <param name="json"></param>
-        /// <param name="article"></param>
-        private async Task<IList<Article>> getRelatedArticles(dynamic relatedArticlesJson)
-        {
-            IList<Article> relatedArticles = new List<Article>();
-
-            foreach (var relatedArticleJson in relatedArticlesJson)
-            {
-                Article relatedArticle = new Article();
-                relatedArticle.ContentURL = relatedArticleJson.url;
-                relatedArticle.Title = relatedArticleJson.title;
-                relatedArticle.Teaser = relatedArticleJson.teaser.DEFAULT;
-                relatedArticle.Locked = relatedArticleJson.locked;
-
-                //Download the related article json and fetch images
-                dynamic relatedArticleDetailsJson = JsonConvert.DeserializeObject(await contentAPI.downloadArticle(relatedArticle.ContentURL));
-                relatedArticle.ArticleImage = getArticleImage(relatedArticleDetailsJson);
-
-                //Add the new related article
-                relatedArticles.Add(relatedArticle);
-            }
-            return relatedArticles;
         }
 
         private ArticleImage getArticleImage(dynamic articleJson)

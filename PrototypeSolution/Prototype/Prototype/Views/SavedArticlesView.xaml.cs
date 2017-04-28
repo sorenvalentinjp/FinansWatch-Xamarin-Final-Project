@@ -52,10 +52,10 @@ namespace Prototype.Views
 
         override protected async void OnAppearing()
         {
-            var list = await this.stateController.getFrontPageArticles();
-            this.SavedArticles.Add(list[0]);
-            this.SavedArticles.Add(list[1]);
-            this.SavedArticles.Add(list[2]);
+            //var list = await this.stateController.getFrontPageArticles();
+            //this.SavedArticles.Add(list[0]);
+            //this.SavedArticles.Add(list[1]);
+            //this.SavedArticles.Add(list[2]);
         }
 
         /// <summary>

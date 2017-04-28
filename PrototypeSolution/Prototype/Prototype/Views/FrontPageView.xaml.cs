@@ -25,56 +25,41 @@ namespace Prototype.Views
             }
         }
 
+        private bool isRefreshing;
+        public bool IsRefreshing
+        {
+            get { return isRefreshing; }
+            set
+            {
+                if (isRefreshing == value) { return; }
+                isRefreshing = value;
+                Notify("IsRefreshing");
+            }
+        }
+
         private StateController stateController;
 
         public FrontPageView(StateController stateController)
 		{
 			InitializeComponent();
             BindingContext = this;
-            DisableItemSelectedAction();            
-            this.stateController = stateController;
-            GetFrontPageArticles();
             
+            this.stateController = stateController;
+            this.stateController.ArticleController.isRefreshing += IsRefreshingChanged;
+            Articles = this.stateController.FrontPageArticles;
+            this.stateController.getFrontPageArticles();
+            DisableItemSelectedAction();
+        }
+
+        //IsRefreshing is used to display an 'busy' icon while the listview is refreshing its content.
+        private void IsRefreshingChanged(bool isRefreshing)
+        {
+            IsRefreshing = isRefreshing;
         }
 
         override protected void OnAppearing()
         {
-        }
-
-        /// <summary>
-        /// Fetches all frontpage articles and stores them in the viewmodel.
-        /// During this operation a 'refresh' icon is displayed.
-        /// </summary>
-        public async void GetFrontPageArticles()
-        {
-            IsRefreshing = true; //to show 'busy' indicator
-            ObservableCollection<Article> fetchedArticles = new ObservableCollection<Article>(await this.stateController.getFrontPageArticles());
-            DetermineTopArticle(fetchedArticles);
-            this.Articles = fetchedArticles;
-            IsRefreshing = false; //to remove 'busy' indicator again
-        }
-
-        /// <summary>
-        /// Sets the proporty 'IsTopArticle' for the toparticle to true.
-        /// This is to be able to assign the correct template to the article.
-        /// </summary>
-        /// <param name="articles">The list containing the articles</param>
-        private void DetermineTopArticle(ObservableCollection<Article> articles)
-        {
-            articles[0].IsTopArticle = true;
-        }
-
-        //IsRefrehing is used to display an 'busy' icon while the listview is refreshing its content.
-        private bool isRefreshning = false;
-        public bool IsRefreshing
-        {
-            get { return isRefreshning; }
-            set
-            {
-                isRefreshning = value;
-                Notify("IsRefreshing");
-            }
-        }
+        }        
 
         /// <summary>
         /// When the user refreshed the view, this.articles is updated.
@@ -85,7 +70,7 @@ namespace Prototype.Views
             {
                 return new Command(() =>
                 {
-                    GetFrontPageArticles();
+                    this.stateController.getFrontPageArticles();
                 });
             }
         }

@@ -33,17 +33,11 @@ namespace Prototype.Views
         public ArticleView(StateController stateController, Article article)
 		{
             InitializeComponent();
-            DisableItemSelectedAction();
-            this.stateController = stateController;
             Article = article;
             BindingContext = Article;
-            //GetArticle(article);
-        }
-
-        private async void GetArticle(Article article)
-        {
-            this.article = await this.stateController.getArticleDetails(article);
-            BindingContext = Article;
+            DisableItemSelectedAction();
+            this.stateController = stateController;
+            this.stateController.getRelatedArticles(Article);
 
             if (imageView.Source == null)
             {

@@ -93,30 +93,6 @@ namespace Prototype.Models
             }
         }
 
-        int homeSectionId;
-        public int HomeSectionId
-        {
-            get { return homeSectionId; }
-            set
-            {
-                if (homeSectionId == value) { return; }
-                homeSectionId = value;
-                notify("HomeSectionId");
-            }
-        }
-
-        int id;
-        public int Id
-        {
-            get { return id; }
-            set
-            {
-                if (id == value) { return; }
-                id = value;
-                notify("Id");
-            }
-        }
-
         string teaser;
         public string Teaser
         {
@@ -205,8 +181,8 @@ namespace Prototype.Models
 
 
 
-        IList<Article> relatedArticles;
-        public IList<Article> RelatedArticles
+        ObservableCollection<Article> relatedArticles;
+        public ObservableCollection<Article> RelatedArticles
         {
             get { return relatedArticles; }
             set
@@ -223,14 +199,12 @@ namespace Prototype.Models
             bodyText = "";
             homeSectionName = "";
             publishInfo = "";
-            homeSectionId = -1;
-            id = -1;
             teaser = "";
             imagePlaceholderBig = ImageSource.FromFile("imagePlaceholderBig.png");
             imagePlaceholderSmall = ImageSource.FromFile("imagePlaceholderSmall.png");
             imageTransparentSmall = ImageSource.FromFile("imageTransparentSmall.png");
             isTopArticle = false;
-            relatedArticles = new List<Article>();
+            relatedArticles = new ObservableCollection<Article>();
         }
 
 
