@@ -18,6 +18,11 @@
                 <ViewCell>
                     <ViewCell.View>
                         <Grid Margin="10,10,10,10">
+                            <!--<Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="DoubleTabGesture_Tapped" 
+                                                      NumberOfTapsRequired="2"
+                                                      />
+                            </Grid.GestureRecognizers>-->
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
