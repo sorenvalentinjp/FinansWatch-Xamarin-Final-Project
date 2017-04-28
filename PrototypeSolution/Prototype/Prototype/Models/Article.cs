@@ -117,18 +117,6 @@ namespace Prototype.Models
             }
         }
 
-        string imageCaption;
-        public string ImageCaption
-        {
-            get { return imageCaption; }
-            set
-            {
-                if (imageCaption == value) { return; }
-                imageCaption = value;
-                notify("ImageCaption");
-            }
-        }
-
         string teaser;
         public string Teaser
         {
@@ -138,30 +126,6 @@ namespace Prototype.Models
                 if (teaser == value) { return; }
                 teaser = value;
                 notify("Teaser");
-            }
-        }
-
-        string imageBigURL;
-        public string ImageBigURL
-        {
-            get { return imageBigURL; }
-            set
-            {
-                if (imageBigURL == value) { return; }
-                imageBigURL = value;
-                notify("ImageBigURL");
-            }
-        }
-
-        string imageSmallURL;
-        public string ImageSmallURL
-        {
-            get { return imageSmallURL; }
-            set
-            {
-                if (imageSmallURL == value) { return; }
-                imageSmallURL = value;
-                notify("ImageSmallURL");
             }
         }
 
@@ -178,65 +142,6 @@ namespace Prototype.Models
             }
         }
 
-        ImageSource imageSourceBig;
-        public ImageSource ImageSourceBig
-        {
-            get { return imageSourceBig; }
-            set
-            {
-                if (imageSourceBig == value) { return; }
-                imageSourceBig = value;
-                notify("ImageSourceBig");
-            }
-        }
-
-        ImageSource imageSourceSmall;
-        public ImageSource ImageSourceSmall
-        {
-            get { return imageSourceSmall; }
-            set
-            {
-                if (imageSourceSmall == value) { return; }
-                imageSourceSmall = value;
-                notify("ImageSourceSmall");
-            }
-        }
-
-        ImageSource imageSourceThumb;
-        public ImageSource ImageSourceThumb
-        {
-            get { return imageSourceSmall; }
-            set
-            {
-                if (imageSourceThumb == value) { return; }
-                imageSourceThumb = value;
-                notify("ImageSourceThumb");
-            }
-        }
-
-        ImageSource imageSourceFrontPageSmall;
-        public ImageSource ImageSourceFrontPageSmall
-        {
-            get { return imageSourceFrontPageSmall; }
-            set
-            {
-                if (imageSourceFrontPageSmall == value) { return; }
-                imageSourceFrontPageSmall = value;
-                notify("ImageSourceFrontPageSmall");
-            }
-        }
-
-        ImageSource imageSourceFrontPageBig;
-        public ImageSource ImageSourceFrontPageBig
-        {
-            get { return imageSourceFrontPageBig; }
-            set
-            {
-                if (imageSourceFrontPageBig == value) { return; }
-                imageSourceFrontPageBig = value;
-                notify("ImageSourceFrontPageBig");
-            }
-        }
 
         ImageSource imagePlaceholderBig;
         public ImageSource ImagePlaceholderBig
@@ -274,6 +179,32 @@ namespace Prototype.Models
             }
         }
 
+        ArticleImage articleImage;
+        public ArticleImage ArticleImage
+        {
+            get { return articleImage; }
+            set
+            {
+                if (articleImage == value) { return; }
+                articleImage = value;
+                notify("ArticleImage");
+            }
+        }
+
+        ArticleImage frontPageImage;
+        public ArticleImage FrontPageImage
+        {
+            get { return frontPageImage; }
+            set
+            {
+                if (frontPageImage == value) { return; }
+                frontPageImage = value;
+                notify("FrontPageImage");
+            }
+        }
+
+
+
         IList<Article> relatedArticles;
         public IList<Article> RelatedArticles
         {
@@ -294,10 +225,7 @@ namespace Prototype.Models
             publishInfo = "";
             homeSectionId = -1;
             id = -1;
-            ImageCaption = "";
             teaser = "";
-            //ImageBigURL = "";
-            //imageSmallURL = "";
             imagePlaceholderBig = ImageSource.FromFile("imagePlaceholderBig.png");
             imagePlaceholderSmall = ImageSource.FromFile("imagePlaceholderSmall.png");
             imageTransparentSmall = ImageSource.FromFile("imageTransparentSmall.png");

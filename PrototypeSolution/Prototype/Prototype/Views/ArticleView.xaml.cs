@@ -37,7 +37,7 @@ namespace Prototype.Views
             this.stateController = stateController;
             Article = article;
             BindingContext = Article;
-            GetArticle(article);
+            //GetArticle(article);
         }
 
         private async void GetArticle(Article article)

@@ -22,14 +22,14 @@ namespace Prototype.Views.TemplateSelectors
 
             if (article.IsTopArticle)
             {
-                if (article.ImageSourceBig == null)
+                if (article.FrontPageImage == null)
                     return ArticleLargeNoImageTemplate;
                 else
                     return ArticleLargeTemplate;
             }
             else
             {
-                if (article.ImageSourceSmall == null)
+                if (article.FrontPageImage == null)
                     return ArticleMediumNoImageTemplate;
                 else
                     return ArticleMediumTemplate;

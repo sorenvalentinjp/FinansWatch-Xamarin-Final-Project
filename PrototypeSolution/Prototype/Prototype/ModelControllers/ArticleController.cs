@@ -38,18 +38,14 @@ namespace Prototype.ModelControllers
                 string teaser = articleJson.teasers.FRONTPAGE;
                 Boolean locked = articleJson.locked;
 
-                //BigImage
-                //SmallImage
-                //newArt.ImageBigURL = getFrontPageArticleBigUrl(articleJson);
-                //newArt.ImageSmallURL = getFrontPageArticleSmallUrl(articleJson);
-                
+                //Get frontpage image
+                newArt.FrontPageImage = getFrontPageImage(articleJson);
+
                 //Save fields
                 newArt.Title = title;
                 newArt.ContentURL = contentURL;
                 newArt.Teaser = stripAllHtmlParagraphTags(teaser);
                 newArt.Locked = locked;
-
-                getFrontPageImage(articleJson, newArt);
 
                 newArt = await getArticleDetails(newArt);
 
@@ -70,12 +66,8 @@ namespace Prototype.ModelControllers
             string publishInfo = json.publishData.publishInfo;
             string homeSectionName = json.metadata.sectionDisplayName;
 
-            //BigImage
-            //SmallImage
-            //ImageCaption
-            getArticleImage(json, article);
-            //ImageSource bigImageSource = getArticleBigImageSource(json);
-            //string imageCaption = getArticleImageCaption(json);
+            //Get article image
+            article.ArticleImage = getArticleImage(json);
 
             //Dates
             //String publishedDateString = json.publishData.publishedTime;
@@ -88,8 +80,6 @@ namespace Prototype.ModelControllers
             article.Teaser = teaser;
             article.PublishInfo = publishInfo;
             article.HomeSectionName = homeSectionName;
-            //article.ImageSourceBig = bigImageSource;
-            //article.ImageCaption = imageCaption;
             article.RelatedArticles = await getRelatedArticles(json.relatedArticles);
 
             return article;
@@ -114,9 +104,8 @@ namespace Prototype.ModelControllers
                 relatedArticle.Locked = relatedArticleJson.locked;
 
                 //Download the related article json and fetch images
-                //string relatedArticleDetailsJson = await contentAPI.downloadArticle(relatedArticle.ContentURL);
                 dynamic relatedArticleDetailsJson = JsonConvert.DeserializeObject(await contentAPI.downloadArticle(relatedArticle.ContentURL));
-                getArticleImage(relatedArticleDetailsJson, relatedArticle);
+                relatedArticle.ArticleImage = getArticleImage(relatedArticleDetailsJson);
 
                 //Add the new related article
                 relatedArticles.Add(relatedArticle);
@@ -124,7 +113,7 @@ namespace Prototype.ModelControllers
             return relatedArticles;
         }
 
-        private void getArticleImage(dynamic articleJson, Article article)
+        private ArticleImage getArticleImage(dynamic articleJson)
         {
             //Images
             try
@@ -147,120 +136,30 @@ namespace Prototype.ModelControllers
                                 Debug.WriteLine(@"getArticleImages ImageCaption {0}", ex.Message);
                             }
 
-                            article.ImageSourceBig = new UriImageSource { Uri = new Uri(imageBigUrl) };
-                            article.ImageSourceSmall = new UriImageSource { Uri = new Uri(imageSmallURL) };
-                            article.ImageSourceThumb = new UriImageSource { Uri = new Uri(imageThumbURL) };
+                            return new ArticleImage(imageBigUrl, imageSmallURL, imageThumbURL, imageCaption);
                     }                    
                 }
-                //return null;
+                return null;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"getArticleImages articleJson.topImages {0}", ex.Message);
-                //return null;
+                return null;
             }            
         }
 
-        private Article getFrontPageImage(dynamic articleJson, Article article)
+        private ArticleImage getFrontPageImage(dynamic articleJson)
         {
             //Images
             try
             {
                 string imageFrontPageBigUrl = articleJson.image.versions.big_article_460.url;
                 string imageFrontPageSmallUrl = articleJson.image.versions.small_article_220.url;
-                //string imageThumbURL = "";
-                //string imageCaption = "";
-                article.ImageSourceFrontPageBig = new UriImageSource { Uri = new Uri(imageFrontPageBigUrl) };
-                article.ImageSourceFrontPageSmall = new UriImageSource { Uri = new Uri(imageFrontPageSmallUrl) };
-                return article;
+                return new ArticleImage(imageFrontPageBigUrl, imageFrontPageSmallUrl, "", "");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"getFrontPageImage {0}", ex.Message);
-                return article;
-            }
-        }
-
-        private string getArticleBigImageUrl(dynamic articleJson)
-        {
-            //BigImage
-            try
-            {
-                foreach (var image in articleJson.topImages)
-                {
-                    return image.big.url;
-                }
-                return null;
-
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"getArticleBigImageSource {0}", ex.Message);
-                return null;
-            }
-        }
-
-
-        private string getArticleSmallImageUrl(dynamic articleJson)
-        {
-            //SmallImage
-            try
-            {
-                foreach (var image in articleJson.topImages)
-                {
-                    return image.small.url;
-                }
-                return null;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"getArticleSmallImageSource {0}", ex.Message);
-                return null;
-            }
-        }
-
-        private string getArticleImageCaption(dynamic articleJson)
-        {
-            //ImageCaption
-            try
-            {
-                foreach (var image in articleJson.topImages)
-                {
-                    return image.imageCaption;
-                }
-                return "";
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"getArticleImageCaption {0}", ex.Message);
-                return null;
-            }
-        }
-
-        private string getFrontPageArticleBigUrl(dynamic articleJson)
-        {
-            //BigImage
-            try
-            {
-                return articleJson.image.versions.big_article_460.url;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"getFrontPageArticleBigImageSource {0}", ex.Message);
-                return null;
-            }
-        }
-
-        private string getFrontPageArticleSmallUrl(dynamic articleJson)
-        {
-            //SmallImage
-            try
-            {
-                return articleJson.image.versions.small_article_220.url;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"getFrontPageArticleSmallImageSource {0}", ex.Message);
                 return null;
             }
         }

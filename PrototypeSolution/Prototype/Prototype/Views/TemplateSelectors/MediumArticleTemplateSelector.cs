@@ -19,7 +19,7 @@ namespace Prototype.Views.TemplateSelectors
         {
             Article article = (Article)item;
 
-            if (article.ImageSmallURL == "")
+            if (article.ArticleImage == null)
                 return ArticleMediumNoImageTemplate;
             else
                 return ArticleMediumTemplate;
