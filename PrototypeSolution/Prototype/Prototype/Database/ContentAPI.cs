@@ -13,7 +13,7 @@ namespace Prototype.Database
 
         public ContentAPI()
         {
-            //Initialize httpclient using variables stored in the Constants class
+            //Initialize httpclients using variables stored in the Constants class
             client = new HttpClient();
             var authData = string.Format("{0}:{1}", Constants.contentAPIUsername, Constants.contentAPIkey);
             var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
@@ -41,7 +41,7 @@ namespace Prototype.Database
         public Task<string> downloadFrontPageArticles()
         {
             //Full url example: https://content.watchmedier.dk/api/finanswatch/content/frontpagearticles
-            var uri = new Uri(Constants.contentAPIUrl + "finanswatch/content/frontpagearticles");
+            var uri = new Uri(Constants.contentAPIUrl + "finanswatch/content/frontpagearticles?max=30");
 
             return downloadJSON(uri);
         }
@@ -64,6 +64,30 @@ namespace Prototype.Database
             {
                 Debug.WriteLine(@"ERROR {0}", ex.Message);
                 return "";
+            }
+        }
+
+        //Not currently used. Not deleted as we might need it later on to check url's
+        public async Task<Boolean> IsValidUrl(string url)
+        {
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Head, url);
+            HttpResponseMessage response = new HttpResponseMessage();
+            try
+            {
+                response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                response.EnsureSuccessStatusCode();
+                response.Dispose(); //not sure if this is needed. Does it close the client or just the response message?
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ERROR: {url} is not valid.");
+                Debug.WriteLine($"ERRORMESSAGE: {ex.Message}");
+                return false;
+            }
+            finally
+            {
+                response.Dispose();
             }
         }
     }

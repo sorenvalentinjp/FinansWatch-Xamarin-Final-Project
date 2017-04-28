@@ -11,6 +11,7 @@ namespace Prototype.Views
     {
 
         private NavigationPage frontPageView;
+        private NavigationPage savedArticlesView;
 
         public StateController StateController { get; set; }
 
@@ -39,7 +40,10 @@ namespace Prototype.Views
 
         private void SavedArticlesAction(object sender, EventArgs e)
         {
-            Detail = new NavigationPage(new SavedArticlesView());
+            if(this.savedArticlesView == null)
+                this.savedArticlesView = new NavigationPage(new SavedArticlesView(this.StateController));
+
+            Detail = savedArticlesView;
             IsPresented = false;
         }
 
