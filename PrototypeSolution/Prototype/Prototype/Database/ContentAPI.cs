@@ -10,18 +10,15 @@ namespace Prototype.Database
     class ContentAPI : IContentAPI
     {
         private HttpClient client;
-        //private HttpClient clientHeadOnly;
 
         public ContentAPI()
         {
             //Initialize httpclients using variables stored in the Constants class
             client = new HttpClient();
-            //clientHeadOnly = new HttpClient();
             var authData = string.Format("{0}:{1}", Constants.contentAPIUsername, Constants.contentAPIkey);
             var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
             client.MaxResponseContentBufferSize = 256000;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
-            //clientHeadOnly.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
         }
 
         /// <summary>
