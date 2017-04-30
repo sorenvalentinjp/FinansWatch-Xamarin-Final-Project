@@ -18,8 +18,8 @@ namespace Prototype.ModelControllers
         {
             this.ArticleController = new ArticleController();
             this.SavedArticles = new ObservableCollection<Article>();
-            this.FrontPageArticles = new ObservableCollection<Article>();
-            ArticleController.articleIsReady += articleIsReady;
+            //this.FrontPageArticles = new ObservableCollection<Article>();
+            //ArticleController.articleIsReady += articleIsReady;
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Prototype.ModelControllers
         /// </summary>
         public void getFrontPageArticles()
         {
-            FrontPageArticles.Clear();
+            //FrontPageArticles.Clear();
             ArticleController.getFrontPageArticlesAsync();
         }
 

@@ -17,7 +17,7 @@ namespace Prototype.ModelControllers
     public class ArticleController
     {
         private ContentAPI contentAPI;
-        public event Action<Article> articleIsReady;
+        public event Action<IList<Article>> articleIsReady;
         public event Action<bool> isRefreshing;
 
         public ArticleController()
@@ -29,13 +29,14 @@ namespace Prototype.ModelControllers
         {
             isRefreshing(true);
             dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadFrontPageArticles());
+            IList<Article> articles = new List<Article>();
             foreach (var articleJson in json)
             {
                 Article newArt = new Article();
 
                 //Other fields
                 string contentURL = articleJson.contentUrl;
-                string title = articleJson.titles.FRONTPAGE;                
+                string title = articleJson.titles.FRONTPAGE;
                 string teaser = articleJson.teasers.FRONTPAGE;
                 Boolean locked = articleJson.locked;
 
@@ -50,8 +51,15 @@ namespace Prototype.ModelControllers
 
                 newArt = await getArticleDetailsAsync(newArt);
 
-                articleIsReady(newArt);
+                if (articles.Count == 0)
+                {
+                    newArt.IsTopArticle = true;
+                }
+                articles.Add(newArt);
+
+                //articleIsReady(newArt);
             }
+            articleIsReady(articles);
             isRefreshing(false);
         }
 
@@ -114,24 +122,24 @@ namespace Prototype.ModelControllers
             {
                 foreach (var image in articleJson.topImages)
                 {
-                        bool isPrimaryImage = image.primary;
-                        if (isPrimaryImage)
+                    bool isPrimaryImage = image.primary;
+                    if (isPrimaryImage)
+                    {
+                        string imageBigUrl = image.big.url;
+                        string imageSmallURL = image.small.url;
+                        string imageThumbURL = image.thumb.url;
+                        string imageCaption = "";
+                        try
                         {
-                            string imageBigUrl = image.big.url;
-                            string imageSmallURL = image.small.url;
-                            string imageThumbURL = image.thumb.url;
-                            string imageCaption = "";
-                            try
-                            {
-                                imageCaption = image.imageCaption;
-                            }
-                            catch (Exception ex)
-                            {
-                                Debug.WriteLine(@"getArticleImages ImageCaption {0}", ex.Message);
-                            }
+                            imageCaption = image.imageCaption;
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine(@"getArticleImages ImageCaption {0}", ex.Message);
+                        }
 
-                            return new ArticleImage(imageBigUrl, imageSmallURL, imageThumbURL, imageCaption);
-                    }                    
+                        return new ArticleImage(imageBigUrl, imageSmallURL, imageThumbURL, imageCaption);
+                    }
                 }
                 return null;
             }
@@ -139,7 +147,7 @@ namespace Prototype.ModelControllers
             {
                 Debug.WriteLine(@"getArticleImages articleJson.topImages {0}", ex.Message);
                 return null;
-            }            
+            }
         }
 
         private ArticleImage getFrontPageImage(dynamic articleJson)

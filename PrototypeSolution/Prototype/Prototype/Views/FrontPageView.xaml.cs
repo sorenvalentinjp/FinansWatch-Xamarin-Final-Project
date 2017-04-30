@@ -13,8 +13,8 @@ namespace Prototype.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FrontPageView : ContentPage, INotifyPropertyChanged
     {
-        private ObservableCollection<Article> articles;
-        public ObservableCollection<Article> Articles
+        private IList<Article> articles;
+        public IList<Article> Articles
         {
             get { return articles; }
             set
@@ -46,9 +46,15 @@ namespace Prototype.Views
             
             this.stateController = stateController;
             this.stateController.ArticleController.isRefreshing += IsRefreshingChanged;
+            this.stateController.ArticleController.articleIsReady += ArticleController_articleIsReady;
             Articles = this.stateController.FrontPageArticles;
             this.stateController.getFrontPageArticles();
             DisableItemSelectedAction();
+        }
+
+        private void ArticleController_articleIsReady(IList<Article> newArticles)
+        {
+            Articles = newArticles;
         }
 
         //IsRefreshing is used to display an 'busy' icon while the listview is refreshing its content.
