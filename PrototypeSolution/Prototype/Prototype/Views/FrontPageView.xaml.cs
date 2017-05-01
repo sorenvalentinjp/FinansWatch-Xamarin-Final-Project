@@ -47,7 +47,7 @@ namespace Prototype.Views
             BindingContext = this;
             
             this.stateController = stateController;
-            this.stateController.ArticleController.isRefreshing += IsRefreshingChanged;
+            this.stateController.ArticleController.isRefreshingFrontPage += IsRefreshingChanged;
             this.stateController.ArticleController.frontPageArticlesAreReady += FrontPageArticlesAreReady;
             this.stateController.getFrontPageArticles();
             DisableItemSelectedAction();

@@ -46,10 +46,10 @@ namespace Prototype.Views
         public AllArticlesView (StateController stateController)
 		{
 			InitializeComponent ();
-            this.StateController = stateController;
-            this.StateController.ArticleController.latestArticlesAreReady += ArticleController_latestArticlesAreReady;
-            this.StateController.ArticleController.isRefreshing += ArticleController_isRefreshing;
             BindingContext = this;
+            this.StateController = stateController;
+            this.StateController.ArticleController.isRefreshingLatestArticles += ArticleController_isRefreshing;
+            this.StateController.ArticleController.latestArticlesAreReady += ArticleController_latestArticlesAreReady;            
             this.StateController.ArticleController.getLatestArticlesAsync();
             DisableItemSelectedAction();
         }
@@ -62,7 +62,7 @@ namespace Prototype.Views
             };
         }
 
-        private void ArticleController_isRefreshing(bool obj)
+        private void ArticleController_isRefreshing(bool isRefreshing)
         {
             IsRefreshing = isRefreshing;
         }
@@ -92,6 +92,12 @@ namespace Prototype.Views
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
+        }
+
+        private async void listView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var tappedArticle = (Article)e.Item;
+            await Navigation.PushModalAsync(new NavigationPage(new ArticleView(this.StateController, tappedArticle)), true);
         }
     }
 
