@@ -31,7 +31,7 @@ namespace Prototype.ModelControllers
         public async void getLatestArticlesAsync()
         {
             isRefreshingLatestArticles(true);
-            dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadFrontPageArticles());
+            dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadLatestArticles());
             IList<Article> articles = new List<Article>();
             foreach (var articleJson in json)
             {

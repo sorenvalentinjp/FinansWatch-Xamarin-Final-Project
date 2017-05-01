@@ -34,7 +34,7 @@ namespace Prototype.Views
 
         private void AllArticlesAction(object sender, EventArgs e)
         {
-            if (this.savedArticlesView == null)
+            if (this.allArticlesView == null)
                 this.allArticlesView = new NavigationPage(new AllArticlesView(StateController));
             Detail = allArticlesView;
             IsPresented = false;

@@ -13,6 +13,7 @@
                   ItemsSource="{Binding Grouped}"
                   IsRefreshing="{Binding IsRefreshing}"
                   IsPullToRefreshEnabled="True"
+                  RefreshCommand="{Binding RefreshCommand}"
                   IsGroupingEnabled="true" 
                   HasUnevenRows="True"
                   GroupDisplayBinding="{Binding Key}"

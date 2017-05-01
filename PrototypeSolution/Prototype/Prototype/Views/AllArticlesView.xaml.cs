@@ -8,7 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -86,6 +86,20 @@ namespace Prototype.Views
         {
             var tappedArticle = (Article)e.Item;
             await Navigation.PushModalAsync(new NavigationPage(new ArticleView(this.StateController, tappedArticle)), true);
+        }
+
+        /// <summary>
+        /// When the user refreshed the view, this.articles is updated.
+        /// </summary>
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    this.StateController.ArticleController.getLatestArticlesAsync();
+                });
+            }
         }
     }
 
