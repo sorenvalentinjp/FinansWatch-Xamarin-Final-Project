@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mr:ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:customRenderers="clr-namespace:Prototype.Views.CustomRenderers"
+             x:Class="Prototype.Views.Cells.LargeCell"
+             Tapped="TappedGesture"
+             LongPressing="LongPressingGesture">
+
+    <ViewCell.View>
+        <StackLayout Orientation="Vertical">
+            <ffimageloading:CachedImage Source="{Binding ArticleImage.SmallUrl}"/>
+            <StackLayout Orientation="Vertical"
+                         Padding="10,0,10,10">
+                <Label Text="{Binding Title}"
+                       FontSize="Large"
+                       FontAttributes="Bold"/>
+                <customRenderers:HtmlFormattedLabel Text="{Binding Teaser}"
+                                                    FontSize="16"/>
+            </StackLayout>
+        </StackLayout>
+    </ViewCell.View>
+</mr:ViewCell>

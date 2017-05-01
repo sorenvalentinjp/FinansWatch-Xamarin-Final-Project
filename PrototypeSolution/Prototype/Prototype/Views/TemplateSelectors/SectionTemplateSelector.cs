@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Prototype.Models;
 using Xamarin.Forms;
+using Prototype.ModelControllers;
+using Prototype.Views.Cells;
 
 namespace Prototype.Views.TemplateSelectors
 {
@@ -15,6 +17,29 @@ namespace Prototype.Views.TemplateSelectors
         public DataTemplate ArticleLargeNoImageTemplate { get; set; }
         public DataTemplate ArticleMediumTemplate { get; set; }
         public DataTemplate ArticleMediumNoImageTemplate { get; set; }
+
+        public SectionTemplateSelector(StateController stateController, ContentPage page)
+        {
+            this.ArticleMediumTemplate = new DataTemplate(() =>
+            {
+                return new MediumCell(stateController, page);
+            });
+
+            this.ArticleMediumNoImageTemplate = new DataTemplate(() =>
+            {
+                return new MediumCellNoImage(stateController, page);
+            });
+
+            this.ArticleLargeTemplate = new DataTemplate(() =>
+            {
+                return new LargeCell(stateController, page);
+            });
+
+            this.ArticleLargeNoImageTemplate = new DataTemplate(() =>
+            {
+                return new LargeCellNoImage(stateController, page);
+            });
+        }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {

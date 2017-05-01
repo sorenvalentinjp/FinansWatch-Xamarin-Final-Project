@@ -1,5 +1,6 @@
 ﻿using Prototype.ModelControllers;
 using Prototype.Models;
+using Prototype.Views.TemplateSelectors;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,7 +15,6 @@ namespace Prototype.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FrontPageView : ContentPage, INotifyPropertyChanged
     {
-        private Article tappedArticle;
         private IList<Article> articles;
         public IList<Article> Articles
         {
@@ -44,6 +44,9 @@ namespace Prototype.Views
         public FrontPageView(StateController stateController)
 		{
 			InitializeComponent();
+
+            listView.ItemTemplate = new SectionTemplateSelector(stateController, this);
+
             BindingContext = this;
             
             this.stateController = stateController;
@@ -63,10 +66,6 @@ namespace Prototype.Views
         {
             IsRefreshing = isRefreshing;
         }
-
-        override protected void OnAppearing()
-        {
-        }        
 
         /// <summary>
         /// When the user refreshed the view, this.articles is updated.
@@ -101,43 +100,6 @@ namespace Prototype.Views
             if (this.PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
-        }
-
-        /// <summary>
-        /// When the user taps an article, that article is stored and used for the MR.Gesture commands.
-        /// This is a hack to avoid highlighting the tapped article.
-        /// </summary>
-        private void ListViewTappedAction(object sender, ItemTappedEventArgs e)
-        {
-            this.tappedArticle = (Article)e.Item;
-        }
-
-        /// <summary>
-        /// Single tap - no longer than 250ms, otherwise it is considered a longpress instead
-        /// </summary>
-        private async void TappedGesture(object sender, MR.Gestures.TapEventArgs e)
-        {
-            await Navigation.PushModalAsync(new NavigationPage(new ArticleView(this.stateController, this.tappedArticle)), true);
-            
-        }
-
-        /// <summary>
-        /// When tap takes longer than 250ms
-        /// </summary>
-        private void LongPressingGesture(object sender, MR.Gestures.LongPressEventArgs e)
-        {
-            if (this.stateController.SavedArticles.Contains(this.tappedArticle))
-            {
-                this.stateController.SavedArticles.Remove(this.tappedArticle);
-                DisplayAlert("", "Artiklen er fjernet fra læselisten.", "OK");
-                Console.WriteLine("REMOVED: " + this.tappedArticle.Title);
-            }
-            else
-            {
-                this.stateController.SavedArticles.Add(this.tappedArticle);
-                DisplayAlert("", "Artiklen er gemt i læselisten.", "OK");
-                Console.WriteLine("ADDED: " + this.tappedArticle.Title);
             }
         }
     }

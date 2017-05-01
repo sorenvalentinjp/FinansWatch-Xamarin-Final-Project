@@ -1,31 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Prototype.Views.TemplateSelectors"
-             xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
              x:Class="Prototype.Views.SavedArticlesView"
              Title="LÆSELISTE">
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-
-            <local:MediumArticleTemplateSelector x:Key="mediumArticleTemplateSelector"
-                                                 ArticleMediumTemplate="{StaticResource articleMediumTemplate}"
-                                                 ArticleMediumNoImageTemplate="{StaticResource articleMediumNoImageTemplate}"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="ALL"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <mr:ListView x:Name="listView"
-                     ItemTemplate="{StaticResource mediumArticleTemplateSelector}"
-                     ItemsSource="{Binding SavedArticles}"
-                     HasUnevenRows="true"
-                     ItemTapped="ListViewTappedAction"
-                     LongPressed="LongPressingGesture"
-                     Tapped="TappedGesture"/>
+        <ListView x:Name="listView"
+                  ItemsSource="{Binding SavedArticles}"
+                  CachingStrategy="RecycleElement"
+                  HasUnevenRows="true"/>
     </ContentPage.Content>
 </ContentPage>

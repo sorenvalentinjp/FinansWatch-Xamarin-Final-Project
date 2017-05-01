@@ -1,5 +1,6 @@
 ﻿using Prototype.ModelControllers;
 using Prototype.Models;
+using Prototype.Views.TemplateSelectors;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,7 +17,6 @@ namespace Prototype.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SavedArticlesView : ContentPage, INotifyPropertyChanged
 	{
-        private Article tappedArticle;
         private ObservableCollection<Article> savedArticles;
         public ObservableCollection<Article> SavedArticles
         {
@@ -34,6 +34,9 @@ namespace Prototype.Views
         public SavedArticlesView(StateController stateController)
 		{
 			InitializeComponent();
+
+            listView.ItemTemplate = new SectionTemplateSelector(stateController, this);
+
             DisableItemSelectedAction();
             BindingContext = this;
             this.stateController = stateController;
@@ -59,45 +62,6 @@ namespace Prototype.Views
             if (this.PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
-        }
-
-        /// <summary>
-        /// When the user tabs an article, that article is pushed modally as a navigation page.
-        /// </summary>
-        private void ListViewTappedAction(object sender, ItemTappedEventArgs e)
-        {
-            this.tappedArticle = (Article)e.Item;
-            //Article tabbedArticle = (Article)e.Item;
-            //this.SavedArticles.Remove(tabbedArticle);
-            //await Navigation.PushModalAsync(new NavigationPage(new ArticleView(this.stateController, tabbedArticle)), true);
-        }
-
-        /// <summary>
-        /// Single tap - no longer than 250ms, otherwise it is considered a longpress instead
-        /// </summary>
-        private async void TappedGesture(object sender, MR.Gestures.TapEventArgs e)
-        {
-            await Navigation.PushModalAsync(new NavigationPage(new ArticleView(this.stateController, this.tappedArticle)), true);
-
-        }
-
-        /// <summary>
-        /// When tap takes longer than 250ms
-        /// </summary>
-        private void LongPressingGesture(object sender, MR.Gestures.LongPressEventArgs e)
-        {
-            if (this.stateController.SavedArticles.Contains(this.tappedArticle))
-            {
-                this.stateController.SavedArticles.Remove(this.tappedArticle);
-                DisplayAlert("", "Artiklen er fjernet fra læselisten.", "OK");
-                Console.WriteLine("REMOVED: " + this.tappedArticle.Title);
-            }
-            else
-            {
-                this.stateController.SavedArticles.Add(this.tappedArticle);
-                DisplayAlert("", "Artiklen er gemt i læselisten.", "OK");
-                Console.WriteLine("ADDED: " + this.tappedArticle.Title);
             }
         }
     }
