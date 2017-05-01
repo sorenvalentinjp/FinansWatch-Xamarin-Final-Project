@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace Prototype.ModelControllers
 {
@@ -18,7 +19,7 @@ namespace Prototype.ModelControllers
     {
         private ContentAPI contentAPI;
         public event Action<IList<Article>> frontPageArticlesAreReady;
-        public event Action<IList<Article>> latestArticlesAreReady;
+        public event Action<List<Grouping<string, Article>>> latestArticlesAreReady;
         public event Action<bool> isRefreshingFrontPage;
         public event Action<bool> isRefreshingLatestArticles;
 
@@ -41,7 +42,16 @@ namespace Prototype.ModelControllers
                 articles.Add(newArt);
 
             }
-            latestArticlesAreReady(articles);
+
+
+            var sortedArticles = from article in articles
+                         orderby article.PublishedDate descending
+                         group article by article.PublishedDate.Date.ToString("dd. MMMM", CultureInfo.InvariantCulture) into articleGroup
+                         select new Grouping<string, Article>(articleGroup.Key, articleGroup);
+
+            var groupedArticles = new List<Grouping<string, Article>>(sortedArticles);
+
+            latestArticlesAreReady(groupedArticles);
             isRefreshingLatestArticles(false);
             
         }

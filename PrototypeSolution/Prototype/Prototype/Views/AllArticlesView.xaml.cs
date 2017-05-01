@@ -67,21 +67,9 @@ namespace Prototype.Views
             IsRefreshing = isRefreshing;
         }
 
-        private void ArticleController_latestArticlesAreReady(IList<Article> articles)
-        {            
-
-
-            var todayDate = DateTime.Now.Date;
-            var todayDateString = todayDate.ToString("dd. MMMM", CultureInfo.InvariantCulture);
-            var yesterdayString = todayDate.AddDays(-1).ToString("dd. MMMM", CultureInfo.InvariantCulture);
-
-
-            var sorted = from article in articles
-                         orderby article.PublishedDate descending
-                         group article by article.PublishedDate.Date.ToString("dd. MMMM", CultureInfo.InvariantCulture) into articleGroup
-                         select new Grouping<string, Article>(articleGroup.Key, articleGroup);
-
-            Grouped = new List<Grouping<string, Article>>(sorted);
+        private void ArticleController_latestArticlesAreReady(List<Grouping<string, Article>> groupedArticles)
+        {
+            Grouped = groupedArticles;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -101,17 +89,7 @@ namespace Prototype.Views
         }
     }
 
-    public class Grouping<K, T> : ObservableCollection<T>
-    {
-        public K Key { get; private set; }
 
-        public Grouping(K key, IEnumerable<T> items)
-        {
-            Key = key;
-            foreach (var item in items)
-                this.Items.Add(item);
-        }
-    }
 }
 
 

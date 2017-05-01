@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ModelControllers\ArticleController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ModelControllers\StateController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Article.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Grouping.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ArticleImage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AllArticlesView.xaml.cs">
       <DependentUpon>AllArticlesView.xaml</DependentUpon>
