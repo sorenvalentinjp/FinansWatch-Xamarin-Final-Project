@@ -5,6 +5,7 @@
              xmlns:project="clr-namespace:Prototype;assembly=Prototype"
              xmlns:customRenderers="clr-namespace:Prototype.Views.CustomRenderers"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
              x:Class="Prototype.Views.FrontPageView"
              Title="FORSIDE">
     
@@ -68,14 +69,15 @@
 
     <!--This view only contains a listview. The template is set by the created templateselector-->
     <ContentPage.Content>
-        <ListView x:Name="listView" 
+        <mr:ListView x:Name="listView" 
                   ItemTemplate="{StaticResource sectionTemplateSelector}" 
                   ItemsSource="{Binding Articles}" 
                   IsPullToRefreshEnabled="True"
                   RefreshCommand="{Binding RefreshCommand}"
                   IsRefreshing="{Binding IsRefreshing}"
-                  CachingStrategy="RecycleElement"
                   HasUnevenRows="True"
-                  ItemTapped="ListViewTabbedAction"/>
+                  ItemTapped="ListViewTappedAction"
+                  LongPressed="LongPressedGesture"
+                  Tapped="TappedGesture"/>
     </ContentPage.Content>
 </ContentPage>

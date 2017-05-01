@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace Prototype.Models
 {
-    public class Article : INotifyPropertyChanged
+    public class Article : INotifyPropertyChanged, IComparable
     {
         string title;
         public string Title
@@ -229,5 +229,11 @@ namespace Prototype.Models
                     PropertyChanged(this, new PropertyChangedEventArgs(propName));
                 }
             }
+
+        public int CompareTo(object article)
+        {
+            Article that = (Article)article;
+            return this.ContentURL.CompareTo(that.ContentURL);
+        }
     }
 }

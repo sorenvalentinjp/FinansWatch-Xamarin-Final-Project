@@ -23,7 +23,10 @@ namespace Prototype.Droid
             CachedImageRenderer.Init();
 
             global::Xamarin.Forms.Forms.Init (this, bundle);
-			LoadApplication (new Prototype.App ());
+
+            //MR.Gesture license key setup
+            MR.Gestures.Android.Settings.LicenseKey = "3HU6-9KQV-UPUG-DSHV-WRA8-W6CL-9DTZ-5L5P-PMXM-942C-97HX-7JG6-Y523";
+            LoadApplication (new Prototype.App ());
 
             
             Window.SetStatusBarColor(Android.Graphics.Color.Rgb(0, 0, 0));            
