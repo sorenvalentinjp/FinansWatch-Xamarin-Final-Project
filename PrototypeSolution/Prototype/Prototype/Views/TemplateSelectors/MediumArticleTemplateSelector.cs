@@ -11,7 +11,6 @@ namespace Prototype.Views.TemplateSelectors
     /// </summary>
     public class MediumArticleTemplateSelector : DataTemplateSelector
     {
-
         public DataTemplate ArticleMediumTemplate { get; set; }
         public DataTemplate ArticleMediumNoImageTemplate { get; set; }
 
