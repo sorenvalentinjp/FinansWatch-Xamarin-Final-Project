@@ -22,7 +22,7 @@
                                         Grid.Row="0" 
                                         Grid.Column="0" 
                                         LoadingPlaceholder="{Binding ImageTransparentSmall}"
-                                        Source="{Binding ArticleImage.ThumbUrl}"
+                                        Source="{Binding FrontPageImage.SmallUrl}"
                                         HorizontalOptions="StartAndExpand"/>
             <Label Text="{Binding Title}" 
                    Grid.Row="0" 

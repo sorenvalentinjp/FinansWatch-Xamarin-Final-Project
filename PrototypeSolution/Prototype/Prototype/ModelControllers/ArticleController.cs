@@ -65,7 +65,7 @@ namespace Prototype.ModelControllers
             {
                 Article newArt = createJsonArticleFromList(articleJson);
 
-                newArt = await getArticleDetailsAsync(newArt);
+                //newArt = await getArticleDetailsAsync(newArt);
 
                 //Determine if the article is a toparticle
                 if (articles.Count == 0)
