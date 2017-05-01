@@ -47,6 +47,18 @@ namespace Prototype.Database
         }
 
         /// <summary>
+        /// Downloads allArticles page articles and returns them as a string
+        /// </summary>
+        /// <returns></returns>
+        public Task<string> downloadLatestArticles()
+        {
+            //Full url example: "https://content.watchmedier.dk/api/finanswatch/content/latest?hoursago=168"
+            var uri = new Uri(Constants.contentAPIUrl + "finanswatch/content/frontpagearticles?max=30");
+
+            return downloadJSON(uri);
+        }
+
+        /// <summary>
         /// Downloads and returns json using an Uri.
         /// </summary>
         /// <param name="uri"></param>

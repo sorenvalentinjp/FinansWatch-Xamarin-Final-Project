@@ -18,11 +18,31 @@ namespace Prototype.ModelControllers
     {
         private ContentAPI contentAPI;
         public event Action<IList<Article>> frontPageArticlesAreReady;
+        public event Action<IList<Article>> latestArticlesAreReady;
         public event Action<bool> isRefreshing;
 
         public ArticleController()
         {
             contentAPI = new ContentAPI();
+        }
+
+        public async void getLatestArticlesAsync()
+        {
+            isRefreshing(true);
+            dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadFrontPageArticles());
+            IList<Article> articles = new List<Article>();
+            foreach (var articleJson in json)
+            {
+                Article newArt = createJsonArticleFromList(articleJson);
+
+                newArt = await getArticleDetailsAsync(newArt);
+
+                articles.Add(newArt);
+
+            }
+            latestArticlesAreReady(articles);
+            isRefreshing(false);
+            
         }
 
         public async void getFrontPageArticlesAsync()
@@ -32,22 +52,7 @@ namespace Prototype.ModelControllers
             IList<Article> articles = new List<Article>();
             foreach (var articleJson in json)
             {
-                Article newArt = new Article();
-
-                //Other fields
-                string contentURL = articleJson.contentUrl;
-                string title = articleJson.titles.FRONTPAGE;
-                string teaser = articleJson.teasers.FRONTPAGE;
-                Boolean locked = articleJson.locked;
-
-                //Get frontpage image
-                newArt.FrontPageImage = getFrontPageImage(articleJson);
-
-                //Save fields
-                newArt.Title = title;
-                newArt.ContentURL = contentURL;
-                newArt.Teaser = stripAllHtmlParagraphTags(teaser);
-                newArt.Locked = locked;
+                Article newArt = createJsonArticleFromList(articleJson);
 
                 newArt = await getArticleDetailsAsync(newArt);
 
@@ -61,6 +66,42 @@ namespace Prototype.ModelControllers
             }
             frontPageArticlesAreReady(articles);
             isRefreshing(false);
+        }
+
+        private Article createJsonArticleFromList(dynamic articleJson)
+        {
+            Article newArt = new Article();
+
+            //Other fields
+            string contentURL = articleJson.contentUrl;
+            string title = articleJson.titles.FRONTPAGE;
+            string teaser = articleJson.teasers.FRONTPAGE;
+            Boolean locked = articleJson.locked;
+
+            //Dates
+            String publishedDateString = articleJson.publishedDate;
+            try
+            {
+                DateTime publishedDate = DateTime.ParseExact(publishedDateString, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
+                newArt.PublishedDate = publishedDate;
+                newArt.PublishedTimeOfDay = newArt.PublishedDate.ToString("HH:mm", CultureInfo.InvariantCulture);
+            }
+            catch (Exception) {}
+            
+
+            //Get frontpage image
+            newArt.FrontPageImage = getFrontPageImage(articleJson);
+
+            //Save fields
+            newArt.Title = title;
+            newArt.ContentURL = contentURL;
+            newArt.Teaser = stripAllHtmlParagraphTags(teaser);
+            newArt.Locked = locked;
+            
+
+
+
+            return newArt;
         }
 
         public async void getRelatedArticlesAsync(Article article)

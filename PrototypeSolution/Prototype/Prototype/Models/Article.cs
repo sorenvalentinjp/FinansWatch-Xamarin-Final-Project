@@ -93,6 +93,18 @@ namespace Prototype.Models
             }
         }
 
+        string publishedTimeOfDay;
+        public string PublishedTimeOfDay
+        {
+            get { return publishedTimeOfDay; }
+            set
+            {
+                if (publishedTimeOfDay == value) { return; }
+                publishedTimeOfDay = value;
+                notify("PublishedTimeOfDay");
+            }
+        }
+
         string teaser;
         public string Teaser
         {

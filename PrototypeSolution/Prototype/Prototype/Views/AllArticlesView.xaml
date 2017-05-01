@@ -8,13 +8,71 @@
         <ToolbarItem Text="ALL"/>
     </ContentPage.ToolbarItems>
 
-    <StackLayout Margin="5">
-        <Label Text="Artikel 1" x:Name="label1"/>
-        <Label Text="Artikel 2"/>
-        <Label Text="Artikel 3"/>
-        <Label Text="Artikel 4"/>
-        <Label Text="Artikel 5"/>
-        <Label Text="Artikel 6"/>
-    </StackLayout>
-    
+    <ContentPage.Content>
+        <ListView x:Name ="listView"
+                  ItemsSource="{Binding Grouped}"
+                  IsRefreshing="{Binding IsRefreshing}"
+                  IsGroupingEnabled="true" 
+                  HasUnevenRows="True"
+                  GroupDisplayBinding="{Binding Key}"
+                  GroupShortNameBinding="{Binding Key}">
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout VerticalOptions="CenterAndExpand"
+                            BackgroundColor="#213c68">
+                            <Label Text="{Binding Key}" 
+                                   TextColor="White" 
+                                   VerticalOptions="Center"
+                                   Margin="10"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Margin="10,5,10,5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding PublishedTimeOfDay}" 
+                                   Margin="10"
+                                   Grid.Row="0" 
+                                   Grid.Column="0" />
+                            <Label Text="{Binding Title}" 
+                                Margin="10"
+                                Grid.Row="0" 
+                                Grid.Column="1" 
+                                Grid.ColumnSpan="4"/>
+                        </Grid>
+                    </ViewCell>
+
+
+                    <!--<ViewCell>
+                        <RelativeLayout>
+                            <Label x:Name="timeLabel" 
+                                Text="{Binding PublishedTimeOfDay}" 
+                                   Margin="10"
+                                   RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=x,Factor=0,Constant=0}"
+                                   />
+                            <Label Text="{Binding Title}" 
+                                Margin="10"
+                               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=timeLabel,Property=x,Factor=1,Constant=0}"
+                                />
+                        </RelativeLayout>
+                    </ViewCell>-->
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+
 </ContentPage>
