@@ -1,4 +1,6 @@
 ﻿using Prototype.ModelControllers;
+using Prototype.Models;
+using Prototype.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +12,15 @@ namespace Prototype
 {
 	public partial class App : Application
 	{
+        public StateController StateController { get; set; }
 
         public App ()
 		{
 			InitializeComponent();
 
-            StateController stateController = new StateController();
+            this.StateController = new StateController();
 
-            MainPage = new Views.MasterDetailView(stateController);
+            MainPage = new Views.MasterDetailView(this.StateController);
 		}
 
 		protected override void OnStart ()
@@ -34,5 +37,5 @@ namespace Prototype
 		{
 			// Handle when your app resumes
 		}
-	}
+    }
 }

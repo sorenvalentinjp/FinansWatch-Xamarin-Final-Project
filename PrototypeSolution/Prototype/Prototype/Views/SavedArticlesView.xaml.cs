@@ -16,6 +16,7 @@ namespace Prototype.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SavedArticlesView : ContentPage, INotifyPropertyChanged
 	{
+        private Article tappedArticle;
         private ObservableCollection<Article> savedArticles;
         public ObservableCollection<Article> SavedArticles
         {
@@ -50,30 +51,6 @@ namespace Prototype.Views
             };
         }
 
-        override protected async void OnAppearing()
-        {
-            //var list = await this.stateController.getFrontPageArticles();
-            //this.SavedArticles.Add(list[0]);
-            //this.SavedArticles.Add(list[1]);
-            //this.SavedArticles.Add(list[2]);
-        }
-
-        /// <summary>
-        /// When the user tabs an article, that article is pushed modally as a navigation page.
-        /// </summary>
-        private void ListViewTabbedAction(object sender, ItemTappedEventArgs e)
-        {
-            Article tabbedArticle = (Article)e.Item;
-            this.SavedArticles.Remove(tabbedArticle);
-            //await Navigation.PushModalAsync(new NavigationPage(new ArticleView(this.stateController, tabbedArticle)), true);
-        }
-
-        public void OnDelete(object sender, EventArgs e)
-        {
-            var mi = ((MenuItem)sender);
-            DisplayAlert("Delete Context Action", mi.CommandParameter + " delete context action", "OK");
-        }
-
         //Because INotifyProportyChanged is implemented
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -85,9 +62,41 @@ namespace Prototype.Views
             }
         }
 
-        private void sdf_Clicked(object sender, EventArgs e)
+        /// <summary>
+        /// When the user tabs an article, that article is pushed modally as a navigation page.
+        /// </summary>
+        private void ListViewTappedAction(object sender, ItemTappedEventArgs e)
         {
+            this.tappedArticle = (Article)e.Item;
+            //Article tabbedArticle = (Article)e.Item;
+            //this.SavedArticles.Remove(tabbedArticle);
+            //await Navigation.PushModalAsync(new NavigationPage(new ArticleView(this.stateController, tabbedArticle)), true);
+        }
 
+        /// <summary>
+        /// Single tap - no longer than 250ms, otherwise it is considered a longpress instead
+        /// </summary>
+        private async void TappedGesture(object sender, MR.Gestures.TapEventArgs e)
+        {
+            await Navigation.PushModalAsync(new NavigationPage(new ArticleView(this.stateController, this.tappedArticle)), true);
+
+        }
+
+        /// <summary>
+        /// When tap takes longer than 250ms
+        /// </summary>
+        private void LongPressedGesture(object sender, MR.Gestures.LongPressEventArgs e)
+        {
+            if (this.stateController.SavedArticles.Contains(this.tappedArticle))
+            {
+                this.stateController.SavedArticles.Remove(this.tappedArticle);
+                Console.WriteLine("REMOVED: " + this.tappedArticle.Title);
+            }
+            else
+            {
+                this.stateController.SavedArticles.Add(this.tappedArticle);
+                Console.WriteLine("ADDED: " + this.tappedArticle.Title);
+            }
         }
     }
 }

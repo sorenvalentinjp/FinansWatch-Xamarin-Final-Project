@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Prototype.Views.TemplateSelectors"
+             xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
              x:Class="Prototype.Views.SavedArticlesView"
              Title="LÆSELISTE">
 
@@ -19,10 +20,12 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <ListView x:Name="listView"
-                  ItemTemplate="{StaticResource mediumArticleTemplateSelector}"
-                  ItemsSource="{Binding SavedArticles}"
-                  HasUnevenRows="true"
-                  ItemTapped="ListViewTabbedAction"/>
+        <mr:ListView x:Name="listView"
+                     ItemTemplate="{StaticResource mediumArticleTemplateSelector}"
+                     ItemsSource="{Binding SavedArticles}"
+                     HasUnevenRows="true"
+                     ItemTapped="ListViewTappedAction"
+                     LongPressed="LongPressedGesture"
+                     Tapped="TappedGesture"/>
     </ContentPage.Content>
 </ContentPage>

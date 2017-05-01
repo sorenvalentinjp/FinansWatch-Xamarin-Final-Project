@@ -26,6 +26,9 @@ namespace Prototype.iOS
 			global::Xamarin.Forms.Forms.Init ();
             CachedImageRenderer.Init();
 
+            //MR.Gesture license key setup
+            MR.Gestures.iOS.Settings.LicenseKey = "3HU6-9KQV-UPUG-DSHV-WRA8-W6CL-9DTZ-5L5P-PMXM-942C-97HX-7JG6-Y523";
+
             LoadApplication (new Prototype.App ());
 
             return base.FinishedLaunching (app, options);

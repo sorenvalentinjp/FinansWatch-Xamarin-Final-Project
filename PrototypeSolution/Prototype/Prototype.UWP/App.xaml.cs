@@ -61,6 +61,9 @@ namespace Prototype.UWP
 
                 Xamarin.Forms.Forms.Init(e);
 
+                //MR.Gesture license key setup
+                MR.Gestures.UWP.Settings.LicenseKey = "3HU6-9KQV-UPUG-DSHV-WRA8-W6CL-9DTZ-5L5P-PMXM-942C-97HX-7JG6-Y523";
+
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
