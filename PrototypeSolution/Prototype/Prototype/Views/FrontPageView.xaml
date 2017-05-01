@@ -77,7 +77,7 @@
                   IsRefreshing="{Binding IsRefreshing}"
                   HasUnevenRows="True"
                   ItemTapped="ListViewTappedAction"
-                  LongPressed="LongPressedGesture"
+                  LongPressing="LongPressingGesture"
                   Tapped="TappedGesture"/>
     </ContentPage.Content>
 </ContentPage>

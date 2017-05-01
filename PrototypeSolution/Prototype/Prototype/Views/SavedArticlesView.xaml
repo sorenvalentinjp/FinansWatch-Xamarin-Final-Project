@@ -25,7 +25,7 @@
                      ItemsSource="{Binding SavedArticles}"
                      HasUnevenRows="true"
                      ItemTapped="ListViewTappedAction"
-                     LongPressed="LongPressedGesture"
+                     LongPressed="LongPressingGesture"
                      Tapped="TappedGesture"/>
     </ContentPage.Content>
 </ContentPage>

@@ -125,7 +125,7 @@ namespace Prototype.Views
         /// <summary>
         /// When tap takes longer than 250ms
         /// </summary>
-        private void LongPressedGesture(object sender, MR.Gestures.LongPressEventArgs e)
+        private void LongPressingGesture(object sender, MR.Gestures.LongPressEventArgs e)
         {
             if (this.stateController.SavedArticles.Contains(this.tappedArticle))
             {
