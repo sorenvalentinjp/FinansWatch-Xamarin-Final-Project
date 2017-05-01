@@ -19,7 +19,8 @@ namespace Prototype.ModelControllers
         private ContentAPI contentAPI;
         public event Action<IList<Article>> frontPageArticlesAreReady;
         public event Action<IList<Article>> latestArticlesAreReady;
-        public event Action<bool> isRefreshing;
+        public event Action<bool> isRefreshingFrontPage;
+        public event Action<bool> isRefreshingLatestArticles;
 
         public ArticleController()
         {
@@ -28,7 +29,7 @@ namespace Prototype.ModelControllers
 
         public async void getLatestArticlesAsync()
         {
-            isRefreshing(true);
+            isRefreshingLatestArticles(true);
             dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadFrontPageArticles());
             IList<Article> articles = new List<Article>();
             foreach (var articleJson in json)
@@ -41,13 +42,13 @@ namespace Prototype.ModelControllers
 
             }
             latestArticlesAreReady(articles);
-            isRefreshing(false);
+            isRefreshingLatestArticles(false);
             
         }
 
         public async void getFrontPageArticlesAsync()
         {
-            isRefreshing(true);
+            isRefreshingFrontPage(true);
             dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadFrontPageArticles());
             IList<Article> articles = new List<Article>();
             foreach (var articleJson in json)
@@ -65,7 +66,7 @@ namespace Prototype.ModelControllers
 
             }
             frontPageArticlesAreReady(articles);
-            isRefreshing(false);
+            isRefreshingFrontPage(false);
         }
 
         private Article createJsonArticleFromList(dynamic articleJson)
