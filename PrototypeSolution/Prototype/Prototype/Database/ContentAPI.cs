@@ -53,7 +53,7 @@ namespace Prototype.Database
         public Task<string> downloadLatestArticles()
         {
             //Full url example: "https://content.watchmedier.dk/api/finanswatch/content/latest?hoursago=168"
-            var uri = new Uri(Constants.contentAPIUrl + "finanswatch/content/latest?hoursago=168");
+            var uri = new Uri(Constants.contentAPIUrl + "finanswatch/content/latest?hoursago=168&max=100");
 
             return downloadJSON(uri);
         }

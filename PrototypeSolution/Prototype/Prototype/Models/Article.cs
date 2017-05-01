@@ -206,12 +206,12 @@ namespace Prototype.Models
         }
 
         public Article() {
-            title = "";
-            contentURL = "";
-            bodyText = "";
-            homeSectionName = "";
-            publishInfo = "";
-            teaser = "";
+            //title = "";
+            //contentURL = "";
+            //bodyText = "";
+            //homeSectionName = "";
+            //publishInfo = "";
+            //teaser = "";
             imagePlaceholderBig = ImageSource.FromFile("imagePlaceholderBig.png");
             imagePlaceholderSmall = ImageSource.FromFile("imagePlaceholderSmall.png");
             imageTransparentSmall = ImageSource.FromFile("imageTransparentSmall.png");

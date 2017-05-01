@@ -14,8 +14,8 @@ using Xamarin.Forms.Xaml;
 
 namespace Prototype.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ArticleView : ContentPage, INotifyPropertyChanged
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ArticleView : ContentPage, INotifyPropertyChanged
     {
         private StateController stateController;
         private Article article;
@@ -31,19 +31,31 @@ namespace Prototype.Views
         }
 
         public ArticleView(StateController stateController, Article article)
-		{
+        {
             InitializeComponent();
             Article = article;
             BindingContext = Article;
             DisableItemSelectedAction();
             this.stateController = stateController;
-            this.stateController.getRelatedArticles(Article);
 
-            if (imageView.Source == null)
+            getArticleDetails();
+
+            this.stateController.getRelatedArticles(Article);
+        }
+
+        private async void getArticleDetails()
+        {
+            if (article.BodyText == null)
             {
-                imageView.IsVisible = false;
-                imageCaptionLabel.IsVisible = false;
+                await this.stateController.getArticleDetails(Article);
             }
+
+            //If articledetails havent already been fetched, await the code above to get the data, then check if the imagesource is null.
+            if (Article.ArticleImage == null)
+               {
+                       imageView.IsVisible = false;
+                       imageCaptionLabel.IsVisible = false;
+               }
         }
 
         private void DisableItemSelectedAction()

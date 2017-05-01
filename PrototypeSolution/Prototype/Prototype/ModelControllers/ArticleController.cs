@@ -37,7 +37,7 @@ namespace Prototype.ModelControllers
             {
                 Article newArt = createJsonArticleFromList(articleJson);
 
-                newArt = await getArticleDetailsAsync(newArt);
+                //newArt = await getArticleDetailsAsync(newArt);
 
                 articles.Add(newArt);
 
@@ -98,9 +98,9 @@ namespace Prototype.ModelControllers
                 newArt.PublishedTimeOfDay = newArt.PublishedDate.ToString("HH:mm", CultureInfo.InvariantCulture);
             }
             catch (Exception) {}
-            
 
-            //Get frontpage image
+
+            ////Get frontpage image
             newArt.FrontPageImage = getFrontPageImage(articleJson);
 
             //Save fields
@@ -220,6 +220,10 @@ namespace Prototype.ModelControllers
 
         private string stripAllHtmlParagraphTags(string html)
         {
+            if(html == null)
+            {
+                return "";
+            }
             var pattern = "<p>|<\\/p>";
             return Regex.Replace(html, pattern, "");
         }
