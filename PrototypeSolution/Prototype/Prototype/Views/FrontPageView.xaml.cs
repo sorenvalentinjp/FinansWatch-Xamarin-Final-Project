@@ -125,16 +125,18 @@ namespace Prototype.Views
         /// <summary>
         /// When tap takes longer than 250ms
         /// </summary>
-        private void LongPressedGesture(object sender, MR.Gestures.LongPressEventArgs e)
+        private void LongPressingGesture(object sender, MR.Gestures.LongPressEventArgs e)
         {
             if (this.stateController.SavedArticles.Contains(this.tappedArticle))
             {
                 this.stateController.SavedArticles.Remove(this.tappedArticle);
+                DisplayAlert("", "Artiklen er fjernet fra læselisten.", "OK");
                 Console.WriteLine("REMOVED: " + this.tappedArticle.Title);
             }
             else
             {
                 this.stateController.SavedArticles.Add(this.tappedArticle);
+                DisplayAlert("", "Artiklen er gemt i læselisten.", "OK");
                 Console.WriteLine("ADDED: " + this.tappedArticle.Title);
             }
         }

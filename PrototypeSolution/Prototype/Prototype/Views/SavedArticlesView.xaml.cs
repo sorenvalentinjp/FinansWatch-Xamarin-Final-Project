@@ -96,8 +96,6 @@ namespace Prototype.Views
             else
             {
                 this.stateController.SavedArticles.Add(this.tappedArticle);
-
-
                 DisplayAlert("", "Artiklen er gemt i læselisten.", "OK");
                 Console.WriteLine("ADDED: " + this.tappedArticle.Title);
             }

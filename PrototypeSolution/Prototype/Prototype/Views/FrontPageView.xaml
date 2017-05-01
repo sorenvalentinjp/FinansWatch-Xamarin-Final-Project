@@ -52,63 +52,6 @@
                 </ViewCell>
             </DataTemplate>
 
-            <!--Template for all the other articles that require smaller cells-->
-            <DataTemplate x:Key="articleMediumTemplate">
-                <mr:ViewCell LongPressing="LongPressingGesture">
-                    <ViewCell.View>
-                        <Grid Margin="10,10,10,10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-
-                            <ffimageloading:CachedImage Grid.Row="0" 
-                                                        Grid.Column="0" 
-                                                        LoadingPlaceholder="{Binding ImageTransparentSmall}"
-                                                        Source="{Binding ArticleImage.ThumbUrl}"
-                                                        HorizontalOptions="StartAndExpand"/>
-                            <Label Text="{Binding Title}" 
-                                   Grid.Row="0" 
-                                   Grid.Column="1" 
-                                   Grid.ColumnSpan="2"
-                                   Font="16"/>
-                        </Grid>
-                    </ViewCell.View>
-                </mr:ViewCell>
-            </DataTemplate>
-
-            <!--Template for all other articlesin case a picture is not provided by the contentAPI-->
-            <DataTemplate x:Key="articleMediumNoImageTemplate">
-                <mr:ViewCell LongPressing="LongPressingGesture">
-                    <ViewCell.View>
-                        <Grid Margin="10,5,10,5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-
-                            <!--In this case we dont have a picture. Therefore a a local transparent image is used in its place-->
-                            <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" 
-                                                        LoadingPlaceholder="{Binding ImageTransparentSmall}"
-                                                        Source="{Binding ImageTransparentSmall}"/>
-                            <Label Text="{Binding Title}" 
-                                   Grid.Row="0" 
-                                   Grid.Column="1" 
-                                   Grid.ColumnSpan="2"
-                                   Font="16"/>
-                        </Grid>
-                    </ViewCell.View>
-                </mr:ViewCell>
-            </DataTemplate>
-
             <!--Creating a templateselector and assigns the above templates to it-->
             <local:SectionTemplateSelector x:Key="sectionTemplateSelector" 
                                            ArticleLargeTemplate="{StaticResource articleLargeTemplate}"
@@ -134,6 +77,7 @@
                   IsRefreshing="{Binding IsRefreshing}"
                   HasUnevenRows="True"
                   ItemTapped="ListViewTappedAction"
-                  Tapped="TappedGesture"/>
+                  Tapped="TappedGesture"
+                  LongPressing="LongPressingGesture"/>
     </ContentPage.Content>
 </ContentPage>
