@@ -10,35 +10,6 @@
     <ContentPage.Resources>
 
         <ResourceDictionary>
-
-            <DataTemplate x:Key="articleMediumTemplate">
-                <ViewCell>
-                    <ViewCell.View>
-                        <Grid Margin="10,10,10,10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-
-                            <ffimageloading:CachedImage Grid.Row="0" 
-                                                        Grid.Column="0" 
-                                                        LoadingPlaceholder="{Binding ImageTransparentSmall}"
-                                                        Source="{Binding ArticleImage.ThumbUrl}"
-                                                        HorizontalOptions="StartAndExpand"/>
-                            <Label Text="{Binding Title}" 
-                                   Grid.Row="0" 
-                                   Grid.Column="1" 
-                                   Grid.ColumnSpan="2"
-                                   Font="16"/>
-                        </Grid>
-                    </ViewCell.View>
-                </ViewCell>
-            </DataTemplate>
-
             <templateSelectors:MediumArticleTemplateSelector x:Key="articleTemplateSelector" 
                                                ArticleMediumTemplate="{StaticResource articleMediumTemplate}"
                                                ArticleMediumNoImageTemplate="{StaticResource articleMediumNoImageTemplate}"/>
@@ -55,10 +26,8 @@
                 ItemsSource="{Binding RelatedArticles}"
                 ItemTemplate="{StaticResource articleTemplateSelector}"
                 HasUnevenRows="True"
+                CachingStrategy="RecycleElement"
                 ItemTapped="ListViewTabbedAction">
-            
-            
-            
             <ListView.Header>
                 <StackLayout>
                     <ffimageloading:CachedImage x:Name="imageView"

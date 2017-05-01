@@ -17,7 +17,7 @@ namespace Prototype.ModelControllers
     public class ArticleController
     {
         private ContentAPI contentAPI;
-        public event Action<IList<Article>> articleIsReady;
+        public event Action<IList<Article>> frontPageArticlesAreReady;
         public event Action<bool> isRefreshing;
 
         public ArticleController()
@@ -51,15 +51,15 @@ namespace Prototype.ModelControllers
 
                 newArt = await getArticleDetailsAsync(newArt);
 
+                //Determine if the article is a toparticle
                 if (articles.Count == 0)
                 {
                     newArt.IsTopArticle = true;
                 }
                 articles.Add(newArt);
 
-                //articleIsReady(newArt);
             }
-            articleIsReady(articles);
+            frontPageArticlesAreReady(articles);
             isRefreshing(false);
         }
 
@@ -107,7 +107,7 @@ namespace Prototype.ModelControllers
             //Strip related articles used on the website, at the end of the bodytext.
             article.BodyText = stripRelatedArticles(bodyText);
             article.Title = title;
-            article.Teaser = teaser;
+            article.Teaser = stripAllHtmlParagraphTags(teaser);
             article.PublishInfo = publishInfo;
             article.HomeSectionName = homeSectionName;
 

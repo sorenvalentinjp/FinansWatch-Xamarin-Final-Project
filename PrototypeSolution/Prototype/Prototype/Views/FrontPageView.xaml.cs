@@ -46,13 +46,12 @@ namespace Prototype.Views
             
             this.stateController = stateController;
             this.stateController.ArticleController.isRefreshing += IsRefreshingChanged;
-            this.stateController.ArticleController.articleIsReady += ArticleController_articleIsReady;
-            Articles = this.stateController.FrontPageArticles;
+            this.stateController.ArticleController.frontPageArticlesAreReady += FrontPageArticlesAreReady;
             this.stateController.getFrontPageArticles();
             DisableItemSelectedAction();
         }
 
-        private void ArticleController_articleIsReady(IList<Article> newArticles)
+        private void FrontPageArticlesAreReady(IList<Article> newArticles)
         {
             Articles = newArticles;
         }

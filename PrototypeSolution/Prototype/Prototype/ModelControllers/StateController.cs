@@ -12,14 +12,11 @@ namespace Prototype.ModelControllers
     {
         public ArticleController ArticleController;
         public ObservableCollection<Article> SavedArticles { get; set; }
-        public ObservableCollection<Article> FrontPageArticles { get; set; }
 
         public StateController()
         {
             this.ArticleController = new ArticleController();
             this.SavedArticles = new ObservableCollection<Article>();
-            //this.FrontPageArticles = new ObservableCollection<Article>();
-            //ArticleController.articleIsReady += articleIsReady;
         }
 
         /// <summary>
@@ -28,7 +25,6 @@ namespace Prototype.ModelControllers
         /// </summary>
         public void getFrontPageArticles()
         {
-            //FrontPageArticles.Clear();
             ArticleController.getFrontPageArticlesAsync();
         }
 
@@ -42,17 +38,6 @@ namespace Prototype.ModelControllers
             return this.ArticleController.getArticleDetailsAsync(article);
         }
 
-
-
-        private void articleIsReady(Article article)
-        {
-            if (FrontPageArticles.Count == 0)
-            {
-                article.IsTopArticle = true;
-            }
-            FrontPageArticles.Add(article);
-
-        }
 
     }
 

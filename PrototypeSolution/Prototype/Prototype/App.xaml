@@ -35,7 +35,7 @@
                             <ffimageloading:CachedImage Grid.Row="0" 
                                                         Grid.Column="0" 
                                                         LoadingPlaceholder="{Binding ImageTransparentSmall}"
-                                                        Source="{Binding FrontPageImage.SmallUrl}"
+                                                        Source="{Binding ArticleImage.ThumbUrl}"
                                                         HorizontalOptions="StartAndExpand"/>
                             <Label Text="{Binding Title}" 
                                    Grid.Row="0" 
