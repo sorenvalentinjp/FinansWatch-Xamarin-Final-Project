@@ -45,17 +45,21 @@ namespace Prototype.Views
 
         private async void getArticleDetails()
         {
-            if (article.BodyText == null)
+            if (article.bodyText == null)
             {
-                await this.stateController.getArticleDetails(Article);
+                Article = await this.stateController.getArticleDetails(Article);
             }
 
             //If articledetails havent already been fetched, await the code above to get the data, then check if the imagesource is null.
-            if (Article.ArticleImage == null)
-               {
-                       imageView.IsVisible = false;
-                       imageCaptionLabel.IsVisible = false;
-               }
+            if (Article.topImages.Count == 0)
+            {
+                imageView.IsVisible = false;
+                imageCaptionLabel.IsVisible = false;
+            } else
+            {
+                imageView.BindingContext = Article.topImages[0];
+                imageCaptionLabel.BindingContext = Article.topImages[0];
+            }
         }
 
         private void DisableItemSelectedAction()

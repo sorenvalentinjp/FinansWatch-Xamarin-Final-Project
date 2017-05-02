@@ -5,7 +5,7 @@
              xmlns:templateSelectors="clr-namespace:Prototype.Views.TemplateSelectors"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Prototype.Views.ArticleView"
-             Title="{Binding HomeSectionName}">
+             Title="{Binding homeSectionName}">
 
     <ContentPage.Resources>
 
@@ -32,13 +32,13 @@
                 <StackLayout>
                     <ffimageloading:CachedImage x:Name="imageView"
                             DownsampleToViewSize="true" 
-                            Source="{Binding ArticleImage.SmallUrl}"
+                            Source="{Binding small.url}"
                             HorizontalOptions="Fill"/>
-                    <Label Text="{Binding ArticleImage.ImageCaption}" Margin="10,0,30,0" FontSize="12" x:Name="imageCaptionLabel"/>
-                    <Label Text="{Binding Title}" Margin="10,10,30,0" FontSize="Large" FontAttributes="Bold"/>
-                    <customRenderers:HtmlFormattedLabel Text="{Binding Teaser}" Margin="10,10,30,0" FontSize="Medium" FontAttributes="Bold"/>
-                    <Label Text="{Binding PublishInfo}" Margin="10,10,30,0" FontSize="12" />
-                    <customRenderers:HtmlFormattedLabel Text="{Binding BodyText}" Margin="10,15,20,10" FontSize="16"/>
+                    <Label x:Name="imageCaptionLabel" Text="{Binding imageCaption}" Margin="10,0,30,0" FontSize="12"/>
+                    <Label Text="{Binding titles.DEFAULT}" Margin="10,10,30,0" FontSize="Large" FontAttributes="Bold"/>
+                    <customRenderers:HtmlFormattedLabel Text="{Binding teasers.DEFAULT}" Margin="10,10,30,0" FontSize="Medium" FontAttributes="Bold"/>
+                    <Label Text="{Binding publishData.publishInfo}" Margin="10,10,30,0" FontSize="12" />
+                    <customRenderers:HtmlFormattedLabel Text="{Binding bodyText}" Margin="10,15,20,10" FontSize="16"/>
                     <BoxView HeightRequest=".5" BackgroundColor="LightGray"/>
                 </StackLayout>
             </ListView.Header>

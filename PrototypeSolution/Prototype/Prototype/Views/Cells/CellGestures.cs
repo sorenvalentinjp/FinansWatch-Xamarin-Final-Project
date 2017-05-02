@@ -11,6 +11,7 @@ namespace Prototype.Views.Cells
     {
         public static async void TappedGesture(ContentPage page, StateController stateController, Article article)
         {
+            article = await stateController.getArticleDetails(article);
             await page.Navigation.PushModalAsync(new NavigationPage(new ArticleView(stateController, article)), true);
         }
 

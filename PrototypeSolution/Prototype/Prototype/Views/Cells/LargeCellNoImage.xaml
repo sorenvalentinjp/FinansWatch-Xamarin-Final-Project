@@ -13,10 +13,10 @@
             <ffimageloading:CachedImage Source="{Binding ImagePlaceholderBig}"/>
             <StackLayout Orientation="Vertical"
                          Padding="10,0,10,10">
-                <Label Text="{Binding Title}"
+                <Label Text="{Binding titles.FRONTPAGE}"
                        FontSize="Large"
                        FontAttributes="Bold"/>
-                <customRenderers:HtmlFormattedLabel Text="{Binding Teaser}"
+                <customRenderers:HtmlFormattedLabel Text="{Binding teasers.FRONTPAGE}"
                                                     Font="16"/>
             </StackLayout>
         </StackLayout>

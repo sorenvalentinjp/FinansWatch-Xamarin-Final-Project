@@ -45,16 +45,16 @@ namespace Prototype.Views.TemplateSelectors
         {
             Article article = (Article)item;
 
-            if (article.IsTopArticle)
+            if (article.isTopArticle)
             {
-                if (article.FrontPageImage == null)
+                if (article.image == null)
                     return ArticleLargeNoImageTemplate;
                 else
                     return ArticleLargeTemplate;
             }
             else
             {
-                if (article.FrontPageImage == null)
+                if (article.image == null)
                     return ArticleMediumNoImageTemplate;
                 else
                     return ArticleMediumTemplate;

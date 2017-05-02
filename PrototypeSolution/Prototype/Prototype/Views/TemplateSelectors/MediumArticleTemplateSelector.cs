@@ -18,7 +18,7 @@ namespace Prototype.Views.TemplateSelectors
         {
             Article article = (Article)item;
 
-            if (article.ArticleImage == null)
+            if (article.topImages.Count == 0)
                 return ArticleMediumNoImageTemplate;
             else
                 return ArticleMediumTemplate;

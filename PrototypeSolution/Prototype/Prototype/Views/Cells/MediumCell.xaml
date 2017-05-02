@@ -22,9 +22,9 @@
                                         Grid.Row="0" 
                                         Grid.Column="0" 
                                         LoadingPlaceholder="{Binding ImageTransparentSmall}"
-                                        Source="{Binding FrontPageImage.SmallUrl}"
+                                        Source="{Binding image.versions.small_article_220.url}"
                                         HorizontalOptions="StartAndExpand"/>
-            <Label Text="{Binding Title}" 
+            <Label Text="{Binding titles.FRONTPAGE}" 
                    Grid.Row="0" 
                    Grid.Column="1" 
                    Grid.ColumnSpan="2"

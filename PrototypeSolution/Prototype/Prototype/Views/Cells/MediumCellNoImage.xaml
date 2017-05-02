@@ -23,7 +23,7 @@
                                         Grid.Column="0" 
                                         LoadingPlaceholder="{Binding ImageTransparentSmall}"
                                         Source="{Binding ImageTransparentSmall}"/>
-            <Label Text="{Binding Title}" 
+            <Label Text="{Binding titles.FRONTPAGE}" 
                    Grid.Row="0" 
                    Grid.Column="1" 
                    Grid.ColumnSpan="2"
