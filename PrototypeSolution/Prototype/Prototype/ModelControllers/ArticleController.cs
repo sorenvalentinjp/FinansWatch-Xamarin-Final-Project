@@ -45,20 +45,39 @@ namespace Prototype.ModelControllers
 
 
             var sortedArticles = from article in articles
-                         orderby article.PublishedDate descending
-                         group article by article.PublishedDate.Date.ToString("dd. MMMM", CultureInfo.InvariantCulture) into articleGroup
-                         select new Grouping<string, Article>(articleGroup.Key, articleGroup);
+                                 orderby article.PublishedDate descending
+                                 group article by article.PublishedDate.Date.ToString("dd. MMMM", CultureInfo.InvariantCulture) into articleGroup
+                                 select new Grouping<string, Article>(articleGroup.Key, articleGroup);
 
             var groupedArticles = new List<Grouping<string, Article>>(sortedArticles);
 
             latestArticlesAreReady(groupedArticles);
             isRefreshingLatestArticles(false);
-            
+
         }
 
         public async void getFrontPageArticlesAsync()
         {
             isRefreshingFrontPage(true);
+
+            //TODO: Refaktorer til denne fremgangsmåde
+            //var reader = new JsonTextReader(new StringReader(await contentAPI.downloadFrontPageArticles()));
+            //var currentProperty = string.Empty;
+
+            //while (reader.Read())
+            //{
+            //    if (reader.Value != null)
+            //    {
+            //        if (reader.TokenType == JsonToken.PropertyName)
+            //            currentProperty = reader.Value.ToString();
+
+            //        if (currentProperty == "contentUrl" && reader.TokenType == JsonToken.String)
+            //        {
+            //            Console.WriteLine(reader.Value);
+            //        }
+            //    }
+            //}
+
             dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadFrontPageArticles());
             IList<Article> articles = new List<Article>();
             foreach (var articleJson in json)
@@ -97,7 +116,7 @@ namespace Prototype.ModelControllers
                 newArt.PublishedDate = publishedDate;
                 newArt.PublishedTimeOfDay = newArt.PublishedDate.ToString("HH:mm", CultureInfo.InvariantCulture);
             }
-            catch (Exception) {}
+            catch (Exception) { }
 
 
             ////Get frontpage image
@@ -108,7 +127,7 @@ namespace Prototype.ModelControllers
             newArt.ContentURL = contentURL;
             newArt.Teaser = stripAllHtmlParagraphTags(teaser);
             newArt.Locked = locked;
-            
+
 
 
 
@@ -220,7 +239,7 @@ namespace Prototype.ModelControllers
 
         private string stripAllHtmlParagraphTags(string html)
         {
-            if(html == null)
+            if (html == null)
             {
                 return "";
             }
