@@ -11,12 +11,12 @@ namespace Prototype.Views.TemplateSelectors
     /// <summary>
     /// This class defines which template a given article should be using in related articles listviews and similar medium sized cell listviews..
     /// </summary>
-    public class MediumArticleTemplateSelector : DataTemplateSelector
+    public class RelatedArticleTemplateSelector : DataTemplateSelector
     {
         public DataTemplate RelatedArticleCell { get; set; }
         public DataTemplate RelatedArticleCellNoImage { get; set; }
 
-        public MediumArticleTemplateSelector(StateController stateController, ContentPage page)
+        public RelatedArticleTemplateSelector(StateController stateController, ContentPage page)
         {
             this.RelatedArticleCell = new DataTemplate(() =>
             {

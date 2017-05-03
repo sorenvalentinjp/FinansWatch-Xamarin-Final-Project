@@ -75,17 +75,7 @@ namespace Prototype.ModelControllers
             if(articles.Count > 0)
             {
                 articles[0].isTopArticle = true;
-            }
-            
-            ////Dates
-            //String publishedDateString = articleJson.publishedDate;
-            //try
-            //{
-            //    DateTime publishedDate = DateTime.ParseExact(publishedDateString, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
-            //    newArt.PublishedDate = publishedDate;
-            //    newArt.PublishedTimeOfDay = newArt.PublishedDate.ToString("HH:mm", CultureInfo.InvariantCulture);
-            //}
-            //catch (Exception) { }
+            }           
 
             return articles;
         }
