@@ -25,6 +25,7 @@ namespace Prototype.Views
             //var navigationPage = new NavigationPage(this.frontPageView);
             //NavigationPage.SetBackButtonTitle(navigationPage, "");
 
+            //iOS
             //App.Navigation = navigationPage.Navigation;
 
             Detail = this.frontPageView;

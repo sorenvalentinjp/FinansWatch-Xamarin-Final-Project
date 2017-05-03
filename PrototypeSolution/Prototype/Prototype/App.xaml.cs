@@ -18,11 +18,16 @@ namespace Prototype
         public App ()
 		{
 			InitializeComponent();
-            var masterDetail = new MasterDetailView(new StateController());
-            NavigationPage.SetBackButtonTitle(masterDetail, "");
-            NavigationPage.SetHasNavigationBar(masterDetail, true);
-            MainPage = new NavigationPage(masterDetail);
-            //MainPage = masterDetail;
+
+            //iOS
+            MainPage = new MasterDetailView(new StateController());
+            NavigationPage.SetBackButtonTitle(MainPage, "");
+
+            //Android
+            //var masterDetail = new MasterDetailView(new StateController());            
+            //MainPage = new NavigationPage(masterDetail);
+
+
             if (App.Navigation == null)
             {
                 App.Navigation = MainPage.Navigation;

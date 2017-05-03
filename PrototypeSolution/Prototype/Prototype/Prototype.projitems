@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Grouping.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Images.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Article.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FrontPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AllArticlesView.xaml.cs">
       <DependentUpon>AllArticlesView.xaml</DependentUpon>
       <SubType>Code</SubType>
