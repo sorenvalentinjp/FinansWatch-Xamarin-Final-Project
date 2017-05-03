@@ -6,7 +6,6 @@
              MasterBehavior="Default">
 
     <MasterDetailPage.Master>
-
         <ContentPage Title="FINANSWATCH">
             <ContentPage.Content>
                 <StackLayout Padding="5,30,5,5"

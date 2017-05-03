@@ -13,7 +13,7 @@ namespace Prototype.Views.Cells
         {
             var newPage = new ArticleView(stateController, article);
             NavigationPage.SetBackButtonTitle(newPage, "");
-            await App.Navigation.PushAsync(new ArticleView(stateController, article), true);
+            await App.Navigation.PushAsync(newPage, true);
         }
 
         public static async void LongPressingGesture(ContentPage page, StateController stateController, Article article)
