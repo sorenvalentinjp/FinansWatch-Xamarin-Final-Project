@@ -19,18 +19,7 @@ namespace Prototype.Views
         public MasterDetailView(StateController stateController)
         {
             InitializeComponent();
-            this.StateController = stateController;
-
-            this.frontPageView = new FrontPageView(this.StateController);
-
-
-            //iOS
-            //var navigationPage = new NavigationPage(this.frontPageView);
-            //NavigationPage.SetBackButtonTitle(navigationPage, "");
-            //App.Navigation = navigationPage.Navigation;
-            //Detail = navigationPage;
-
-            //Android
+            this.StateController = stateController;           
             this.frontPageView = new FrontPageView(this.StateController);
             Detail = this.frontPageView;
         }

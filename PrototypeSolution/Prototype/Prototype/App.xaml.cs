@@ -19,14 +19,8 @@ namespace Prototype
 		{
 			InitializeComponent();
 
-            //iOS
-            //MainPage = new MasterDetailView(new StateController());
-            //NavigationPage.SetBackButtonTitle(MainPage, "");
-
-            //Android
             MainPage = new NavigationPage(new MasterDetailView(new StateController()));
-            NavigationPage.SetHasNavigationBar(MainPage, true);
-            NavigationPage.SetHasBackButton(MainPage, true);
+            NavigationPage.SetBackButtonTitle(MainPage, "");
 
 
             if (App.Navigation == null)
