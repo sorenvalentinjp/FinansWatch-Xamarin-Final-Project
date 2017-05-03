@@ -28,9 +28,9 @@ namespace Prototype.ModelControllers
             ArticleController.getFrontPageArticlesAsync();
         }
 
-        public void getRelatedArticles(Article article)
+        public Task<IList<Article>> getRelatedArticles(Article article)
         {
-            ArticleController.getRelatedArticlesAsync(article);
+            return ArticleController.getRelatedArticlesAsync(article);
         }
 
         public Task<Article> getArticleDetails(Article article)

@@ -7,15 +7,6 @@
              x:Class="Prototype.Views.ArticleView"
              Title="{Binding homeSectionName}">
 
-    <ContentPage.Resources>
-
-        <ResourceDictionary>
-            <templateSelectors:MediumArticleTemplateSelector x:Key="articleTemplateSelector" 
-                                               ArticleMediumTemplate="{StaticResource articleMediumTemplate}"
-                                               ArticleMediumNoImageTemplate="{StaticResource articleMediumNoImageTemplate}"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="ALL"/>
     </ContentPage.ToolbarItems>
@@ -23,19 +14,17 @@
     <ContentPage.Content>
 
         <ListView x:Name="listView"
-                ItemsSource="{Binding RelatedArticles}"
-                ItemTemplate="{StaticResource articleTemplateSelector}"
+                ItemsSource="{Binding relatedDetailedArticles}"
                 HasUnevenRows="True"
-                CachingStrategy="RecycleElement"
-                ItemTapped="ListViewTabbedAction">
+                CachingStrategy="RecycleElement">
             <ListView.Header>
                 <StackLayout>
                     <ffimageloading:CachedImage x:Name="imageView"
                             DownsampleToViewSize="true" 
-                            Source="{Binding small.url}"
+                            Source="{Binding topImage.small.url}"
                             HorizontalOptions="Fill"/>
-                    <Label x:Name="imageCaptionLabel" Text="{Binding imageCaption}" Margin="10,0,30,0" FontSize="12"/>
-                    <Label Text="{Binding titles.DEFAULT}" Margin="10,10,30,0" FontSize="Large" FontAttributes="Bold"/>
+                    <Label x:Name="imageCaptionLabel" Text="{Binding topImage.imageCaption}" Margin="10,0,30,10" FontSize="12"/>
+                    <Label Text="{Binding titles.DEFAULT}" Margin="10,0,30,0" FontSize="Large" FontAttributes="Bold"/>
                     <customRenderers:HtmlFormattedLabel Text="{Binding teasers.DEFAULT}" Margin="10,10,30,0" FontSize="Medium" FontAttributes="Bold"/>
                     <Label Text="{Binding publishData.publishInfo}" Margin="10,10,30,0" FontSize="12" />
                     <customRenderers:HtmlFormattedLabel Text="{Binding bodyText}" Margin="10,15,20,10" FontSize="16"/>

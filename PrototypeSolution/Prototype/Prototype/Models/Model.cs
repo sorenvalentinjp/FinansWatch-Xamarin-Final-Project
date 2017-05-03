@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace Prototype.Models
 {
@@ -14,7 +15,8 @@ namespace Prototype.Models
         public Titles titles { get; set; }
         public Teasers teasers { get; set; }
         public int homeSectionId { get; set; }
-        public DateTime publishedDate { get; set; }
+        public string publishedDate { get; set; }
+        public DateTime publishedDateTime { get; set; }
         public bool locked { get; set; }
         public bool isTopArticle { get; set; }
         public List<object> inlineImages { get; set; }
@@ -35,8 +37,19 @@ namespace Prototype.Models
         public PublishData publishData { get; set; }
         public string lastModified { get; set; }
         public int id { get; set; }
+        public IList<Article> relatedDetailedArticles { get; set; }
+        //Used because we want to acces the first topImage in the topImages list. 
+        public TopImage topImage { get; set; }
+        public ImageSource ImagePlaceholderBig { get; set; }
+        public ImageSource ImagePlaceholderSmall { get; set; }
+        public ImageSource ImageTransparentSmall { get; set; }
 
-        public Article() { }
+        public Article()
+        {
+            ImagePlaceholderBig = ImageSource.FromFile("imagePlaceholderBig.png");
+            ImagePlaceholderSmall = ImageSource.FromFile("imagePlaceholderSmall.png");
+            ImageTransparentSmall = ImageSource.FromFile("imageTransparentSmall.png");
+        }
         public void addFieldsFromAnotherArticle(Article article)
         {
             //image = article.image;

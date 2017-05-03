@@ -1,4 +1,6 @@
-﻿using Prototype.Models;
+﻿using Prototype.ModelControllers;
+using Prototype.Models;
+using Prototype.Views.Cells;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,11 +16,24 @@ namespace Prototype.Views.TemplateSelectors
         public DataTemplate ArticleMediumTemplate { get; set; }
         public DataTemplate ArticleMediumNoImageTemplate { get; set; }
 
+        public MediumArticleTemplateSelector(StateController stateController, ContentPage page)
+        {
+            this.ArticleMediumTemplate = new DataTemplate(() =>
+            {
+                return new MediumCellRelatedArticle(stateController, page);
+            });
+
+            this.ArticleMediumNoImageTemplate = new DataTemplate(() =>
+            {
+                return new MediumCellRelatedArticleNoImage(stateController, page);
+            });            
+        }
+
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
             Article article = (Article)item;
 
-            if (article.topImages.Count == 0)
+            if (article.topImage == null)
                 return ArticleMediumNoImageTemplate;
             else
                 return ArticleMediumTemplate;

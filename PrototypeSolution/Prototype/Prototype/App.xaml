@@ -30,9 +30,9 @@
                             <ffimageloading:CachedImage Grid.Row="0" 
                                                         Grid.Column="0" 
                                                         LoadingPlaceholder="{Binding ImageTransparentSmall}"
-                                                        Source="{Binding ArticleImage.ThumbUrl}"
+                                        Source="{Binding small.url}"
                                                         HorizontalOptions="StartAndExpand"/>
-                            <Label Text="{Binding Title}" 
+                            <Label Text="{Binding titles.FRONTPAGE}" 
                                    Grid.Row="0" 
                                    Grid.Column="1" 
                                    Grid.ColumnSpan="2"
@@ -60,7 +60,7 @@
                             <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" 
                                                         LoadingPlaceholder="{Binding ImageTransparentSmall}"
                                                         Source="{Binding ImageTransparentSmall}"/>
-                            <Label Text="{Binding Title}" 
+                            <Label Text="{Binding titles.FRONTPAGE}"  
                                    Grid.Row="0" 
                                    Grid.Column="1" 
                                    Grid.ColumnSpan="2"

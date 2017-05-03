@@ -1,5 +1,6 @@
 ﻿using Prototype.ModelControllers;
 using Prototype.Models;
+using Prototype.Views.TemplateSelectors;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,36 +31,37 @@ namespace Prototype.Views
             }
         }
 
-        public ArticleView(StateController stateController, Article article)
+        public ArticleView(StateController stateController, Article articleToDisplay)
         {
             InitializeComponent();
-            Article = article;
-            BindingContext = Article;
-            DisableItemSelectedAction();
+
+            listView.ItemTemplate = new MediumArticleTemplateSelector(stateController, this);
+
             this.stateController = stateController;
+            getArticleDetails(articleToDisplay);
 
-            getArticleDetails();
-
-            this.stateController.getRelatedArticles(Article);
+            DisableItemSelectedAction();
+            
+            
         }
 
-        private async void getArticleDetails()
+        private async void getArticleDetails(Article articleToDisplay)
         {
-            if (article.bodyText == null)
+            if (articleToDisplay.bodyText == null)
             {
-                Article = await this.stateController.getArticleDetails(Article);
+                articleToDisplay = await this.stateController.getArticleDetails(articleToDisplay);
             }
 
             //If articledetails havent already been fetched, await the code above to get the data, then check if the imagesource is null.
-            if (Article.topImages.Count == 0)
+            if (articleToDisplay.topImage == null)
             {
                 imageView.IsVisible = false;
                 imageCaptionLabel.IsVisible = false;
-            } else
-            {
-                imageView.BindingContext = Article.topImages[0];
-                imageCaptionLabel.BindingContext = Article.topImages[0];
-            }
+            } 
+
+            articleToDisplay.relatedDetailedArticles = await this.stateController.getRelatedArticles(articleToDisplay);
+            Article = articleToDisplay;
+            BindingContext = Article;
         }
 
         private void DisableItemSelectedAction()
@@ -68,12 +70,6 @@ namespace Prototype.Views
             {
                 ((ListView)sender).SelectedItem = null;
             };
-        }
-
-        private async void ListViewTabbedAction(object sender, ItemTappedEventArgs e)
-        {
-            Article tabbedArticle = (Article)e.Item;
-            await Navigation.PushModalAsync(new NavigationPage(new ArticleView(this.stateController, await stateController.getArticleDetails(tabbedArticle))), true);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

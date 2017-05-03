@@ -35,87 +35,48 @@ namespace Prototype.ModelControllers
 
             IList<Article> articles = createArticlesFromJson(await contentAPI.downloadLatestArticles());
 
-            //dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadLatestArticles());
-            //IList<Article> articles = new List<Article>();
-            //foreach (var articleJson in json)
-            //{
-            //    Article newArt = createJsonArticleFromList(articleJson);
-
-            //    //newArt = await getArticleDetailsAsync(newArt);
-
-            //    articles.Add(newArt);
-
-            //}
-
-
             var sortedArticles = from article in articles
-                                 orderby article.publishedDate descending
-                                 group article by article.publishedDate.Date.ToString("dd. MMMM", CultureInfo.InvariantCulture) into articleGroup
+                                 orderby article.publishedDateTime descending
+                                 group article by article.publishedDateTime.Date.ToString("dd. MMMM", CultureInfo.InvariantCulture) into articleGroup
                                  select new Grouping<string, Article>(articleGroup.Key, articleGroup);
 
             var groupedArticles = new List<Grouping<string, Article>>(sortedArticles);
 
             latestArticlesAreReady(groupedArticles);
             isRefreshingLatestArticles(false);
-
         }
 
         public async void getFrontPageArticlesAsync()
         {
             isRefreshingFrontPage(true);
 
-            //TODO: Refaktorer til denne fremgangsmåde
-
             IList<Article> articles = createArticlesFromJson(await contentAPI.downloadFrontPageArticles());
-            //var reader = new JsonTextReader(new StringReader(await contentAPI.downloadFrontPageArticles()));
-            //var currentProperty = string.Empty;
-
-            //while (reader.Read())
-            //{
-            //    if (reader.Value != null)
-            //    {
-            //        if (reader.TokenType == JsonToken.PropertyName)
-            //            currentProperty = reader.Value.ToString();
-
-            //        if (currentProperty == "contentUrl" && reader.TokenType == JsonToken.String)
-            //        {
-            //            Console.WriteLine(reader.Value);
-            //        }
-            //    }
-            //}
-
-            //dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadFrontPageArticles());
-            //IList<Article> articles = new List<Article>();
-            //foreach (var articleJson in json)
-            //{
-            //    Article newArt = createJsonArticleFromList(articleJson);
-
-            //    //newArt = await getArticleDetailsAsync(newArt);
-
-            ////Determine if the article is a toparticle
-            //if (articles.Count == 0)
-            //{
-            //    newArt.IsTopArticle = true;
-            //}
-            //articles.Add(newArt);
-
-            //}
-            articles[0].isTopArticle = true;
+           
             frontPageArticlesAreReady(articles);
             isRefreshingFrontPage(false);
         }
 
         private IList<Article> createArticlesFromJson(string json)
         {
-            var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = "dd-MM-yyyy HH:mm" };
-            IList<Article> articles = JsonConvert.DeserializeObject<List<Article>>(json, dateTimeConverter);
+            //var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = "dd-MM-yyyy HH:mm" };
+            IList<Article> articles = JsonConvert.DeserializeObject<List<Article>>(json);
 
-            ////Other fields
-            //string contentURL = articleJson.contentUrl;
-            //string title = articleJson.titles.FRONTPAGE;
-            //string teaser = articleJson.teasers.FRONTPAGE;
-            //Boolean locked = articleJson.locked;
+            foreach (var article in articles)
+            {
+                stripArticle(article);
+                try
+                {
+                    DateTime publishedDateTime = DateTime.ParseExact(article.publishedDate, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
+                    article.publishedDateTime= publishedDateTime;
+                }
+                catch (Exception) { }
+            }
 
+            if(articles.Count > 0)
+            {
+                articles[0].isTopArticle = true;
+            }
+            
             ////Dates
             //String publishedDateString = articleJson.publishedDate;
             //try
@@ -126,132 +87,69 @@ namespace Prototype.ModelControllers
             //}
             //catch (Exception) { }
 
-
-            //////Get frontpage image
-            //newArt.FrontPageImage = getFrontPageImage(articleJson);
-
-            ////Save fields
-            //newArt.Title = title;
-            //newArt.ContentURL = contentURL;
-            //newArt.Teaser = stripAllHtmlParagraphTags(teaser);
-            //newArt.Locked = locked;
-
-
-
-
             return articles;
         }
 
-        public async void getRelatedArticlesAsync(Article article)
+        public async Task<IList<Article>> getRelatedArticlesAsync(Article article)
         {
-            //dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadArticle(article.ContentURL));
-
-            //article.RelatedArticles.Clear();
-
-            //foreach (var relatedArticleJson in json.relatedArticles)
-            //{
-            //    Article relatedArticle = new Article();
-            //    relatedArticle.ContentURL = relatedArticleJson.url;
-            //    relatedArticle.Title = relatedArticleJson.title;
-            //    relatedArticle.Locked = relatedArticleJson.locked;
-
-            //    //Download the related article json and fetch images
-            //    dynamic relatedArticleDetailsJson = JsonConvert.DeserializeObject(await contentAPI.downloadArticle(relatedArticle.ContentURL));
-            //    relatedArticle.ArticleImage = getArticleImage(relatedArticleDetailsJson);
-
-            //    //Add the new related article
-            //    article.RelatedArticles.Add(relatedArticle);
-            //}
+            IList<Article> newRelatedArticles = new List<Article>();
+            foreach (var relatedArticle in article.relatedArticles)
+            {
+                newRelatedArticles.Add(await getArticleDetailsAsync(relatedArticle.url));
+            }
+            return newRelatedArticles;
         }
 
         public async Task<Article> getArticleDetailsAsync(Article article)
         {
-            //dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadArticle(article.ContentURL));
-
-            ////Get fields
-            //string bodyText = json.bodyText;
-            //string title = json.titles.DEFAULT;
-            //string teaser = json.teasers.DEFAULT;
-            //string publishInfo = json.publishData.publishInfo;
-            //string homeSectionName = json.metadata.sectionDisplayName;
-
-            ////Get article image
-            //article.ArticleImage = getArticleImage(json);
 
             ////Dates
             ////String publishedDateString = json.publishData.publishedTime;
             ////DateTime publishedDate = DateTime.ParseExact(publishedDateString, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
 
-            ////Save fields
-            ////Strip related articles used on the website, at the end of the bodytext.
-            //article.BodyText = stripRelatedArticles(bodyText);
-            //article.Title = title;
-            //article.Teaser = stripAllHtmlParagraphTags(teaser);
-            //article.PublishInfo = publishInfo;
-            //article.HomeSectionName = homeSectionName;
+            article = JsonConvert.DeserializeObject<Article>(await contentAPI.downloadArticle(article.contentUrl));
 
-            var newArt = JsonConvert.DeserializeObject<Article>(await contentAPI.downloadArticle(article.contentUrl));
-            article.addFieldsFromAnotherArticle(newArt);
+            article = setArticleFields(article);
+
+            return article;
+        }
+
+        public async Task<Article> getArticleDetailsAsync(string contentUrl)
+        {        
+            var article = JsonConvert.DeserializeObject<Article>(await contentAPI.downloadArticle(contentUrl));
+
+            article = setArticleFields(article);
+
             return article;
 
         }
 
-        private ArticleImage getArticleImage(dynamic articleJson)
+        private Article setArticleFields(Article article)
         {
-            //Images
-            try
-            {
-                foreach (var image in articleJson.topImages)
-                {
-                    bool isPrimaryImage = image.primary;
-                    if (isPrimaryImage)
-                    {
-                        string imageBigUrl = image.big.url;
-                        string imageSmallURL = image.small.url;
-                        string imageThumbURL = image.thumb.url;
-                        string imageCaption = "";
-                        try
-                        {
-                            imageCaption = image.imageCaption;
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.WriteLine(@"getArticleImages ImageCaption {0}", ex.Message);
-                        }
+            //article.addFieldsFromAnotherArticle(newArt);
+            article = stripArticle(article);
 
-                        return new ArticleImage(imageBigUrl, imageSmallURL, imageThumbURL, imageCaption);
-                    }
-                }
-                return null;
-            }
-            catch (Exception ex)
+            if (article.topImages.Count > 0)
             {
-                Debug.WriteLine(@"getArticleImages articleJson.topImages {0}", ex.Message);
-                return null;
+                article.topImage = article.topImages[0];
             }
+            return article;
         }
 
-        private ArticleImage getFrontPageImage(dynamic articleJson)
+        private Article stripArticle(Article article)
         {
-            //Images
-            try
-            {
-                string imageFrontPageBigUrl = articleJson.image.versions.big_article_460.url;
-                string imageFrontPageSmallUrl = articleJson.image.versions.small_article_220.url;
-                return new ArticleImage(imageFrontPageBigUrl, imageFrontPageSmallUrl, "", "");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"getFrontPageImage {0}", ex.Message);
-                return null;
-            }
+            article.bodyText = stripRelatedArticles(article.bodyText);
+            article.teasers.FRONTPAGE = stripAllHtmlParagraphTags(article.teasers.FRONTPAGE);
+            article.teasers.DEFAULT = stripAllHtmlParagraphTags(article.teasers.DEFAULT);
+            return article;
         }
+
 
         private string stripAllHtmlParagraphTags(string html)
         {
             if (html == null)
             {
-                return "";
+                return null;
             }
             var pattern = "<p>|<\\/p>";
             return Regex.Replace(html, pattern, "");
@@ -265,6 +163,10 @@ namespace Prototype.ModelControllers
         /// <returns></returns>
         private string stripRelatedArticles(string html)
         {
+            if (html == null)
+            {
+                return null;
+            }
             var pattern = "<ul.*</ul>";
             return Regex.Replace(html, pattern, "");
         }
