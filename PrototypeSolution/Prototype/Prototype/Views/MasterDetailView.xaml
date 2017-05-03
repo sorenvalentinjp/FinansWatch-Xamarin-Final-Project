@@ -2,8 +2,8 @@
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.Views.MasterDetailView"
-             Title="FINANSWATCH"
-             MasterBehavior="Default">
+             MasterBehavior="Default"
+             Title="FINANSWATCH">
 
     <MasterDetailPage.Master>
         <ContentPage Title="FINANSWATCH">
@@ -22,12 +22,4 @@
             </ContentPage.Content>
         </ContentPage>
     </MasterDetailPage.Master>
-
-    <MasterDetailPage.Detail>
-        <NavigationPage>
-
-
-
-        </NavigationPage>
-    </MasterDetailPage.Detail>
-    </MasterDetailPage>
+</MasterDetailPage>
