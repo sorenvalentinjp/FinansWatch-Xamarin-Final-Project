@@ -17,7 +17,7 @@
                        FontSize="Large"
                        FontAttributes="Bold"/>
                 <customRenderers:HtmlFormattedLabel Text="{Binding teasers.FRONTPAGE}"
-                                                    Font="16"/>
+                                                    FontSize="Medium"/>
             </StackLayout>
         </StackLayout>
     </ViewCell.View>
