@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mr:ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.Views.Cells.DateTimeCell"
+             xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
+             Tapped="TappedGesture"
+             LongPressing="LongPressingGesture">
+
+    <ViewCell.View>
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Text="{Binding publishedDateTime, StringFormat='{0:HH:mm}'}" 
+                                   Margin="10"
+                                   Grid.Row="0" 
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"/>
+            <Label Text="{Binding titles.FRONTPAGE}" 
+                                Margin="10"
+                                Grid.Row="0" 
+                                Grid.Column="2" 
+                                Grid.ColumnSpan="5"/>
+        </Grid>
+    </ViewCell.View>
+</mr:ViewCell>

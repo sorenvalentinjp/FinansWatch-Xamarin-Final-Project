@@ -1,5 +1,6 @@
 ﻿using Prototype.ModelControllers;
 using Prototype.Models;
+using Prototype.Views.Cells;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -46,6 +47,11 @@ namespace Prototype.Views
         public AllArticlesView (StateController stateController)
 		{
 			InitializeComponent ();
+
+            listView.ItemTemplate = new DataTemplate(() => { return new DateTimeCell(this.StateController, this); });
+
+            listView.GroupHeaderTemplate = new DataTemplate(() => { return new DateTimeCellGroupHeader(); });
+
             BindingContext = this;
             this.StateController = stateController;
             this.StateController.ArticleController.isRefreshingLatestArticles += ArticleController_isRefreshing;

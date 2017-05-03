@@ -17,53 +17,6 @@
                   IsGroupingEnabled="true" 
                   HasUnevenRows="True"
                   GroupDisplayBinding="{Binding Key}"
-                  GroupShortNameBinding="{Binding Key}"
-                  ItemTapped="listView_ItemTapped">
-            <ListView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout VerticalOptions="CenterAndExpand"
-                            BackgroundColor="#213c68">
-                            <Label Text="{Binding Key}" 
-                                   TextColor="White" 
-                                   VerticalOptions="Center"
-                                   Margin="10"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.GroupHeaderTemplate>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid Margin="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Label Text="{Binding publishedDateTime, StringFormat='{0:HH:mm}'}" 
-                                   Margin="10"
-                                   Grid.Row="0" 
-                                   Grid.Column="0"
-                                   Grid.ColumnSpan="2"/>
-                            <Label Text="{Binding titles.FRONTPAGE}" 
-                                Margin="10"
-                                Grid.Row="0" 
-                                Grid.Column="2" 
-                                Grid.ColumnSpan="5"/>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                  GroupShortNameBinding="{Binding Key}"/>
     </ContentPage.Content>
-
 </ContentPage>
