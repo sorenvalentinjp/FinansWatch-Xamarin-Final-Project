@@ -11,6 +11,8 @@ namespace Prototype.Views.Cells
     {
         public static async void TappedGesture(ContentPage page, StateController stateController, Article article)
         {
+            var newPage = new ArticleView(stateController, article);
+            NavigationPage.SetBackButtonTitle(newPage, "");
             await App.Navigation.PushAsync(new ArticleView(stateController, article), true);
         }
 

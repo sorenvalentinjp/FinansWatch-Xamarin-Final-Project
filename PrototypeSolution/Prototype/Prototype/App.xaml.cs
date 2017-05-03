@@ -19,8 +19,12 @@ namespace Prototype
 		{
 			InitializeComponent();
 
-            MainPage = new MasterDetailView(new StateController());
-		}
+            MainPage = new NavigationPage(new MasterDetailView(new StateController()));
+            if (App.Navigation == null)
+            {
+                App.Navigation = MainPage.Navigation;
+            }
+        }
 
 		protected override void OnStart ()
 		{

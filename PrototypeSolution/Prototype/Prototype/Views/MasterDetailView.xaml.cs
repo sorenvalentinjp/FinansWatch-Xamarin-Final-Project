@@ -10,9 +10,9 @@ namespace Prototype.Views
 	public partial class MasterDetailView : MasterDetailPage
     {
 
-        private NavigationPage frontPageView;
-        private NavigationPage savedArticlesView;
-        private NavigationPage allArticlesView;
+        private Page frontPageView;
+        private Page savedArticlesView;
+        private Page allArticlesView;
 
         public StateController StateController { get; set; }
 
@@ -21,11 +21,9 @@ namespace Prototype.Views
             InitializeComponent();
             this.StateController = stateController;
 
-            this.frontPageView = new NavigationPage(new FrontPageView(this.StateController));
+            this.frontPageView = new FrontPageView(this.StateController);
 
             Detail = this.frontPageView;
-
-            if (App.Navigation == null) App.Navigation = Detail.Navigation;
         }
 
         private void FrontPageAction(object sender, EventArgs e)
@@ -37,7 +35,7 @@ namespace Prototype.Views
         private void AllArticlesAction(object sender, EventArgs e)
         {
             if (this.allArticlesView == null)
-                this.allArticlesView = new NavigationPage(new AllArticlesView(StateController));
+                this.allArticlesView = new AllArticlesView(StateController);
             Detail = allArticlesView;
             IsPresented = false;
         }
@@ -45,7 +43,7 @@ namespace Prototype.Views
         private void SavedArticlesAction(object sender, EventArgs e)
         {
             if(this.savedArticlesView == null)
-                this.savedArticlesView = new NavigationPage(new SavedArticlesView(this.StateController));
+                this.savedArticlesView = new SavedArticlesView(this.StateController);
 
             Detail = savedArticlesView;
             IsPresented = false;
@@ -53,19 +51,19 @@ namespace Prototype.Views
 
         private void SectionAction(object sender, EventArgs e)
         {
-            Detail = new NavigationPage(new SectionView());
+            Detail = new SectionView();
             IsPresented = false;
         }
 
         private void LoginAction(object sender, EventArgs e)
         {
-            Detail = new NavigationPage(new LoginView());
+            Detail = new LoginView();
             IsPresented = false;
         }
 
         private void SearchArticlesAction(object sender, EventArgs e)
         {
-            Detail = new NavigationPage(new SearchArticlesView());
+            Detail = new SearchArticlesView();
             IsPresented = false;
         }
     }

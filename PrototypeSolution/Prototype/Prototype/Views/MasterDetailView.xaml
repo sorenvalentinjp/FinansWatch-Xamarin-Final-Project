@@ -2,12 +2,12 @@
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.Views.MasterDetailView"
-             Title="Master"
+             Title="FINANSWATCH"
              MasterBehavior="Default">
 
     <MasterDetailPage.Master>
 
-        <ContentPage Title="Master">
+        <ContentPage Title="FINANSWATCH">
             <ContentPage.Content>
                 <StackLayout Padding="5,30,5,5"
                              BackgroundColor="#213c68">
