@@ -14,7 +14,7 @@ namespace Prototype.Models
         public Titles titles { get; set; }
         public Teasers teasers { get; set; }
         public int homeSectionId { get; set; }
-        public string publishedDate { get; set; }
+        public DateTime publishedDate { get; set; }
         public bool locked { get; set; }
         public bool isTopArticle { get; set; }
         public List<object> inlineImages { get; set; }

@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Linq;
+using Newtonsoft.Json.Converters;
 
 namespace Prototype.ModelControllers
 {
@@ -31,6 +32,9 @@ namespace Prototype.ModelControllers
         public async void getLatestArticlesAsync()
         {
             isRefreshingLatestArticles(true);
+
+            IList<Article> articles = createArticlesFromJson(await contentAPI.downloadLatestArticles());
+
             //dynamic json = JsonConvert.DeserializeObject(await contentAPI.downloadLatestArticles());
             //IList<Article> articles = new List<Article>();
             //foreach (var articleJson in json)
@@ -44,14 +48,14 @@ namespace Prototype.ModelControllers
             //}
 
 
-            //var sortedArticles = from article in articles
-            //                     orderby article.PublishedDate descending
-            //                     group article by article.PublishedDate.Date.ToString("dd. MMMM", CultureInfo.InvariantCulture) into articleGroup
-            //                     select new Grouping<string, Article>(articleGroup.Key, articleGroup);
+            var sortedArticles = from article in articles
+                                 orderby article.publishedDate descending
+                                 group article by article.publishedDate.Date.ToString("dd. MMMM", CultureInfo.InvariantCulture) into articleGroup
+                                 select new Grouping<string, Article>(articleGroup.Key, articleGroup);
 
-            //var groupedArticles = new List<Grouping<string, Article>>(sortedArticles);
+            var groupedArticles = new List<Grouping<string, Article>>(sortedArticles);
 
-            //latestArticlesAreReady(groupedArticles);
+            latestArticlesAreReady(groupedArticles);
             isRefreshingLatestArticles(false);
 
         }
@@ -62,8 +66,7 @@ namespace Prototype.ModelControllers
 
             //TODO: Refaktorer til denne fremgangsmåde
 
-            IList<Article> articles = JsonConvert.DeserializeObject<List<Article>>(await contentAPI.downloadFrontPageArticles());
-
+            IList<Article> articles = createArticlesFromJson(await contentAPI.downloadFrontPageArticles());
             //var reader = new JsonTextReader(new StringReader(await contentAPI.downloadFrontPageArticles()));
             //var currentProperty = string.Empty;
 
@@ -102,9 +105,10 @@ namespace Prototype.ModelControllers
             isRefreshingFrontPage(false);
         }
 
-        private Article createJsonArticleFromList(dynamic articleJson)
+        private IList<Article> createArticlesFromJson(string json)
         {
-            Article newArt = new Article();
+            var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = "dd-MM-yyyy HH:mm" };
+            IList<Article> articles = JsonConvert.DeserializeObject<List<Article>>(json, dateTimeConverter);
 
             ////Other fields
             //string contentURL = articleJson.contentUrl;
@@ -132,10 +136,10 @@ namespace Prototype.ModelControllers
             //newArt.Teaser = stripAllHtmlParagraphTags(teaser);
             //newArt.Locked = locked;
 
-            
 
 
-            return newArt;
+
+            return articles;
         }
 
         public async void getRelatedArticlesAsync(Article article)
