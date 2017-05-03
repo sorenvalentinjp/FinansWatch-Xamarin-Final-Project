@@ -22,12 +22,16 @@ namespace Prototype.Views
             this.StateController = stateController;
 
             this.frontPageView = new FrontPageView(this.StateController);
-            //var navigationPage = new NavigationPage(this.frontPageView);
-            //NavigationPage.SetBackButtonTitle(navigationPage, "");
+
 
             //iOS
+            //var navigationPage = new NavigationPage(this.frontPageView);
+            //NavigationPage.SetBackButtonTitle(navigationPage, "");
             //App.Navigation = navigationPage.Navigation;
+            //Detail = navigationPage;
 
+            //Android
+            this.frontPageView = new FrontPageView(this.StateController);
             Detail = this.frontPageView;
         }
 
