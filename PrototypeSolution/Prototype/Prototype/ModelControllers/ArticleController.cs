@@ -145,7 +145,7 @@ namespace Prototype.ModelControllers
         {
             if (html == null)
             {
-                return null;
+                return "";
             }
             var pattern = "<p>|<\\/p>";
             return Regex.Replace(html, pattern, "");
@@ -161,7 +161,7 @@ namespace Prototype.ModelControllers
         {
             if (html == null)
             {
-                return null;
+                return "";
             }
             var pattern = "<ul.*</ul>";
             return Regex.Replace(html, pattern, "");
