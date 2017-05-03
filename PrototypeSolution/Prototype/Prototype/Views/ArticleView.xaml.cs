@@ -47,7 +47,7 @@ namespace Prototype.Views
 
         private async void getArticleDetails(Article articleToDisplay)
         {
-            if (articleToDisplay.bodyText == null)
+            if (articleToDisplay.bodyText == "")
             {
                 articleToDisplay = await this.stateController.getArticleDetails(articleToDisplay);
             }
