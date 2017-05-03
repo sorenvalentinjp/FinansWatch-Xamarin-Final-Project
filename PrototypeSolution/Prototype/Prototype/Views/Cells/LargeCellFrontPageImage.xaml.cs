@@ -11,15 +11,15 @@ using Xamarin.Forms.Xaml;
 
 namespace Prototype.Views.Cells
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RelatedArticleCell : MR.Gestures.ViewCell
-    {
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class LargeCellFrontPageImage : MR.Gestures.ViewCell
+	{
         private StateController stateController;
         private ContentPage page;
 
-        public RelatedArticleCell(StateController stateController, ContentPage page)
-        {
-            InitializeComponent();
+        public LargeCellFrontPageImage(StateController stateController, ContentPage page)
+		{
+			InitializeComponent();
             this.stateController = stateController;
             this.page = page;
         }

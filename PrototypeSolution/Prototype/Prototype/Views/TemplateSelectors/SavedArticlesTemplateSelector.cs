@@ -8,26 +8,27 @@ using Xamarin.Forms;
 
 namespace Prototype.Views.TemplateSelectors
 {
-    /// <summary>
-    /// This class defines which template a given article should be using in related articles listviews and similar medium sized cell listviews..
-    /// </summary>
-    public class RelatedArticlesTemplateSelector : DataTemplateSelector
+    public class SavedArticlesTemplateSelector : DataTemplateSelector
     {
+        public DataTemplate MediumCellFrontPageImageTemplate { get; set; }
         public DataTemplate MediumCellTopImageTemplate { get; set; }
         public DataTemplate MediumCellNoImageTemplate { get; set; }
 
-        public RelatedArticlesTemplateSelector(StateController stateController, ContentPage page)
+        public SavedArticlesTemplateSelector(StateController stateController, ContentPage page)
         {
+            this.MediumCellFrontPageImageTemplate = new DataTemplate(() => { return new MediumCellFrontPageImage(stateController, page); });
             this.MediumCellTopImageTemplate = new DataTemplate(() => { return new MediumCellTopImage(stateController, page); });
-            this.MediumCellNoImageTemplate = new DataTemplate(() => { return new MediumCellNoImage(stateController, page); });            
+            this.MediumCellNoImageTemplate = new DataTemplate(() => { return new MediumCellNoImage(stateController, page); });
         }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
             Article article = (Article)item;
 
-            if (article.topImage == null)
+            if (article.image == null && article.topImage == null)
                 return this.MediumCellNoImageTemplate;
+            else if (article.image != null)
+                return this.MediumCellFrontPageImageTemplate;
             else
                 return this.MediumCellTopImageTemplate;
         }

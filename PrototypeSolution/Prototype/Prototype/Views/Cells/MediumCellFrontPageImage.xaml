@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             x:Class="Prototype.Views.Cells.RelatedArticleCellNoImage"
+             x:Class="Prototype.Views.Cells.MediumCellFrontPageImage"
              Tapped="TappedGesture"
              LongPressing="LongPressingGesture">
 
@@ -21,7 +21,8 @@
             <ffimageloading:CachedImage x:Name="image"
                                         Grid.Row="0" 
                                         Grid.Column="0" 
-                                        Source="{Binding ImageTransparentSmall}"
+                                        LoadingPlaceholder="{Binding ImageTransparentSmall}"
+                                        Source="{Binding image.versions.small_article_220.url}"
                                         HorizontalOptions="StartAndExpand"/>
             <Label Text="{Binding titles.FRONTPAGE}" 
                    Grid.Row="0" 

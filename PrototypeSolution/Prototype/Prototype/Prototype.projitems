@@ -29,28 +29,24 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\CellGestures.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\LargeCell.xaml.cs">
-      <DependentUpon>LargeCell.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\LargeCellFrontPageImage.xaml.cs">
+      <DependentUpon>LargeCellFrontPageImage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\LargeCellNoImage.xaml.cs">
       <DependentUpon>LargeCellNoImage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\MediumCell.xaml.cs">
-      <DependentUpon>MediumCell.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\MediumCellFrontPageImage.xaml.cs">
+      <DependentUpon>MediumCellFrontPageImage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\MediumCellNoImage.xaml.cs">
       <DependentUpon>MediumCellNoImage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\RelatedArticleCellNoImage.xaml.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>RelatedArticleCellNoImage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\RelatedArticleCell.xaml.cs">
-      <DependentUpon>RelatedArticleCell.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\MediumCellTopImage.xaml.cs">
+      <DependentUpon>MediumCellTopImage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\CustomRenderers\HtmlFormattedLabel.cs" />
@@ -79,14 +75,11 @@
       <DependentUpon>SectionView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\TemplateSelectors\SavedArticlesTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\TemplateSelectors\SectionTemplateSelector.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Cells\RelatedArticleCellNoImage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -140,7 +133,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Cells\MediumCell.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Cells\MediumCellFrontPageImage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -152,7 +145,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Cells\LargeCell.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Cells\LargeCellFrontPageImage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -164,7 +157,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Cells\RelatedArticleCell.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Cells\MediumCellTopImage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

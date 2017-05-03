@@ -13,32 +13,17 @@ namespace Prototype.Views.TemplateSelectors
     /// </summary>
     public class SectionTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate ArticleLargeTemplate { get; set; }
-        public DataTemplate ArticleLargeNoImageTemplate { get; set; }
-        public DataTemplate ArticleMediumTemplate { get; set; }
-        public DataTemplate ArticleMediumNoImageTemplate { get; set; }
+        public DataTemplate LargeCellFrontPageImageTemplate { get; set; }
+        public DataTemplate LargeCellNoImageTemplate { get; set; }
+        public DataTemplate MediumCellFrontPageImageTemplate { get; set; }
+        public DataTemplate MediumCellNoImageTemplate { get; set; }
 
         public SectionTemplateSelector(StateController stateController, ContentPage page)
         {
-            this.ArticleMediumTemplate = new DataTemplate(() =>
-            {
-                return new MediumCell(stateController, page);
-            });
-
-            this.ArticleMediumNoImageTemplate = new DataTemplate(() =>
-            {
-                return new MediumCellNoImage(stateController, page);
-            });
-
-            this.ArticleLargeTemplate = new DataTemplate(() =>
-            {
-                return new LargeCell(stateController, page);
-            });
-
-            this.ArticleLargeNoImageTemplate = new DataTemplate(() =>
-            {
-                return new LargeCellNoImage(stateController, page);
-            });
+            this.MediumCellFrontPageImageTemplate = new DataTemplate(() => { return new MediumCellFrontPageImage(stateController, page); });
+            this.MediumCellNoImageTemplate = new DataTemplate(() => { return new MediumCellNoImage(stateController, page); });
+            this.LargeCellFrontPageImageTemplate = new DataTemplate(() => { return new LargeCellFrontPageImage(stateController, page); });
+            this.LargeCellNoImageTemplate = new DataTemplate(() => { return new LargeCellNoImage(stateController, page); });
         }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
@@ -48,16 +33,16 @@ namespace Prototype.Views.TemplateSelectors
             if (article.isTopArticle)
             {
                 if (article.image == null)
-                    return ArticleLargeNoImageTemplate;
+                    return this.LargeCellNoImageTemplate;
                 else
-                    return ArticleLargeTemplate;
+                    return this.LargeCellFrontPageImageTemplate;
             }
             else
             {
                 if (article.image == null)
-                    return ArticleMediumNoImageTemplate;
+                    return this.MediumCellNoImageTemplate;
                 else
-                    return ArticleMediumTemplate;
+                    return this.MediumCellFrontPageImageTemplate;
             }
         }
     }
