@@ -1,239 +1,159 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Text;
 using Xamarin.Forms;
 
 namespace Prototype.Models
 {
-    public class OldArticle : INotifyPropertyChanged, IComparable
+    /// <summary>
+    /// JSON Generated class
+    /// </summary>
+    public class Article
     {
-        string title;
-        public string Title
+
+        //Generated fields start
+        public Image image { get; set; }
+        public string desktopUrl { get; set; }
+        public string homeSectionName { get; set; }
+        public string contentUrl { get; set; }
+        public Titles titles { get; set; }
+        public Teasers teasers { get; set; }
+        public int homeSectionId { get; set; }
+        public string publishedDate { get; set; }
+        public DateTime publishedDateTime { get; set; }
+        public bool locked { get; set; }
+        public bool isTopArticle { get; set; }
+        public List<object> inlineImages { get; set; }
+        public Metadata metadata { get; set; }
+        public bool breakingNews { get; set; }
+        public object partner { get; set; }
+        public string bodyText { get; set; }
+        public string c_name { get; set; }
+        public string c_category { get; set; }
+        public List<object> tags { get; set; }
+        public List<RelatedArticle> relatedArticles { get; set; }
+        public List<TopImage> topImages { get; set; }
+        public object video { get; set; }
+        public List<object> quoteBoxes { get; set; }
+        public List<object> reviewBoxes { get; set; }
+        public List<object> factsBoxes { get; set; }
+        public object updateInfo { get; set; }
+        public PublishData publishData { get; set; }
+        public string lastModified { get; set; }
+        public int id { get; set; }
+        //Generated fields end
+
+
+        //Manually made fields start
+        public IList<Article> relatedDetailedArticles { get; set; }
+        //Used because we want to acces the first topImage in the topImages list. 
+        public TopImage topImage { get; set; }
+        public ImageSource ImagePlaceholderBig { get; set; }
+        public ImageSource ImagePlaceholderSmall { get; set; }
+        public ImageSource ImageTransparentSmall { get; set; }
+        //Manually made fields end
+
+        public Article()
         {
-            get { return title; }
-            set
-            {
-                if(title == value) { return; }
-                title = value;
-                notify("Title");
-            }
+            ImagePlaceholderBig = ImageSource.FromFile("imagePlaceholderBig.png");
+            ImagePlaceholderSmall = ImageSource.FromFile("imagePlaceholderSmall.png");
+            ImageTransparentSmall = ImageSource.FromFile("imageTransparentSmall.png");
         }
-
-        string contentURL;
-        public string ContentURL
-        {
-            get { return contentURL; }
-            set
-            {
-                if (contentURL == value) { return; }
-                contentURL = value;
-                notify("ContentURL");
-            }
-        }
-
-        string bodyText;
-        public string BodyText
-        {
-            get { return bodyText; }
-            set
-            {
-                if (bodyText == value) { return; }
-                bodyText = value;
-                notify("BodyText");
-            }
-        }
-
-        string homeSectionName;
-        public string HomeSectionName
-        {
-            get { return homeSectionName; }
-            set
-            {
-                if (homeSectionName == value) { return; }
-                homeSectionName = value;
-                notify("HomeSectionName");
-            }
-        }
-
-        Boolean locked;
-        public Boolean Locked
-        {
-            get { return locked; }
-            set
-            {
-                if (locked == value) { return; }
-                locked = value;
-                notify("Locked");
-            }
-        }
-
-        DateTime publishedDate;
-        public DateTime PublishedDate
-        {
-            get { return publishedDate; }
-            set
-            {
-                if (publishedDate == value) { return; }
-                publishedDate = value;
-                notify("PublishedDate");
-            }
-        }
-
-        string publishInfo;
-        public string PublishInfo
-        {
-            get { return publishInfo; }
-            set
-            {
-                if (publishInfo == value) { return; }
-                publishInfo = value;
-                notify("PublishInfo");
-            }
-        }
-
-        string publishedTimeOfDay;
-        public string PublishedTimeOfDay
-        {
-            get { return publishedTimeOfDay; }
-            set
-            {
-                if (publishedTimeOfDay == value) { return; }
-                publishedTimeOfDay = value;
-                notify("PublishedTimeOfDay");
-            }
-        }
-
-        string teaser;
-        public string Teaser
-        {
-            get { return teaser; }
-            set
-            {
-                if (teaser == value) { return; }
-                teaser = value;
-                notify("Teaser");
-            }
-        }
-
-        //added to be able to know if an article is the top article on the frontpage
-        Boolean isTopArticle;
-        public Boolean IsTopArticle
-        {
-            get { return isTopArticle; }
-            set
-            {
-                if (isTopArticle == value) { return; }
-                isTopArticle = value;
-                notify("IsTopArticle");
-            }
-        }
-
-
-        ImageSource imagePlaceholderBig;
-        public ImageSource ImagePlaceholderBig
-        {
-            get { return imagePlaceholderBig; }
-            set
-            {
-                if (imagePlaceholderBig == value) { return; }
-                imagePlaceholderBig = value;
-                notify("ImagePlaceholderBig");
-            }
-        }
-
-        ImageSource imagePlaceholderSmall;
-        public ImageSource ImagePlaceholderSmall
-        {
-            get { return imagePlaceholderSmall; }
-            set
-            {
-                if (imagePlaceholderSmall == value) { return; }
-                imagePlaceholderSmall = value;
-                notify("ImagePlaceholderSmall");
-            }
-        }
-
-        ImageSource imageTransparentSmall;
-        public ImageSource ImageTransparentSmall
-        {
-            get { return imageTransparentSmall; }
-            set
-            {
-                if (imageTransparentSmall == value) { return; }
-                imageTransparentSmall = value;
-                notify("ImageTransparentSmall");
-            }
-        }
-
-        ArticleImage articleImage;
-        public ArticleImage ArticleImage
-        {
-            get { return articleImage; }
-            set
-            {
-                if (articleImage == value) { return; }
-                articleImage = value;
-                notify("ArticleImage");
-            }
-        }
-
-        ArticleImage frontPageImage;
-        public ArticleImage FrontPageImage
-        {
-            get { return frontPageImage; }
-            set
-            {
-                if (frontPageImage == value) { return; }
-                frontPageImage = value;
-                notify("FrontPageImage");
-            }
-        }
-
-
-
-        ObservableCollection<Article> relatedArticles;
-        public ObservableCollection<Article> RelatedArticles
-        {
-            get { return relatedArticles; }
-            set
-            {
-                if (relatedArticles == value) { return; }
-                relatedArticles = value;
-                notify("RelatedArticles");
-            }
-        }
-
-        public OldArticle() {
-            //title = "";
-            //contentURL = "";
-            //bodyText = "";
-            //homeSectionName = "";
-            //publishInfo = "";
-            //teaser = "";
-            imagePlaceholderBig = ImageSource.FromFile("imagePlaceholderBig.png");
-            imagePlaceholderSmall = ImageSource.FromFile("imagePlaceholderSmall.png");
-            imageTransparentSmall = ImageSource.FromFile("imageTransparentSmall.png");
-            isTopArticle = false;
-            relatedArticles = new ObservableCollection<Article>();
-        }
-
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            protected void notify(string propName)
-            {
-                if(this.PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(propName));
-                }
-            }
-
-        public int CompareTo(object article)
-        {
-            Article that = (Article)article;
-            return this.ContentURL.CompareTo(that.contentUrl);
-        }
+        //public void addFieldsFromAnotherArticle(Article article)
+        //{
+            //image = article.image;
+            //desktopUrl = article.desktopUrl;
+            //homeSectionName = article.homeSectionName;
+            //contentUrl = article.contentUrl;
+            //titles = article.titles;
+            //teasers = article.teasers;
+            //homeSectionId = article.homeSectionId;
+            //publishedDate = article.publishedDate;
+            //locked = article.locked;
+            //isTopArticle = article.isTopArticle;
+            //inlineImages = article.inlineImages;
+            //metadata = article.metadata;
+            //breakingNews = article.breakingNews;
+            //partner = article.partner;
+            //bodyText = article.bodyText;
+            //c_name = article.c_name;
+            //c_category = article.c_category;
+            //tags = article.tags;
+            //relatedArticles = article.relatedArticles;
+            //topImages = article.topImages;
+            //video = article.video;
+            //quoteBoxes = article.quoteBoxes;
+            //reviewBoxes = article.reviewBoxes;
+            //updateInfo = article.updateInfo;
+            //publishData = article.publishData;
+            //lastModified = article.lastModified;
+            //id = article.id;
+        //}
     }
+
+
+    /// <summary>
+    /// JSON Generated class that is used in Article
+    /// </summary>
+    public class Titles
+    {
+        public string DEFAULT { get; set; }
+        public object KICKER { get; set; }
+        public string FRONTPAGE { get; set; }
+    }
+
+    /// <summary>
+    /// JSON Generated class that is used in Article
+    /// </summary>
+    public class Teasers
+    {
+        public string DEFAULT { get; set; }
+        public string FRONTPAGE { get; set; }
+    }
+
+    /// <summary>
+    /// JSON Generated class that is used in Article
+    /// </summary>
+    public class Metadata
+    {
+        public string sectionDisplayName { get; set; }
+        public string c_name { get; set; }
+        public string c_category { get; set; }
+        public string color { get; set; }
+    }
+
+    /// <summary>
+    /// JSON Generated class that is used in Article
+    /// </summary>
+    public class Teaser
+    {
+        public string DEFAULT { get; set; }
+        public string FRONTPAGE { get; set; }
+    }
+
+    /// <summary>
+    /// JSON Generated class that is used in Article
+    /// </summary>
+    public class RelatedArticle
+    {
+        public string url { get; set; }
+        public string title { get; set; }
+        public string sectionName { get; set; }
+        public string publishedTime { get; set; }
+        public Teaser teaser { get; set; }
+        public bool locked { get; set; }
+    }
+
+    /// <summary>
+    /// JSON Generated class that is used in Article
+    /// </summary>
+    public class PublishData
+    {
+        public List<object> authors { get; set; }
+        public string publishInfo { get; set; }
+        public string publishedTime { get; set; }
+        public string publishedTimeFormatted { get; set; }
+
+    }
+
 }

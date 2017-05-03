@@ -17,10 +17,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Database\IContentAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ModelControllers\ArticleController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ModelControllers\StateController.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Article.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Grouping.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\ArticleImage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Model.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Images.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Article.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AllArticlesView.xaml.cs">
       <DependentUpon>AllArticlesView.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -67,7 +66,7 @@
       <DependentUpon>MasterDetailView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\TemplateSelectors\RelatedArticleTemplateSelector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\TemplateSelectors\RelatedArticlesTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\SavedArticlesView.xaml.cs">
       <DependentUpon>SavedArticlesView.xaml</DependentUpon>
       <SubType>Code</SubType>

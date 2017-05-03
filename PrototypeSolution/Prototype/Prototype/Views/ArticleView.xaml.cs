@@ -35,7 +35,7 @@ namespace Prototype.Views
         {
             InitializeComponent();
 
-            listView.ItemTemplate = new RelatedArticleTemplateSelector(stateController, this);
+            listView.ItemTemplate = new RelatedArticlesTemplateSelector(stateController, this);
 
             this.stateController = stateController;
             getArticleDetails(articleToDisplay);

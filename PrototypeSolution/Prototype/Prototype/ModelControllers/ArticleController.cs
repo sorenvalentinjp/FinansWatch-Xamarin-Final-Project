@@ -33,7 +33,7 @@ namespace Prototype.ModelControllers
         {
             isRefreshingLatestArticles(true);
 
-            IList<Article> articles = createArticlesFromJson(await contentAPI.downloadLatestArticles());
+            IList<Article> articles = deserializeArticlesFromJson(await contentAPI.downloadLatestArticles());
 
             var sortedArticles = from article in articles
                                  orderby article.publishedDateTime descending
@@ -50,35 +50,13 @@ namespace Prototype.ModelControllers
         {
             isRefreshingFrontPage(true);
 
-            IList<Article> articles = createArticlesFromJson(await contentAPI.downloadFrontPageArticles());
+            IList<Article> articles = deserializeArticlesFromJson(await contentAPI.downloadFrontPageArticles());
            
             frontPageArticlesAreReady(articles);
             isRefreshingFrontPage(false);
         }
 
-        private IList<Article> createArticlesFromJson(string json)
-        {
-            //var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = "dd-MM-yyyy HH:mm" };
-            IList<Article> articles = JsonConvert.DeserializeObject<List<Article>>(json);
 
-            foreach (var article in articles)
-            {
-                stripArticle(article);
-                try
-                {
-                    DateTime publishedDateTime = DateTime.ParseExact(article.publishedDate, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
-                    article.publishedDateTime= publishedDateTime;
-                }
-                catch (Exception) { }
-            }
-
-            if(articles.Count > 0)
-            {
-                articles[0].isTopArticle = true;
-            }           
-
-            return articles;
-        }
 
         public async Task<IList<Article>> getRelatedArticlesAsync(Article article)
         {
@@ -92,21 +70,46 @@ namespace Prototype.ModelControllers
 
         public async Task<Article> getArticleDetailsAsync(Article article)
         {
+            return deserializeArticle(await contentAPI.downloadArticle(article.contentUrl));
 
-            ////Dates
-            ////String publishedDateString = json.publishData.publishedTime;
-            ////DateTime publishedDate = DateTime.ParseExact(publishedDateString, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
-
-            article = JsonConvert.DeserializeObject<Article>(await contentAPI.downloadArticle(article.contentUrl));
-
-            article = setArticleFields(article);
-
-            return article;
         }
 
         public async Task<Article> getArticleDetailsAsync(string contentUrl)
+        {
+            return deserializeArticle(await contentAPI.downloadArticle(contentUrl));
+
+        }
+
+
+        //Deserialize methods
+        private IList<Article> deserializeArticlesFromJson(string json)
+        {
+            //var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = "dd-MM-yyyy HH:mm" };
+            IList<Article> articles = JsonConvert.DeserializeObject<List<Article>>(json);
+
+            foreach (var article in articles)
+            {
+                stripArticle(article);
+                try
+                {
+                    DateTime publishedDateTime = DateTime.ParseExact(article.publishedDate, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
+                    article.publishedDateTime = publishedDateTime;
+                }
+                catch (Exception) { }
+            }
+
+            if (articles.Count > 0)
+            {
+                articles[0].isTopArticle = true;
+            }
+
+            return articles;
+        }
+
+
+        public Article deserializeArticle(string json)
         {        
-            var article = JsonConvert.DeserializeObject<Article>(await contentAPI.downloadArticle(contentUrl));
+            var article = JsonConvert.DeserializeObject<Article>(json);
 
             article = setArticleFields(article);
 
@@ -114,6 +117,9 @@ namespace Prototype.ModelControllers
 
         }
 
+
+
+        //Helper methods
         private Article setArticleFields(Article article)
         {
             //article.addFieldsFromAnotherArticle(newArt);
