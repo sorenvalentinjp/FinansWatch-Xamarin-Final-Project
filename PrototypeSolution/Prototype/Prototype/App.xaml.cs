@@ -3,6 +3,7 @@ using Prototype.Models;
 using Prototype.Views;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -12,15 +13,13 @@ namespace Prototype
 {
 	public partial class App : Application
 	{
-        public StateController StateController { get; set; }
+        public static INavigation Navigation { get; set; }
 
         public App ()
 		{
 			InitializeComponent();
 
-            this.StateController = new StateController();
-
-            MainPage = new Views.MasterDetailView(this.StateController);
+            MainPage = new MasterDetailView(new StateController());
 		}
 
 		protected override void OnStart ()

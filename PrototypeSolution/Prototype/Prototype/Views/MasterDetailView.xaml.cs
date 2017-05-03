@@ -24,6 +24,8 @@ namespace Prototype.Views
             this.frontPageView = new NavigationPage(new FrontPageView(this.StateController));
 
             Detail = this.frontPageView;
+
+            if (App.Navigation == null) App.Navigation = Detail.Navigation;
         }
 
         private void FrontPageAction(object sender, EventArgs e)
