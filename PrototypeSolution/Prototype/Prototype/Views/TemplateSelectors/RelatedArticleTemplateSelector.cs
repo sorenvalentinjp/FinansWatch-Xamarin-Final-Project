@@ -13,19 +13,19 @@ namespace Prototype.Views.TemplateSelectors
     /// </summary>
     public class MediumArticleTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate ArticleMediumTemplate { get; set; }
-        public DataTemplate ArticleMediumNoImageTemplate { get; set; }
+        public DataTemplate RelatedArticleCell { get; set; }
+        public DataTemplate RelatedArticleCellNoImage { get; set; }
 
         public MediumArticleTemplateSelector(StateController stateController, ContentPage page)
         {
-            this.ArticleMediumTemplate = new DataTemplate(() =>
+            this.RelatedArticleCell = new DataTemplate(() =>
             {
-                return new MediumCellRelatedArticle(stateController, page);
+                return new RelatedArticleCell(stateController, page);
             });
 
-            this.ArticleMediumNoImageTemplate = new DataTemplate(() =>
+            this.RelatedArticleCellNoImage = new DataTemplate(() =>
             {
-                return new MediumCellRelatedArticleNoImage(stateController, page);
+                return new RelatedArticleCellNoImage(stateController, page);
             });            
         }
 
@@ -34,9 +34,9 @@ namespace Prototype.Views.TemplateSelectors
             Article article = (Article)item;
 
             if (article.topImage == null)
-                return ArticleMediumNoImageTemplate;
+                return RelatedArticleCellNoImage;
             else
-                return ArticleMediumTemplate;
+                return RelatedArticleCell;
         }
     }
 }

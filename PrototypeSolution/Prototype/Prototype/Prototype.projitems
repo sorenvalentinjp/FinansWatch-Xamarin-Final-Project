@@ -46,12 +46,12 @@
       <DependentUpon>MediumCellNoImage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\MediumCellRelatedArticleNoImage.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\RelatedArticleCellNoImage.xaml.cs">
       <SubType>Code</SubType>
-      <DependentUpon>MediumCellRelatedArticleNoImage.xaml</DependentUpon>
+      <DependentUpon>RelatedArticleCellNoImage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\MediumCellRelatedArticle.xaml.cs">
-      <DependentUpon>MediumCellRelatedArticle.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\RelatedArticleCell.xaml.cs">
+      <DependentUpon>RelatedArticleCell.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\CustomRenderers\HtmlFormattedLabel.cs" />
@@ -67,7 +67,7 @@
       <DependentUpon>MasterDetailView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\TemplateSelectors\MediumArticleTemplateSelector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\TemplateSelectors\RelatedArticleTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\SavedArticlesView.xaml.cs">
       <DependentUpon>SavedArticlesView.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -87,7 +87,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Cells\MediumCellRelatedArticleNoImage.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Cells\RelatedArticleCellNoImage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -165,7 +165,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Cells\MediumCellRelatedArticle.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Cells\RelatedArticleCell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

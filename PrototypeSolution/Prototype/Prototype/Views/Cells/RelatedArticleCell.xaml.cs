@@ -12,12 +12,12 @@ using Xamarin.Forms.Xaml;
 namespace Prototype.Views.Cells
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MediumCellRelatedArticle : MR.Gestures.ViewCell
+    public partial class RelatedArticleCell : MR.Gestures.ViewCell
     {
         private StateController stateController;
         private ContentPage page;
 
-        public MediumCellRelatedArticle(StateController stateController, ContentPage page)
+        public RelatedArticleCell(StateController stateController, ContentPage page)
         {
             InitializeComponent();
             this.stateController = stateController;
