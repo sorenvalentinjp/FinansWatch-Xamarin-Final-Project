@@ -18,7 +18,7 @@ namespace Prototype.iOS.CustomRenderers
             base.OnElementChanged(e);
 
             var view = (HtmlFormattedLabel)Element;
-            if (view == null) return;
+            if (view == null || view.Text == null) return;
 
             var attr = new NSAttributedStringDocumentAttributes();
             var nsError = new NSError();
