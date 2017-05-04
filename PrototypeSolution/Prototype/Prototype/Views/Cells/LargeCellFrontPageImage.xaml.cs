@@ -15,9 +15,9 @@ namespace Prototype.Views.Cells
 	public partial class LargeCellFrontPageImage : MR.Gestures.ViewCell
 	{
         private readonly StateController _stateController;
-        private readonly ContentPage _page;
+        private readonly Page _page;
 
-        public LargeCellFrontPageImage(StateController stateController, ContentPage page)
+        public LargeCellFrontPageImage(StateController stateController, Page page)
 		{
 			InitializeComponent();
             this._stateController = stateController;

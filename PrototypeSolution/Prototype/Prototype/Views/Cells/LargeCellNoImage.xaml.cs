@@ -15,9 +15,9 @@ namespace Prototype.Views.Cells
 	public partial class LargeCellNoImage : MR.Gestures.ViewCell
 	{
         private readonly StateController _stateController;
-        private readonly ContentPage _page;
+        private readonly Page _page;
 
-        public LargeCellNoImage(StateController stateController, ContentPage page)
+        public LargeCellNoImage(StateController stateController, Page page)
 		{
 			InitializeComponent();
             this._stateController = stateController;

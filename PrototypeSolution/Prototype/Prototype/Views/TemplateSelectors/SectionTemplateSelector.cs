@@ -18,7 +18,7 @@ namespace Prototype.Views.TemplateSelectors
         public DataTemplate MediumCellFrontPageImageTemplate { get; set; }
         public DataTemplate MediumCellNoImageTemplate { get; set; }
 
-        public SectionTemplateSelector(StateController stateController, ContentPage page)
+        public SectionTemplateSelector(StateController stateController, Page page)
         {
             this.MediumCellFrontPageImageTemplate = new DataTemplate(() => { return new MediumCellFrontPageImage(stateController, page); });
             this.MediumCellNoImageTemplate = new DataTemplate(() => { return new MediumCellNoImage(stateController, page); });

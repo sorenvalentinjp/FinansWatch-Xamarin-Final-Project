@@ -1,5 +1,6 @@
 ﻿using Prototype.ModelControllers;
 using System;
+using Prototype.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

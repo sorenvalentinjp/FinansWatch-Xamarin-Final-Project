@@ -15,9 +15,9 @@ namespace Prototype.Views.Cells
     public partial class MediumCellTopImage : MR.Gestures.ViewCell
     {
         private readonly StateController _stateController;
-        private readonly ContentPage _page;
+        private readonly Page _page;
 
-        public MediumCellTopImage(StateController stateController, ContentPage page)
+        public MediumCellTopImage(StateController stateController, Page page)
         {
             InitializeComponent();
             this._stateController = stateController;

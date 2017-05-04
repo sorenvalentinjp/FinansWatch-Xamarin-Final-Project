@@ -15,9 +15,9 @@ namespace Prototype.Views.Cells
 	public partial class MediumCellNoImage : MR.Gestures.ViewCell
 	{
         private readonly StateController _stateController;
-        private readonly ContentPage _page;
+        private readonly Page _page;
 
-        public MediumCellNoImage(StateController stateController, ContentPage page)
+        public MediumCellNoImage(StateController stateController, Page page)
 		{
 			InitializeComponent();
             this._stateController = stateController;

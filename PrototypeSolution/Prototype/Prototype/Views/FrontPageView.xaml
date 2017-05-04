@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.Views.FrontPageView"
+             BindingContext="{Binding ViewModel}"
              Title="FORSIDE">
 
     <!--Adds the button at the navigation bar-->
@@ -12,7 +13,8 @@
     <!--This view only contains a listview. The template is set by the created templateselector-->
     <ContentPage.Content>
         <ListView x:Name="listView" 
-                  ItemsSource="{Binding Articles}" 
+                  ItemsSource="{Binding Articles}"
+                  ItemTemplate="{Binding DataTemplate}"
                   IsPullToRefreshEnabled="True"
                   RefreshCommand="{Binding RefreshCommand}"
                   IsRefreshing="{Binding IsRefreshing}"

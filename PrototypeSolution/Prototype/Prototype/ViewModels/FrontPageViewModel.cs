@@ -5,11 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Prototype.ViewModels
 {
-    class FrontPageViewModel : INotifyPropertyChanged
+    public class FrontPageViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -51,16 +52,41 @@ namespace Prototype.ViewModels
 
         private readonly StateController _stateController;
 
-        public FrontPageViewModel(StateController stateController)
+        public FrontPageViewModel(StateController stateController, Page page)
         {
-            //DataTemplate = new SectionTemplateSelector(stateController);
-            
             this._stateController = stateController;
-            //this.stateController.ArticleController.isRefreshingFrontPage += IsRefreshingChanged;
-            //this.stateController.ArticleController.frontPageArticlesAreReady += FrontPageArticlesAreReady;
-            this._stateController.GetFrontPageArticles();            
+            IsRefreshing = false;
+            this._stateController.ArticleController.IsRefreshingFrontPage += IsRefreshingChanged;
+            this._stateController.ArticleController.FrontPageArticlesAreReady += FrontPageArticlesAreReady;
+            DataTemplate = new SectionTemplateSelector(_stateController, page);
+            this._stateController.GetFrontPageArticles();
+         
         }
 
+        private void FrontPageArticlesAreReady(IList<Article> newArticles)
+        {
+            Articles = newArticles;
+        }
+
+        //IsRefreshing is used to display an 'busy' icon while the listview is refreshing its content.
+        private void IsRefreshingChanged(bool isRefreshing)
+        {
+            IsRefreshing = isRefreshing;
+        }
+
+        /// <summary>
+        /// When the user refreshed the view, this.articles is updated.
+        /// </summary>
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    this._stateController.GetFrontPageArticles();
+                });
+            }
+        }
 
         protected void Notify(string propName)
         {

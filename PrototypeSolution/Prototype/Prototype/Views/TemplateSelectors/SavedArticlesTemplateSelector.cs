@@ -14,7 +14,7 @@ namespace Prototype.Views.TemplateSelectors
         public DataTemplate MediumCellTopImageTemplate { get; set; }
         public DataTemplate MediumCellNoImageTemplate { get; set; }
 
-        public SavedArticlesTemplateSelector(StateController stateController, ContentPage page)
+        public SavedArticlesTemplateSelector(StateController stateController, Page page)
         {
             this.MediumCellFrontPageImageTemplate = new DataTemplate(() => { return new MediumCellFrontPageImage(stateController, page); });
             this.MediumCellTopImageTemplate = new DataTemplate(() => { return new MediumCellTopImage(stateController, page); });
