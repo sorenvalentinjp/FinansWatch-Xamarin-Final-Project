@@ -13,11 +13,8 @@ namespace Prototype.Views
         public FrontPageView(StateController stateController)
 		{
 			InitializeComponent();
-
-            var viewModel = new FrontPageViewModel(stateController, this);
-
-		    BindingContext = viewModel;
-            
+            FrontPageViewModel vm = new FrontPageViewModel(stateController, this);
+		    BindingContext = vm;
             ListViewHelper.DisableItemSelectedAction(listView);
         }     
     }
