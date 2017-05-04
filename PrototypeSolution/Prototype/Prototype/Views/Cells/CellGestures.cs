@@ -1,5 +1,6 @@
 ﻿using Prototype.ModelControllers;
 using Prototype.Models;
+using Prototype.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Prototype.Views.Cells
     {
         public static async void TappedGesture(StateController stateController, Article article)
         {
-            var newPage = new ArticleView(stateController, article);
+            var newPage = new ArticleView(new ArticleViewModel(stateController, article));
             NavigationPage.SetBackButtonTitle(newPage, "");
             await App.Navigation.PushAsync(newPage, true);
         }

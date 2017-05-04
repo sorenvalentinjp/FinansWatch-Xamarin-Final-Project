@@ -20,13 +20,13 @@ namespace Prototype.Views
     public partial class ArticleView : ContentPage
     {
 
-        public ArticleView(StateController stateController, Article articleToDisplay)
+        public ArticleView(ArticleViewModel viewModel)
         {
             InitializeComponent();
 
             ListViewHelper.DisableItemSelectedAction(listView);
 
-            BindingContext = new ArticleViewModel(stateController, articleToDisplay);
+            BindingContext = viewModel;
         }
     }
 }
