@@ -15,8 +15,7 @@ namespace Prototype.Database
         {
             //Initialize httpclients using variables stored in the Constants class
             _client = new HttpClient();
-            var authData = $"{Constants.ContentApiUsername}:{Constants.ContentApIkey}";
-            //var authData = string.Format("{0}:{1}", Constants.contentAPIUsername, Constants.contentAPIkey);
+            var authData = $"{Constants.ContentApiUsername}:{Constants.ContentApiKey}";
             var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
             _client.MaxResponseContentBufferSize = 256000;
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
