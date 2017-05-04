@@ -33,7 +33,7 @@ namespace Prototype.Views
 		{
 		    InitializeComponent();
 
-            listView.ItemTemplate = new SavedArticlesTemplateSelector(stateController, this);
+            listView.ItemTemplate = new SavedArticlesTemplateSelector(stateController);
 
             DisableItemSelectedAction();
             BindingContext = this;

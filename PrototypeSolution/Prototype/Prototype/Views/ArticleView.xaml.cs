@@ -26,7 +26,7 @@ namespace Prototype.Views
 
             ListViewHelper.DisableItemSelectedAction(listView);
 
-            BindingContext = new ArticleViewModel(stateController, articleToDisplay, this);
+            BindingContext = new ArticleViewModel(stateController, articleToDisplay);
         }
     }
 }

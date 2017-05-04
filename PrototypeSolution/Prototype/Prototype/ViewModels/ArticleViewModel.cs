@@ -38,10 +38,10 @@ namespace Prototype.ViewModels
             }
         }
 
-        public ArticleViewModel(StateController stateController, Article articleToDisplay, Page page)
+        public ArticleViewModel(StateController stateController, Article articleToDisplay)
         {
             this._stateController = stateController;
-            DataTemplate = new RelatedArticlesTemplateSelector(_stateController, page);
+            DataTemplate = new RelatedArticlesTemplateSelector(_stateController);
 
             GetArticleDetails(articleToDisplay);
         }

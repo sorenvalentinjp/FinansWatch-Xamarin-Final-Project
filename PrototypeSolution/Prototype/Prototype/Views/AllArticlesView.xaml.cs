@@ -10,13 +10,12 @@ namespace Prototype.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AllArticlesView : ContentPage
     {
-        public AllArticlesView(StateController stateController)
+        public AllArticlesView(AllArticlesViewModel viewModel)
         {
 			InitializeComponent();
-            AllArticlesViewModel vm = new AllArticlesViewModel(stateController, this);
-            listView.ItemTemplate = new DataTemplate(() => new DateTimeCell(stateController, this));
-            listView.GroupHeaderTemplate = new DataTemplate(() => new DateTimeCellGroupHeader());
-            BindingContext = vm;
+
+            BindingContext = viewModel;
+
             ListViewHelper.DisableItemSelectedAction(listView);
         }
     }

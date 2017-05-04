@@ -10,14 +10,12 @@ namespace Prototype.Views
     public partial class FrontPageView : ContentPage
     {
 
-        public FrontPageView(StateController stateController)
+        public FrontPageView(FrontPageViewModel viewModel)
 		{
 			InitializeComponent();
 
-            var viewModel = new FrontPageViewModel(stateController, this);
-
 		    BindingContext = viewModel;
-            
+
             ListViewHelper.DisableItemSelectedAction(listView);
         }     
     }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-
+using Prototype.ViewModels;
 using Xamarin.Forms;
 
 namespace Prototype
@@ -19,10 +19,9 @@ namespace Prototype
 		{
 			InitializeComponent();
 
-		    var masterDetail = new NavigationPage(new MasterDetailView(new StateController()));
-		    NavigationPage.SetBackButtonTitle(masterDetail, "");
+		    MainPage = new NavigationPage(new MasterDetailView(new StateController()));
 
-		    MainPage = masterDetail;
+		    NavigationPage.SetBackButtonTitle(MainPage, "");
 
             if (App.Navigation == null)
             {

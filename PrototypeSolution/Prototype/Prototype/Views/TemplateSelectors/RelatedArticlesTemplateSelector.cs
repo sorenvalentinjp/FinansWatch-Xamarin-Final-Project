@@ -16,10 +16,10 @@ namespace Prototype.Views.TemplateSelectors
         public DataTemplate MediumCellTopImageTemplate { get; set; }
         public DataTemplate MediumCellNoImageTemplate { get; set; }
 
-        public RelatedArticlesTemplateSelector(StateController stateController, Page page)
+        public RelatedArticlesTemplateSelector(StateController stateController)
         {
-            this.MediumCellTopImageTemplate = new DataTemplate(() => { return new MediumCellTopImage(stateController, page); });
-            this.MediumCellNoImageTemplate = new DataTemplate(() => { return new MediumCellNoImage(stateController, page); });            
+            this.MediumCellTopImageTemplate = new DataTemplate(() => new MediumCellTopImage(stateController));
+            this.MediumCellNoImageTemplate = new DataTemplate(() => new MediumCellNoImage(stateController));            
         }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)

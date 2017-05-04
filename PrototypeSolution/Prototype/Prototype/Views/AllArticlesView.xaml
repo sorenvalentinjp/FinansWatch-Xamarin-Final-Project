@@ -12,6 +12,8 @@
         <ListView x:Name ="listView"
                   ItemsSource="{Binding Grouped}"
                   IsRefreshing="{Binding IsRefreshing}"
+                  ItemTemplate="{Binding DataTemplate}"
+                  GroupHeaderTemplate="{Binding DataTemplateGroupHeader}"
                   IsPullToRefreshEnabled="True"
                   RefreshCommand="{Binding RefreshCommand}"
                   IsGroupingEnabled="true" 

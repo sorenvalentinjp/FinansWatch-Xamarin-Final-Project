@@ -18,12 +18,12 @@ namespace Prototype.Views.TemplateSelectors
         public DataTemplate MediumCellFrontPageImageTemplate { get; set; }
         public DataTemplate MediumCellNoImageTemplate { get; set; }
 
-        public SectionTemplateSelector(StateController stateController, Page page)
+        public SectionTemplateSelector(StateController stateController)
         {
-            this.MediumCellFrontPageImageTemplate = new DataTemplate(() => { return new MediumCellFrontPageImage(stateController, page); });
-            this.MediumCellNoImageTemplate = new DataTemplate(() => { return new MediumCellNoImage(stateController, page); });
-            this.LargeCellFrontPageImageTemplate = new DataTemplate(() => { return new LargeCellFrontPageImage(stateController, page); });
-            this.LargeCellNoImageTemplate = new DataTemplate(() => { return new LargeCellNoImage(stateController, page); });
+            this.MediumCellFrontPageImageTemplate = new DataTemplate(() => new MediumCellFrontPageImage(stateController));
+            this.MediumCellNoImageTemplate = new DataTemplate(() => new MediumCellNoImage(stateController));
+            this.LargeCellFrontPageImageTemplate = new DataTemplate(() => new LargeCellFrontPageImage(stateController));
+            this.LargeCellNoImageTemplate = new DataTemplate(() => new LargeCellNoImage(stateController));
         }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)

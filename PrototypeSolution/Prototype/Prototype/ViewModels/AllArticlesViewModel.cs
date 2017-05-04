@@ -3,6 +3,7 @@ using Prototype.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
+using Prototype.Views.Cells;
 using Xamarin.Forms;
 
 namespace Prototype.ViewModels
@@ -36,14 +37,44 @@ namespace Prototype.ViewModels
             }
         }
 
-        public AllArticlesViewModel(StateController stateController, Page page)
+        private DataTemplate _dataTemplateGroupHeader;
+        public DataTemplate DataTemplateGroupHeader
+        {
+            get { return _dataTemplateGroupHeader; }
+            set
+            {
+                if (_dataTemplateGroupHeader == value) { return; }
+                _dataTemplateGroupHeader = value;
+                Notify("DataTemplateGroupHeader");
+            }
+        }
+
+        private DataTemplate _dataTemplate;
+        public DataTemplate DataTemplate
+        {
+            get { return _dataTemplate; }
+            set
+            {
+                if (_dataTemplate == value) { return; }
+                _dataTemplate = value;
+                Notify("DataTemplate");
+            }
+        }
+
+        public AllArticlesViewModel(StateController stateController)
         {
             this._stateController = stateController;
             IsRefreshing = false;
             this._stateController.ArticleController.IsRefreshingLatestArticles += IsRefreshingChanged;
             this._stateController.ArticleController.LatestArticlesAreReady += LatestArticlesAreReady;
             this._stateController.ArticleController.GetLatestArticlesAsync();
+
+            this.DataTemplate = new DataTemplate(() => new DateTimeCell(stateController));
+            this.DataTemplateGroupHeader = new DataTemplate(() => new DateTimeCellGroupHeader());
+
         }
+
+
 
         private void LatestArticlesAreReady(List<Grouping<string, Article>> groupedArticles)
         {
