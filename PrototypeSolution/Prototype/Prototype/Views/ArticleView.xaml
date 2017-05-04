@@ -3,8 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:customRenderers="clr-namespace:Prototype.Views.CustomRenderers"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:converters="clr-namespace:Prototype.Views.Converters;"
              x:Class="Prototype.Views.ArticleView"
-             Title="{Binding homeSectionName}">
+             Title="{Binding Article.homeSectionName}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:NullToBooleanConverter x:Key="nullToBooleanConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="ALL"/>
@@ -13,20 +20,24 @@
     <ContentPage.Content>
 
         <ListView x:Name="listView"
-                ItemsSource="{Binding relatedDetailedArticles}"
+                ItemsSource="{Binding Article.relatedDetailedArticles}"
+                ItemTemplate="{Binding DataTemplate}"
                 HasUnevenRows="True"
                 CachingStrategy="RecycleElement">
             <ListView.Header>
                 <StackLayout>
-                    <ffimageloading:CachedImage x:Name="imageView"
-                            DownsampleToViewSize="true" 
-                            Source="{Binding topImage.small.url}"
-                            HorizontalOptions="Fill"/>
-                    <Label x:Name="imageCaptionLabel" Text="{Binding topImage.imageCaption}" Margin="10,0,30,10" FontSize="Micro"/>
-                    <Label Text="{Binding titles.DEFAULT}" Margin="10,0,30,0" FontSize="Large" FontAttributes="Bold"/>
-                    <customRenderers:HtmlFormattedLabel Text="{Binding teasers.DEFAULT}" Margin="10,10,30,0" FontSize="Medium"/>
-                    <Label Text="{Binding publishData.publishInfo}" Margin="10,10,30,0" FontSize="Micro" />
-                    <customRenderers:HtmlFormattedLabel Text="{Binding bodyText}" Margin="10,15,20,10" FontSize="Small"/>
+                    <ffimageloading:CachedImage DownsampleToViewSize="true" 
+                            Source="{Binding Article.topImage.small.url}"
+                            HorizontalOptions="Fill"
+                            IsVisible="{Binding Article.topImage, Converter={StaticResource nullToBooleanConverter}}"/>
+                    <Label Text="{Binding Article.topImage.imageCaption}" 
+                           Margin="10,0,30,10" 
+                           FontSize="Micro"
+                           IsVisible="{Binding Article.topImage, Converter={StaticResource nullToBooleanConverter}}"/>
+                    <Label Text="{Binding Article.titles.DEFAULT}" Margin="10,0,30,0" FontSize="Large" FontAttributes="Bold"/>
+                    <customRenderers:HtmlFormattedLabel Text="{Binding Article.teasers.DEFAULT}" Margin="10,10,30,0" FontSize="Medium"/>
+                    <Label Text="{Binding Article.publishData.publishInfo}" Margin="10,10,30,0" FontSize="Micro" />
+                    <customRenderers:HtmlFormattedLabel Text="{Binding Article.bodyText}" Margin="10,15,20,10" FontSize="Small"/>
                     <BoxView HeightRequest=".5" BackgroundColor="LightGray"/>
                 </StackLayout>
             </ListView.Header>

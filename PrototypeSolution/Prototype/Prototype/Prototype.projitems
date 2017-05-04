@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Grouping.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Images.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Article.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ArticleViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FrontPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AllArticlesView.xaml.cs">
       <DependentUpon>AllArticlesView.xaml</DependentUpon>
@@ -58,6 +59,7 @@
       <DependentUpon>MediumCellTopImage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Converters\NullToBooleanConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\CustomRenderers\HtmlFormattedLabel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\FrontPageView.xaml.cs">
       <DependentUpon>FrontPageView.xaml</DependentUpon>
