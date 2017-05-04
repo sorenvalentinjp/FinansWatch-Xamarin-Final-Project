@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
-using Android.Opengl;
 using Xamarin.Forms;
 
 namespace Prototype.Views.Converters
