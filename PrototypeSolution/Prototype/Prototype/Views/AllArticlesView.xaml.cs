@@ -18,28 +18,28 @@ namespace Prototype.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AllArticlesView : ContentPage, INotifyPropertyChanged
     {
-        private StateController StateController;
+        private readonly StateController _stateController;
 
-        private IList<Grouping<string, Article>> grouped;
+        private IList<Grouping<string, Article>> _grouped;
         public IList<Grouping<string, Article>> Grouped
         {
-            get { return grouped; }
+            get { return _grouped; }
             set
             {
-                if (grouped == value) { return; }
-                grouped = value;
+                if (_grouped == value) { return; }
+                _grouped = value;
                 Notify("Grouped");
             }
         }
 
-        private bool isRefreshing;
+        private bool _isRefreshing;
         public bool IsRefreshing
         {
-            get { return isRefreshing; }
+            get { return _isRefreshing; }
             set
             {
-                if (isRefreshing == value) { return; }
-                isRefreshing = value;
+                if (_isRefreshing == value) { return; }
+                _isRefreshing = value;
                 Notify("IsRefreshing");
             }
         }
@@ -48,15 +48,15 @@ namespace Prototype.Views
 		{
 			InitializeComponent ();
 
-            listView.ItemTemplate = new DataTemplate(() => { return new DateTimeCell(this.StateController, this); });
+            listView.ItemTemplate = new DataTemplate(() => new DateTimeCell(this._stateController, this));
 
-            listView.GroupHeaderTemplate = new DataTemplate(() => { return new DateTimeCellGroupHeader(); });
+            listView.GroupHeaderTemplate = new DataTemplate(() => new DateTimeCellGroupHeader());
 
             BindingContext = this;
-            this.StateController = stateController;
-            this.StateController.ArticleController.IsRefreshingLatestArticles += ArticleController_isRefreshing;
-            this.StateController.ArticleController.LatestArticlesAreReady += ArticleController_latestArticlesAreReady;            
-            this.StateController.ArticleController.GetLatestArticlesAsync();
+            this._stateController = stateController;
+            this._stateController.ArticleController.IsRefreshingLatestArticles += ArticleController_isRefreshing;
+            this._stateController.ArticleController.LatestArticlesAreReady += ArticleController_latestArticlesAreReady;            
+            this._stateController.ArticleController.GetLatestArticlesAsync();
             DisableItemSelectedAction();
         }
 
@@ -91,7 +91,7 @@ namespace Prototype.Views
         private async void listView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var tappedArticle = (Article)e.Item;
-            await Navigation.PushModalAsync(new NavigationPage(new ArticleView(this.StateController, tappedArticle)), true);
+            await Navigation.PushModalAsync(new NavigationPage(new ArticleView(this._stateController, tappedArticle)), true);
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Prototype.Views
             {
                 return new Command(() =>
                 {
-                    this.StateController.ArticleController.GetLatestArticlesAsync();
+                    this._stateController.ArticleController.GetLatestArticlesAsync();
                 });
             }
         }

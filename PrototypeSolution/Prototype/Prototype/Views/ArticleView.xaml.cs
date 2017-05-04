@@ -18,15 +18,15 @@ namespace Prototype.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ArticleView : ContentPage, INotifyPropertyChanged
     {
-        private StateController stateController;
-        private Article article;
+        private readonly StateController _stateController;
+        private Article _article;
         public Article Article
         {
-            get { return article; }
+            get { return _article; }
             set
             {
-                if (article == value) { return; }
-                article = value;
+                if (_article == value) { return; }
+                _article = value;
                 Notify("Article");
             }
         }
@@ -37,19 +37,19 @@ namespace Prototype.Views
 
             listView.ItemTemplate = new RelatedArticlesTemplateSelector(stateController, this);
 
-            this.stateController = stateController;
-            getArticleDetails(articleToDisplay);
+            this._stateController = stateController;
+            GetArticleDetails(articleToDisplay);
 
             DisableItemSelectedAction();
             
             
         }
 
-        private async void getArticleDetails(Article articleToDisplay)
+        private async void GetArticleDetails(Article articleToDisplay)
         {
             if (articleToDisplay.bodyText == "")
             {
-                articleToDisplay = await this.stateController.GetArticleDetails(articleToDisplay);
+                articleToDisplay = await this._stateController.GetArticleDetails(articleToDisplay);
             }
 
             //If articledetails havent already been fetched, await the code above to get the data, then check if the imagesource is null.
@@ -59,7 +59,7 @@ namespace Prototype.Views
                 imageCaptionLabel.IsVisible = false;
             } 
 
-            articleToDisplay.relatedDetailedArticles = await this.stateController.GetRelatedArticles(articleToDisplay);
+            articleToDisplay.relatedDetailedArticles = await this._stateController.GetRelatedArticles(articleToDisplay);
             Article = articleToDisplay;
             BindingContext = Article;
         }

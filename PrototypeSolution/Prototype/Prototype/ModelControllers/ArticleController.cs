@@ -17,7 +17,7 @@ namespace Prototype.ModelControllers
 {
     public class ArticleController
     {
-        private readonly ContentApi contentApi;
+        private readonly ContentApi _contentApi;
         public event Action<IList<Article>> FrontPageArticlesAreReady;
         public event Action<List<Grouping<string, Article>>> LatestArticlesAreReady;
         public event Action<bool> IsRefreshingFrontPage;
@@ -25,14 +25,14 @@ namespace Prototype.ModelControllers
 
         public ArticleController()
         {
-            contentApi = new ContentApi();
+            _contentApi = new ContentApi();
         }
 
         public async void GetLatestArticlesAsync()
         {
             IsRefreshingLatestArticles(true);
 
-            IList<Article> articles = DeserializeArticlesFromJson(await contentApi.DownloadLatestArticles());
+            IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadLatestArticles());
 
             var sortedArticles = from article in articles
                                  orderby article.publishedDateTime descending
@@ -49,7 +49,7 @@ namespace Prototype.ModelControllers
         {
             IsRefreshingFrontPage(true);
 
-            IList<Article> articles = DeserializeArticlesFromJson(await contentApi.DownloadFrontPageArticles());
+            IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadFrontPageArticles());
            
             FrontPageArticlesAreReady(articles);
             IsRefreshingFrontPage(false);
@@ -69,13 +69,13 @@ namespace Prototype.ModelControllers
 
         public async Task<Article> GetArticleDetailsAsync(Article article)
         {
-            return DeserializeArticle(await contentApi.DownloadArticle(article.contentUrl));
+            return DeserializeArticle(await _contentApi.DownloadArticle(article.contentUrl));
 
         }
 
         public async Task<Article> GetArticleDetailsAsync(string contentUrl)
         {
-            return DeserializeArticle(await contentApi.DownloadArticle(contentUrl));
+            return DeserializeArticle(await _contentApi.DownloadArticle(contentUrl));
 
         }
 

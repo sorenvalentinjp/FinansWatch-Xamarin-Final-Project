@@ -9,17 +9,17 @@ namespace Prototype.Database
 {
     internal class ContentApi : IContentApi
     {
-        private readonly HttpClient client;
+        private readonly HttpClient _client;
 
         public ContentApi()
         {
             //Initialize httpclients using variables stored in the Constants class
-            client = new HttpClient();
-            var authData = $"{Constants.contentAPIUsername}:{Constants.contentAPIkey}";
+            _client = new HttpClient();
+            var authData = $"{Constants.ContentApiUsername}:{Constants.ContentApIkey}";
             //var authData = string.Format("{0}:{1}", Constants.contentAPIUsername, Constants.contentAPIkey);
             var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
-            client.MaxResponseContentBufferSize = 256000;
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
+            _client.MaxResponseContentBufferSize = 256000;
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Prototype.Database
         public Task<string> DownloadFrontPageArticles()
         {
             //Full url example: https://content.watchmedier.dk/api/finanswatch/content/frontpagearticles
-            var uri = new Uri(Constants.contentAPIUrl + "finanswatch/content/frontpagearticles?max=30");
+            var uri = new Uri(Constants.ContentApiUrl + "finanswatch/content/frontpagearticles?max=30");
 
             return DownloadJson(uri);
         }
@@ -54,7 +54,7 @@ namespace Prototype.Database
         public Task<string> DownloadLatestArticles()
         {
             //Full url example: "https://content.watchmedier.dk/api/finanswatch/content/latest?hoursago=168"
-            var uri = new Uri(Constants.contentAPIUrl + "finanswatch/content/latest?hoursago=168&max=100");
+            var uri = new Uri(Constants.ContentApiUrl + "finanswatch/content/latest?hoursago=168&max=100");
 
             return DownloadJson(uri);
         }
@@ -68,7 +68,7 @@ namespace Prototype.Database
         {
             try
             {
-                var response = await client.GetAsync(uri);
+                var response = await _client.GetAsync(uri);
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsStringAsync();
             }
@@ -87,7 +87,7 @@ namespace Prototype.Database
             HttpResponseMessage response = new HttpResponseMessage();
             try
             {
-                response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                response = await _client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
                 response.EnsureSuccessStatusCode();
                 response.Dispose(); //not sure if this is needed. Does it close the client or just the response message?
                 return true;

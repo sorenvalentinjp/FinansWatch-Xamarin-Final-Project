@@ -19,9 +19,10 @@ namespace Prototype
 		{
 			InitializeComponent();
 
-            MainPage = new NavigationPage(new MasterDetailView(new StateController()));
-            NavigationPage.SetBackButtonTitle(MainPage, "");
+		    var masterDetail = new NavigationPage(new MasterDetailView(new StateController()));
+		    NavigationPage.SetBackButtonTitle(masterDetail, "");
 
+		    MainPage = masterDetail;
 
             if (App.Navigation == null)
             {

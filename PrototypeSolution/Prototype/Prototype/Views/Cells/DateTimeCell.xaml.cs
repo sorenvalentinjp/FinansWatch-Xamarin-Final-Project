@@ -14,8 +14,8 @@ namespace Prototype.Views.Cells
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DateTimeCell : MR.Gestures.ViewCell
 	{
-        private StateController stateController;
-        private ContentPage page;
+        private readonly StateController stateController;
+        private readonly ContentPage page;
 
         public DateTimeCell (StateController stateController, ContentPage page)
 		{

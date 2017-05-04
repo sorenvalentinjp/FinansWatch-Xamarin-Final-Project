@@ -15,31 +15,31 @@ namespace Prototype.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FrontPageView : ContentPage, INotifyPropertyChanged
     {
-        private IList<Article> articles;
+        private IList<Article> _articles;
         public IList<Article> Articles
         {
-            get { return articles; }
+            get { return _articles; }
             set
             {
-                if (articles == value) { return; }
-                articles = value;
+                if (_articles == value) { return; }
+                _articles = value;
                 Notify("Articles");
             }
         }
 
-        private bool isRefreshing;
+        private bool _isRefreshing;
         public bool IsRefreshing
         {
-            get { return isRefreshing; }
+            get { return _isRefreshing; }
             set
             {
-                if (isRefreshing == value) { return; }
-                isRefreshing = value;
+                if (_isRefreshing == value) { return; }
+                _isRefreshing = value;
                 Notify("IsRefreshing");
             }
         }
 
-        private readonly StateController stateController;
+        private readonly StateController _stateController;
 
         public FrontPageView(StateController stateController)
 		{
@@ -49,11 +49,11 @@ namespace Prototype.Views
 
             BindingContext = this;
             
-            this.stateController = stateController;
+            this._stateController = stateController;
 		    IsRefreshing = false;
-            this.stateController.ArticleController.IsRefreshingFrontPage += IsRefreshingChanged;
-            this.stateController.ArticleController.FrontPageArticlesAreReady += FrontPageArticlesAreReady;
-            this.stateController.GetFrontPageArticles();
+            this._stateController.ArticleController.IsRefreshingFrontPage += IsRefreshingChanged;
+            this._stateController.ArticleController.FrontPageArticlesAreReady += FrontPageArticlesAreReady;
+            this._stateController.GetFrontPageArticles();
             DisableItemSelectedAction();
         }
 
@@ -77,7 +77,7 @@ namespace Prototype.Views
             {
                 return new Command(() =>
                 {
-                    this.stateController.GetFrontPageArticles();
+                    this._stateController.GetFrontPageArticles();
                 });
             }
         }

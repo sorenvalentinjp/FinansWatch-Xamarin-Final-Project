@@ -10,9 +10,9 @@ namespace Prototype.Views
 	public partial class MasterDetailView : MasterDetailPage
     {
 
-        private Page frontPageView;
-        private Page savedArticlesView;
-        private Page allArticlesView;
+        private readonly Page _frontPageView;
+        private Page _savedArticlesView;
+        private Page _allArticlesView;
 
         public StateController StateController { get; set; }
 
@@ -20,30 +20,30 @@ namespace Prototype.Views
         {
             InitializeComponent();
             this.StateController = stateController;           
-            this.frontPageView = new FrontPageView(this.StateController);
-            Detail = this.frontPageView;
+            this._frontPageView = new FrontPageView(this.StateController);
+            Detail = this._frontPageView;
         }
 
         private void FrontPageAction(object sender, EventArgs e)
         {
-            Detail = this.frontPageView;
+            Detail = this._frontPageView;
             IsPresented = false;
         }
 
         private void AllArticlesAction(object sender, EventArgs e)
         {
-            if (this.allArticlesView == null)
-                this.allArticlesView = new AllArticlesView(StateController);
-            Detail = allArticlesView;
+            if (this._allArticlesView == null)
+                this._allArticlesView = new AllArticlesView(StateController);
+            Detail = _allArticlesView;
             IsPresented = false;
         }
 
         private void SavedArticlesAction(object sender, EventArgs e)
         {
-            if(this.savedArticlesView == null)
-                this.savedArticlesView = new SavedArticlesView(this.StateController);
+            if(this._savedArticlesView == null)
+                this._savedArticlesView = new SavedArticlesView(this.StateController);
 
-            Detail = savedArticlesView;
+            Detail = _savedArticlesView;
             IsPresented = false;
         }
 

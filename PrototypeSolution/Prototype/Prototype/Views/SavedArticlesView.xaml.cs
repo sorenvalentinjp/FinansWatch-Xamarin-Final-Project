@@ -17,30 +17,27 @@ namespace Prototype.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SavedArticlesView : ContentPage, INotifyPropertyChanged
 	{
-        private ObservableCollection<Article> savedArticles;
+        private ObservableCollection<Article> _savedArticles;
         public ObservableCollection<Article> SavedArticles
         {
-            get { return savedArticles; }
+            get { return _savedArticles; }
             set
             {
-                if(savedArticles == value) { return; }
-                savedArticles = value;
+                if(_savedArticles == value) { return; }
+                _savedArticles = value;
                 Notify("SavedArticles");
             }
         }
 
-        private StateController stateController;
-
-        public SavedArticlesView(StateController stateController)
+	    public SavedArticlesView(StateController stateController)
 		{
-			InitializeComponent();
+		    InitializeComponent();
 
             listView.ItemTemplate = new SavedArticlesTemplateSelector(stateController, this);
 
             DisableItemSelectedAction();
             BindingContext = this;
-            this.stateController = stateController;
-            this.SavedArticles = this.stateController.SavedArticles;
+		    this.SavedArticles = stateController.SavedArticles;
         }
 
         /// <summary>

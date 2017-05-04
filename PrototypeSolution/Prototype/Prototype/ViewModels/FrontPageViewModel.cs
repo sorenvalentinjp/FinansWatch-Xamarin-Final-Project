@@ -49,16 +49,16 @@ namespace Prototype.ViewModels
             }
         }
 
-        private StateController stateController;
+        private readonly StateController _stateController;
 
         public FrontPageViewModel(StateController stateController)
         {
             //DataTemplate = new SectionTemplateSelector(stateController);
             
-            this.stateController = stateController;
+            this._stateController = stateController;
             //this.stateController.ArticleController.isRefreshingFrontPage += IsRefreshingChanged;
             //this.stateController.ArticleController.frontPageArticlesAreReady += FrontPageArticlesAreReady;
-            this.stateController.GetFrontPageArticles();            
+            this._stateController.GetFrontPageArticles();            
         }
 
 
