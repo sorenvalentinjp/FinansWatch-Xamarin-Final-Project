@@ -1,4 +1,5 @@
-﻿using Prototype.ModelControllers;
+﻿using Prototype.Database;
+using Prototype.ModelControllers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,7 @@ namespace Prototype.ViewModels
         public LoginViewModel(StateController stateController)
         {
             this._stateController = stateController;
+            LoginApi api = new LoginApi();
         }
     }
 }
