@@ -10,7 +10,6 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 using System.Linq;
 using Newtonsoft.Json.Converters;
 
@@ -18,22 +17,22 @@ namespace Prototype.ModelControllers
 {
     public class ArticleController
     {
-        private ContentAPI contentAPI;
-        public event Action<IList<Article>> frontPageArticlesAreReady;
-        public event Action<List<Grouping<string, Article>>> latestArticlesAreReady;
-        public event Action<bool> isRefreshingFrontPage;
-        public event Action<bool> isRefreshingLatestArticles;
+        private readonly ContentApi contentApi;
+        public event Action<IList<Article>> FrontPageArticlesAreReady;
+        public event Action<List<Grouping<string, Article>>> LatestArticlesAreReady;
+        public event Action<bool> IsRefreshingFrontPage;
+        public event Action<bool> IsRefreshingLatestArticles;
 
         public ArticleController()
         {
-            contentAPI = new ContentAPI();
+            contentApi = new ContentApi();
         }
 
-        public async void getLatestArticlesAsync()
+        public async void GetLatestArticlesAsync()
         {
-            isRefreshingLatestArticles(true);
+            IsRefreshingLatestArticles(true);
 
-            IList<Article> articles = deserializeArticlesFromJson(await contentAPI.downloadLatestArticles());
+            IList<Article> articles = DeserializeArticlesFromJson(await contentApi.DownloadLatestArticles());
 
             var sortedArticles = from article in articles
                                  orderby article.publishedDateTime descending
@@ -42,60 +41,60 @@ namespace Prototype.ModelControllers
 
             var groupedArticles = new List<Grouping<string, Article>>(sortedArticles);
 
-            latestArticlesAreReady(groupedArticles);
-            isRefreshingLatestArticles(false);
+            LatestArticlesAreReady(groupedArticles);
+            IsRefreshingLatestArticles(false);
         }
 
-        public async void getFrontPageArticlesAsync()
+        public async void GetFrontPageArticlesAsync()
         {
-            isRefreshingFrontPage(true);
+            IsRefreshingFrontPage(true);
 
-            IList<Article> articles = deserializeArticlesFromJson(await contentAPI.downloadFrontPageArticles());
+            IList<Article> articles = DeserializeArticlesFromJson(await contentApi.DownloadFrontPageArticles());
            
-            frontPageArticlesAreReady(articles);
-            isRefreshingFrontPage(false);
+            FrontPageArticlesAreReady(articles);
+            IsRefreshingFrontPage(false);
         }
 
 
 
-        public async Task<IList<Article>> getRelatedArticlesAsync(Article article)
+        public async Task<IList<Article>> GetRelatedArticlesAsync(Article article)
         {
             IList<Article> newRelatedArticles = new List<Article>();
             foreach (var relatedArticle in article.relatedArticles)
             {
-                newRelatedArticles.Add(await getArticleDetailsAsync(relatedArticle.url));
+                newRelatedArticles.Add(await GetArticleDetailsAsync(relatedArticle.url));
             }
             return newRelatedArticles;
         }
 
-        public async Task<Article> getArticleDetailsAsync(Article article)
+        public async Task<Article> GetArticleDetailsAsync(Article article)
         {
-            return deserializeArticle(await contentAPI.downloadArticle(article.contentUrl));
+            return DeserializeArticle(await contentApi.DownloadArticle(article.contentUrl));
 
         }
 
-        public async Task<Article> getArticleDetailsAsync(string contentUrl)
+        public async Task<Article> GetArticleDetailsAsync(string contentUrl)
         {
-            return deserializeArticle(await contentAPI.downloadArticle(contentUrl));
+            return DeserializeArticle(await contentApi.DownloadArticle(contentUrl));
 
         }
 
 
         //Deserialize methods
-        private IList<Article> deserializeArticlesFromJson(string json)
+        private IList<Article> DeserializeArticlesFromJson(string json)
         {
             //var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = "dd-MM-yyyy HH:mm" };
             IList<Article> articles = JsonConvert.DeserializeObject<List<Article>>(json);
 
             foreach (var article in articles)
             {
-                stripArticle(article);
+                StripArticle(article);
                 try
                 {
                     DateTime publishedDateTime = DateTime.ParseExact(article.publishedDate, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
                     article.publishedDateTime = publishedDateTime;
                 }
-                catch (Exception) { }
+                catch (Exception e) { Debug.Print(e.Message); }
             }
 
             if (articles.Count > 0)
@@ -107,11 +106,11 @@ namespace Prototype.ModelControllers
         }
 
 
-        public Article deserializeArticle(string json)
+        public Article DeserializeArticle(string json)
         {        
             var article = JsonConvert.DeserializeObject<Article>(json);
 
-            article = setArticleFields(article);
+            article = SetArticleFields(article);
 
             return article;
 
@@ -120,10 +119,10 @@ namespace Prototype.ModelControllers
 
 
         //Helper methods
-        private Article setArticleFields(Article article)
+        private Article SetArticleFields(Article article)
         {
             //article.addFieldsFromAnotherArticle(newArt);
-            article = stripArticle(article);
+            article = StripArticle(article);
 
             if (article.topImages.Count > 0)
             {
@@ -132,16 +131,16 @@ namespace Prototype.ModelControllers
             return article;
         }
 
-        private Article stripArticle(Article article)
+        private Article StripArticle(Article article)
         {
-            article.bodyText = stripRelatedArticles(article.bodyText);
-            article.teasers.FRONTPAGE = stripAllHtmlParagraphTags(article.teasers.FRONTPAGE);
-            article.teasers.DEFAULT = stripAllHtmlParagraphTags(article.teasers.DEFAULT);
+            article.bodyText = StripRelatedArticles(article.bodyText);
+            article.teasers.FRONTPAGE = StripAllHtmlParagraphTags(article.teasers.FRONTPAGE);
+            article.teasers.DEFAULT = StripAllHtmlParagraphTags(article.teasers.DEFAULT);
             return article;
         }
 
 
-        private string stripAllHtmlParagraphTags(string html)
+        private string StripAllHtmlParagraphTags(string html)
         {
             if (html == null)
             {
@@ -157,7 +156,7 @@ namespace Prototype.ModelControllers
         /// </summary>
         /// <param name="html"></param>
         /// <returns></returns>
-        private string stripRelatedArticles(string html)
+        private string StripRelatedArticles(string html)
         {
             if (html == null)
             {

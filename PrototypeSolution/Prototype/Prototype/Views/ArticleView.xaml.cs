@@ -49,7 +49,7 @@ namespace Prototype.Views
         {
             if (articleToDisplay.bodyText == "")
             {
-                articleToDisplay = await this.stateController.getArticleDetails(articleToDisplay);
+                articleToDisplay = await this.stateController.GetArticleDetails(articleToDisplay);
             }
 
             //If articledetails havent already been fetched, await the code above to get the data, then check if the imagesource is null.
@@ -59,7 +59,7 @@ namespace Prototype.Views
                 imageCaptionLabel.IsVisible = false;
             } 
 
-            articleToDisplay.relatedDetailedArticles = await this.stateController.getRelatedArticles(articleToDisplay);
+            articleToDisplay.relatedDetailedArticles = await this.stateController.GetRelatedArticles(articleToDisplay);
             Article = articleToDisplay;
             BindingContext = Article;
         }

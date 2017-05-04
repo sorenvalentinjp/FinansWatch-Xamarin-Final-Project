@@ -23,19 +23,19 @@ namespace Prototype.ModelControllers
         /// Fetches all frontpage articles async and wait for the articleIsReady events to fire
         /// During this operation a 'refresh' icon is displayed.
         /// </summary>
-        public void getFrontPageArticles()
+        public void GetFrontPageArticles()
         {
-            ArticleController.getFrontPageArticlesAsync();
+            ArticleController.GetFrontPageArticlesAsync();
         }
 
-        public Task<IList<Article>> getRelatedArticles(Article article)
+        public Task<IList<Article>> GetRelatedArticles(Article article)
         {
-            return ArticleController.getRelatedArticlesAsync(article);
+            return ArticleController.GetRelatedArticlesAsync(article);
         }
 
-        public Task<Article> getArticleDetails(Article article)
+        public Task<Article> GetArticleDetails(Article article)
         {
-            return this.ArticleController.getArticleDetailsAsync(article);
+            return this.ArticleController.GetArticleDetailsAsync(article);
         }
 
 

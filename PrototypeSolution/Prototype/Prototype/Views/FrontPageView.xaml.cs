@@ -39,7 +39,7 @@ namespace Prototype.Views
             }
         }
 
-        private StateController stateController;
+        private readonly StateController stateController;
 
         public FrontPageView(StateController stateController)
 		{
@@ -50,9 +50,10 @@ namespace Prototype.Views
             BindingContext = this;
             
             this.stateController = stateController;
-            this.stateController.ArticleController.isRefreshingFrontPage += IsRefreshingChanged;
-            this.stateController.ArticleController.frontPageArticlesAreReady += FrontPageArticlesAreReady;
-            this.stateController.getFrontPageArticles();
+		    IsRefreshing = false;
+            this.stateController.ArticleController.IsRefreshingFrontPage += IsRefreshingChanged;
+            this.stateController.ArticleController.FrontPageArticlesAreReady += FrontPageArticlesAreReady;
+            this.stateController.GetFrontPageArticles();
             DisableItemSelectedAction();
         }
 
@@ -76,7 +77,7 @@ namespace Prototype.Views
             {
                 return new Command(() =>
                 {
-                    this.stateController.getFrontPageArticles();
+                    this.stateController.GetFrontPageArticles();
                 });
             }
         }

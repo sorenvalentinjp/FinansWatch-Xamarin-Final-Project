@@ -7,15 +7,16 @@ using System.Net.Http.Headers;
 
 namespace Prototype.Database
 {
-    class ContentAPI : IContentAPI
+    internal class ContentApi : IContentApi
     {
-        private HttpClient client;
+        private readonly HttpClient client;
 
-        public ContentAPI()
+        public ContentApi()
         {
             //Initialize httpclients using variables stored in the Constants class
             client = new HttpClient();
-            var authData = string.Format("{0}:{1}", Constants.contentAPIUsername, Constants.contentAPIkey);
+            var authData = $"{Constants.contentAPIUsername}:{Constants.contentAPIkey}";
+            //var authData = string.Format("{0}:{1}", Constants.contentAPIUsername, Constants.contentAPIkey);
             var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
             client.MaxResponseContentBufferSize = 256000;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
@@ -24,38 +25,38 @@ namespace Prototype.Database
         /// <summary>
         /// Downloads a single article and returns it as a task json string
         /// </summary>
-        /// <param name="contentURL"></param>
+        /// <param name="contentUrl"></param>
         /// <returns></returns>
-        public Task<string> downloadArticle(String contentURL)
+        public Task<string> DownloadArticle(string contentUrl)
         {
             //Full url example: https://content.watchmedier.dk/api/finanswatch/content/article/9517468
-            var uri = new Uri(contentURL);
+            var uri = new Uri(contentUrl);
 
-            return downloadJSON(uri);
+            return DownloadJson(uri);
         }
 
         /// <summary>
         /// Downloads all front page articles and returns them as a string
         /// </summary>
         /// <returns></returns>
-        public Task<string> downloadFrontPageArticles()
+        public Task<string> DownloadFrontPageArticles()
         {
             //Full url example: https://content.watchmedier.dk/api/finanswatch/content/frontpagearticles
             var uri = new Uri(Constants.contentAPIUrl + "finanswatch/content/frontpagearticles?max=30");
 
-            return downloadJSON(uri);
+            return DownloadJson(uri);
         }
 
         /// <summary>
         /// Downloads allArticles page articles and returns them as a string
         /// </summary>
         /// <returns></returns>
-        public Task<string> downloadLatestArticles()
+        public Task<string> DownloadLatestArticles()
         {
             //Full url example: "https://content.watchmedier.dk/api/finanswatch/content/latest?hoursago=168"
             var uri = new Uri(Constants.contentAPIUrl + "finanswatch/content/latest?hoursago=168&max=100");
 
-            return downloadJSON(uri);
+            return DownloadJson(uri);
         }
 
         /// <summary>
@@ -63,7 +64,7 @@ namespace Prototype.Database
         /// </summary>
         /// <param name="uri"></param>
         /// <returns></returns>
-        public async Task<string> downloadJSON(Uri uri)
+        public async Task<string> DownloadJson(Uri uri)
         {
             try
             {
@@ -80,7 +81,7 @@ namespace Prototype.Database
         }
 
         //Not currently used. Not deleted as we might need it later on to check url's
-        public async Task<Boolean> IsValidUrl(string url)
+        public async Task<bool> IsValidUrl(string url)
         {
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Head, url);
             HttpResponseMessage response = new HttpResponseMessage();

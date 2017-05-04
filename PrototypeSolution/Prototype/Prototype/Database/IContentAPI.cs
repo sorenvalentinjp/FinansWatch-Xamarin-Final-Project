@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Prototype.Database
 {
-    interface IContentAPI
+    interface IContentApi
     {
-        Task<String> downloadFrontPageArticles();
-        Task<String> downloadArticle(String contentURL);
-        Task<String> downloadJSON(Uri uri);
+        Task<string> DownloadFrontPageArticles();
+        Task<string> DownloadArticle(string contentUrl);
+        Task<string> DownloadJson(Uri uri);
     }
 }

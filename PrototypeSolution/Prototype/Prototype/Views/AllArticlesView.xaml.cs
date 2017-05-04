@@ -54,9 +54,9 @@ namespace Prototype.Views
 
             BindingContext = this;
             this.StateController = stateController;
-            this.StateController.ArticleController.isRefreshingLatestArticles += ArticleController_isRefreshing;
-            this.StateController.ArticleController.latestArticlesAreReady += ArticleController_latestArticlesAreReady;            
-            this.StateController.ArticleController.getLatestArticlesAsync();
+            this.StateController.ArticleController.IsRefreshingLatestArticles += ArticleController_isRefreshing;
+            this.StateController.ArticleController.LatestArticlesAreReady += ArticleController_latestArticlesAreReady;            
+            this.StateController.ArticleController.GetLatestArticlesAsync();
             DisableItemSelectedAction();
         }
 
@@ -103,7 +103,7 @@ namespace Prototype.Views
             {
                 return new Command(() =>
                 {
-                    this.StateController.ArticleController.getLatestArticlesAsync();
+                    this.StateController.ArticleController.GetLatestArticlesAsync();
                 });
             }
         }

@@ -58,7 +58,7 @@ namespace Prototype.ViewModels
             this.stateController = stateController;
             //this.stateController.ArticleController.isRefreshingFrontPage += IsRefreshingChanged;
             //this.stateController.ArticleController.frontPageArticlesAreReady += FrontPageArticlesAreReady;
-            this.stateController.getFrontPageArticles();            
+            this.stateController.GetFrontPageArticles();            
         }
 
 
