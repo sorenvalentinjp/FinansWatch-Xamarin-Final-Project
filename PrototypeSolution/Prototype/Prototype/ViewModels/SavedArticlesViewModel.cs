@@ -39,11 +39,11 @@ namespace Prototype.ViewModels
             }
         }
 
-        public SavedArticlesViewModel(StateController stateController, Page page)
+        public SavedArticlesViewModel(StateController stateController)
         {
             this._stateController = stateController;
             this.SavedArticles = this._stateController.SavedArticles;
-            this.DataTemplate = new SavedArticlesTemplateSelector(this._stateController, page);
+            this.DataTemplate = new SavedArticlesTemplateSelector(this._stateController);
         }
 
         protected void Notify(string propName)
