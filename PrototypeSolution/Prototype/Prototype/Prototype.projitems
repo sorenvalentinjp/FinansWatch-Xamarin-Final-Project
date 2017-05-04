@@ -24,7 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AllArticlesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FrontPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MasterDetailViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SavedArticlesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SearchArticlesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SectionViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AllArticlesView.xaml.cs">

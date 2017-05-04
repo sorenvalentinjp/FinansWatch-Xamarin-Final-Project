@@ -11,6 +11,7 @@
     <ContentPage.Content>
         <ListView x:Name="listView"
                   ItemsSource="{Binding SavedArticles}"
+                  ItemTemplate="{Binding DataTemplate}"
                   CachingStrategy="RecycleElement"
                   HasUnevenRows="true"/>
     </ContentPage.Content>
