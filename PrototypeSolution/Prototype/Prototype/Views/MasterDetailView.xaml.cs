@@ -13,7 +13,10 @@ namespace Prototype.Views
 
         private readonly Page _frontPageView;
         private Page _savedArticlesView;
+        private Page _sectionView;
         private Page _allArticlesView;
+        private Page _loginView;
+        private Page _searchArticlesView;
 
         public StateController StateController { get; set; }
 
@@ -44,25 +47,37 @@ namespace Prototype.Views
             if(this._savedArticlesView == null)
                 this._savedArticlesView = new SavedArticlesView(this.StateController);
 
-            Detail = _savedArticlesView;
+            Detail = this._savedArticlesView;
             IsPresented = false;
         }
 
         private void SectionAction(object sender, EventArgs e)
         {
-            Detail = new SectionView();
+            if(this._sectionView == null)
+            {
+                this._sectionView = new SectionView(this.StateController);
+            }
+            Detail = this._sectionView;
             IsPresented = false;
         }
 
         private void LoginAction(object sender, EventArgs e)
         {
-            Detail = new LoginView();
+            if(this._loginView == null)
+            {
+                this._loginView = new LoginView(this.StateController);
+            }
+            Detail = this._loginView;
             IsPresented = false;
         }
 
         private void SearchArticlesAction(object sender, EventArgs e)
         {
-            Detail = new SearchArticlesView();
+            if(this._searchArticlesView == null)
+            {
+                this._searchArticlesView = new SearchArticlesView(this.StateController);
+            }
+            Detail = this._searchArticlesView;
             IsPresented = false;
         }
     }

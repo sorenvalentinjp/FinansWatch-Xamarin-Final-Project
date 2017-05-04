@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Prototype.ModelControllers;
+using Prototype.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +14,11 @@ namespace Prototype.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LoginView : ContentPage
 	{
-		public LoginView ()
+		public LoginView(StateController stateController)
 		{
-			InitializeComponent ();
+			InitializeComponent();
+            LoginViewModel vm = new LoginViewModel(stateController, this);
+            BindingContext = vm;
 		}
 	}
 }
