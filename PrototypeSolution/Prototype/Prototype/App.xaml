@@ -1,10 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:customRenderers="clr-namespace:Prototype.Views.CustomRenderers"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             x:Class="Prototype.App"
-             xmlns:theme="clr-namespace:Xamarin.Forms.Themes;assembly=Xamarin.Forms.Theme.Light">
+             x:Class="Prototype.App">
 	<Application.Resources>
 
         <ResourceDictionary>
@@ -12,63 +9,6 @@
                 <Setter Property="BarBackgroundColor" Value="#213c68"/>
                 <Setter Property="BarTextColor" Value="White"/>
             </Style>
-
-            <!--Template for all the other articles that require smaller cells-->
-            <DataTemplate x:Key="articleMediumTemplate">
-                <ViewCell>
-                    <ViewCell.View>
-                        <Grid Margin="10,10,10,10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-
-                            <ffimageloading:CachedImage Grid.Row="0" 
-                                                        Grid.Column="0" 
-                                                        LoadingPlaceholder="{Binding ImageTransparentSmall}"
-                                        Source="{Binding small.url}"
-                                                        HorizontalOptions="StartAndExpand"/>
-                            <Label Text="{Binding titles.FRONTPAGE}" 
-                                   Grid.Row="0" 
-                                   Grid.Column="1" 
-                                   Grid.ColumnSpan="2"
-                                   Font="16"/>
-                        </Grid>
-                    </ViewCell.View>
-                </ViewCell>
-            </DataTemplate>
-
-            <!--Template for all other articlesin case a picture is not provided by the contentAPI-->
-            <DataTemplate x:Key="articleMediumNoImageTemplate">
-                <ViewCell>
-                    <ViewCell.View>
-                        <Grid Margin="10,5,10,5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-
-                            <!--In this case we dont have a picture. Therefore a a local transparent image is used in its place-->
-                            <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" 
-                                                        LoadingPlaceholder="{Binding ImageTransparentSmall}"
-                                                        Source="{Binding ImageTransparentSmall}"/>
-                            <Label Text="{Binding titles.FRONTPAGE}"  
-                                   Grid.Row="0" 
-                                   Grid.Column="1" 
-                                   Grid.ColumnSpan="2"
-                                   Font="16"/>
-                        </Grid>
-                    </ViewCell.View>
-                </ViewCell>
-            </DataTemplate>
         </ResourceDictionary>
 
     </Application.Resources>
