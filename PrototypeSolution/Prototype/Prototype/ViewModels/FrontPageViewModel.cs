@@ -1,10 +1,8 @@
 ﻿using Prototype.ModelControllers;
 using Prototype.Models;
 using Prototype.Views.TemplateSelectors;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
