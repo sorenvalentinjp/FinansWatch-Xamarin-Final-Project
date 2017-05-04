@@ -14,11 +14,11 @@ namespace Prototype.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SearchArticlesView : ContentPage
 	{
-		public SearchArticlesView(StateController stateController)
+		public SearchArticlesView(SearchArticlesViewModel viewModel)
 		{
 			InitializeComponent();
-            SearchArticlesViewModel vm = new SearchArticlesViewModel(stateController, this);
-            BindingContext = vm;
+
+            BindingContext = viewModel;
 		}
 	}
 }

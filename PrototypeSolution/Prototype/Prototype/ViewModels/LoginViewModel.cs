@@ -10,7 +10,7 @@ namespace Prototype.ViewModels
     {
         private readonly StateController _stateController;
 
-        public LoginViewModel(StateController stateController, Page page)
+        public LoginViewModel(StateController stateController)
         {
             this._stateController = stateController;
         }

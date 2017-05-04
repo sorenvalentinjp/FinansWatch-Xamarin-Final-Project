@@ -14,11 +14,11 @@ namespace Prototype.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LoginView : ContentPage
 	{
-		public LoginView(StateController stateController)
+		public LoginView(LoginViewModel viewModel)
 		{
 			InitializeComponent();
-            LoginViewModel vm = new LoginViewModel(stateController, this);
-            BindingContext = vm;
+
+            BindingContext = viewModel;
 		}
 	}
 }

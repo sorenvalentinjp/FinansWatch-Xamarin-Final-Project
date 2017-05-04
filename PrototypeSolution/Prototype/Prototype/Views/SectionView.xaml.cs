@@ -14,11 +14,11 @@ namespace Prototype.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SectionView : ContentPage
 	{
-		public SectionView (StateController stateController)
+		public SectionView (SectionViewModel viewModel)
 		{
 			InitializeComponent();
-            SectionViewModel vm = new SectionViewModel(stateController, this);
-            BindingContext = vm;
+
+            BindingContext = viewModel;
 		}
 	}
 }

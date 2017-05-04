@@ -24,7 +24,8 @@ namespace Prototype.ViewModels
         {
             _stateController = stateController;
             _masterDetail = masterDetail;
-            _masterDetail.Detail = new FrontPageView(new FrontPageViewModel(stateController));
+            _frontPageView = new FrontPageView(new FrontPageViewModel(stateController));
+            _masterDetail.Detail = _frontPageView;
         }
 
         public ICommand FrontPageAction
@@ -60,7 +61,7 @@ namespace Prototype.ViewModels
                 return new Command(() =>
                 {
                     if (this._savedArticlesView == null)
-                        this._savedArticlesView = new SavedArticlesView(this._stateController);
+                        this._savedArticlesView = new SavedArticlesView(new SavedArticlesViewModel(_stateController));
 
                     _masterDetail.Detail = this._savedArticlesView;
                     _masterDetail.IsPresented = false;
@@ -76,7 +77,7 @@ namespace Prototype.ViewModels
                 {
                     if (this._sectionView == null)
                     {
-                        this._sectionView = new SectionView(this._stateController);
+                        this._sectionView = new SectionView(new SectionViewModel(_stateController));
                     }
                     _masterDetail.Detail = this._sectionView;
                     _masterDetail.IsPresented = false;
@@ -92,7 +93,7 @@ namespace Prototype.ViewModels
                 {
                     if (this._loginView == null)
                     {
-                        this._loginView = new LoginView(this._stateController);
+                        this._loginView = new LoginView(new LoginViewModel(_stateController));
                     }
                     _masterDetail.Detail = this._loginView;
                     _masterDetail.IsPresented = false;
@@ -108,7 +109,7 @@ namespace Prototype.ViewModels
                 {
                     if (this._searchArticlesView == null)
                     {
-                        this._searchArticlesView = new SearchArticlesView(this._stateController);
+                        this._searchArticlesView = new SearchArticlesView(new SearchArticlesViewModel(_stateController));
                     }
                     _masterDetail.Detail = this._searchArticlesView;
                     _masterDetail.IsPresented = false;

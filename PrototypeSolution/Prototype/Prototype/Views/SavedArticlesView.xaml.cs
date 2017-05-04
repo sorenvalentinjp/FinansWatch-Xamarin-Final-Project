@@ -9,11 +9,12 @@ namespace Prototype.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SavedArticlesView : ContentPage
 	{
-	    public SavedArticlesView(StateController stateController)
+	    public SavedArticlesView(SavedArticlesViewModel viewModel)
 		{
 		    InitializeComponent();
-            SavedArticlesViewModel vm = new SavedArticlesViewModel(stateController);
-            BindingContext = vm;
+
+		    BindingContext = viewModel;
+
             ListViewHelper.DisableItemSelectedAction(listView);
         }
     }
