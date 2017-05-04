@@ -1,4 +1,5 @@
 ﻿using Prototype.ModelControllers;
+using Prototype.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace Prototype.Views
 		public SectionView (StateController stateController)
 		{
 			InitializeComponent();
+            SectionViewModel vm = new SectionViewModel(stateController, this);
+            BindingContext = vm;
 		}
 	}
 }

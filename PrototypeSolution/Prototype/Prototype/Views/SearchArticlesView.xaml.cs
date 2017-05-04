@@ -1,4 +1,5 @@
 ﻿using Prototype.ModelControllers;
+using Prototype.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,9 @@ namespace Prototype.Views
 	{
 		public SearchArticlesView(StateController stateController)
 		{
-			InitializeComponent ();
+			InitializeComponent();
+            SearchArticlesViewModel vm = new SearchArticlesViewModel(stateController, this);
+            BindingContext = vm;
 		}
 	}
 }
