@@ -7,39 +7,49 @@
              x:Class="Prototype.Views.ArticleView"
              Title="{Binding Article.homeSectionName}">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:NullToBooleanConverter x:Key="nullToBooleanConverter"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="ALL"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <ListView x:Name="listView"
-                ItemsSource="{Binding Article.relatedDetailedArticles}"
-                ItemTemplate="{Binding DataTemplate}"
-                HasUnevenRows="True"
-                CachingStrategy="RecycleElement">
-            <ListView.Header>
+        <ScrollView>
+            <StackLayout Orientation="Vertical">
+
                 <StackLayout>
                     <ffimageloading:CachedImage DownsampleToViewSize="true" 
                             Source="{Binding Article.topImage.small.url}"
                             HorizontalOptions="Fill"
-                            IsVisible="{Binding Article.topImage, Converter={StaticResource nullToBooleanConverter}}"/>
+                            IsVisible="{Binding Article.topImage, Converter={converters:NullToBooleanConverter}}"/>
                     <Label Text="{Binding Article.topImage.imageCaption}" 
                            Margin="10,0,30,10" 
                            FontSize="Micro"
-                           IsVisible="{Binding Article.topImage, Converter={StaticResource nullToBooleanConverter}}"/>
-                    <Label Text="{Binding Article.titles.DEFAULT}" Margin="10,0,30,0" FontSize="Large" FontAttributes="Bold"/>
-                    <customRenderers:HtmlFormattedLabel Text="{Binding Article.teasers.DEFAULT}" Margin="10,10,30,0" FontSize="Medium"/>
-                    <Label Text="{Binding Article.publishData.publishInfo}" Margin="10,10,30,0" FontSize="Micro" />
-                    <customRenderers:HtmlFormattedLabel Text="{Binding Article.bodyText}" Margin="10,15,20,10" FontSize="Small"/>
-                    <BoxView HeightRequest=".5" BackgroundColor="LightGray"/>
+                           IsVisible="{Binding Article.topImage, Converter={converters:NullToBooleanConverter}}"/>
+                    <Label Text="{Binding Article.titles.DEFAULT}" 
+                           Margin="10,0,30,0" 
+                           FontSize="Large" 
+                           FontAttributes="Bold"/>
+                    <customRenderers:HtmlFormattedLabel 
+                        Text="{Binding Article.teasers.DEFAULT}" 
+                        Margin="10,10,30,0" FontSize="Medium"/>
+                    <Label Text="{Binding Article.publishData.publishInfo}" 
+                           Margin="10,10,30,0" 
+                           FontSize="Micro" />
+                    <customRenderers:HtmlFormattedLabel 
+                        Text="{Binding Article.bodyText}" 
+                        Margin="10,15,20,10" 
+                        FontSize="Small"
+                        IsVisible="{Binding HasAccess}"/>
+                    <BoxView 
+                        HeightRequest=".5" 
+                        BackgroundColor="LightGray"/>
                 </StackLayout>
-            </ListView.Header>
-        </ListView>
+
+        <ListView x:Name="listView"
+                ItemsSource="{Binding Article.relatedDetailedArticles}"
+                ItemTemplate="{Binding DataTemplate}"
+                HasUnevenRows="True"
+                CachingStrategy="RecycleElement"/>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

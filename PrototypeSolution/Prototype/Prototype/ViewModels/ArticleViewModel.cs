@@ -38,10 +38,31 @@ namespace Prototype.ViewModels
             }
         }
 
+        private bool _hasAccess;
+        public bool HasAccess
+        {
+            get { return _hasAccess; }
+            set
+            {
+                if (_hasAccess == value) { return; }
+                _hasAccess = value;
+                Notify("HasAccess");
+            }
+        }
+
         public ArticleViewModel(StateController stateController, Article articleToDisplay)
         {
             this._stateController = stateController;
             DataTemplate = new RelatedArticlesTemplateSelector(_stateController);
+
+            if (_stateController.Subscriber != null)
+            {
+                HasAccess = _stateController.Subscriber.HasAccessToSite("finanswatch");
+            }
+            else
+            {
+                HasAccess = false;
+            }
 
             GetArticleDetails(articleToDisplay);
         }

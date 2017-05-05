@@ -9,6 +9,15 @@ namespace Prototype.Models
         public List<FeatureAccessList> featureAccessList { get; set; }
         public Error error { get; set; }
         public User user { get; set; }
+
+        public bool HasAccessToSite(string site)
+        {
+            foreach (var featureAccess in featureAccessList)
+            {
+                if (featureAccess.name == site.ToUpper()) return featureAccess.access;
+            }
+            return false;
+        }
     }
 
     public class FeatureAccessList
