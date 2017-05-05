@@ -14,7 +14,7 @@ namespace Prototype.Models
         {
             foreach (var featureAccess in featureAccessList)
             {
-                if (featureAccess.name == site.ToUpper()) return featureAccess.access;
+                if (featureAccess.code == site.ToUpper()) return featureAccess.access;
             }
             return false;
         }
