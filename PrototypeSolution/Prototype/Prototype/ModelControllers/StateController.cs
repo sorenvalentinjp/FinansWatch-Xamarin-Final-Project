@@ -11,12 +11,15 @@ namespace Prototype.ModelControllers
     public class StateController
     {
         public ArticleController ArticleController;
-        public ObservableCollection<Article> SavedArticles { get; set; }
+        public ObservableCollection<Article> SavedArticles;
+        public LoginController LoginController;
+        public Subscriber Subscriber;
 
         public StateController()
         {
             this.ArticleController = new ArticleController();
             this.SavedArticles = new ObservableCollection<Article>();
+            this.LoginController = new LoginController();
         }
 
         /// <summary>

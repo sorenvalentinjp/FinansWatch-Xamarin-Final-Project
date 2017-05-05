@@ -11,10 +11,10 @@
 
     <StackLayout Margin="5">
         <Label Text="E-mail"/>
-        <Entry Placeholder="Eksempel@mail.dk"/>
+        <Entry x:Name="entryEmail" Placeholder="Eksempel@mail.dk" Text="{Binding Email}"/>
         <Label Text="Adgangskode"/>
-        <Entry Placeholder="Adgangskode"/>
-        <Button Text="LOG IND"/>
-        <Button Text="GLEMT ADGANGSKODE?"/>
+        <Entry x:Name="entryPassword" Placeholder="Adgangskode" Text="{Binding Password}"/>
+        <Button Text="LOG IND" Command="{Binding LoginCommand}"/>
+        <Button Text="GLEMT ADGANGSKODE?" Command="{Binding ForgotPasswordCommand}"/>
     </StackLayout>
 </ContentPage>

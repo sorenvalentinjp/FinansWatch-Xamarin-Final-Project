@@ -1,9 +1,11 @@
 ﻿using Java.Util;
+using Prototype.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,11 +18,13 @@ namespace Prototype.Database
         public LoginApi()
         {
             _client = new HttpClient();
+            _client.MaxResponseContentBufferSize = 256000;
+            
+            //get user access
+        }
 
-            string email = "michael.m.hansen@jp.dk";
-            string password = "1234qwer";
-
-            //get token
+        public Task<string> DownloadLoginToken(string email, string password)
+        {
             string authData = $"{email}:{password}";
             string authDataBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
 
@@ -34,14 +38,21 @@ namespace Prototype.Database
             };
 
             request.Headers.Add("JP-Authorization", authDataBase64);
-
-            string res = DownloadJson(request).Result;
-
-            Console.WriteLine(res);
-            //get user access
+            return DownloadJson(request);
         }
 
-        public async Task<string> DownloadJson(HttpRequestMessage request)
+        public Task<string> DownloadSubscriber(SubscriberToken token)
+        {
+            string url = $"{Constants.GetUserUrl}{token.token}";
+            HttpRequestMessage request = new HttpRequestMessage()
+            {
+                RequestUri = new Uri(url),
+                Method = HttpMethod.Get
+            };
+            return DownloadJson(request);
+        }
+
+        private async Task<string> DownloadJson(HttpRequestMessage request)
         {
             try
             {
@@ -54,6 +65,10 @@ namespace Prototype.Database
             {
                 Debug.WriteLine(@"ERROR {0}", ex.Message);
                 return "";
+            }
+            finally
+            {
+                request.Dispose();
             }
         }
     }
