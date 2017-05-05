@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Windows.Input;
 using Prototype.ModelControllers;
 using Prototype.Models;
 using Prototype.Views.TemplateSelectors;
@@ -77,6 +78,17 @@ namespace Prototype.ViewModels
             articleToDisplay.relatedDetailedArticles = await this._stateController.GetRelatedArticles(articleToDisplay);
 
             Article = articleToDisplay;
+        }
+
+        public ICommand LoginCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    //App.Navigation.PushAsync();
+                });
+            }
         }
 
         protected void Notify(string propName)

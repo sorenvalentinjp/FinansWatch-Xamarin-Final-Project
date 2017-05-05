@@ -39,6 +39,16 @@
                         Margin="10,15,20,10" 
                         FontSize="Small"
                         IsVisible="{Binding HasAccess}"/>
+                    <StackLayout IsVisible="{Binding HasAccess, Converter={converters:InverseBooleanConverter}}" 
+                        Orientation="Vertical"
+                        BackgroundColor="LightGray">
+                        <Label 
+                            Text="LOG IND FOR AT LÆSE ARTIKLEN"
+                            FontAttributes="Bold"
+                            FontSize="Large"/>
+                        <Button Text="LOG IND" TextColor="White" BackgroundColor="#213c68" Command="{Binding LoginCommand}"/>
+                        <Button Text="GLEMT ADGANGSKODE?" TextColor="White" BackgroundColor="#213c68" Command="{Binding ForgotPasswordCommand}"/>
+                    </StackLayout>
                     <BoxView 
                         HeightRequest=".5" 
                         BackgroundColor="LightGray"/>
