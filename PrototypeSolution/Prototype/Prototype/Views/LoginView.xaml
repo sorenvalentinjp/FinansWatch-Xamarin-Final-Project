@@ -13,7 +13,7 @@
         <Label Text="E-mail"/>
         <Entry x:Name="entryEmail" Placeholder="Eksempel@mail.dk" Text="{Binding Email}"/>
         <Label Text="Adgangskode"/>
-        <Entry x:Name="entryPassword" Placeholder="Adgangskode" Text="{Binding Password}"/>
+        <Entry x:Name="entryPassword" Placeholder="Adgangskode" Text="{Binding Password}" IsPassword="True"/>
         <Button Text="LOG IND" Command="{Binding LoginCommand}"/>
         <Button Text="GLEMT ADGANGSKODE?" Command="{Binding ForgotPasswordCommand}"/>
     </StackLayout>

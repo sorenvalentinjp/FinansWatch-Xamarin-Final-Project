@@ -123,18 +123,35 @@ namespace Prototype.ViewModels
             }
         }
 
+        /// <summary>
+        /// Contains logged to log in (a new view is presented) or to log the user out right away
+        /// </summary>
         public ICommand LoginAction
         {
             get
             {
                 return new Command(() =>
                 {
-                    if (this._loginView == null)
-                        this._loginView = new LoginView(new LoginViewModel(_stateController));
+                    //If logget out, then present the log in view
+                    if (LoginButtonText == "LOG IND")
+                    {
+                        if (this._loginView == null)
+                            this._loginView = new LoginView(new LoginViewModel(_stateController));
 
-                    _latestVisitedView = _masterDetail.Detail;
-                    _masterDetail.Detail = this._loginView;
-                    _masterDetail.IsPresented = false;
+                        _latestVisitedView = _masterDetail.Detail;
+                        _masterDetail.Detail = this._loginView;
+                        _masterDetail.IsPresented = false;
+                    }
+
+                    //Else log the user out right away
+                    else
+                    {
+                        _stateController.Subscriber = null;
+                        LoginButtonText = "LOG IND";
+                        //set _loginView to a new LogInView to avoid email and password entries being populated when the user want to log in again
+                        _loginView = new LoginView(new LoginViewModel(_stateController));
+                        _masterDetail.IsPresented = false;
+                    }
                 });
             }
         }
