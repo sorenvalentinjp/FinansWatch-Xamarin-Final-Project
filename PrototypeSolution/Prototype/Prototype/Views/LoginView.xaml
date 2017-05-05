@@ -16,5 +16,6 @@
         <Entry x:Name="entryPassword" Placeholder="Adgangskode" Text="{Binding Password}" IsPassword="True"/>
         <Button Text="LOG IND" TextColor="White" BackgroundColor="#213c68" Command="{Binding LoginCommand}"/>
         <Button Text="GLEMT ADGANGSKODE?" TextColor="White" BackgroundColor="#213c68" Command="{Binding ForgotPasswordCommand}"/>
+        <Button Text="PRØV FINANSWATCH" TextColor="White" BackgroundColor="#213c68" Command="{Binding TryWatchCommand}"/>
     </StackLayout>
 </ContentPage>

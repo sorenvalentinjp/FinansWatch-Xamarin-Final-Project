@@ -70,6 +70,22 @@ namespace Prototype.ViewModels
             }
         }
 
+        /// <summary>
+        /// Directs the user to the watch website using the device's default browser
+        /// </summary>
+        public ICommand TryWatchCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    string url = "http://finanswatch.dk";
+                    Uri uri = new Uri(url);
+                    Device.OpenUri(uri);
+                });
+            }
+        }
+
         protected void Notify(string propName)
         {
             if (this.PropertyChanged != null)
