@@ -9,12 +9,12 @@
         <ToolbarItem Text="ALL"/>
     </ContentPage.ToolbarItems>
 
-    <StackLayout Margin="5">
-        <Label Text="E-mail"/>
+    <StackLayout Margin="35">
+        <Label Text="E-mail" FontSize="Medium" FontAttributes="Bold"/>
         <Entry x:Name="entryEmail" Placeholder="Eksempel@mail.dk" Text="{Binding Email}"/>
-        <Label Text="Adgangskode"/>
+        <Label Text="Adgangskode" FontSize="Medium" FontAttributes="Bold"/>
         <Entry x:Name="entryPassword" Placeholder="Adgangskode" Text="{Binding Password}" IsPassword="True"/>
-        <Button Text="LOG IND" Command="{Binding LoginCommand}"/>
-        <Button Text="GLEMT ADGANGSKODE?" Command="{Binding ForgotPasswordCommand}"/>
+        <Button Text="LOG IND" TextColor="White" BackgroundColor="#213c68" Command="{Binding LoginCommand}"/>
+        <Button Text="GLEMT ADGANGSKODE?" TextColor="White" BackgroundColor="#213c68" Command="{Binding ForgotPasswordCommand}"/>
     </StackLayout>
 </ContentPage>
