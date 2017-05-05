@@ -5,6 +5,7 @@ using Prototype.ModelControllers;
 using Prototype.Views;
 using Xamarin.Forms;
 using System.Windows.Input;
+using Prototype.Models;
 
 namespace Prototype.ViewModels
 {
@@ -18,14 +19,23 @@ namespace Prototype.ViewModels
         private Page _searchArticlesView;
         private readonly StateController _stateController;
         private readonly MasterDetailPage _masterDetail;
-
+        //We want to direct the user back to the latest visited view after login, hence this variable is needed.
+        private Page _latestVisitedView;
 
         public MasterDetailViewModel(StateController stateController, MasterDetailPage masterDetail)
         {
             _stateController = stateController;
+            _stateController.LoginController.LoginSucceeded += LoginSucceeded;
             _masterDetail = masterDetail;
             _frontPageView = new FrontPageView(new FrontPageViewModel(stateController));
             _masterDetail.Detail = _frontPageView;
+        }
+
+        //This event fires when the user logs in successfully. The detail's view is then set to direct the user back to the last visisted view.
+        private void LoginSucceeded(Subscriber subscriber)
+        {
+            _masterDetail.Detail = _latestVisitedView;
+            _masterDetail.IsPresented = false;
         }
 
         public ICommand FrontPageAction
@@ -95,6 +105,7 @@ namespace Prototype.ViewModels
                     {
                         this._loginView = new LoginView(new LoginViewModel(_stateController));
                     }
+                    _latestVisitedView = _masterDetail.Detail;
                     _masterDetail.Detail = this._loginView;
                     _masterDetail.IsPresented = false;
                 });

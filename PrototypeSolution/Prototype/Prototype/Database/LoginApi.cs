@@ -19,15 +19,20 @@ namespace Prototype.Database
         {
             _client = new HttpClient();
             _client.MaxResponseContentBufferSize = 256000;
-            
-            //get user access
         }
 
+        /// <summary>
+        /// Downloads the token using an email and password
+        /// </summary>
+        /// <param name="email">the subscribers email</param>
+        /// <param name="password">the subscribers password</param>
+        /// <returns>The token represented as a json string</returns>
         public Task<string> DownloadLoginToken(string email, string password)
         {
             string authData = $"{email}:{password}";
             string authDataBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
 
+            //TODO: device id is hardcoded for now, but we should fetch the actual device's id later on!
             string deviceId = "1";
             string url = $"{Constants.GetTokenUrl}{deviceId}";
 
@@ -41,6 +46,11 @@ namespace Prototype.Database
             return DownloadJson(request);
         }
 
+        /// <summary>
+        /// Using the aquired token, the subscriber itself can be downloaded.
+        /// </summary>
+        /// <param name="token">The subscribers token</param>
+        /// <returns>The subscriber respresented as a json string</returns>
         public Task<string> DownloadSubscriber(SubscriberToken token)
         {
             string url = $"{Constants.GetUserUrl}{token.token}";
@@ -52,6 +62,11 @@ namespace Prototype.Database
             return DownloadJson(request);
         }
 
+        /// <summary>
+        /// Downloads the httprequestmessage and returns the result as a string
+        /// </summary>
+        /// <param name="request">The HttpRequestMessage</param>
+        /// <returns>The result as json string</returns>
         private async Task<string> DownloadJson(HttpRequestMessage request)
         {
             try
@@ -68,7 +83,7 @@ namespace Prototype.Database
             }
             finally
             {
-                request.Dispose();
+                request.Dispose(); //important to dispose the HttpRequestMessage for performance gain
             }
         }
     }

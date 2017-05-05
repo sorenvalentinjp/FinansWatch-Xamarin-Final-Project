@@ -22,24 +22,19 @@ namespace Prototype.ModelControllers
         {
             SubscriberToken token = JsonConvert.DeserializeObject<SubscriberToken>(await _loginApi.DownloadLoginToken(email, password));
 
-            //code = 0 means email and password was correct
+            //code = 0 means email and password was correctly entered
             if(token.error.code == 0)
             {
                 Subscriber subscriber = JsonConvert.DeserializeObject<Subscriber>(await _loginApi.DownloadSubscriber(token));
 
+                //code = 0 once again means no error occured
                 if(subscriber.error.code == 0)
-                {
                     LoginSucceeded(subscriber);
-                }
                 else
-                {
                     LoginErrorOccured(subscriber.error);
-                }
             }
             else
-            {
                 LoginErrorOccured(token.error);
-            }
         }
     }
 }

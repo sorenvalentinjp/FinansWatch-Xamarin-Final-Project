@@ -15,7 +15,7 @@ namespace Prototype.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly StateController _stateController;
-        private string _email;
+        private string _email; //the email entry value
         public string Email
         {
             get { return _email; }
@@ -27,7 +27,7 @@ namespace Prototype.ViewModels
             }
         }
 
-        private string _password;
+        private string _password; //the password entry value
         public string Password
         {
             get { return _password; }
@@ -39,12 +39,11 @@ namespace Prototype.ViewModels
             }
         }
 
-
         public LoginViewModel(StateController stateController)
         {
-            this._stateController = stateController;
-            _stateController.LoginController.LoginAsync("michael.m.hansen@jp.dk", "1234qwer");
+            _stateController = stateController;
 
+            //two event for failed and successfull login
             _stateController.LoginController.LoginErrorOccured += LoginErrorOccured;
             _stateController.LoginController.LoginSucceeded += LoginSucceeded;
         }
@@ -52,12 +51,12 @@ namespace Prototype.ViewModels
         private void LoginErrorOccured(Error error)
         {
             App.Navigation.NavigationStack.First().DisplayAlert("", error.friendlyErrorText, "OK");
-            Password = "";
+            Password = ""; //password is reset, but we keep the entered email
         }
 
-        private void LoginSucceeded(Subscriber obj)
+        private void LoginSucceeded(Subscriber subscriber)
         {
-            App.Navigation.PopAsync();
+            _stateController.Subscriber = subscriber; //setting the subscriber, so we can reference him from other pages
         }
 
         public ICommand LoginCommand
