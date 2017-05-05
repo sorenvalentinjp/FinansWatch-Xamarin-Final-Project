@@ -80,8 +80,7 @@ namespace Prototype.ViewModels
                 return new Command(() =>
                 {
                     string url = "http://finanswatch.dk";
-                    Uri uri = new Uri(url);
-                    Device.OpenUri(uri);
+                    Device.OpenUri(new Uri(url));
                 });
             }
         }
