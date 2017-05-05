@@ -15,7 +15,7 @@
                     <Button Text="ALLE NYHEDER" TextColor="White" BackgroundColor="#213c68" Command="{Binding AllArticlesAction}"/>
                     <Button Text="LÆSELISTE" TextColor="White" BackgroundColor="#213c68" Command="{Binding SavedArticlesAction}"/>
                     <Button Text="SEKTIONER" TextColor="White" BackgroundColor="#213c68" Command="{Binding SectionAction}"/>
-                    <Button Text="LOGIN" TextColor="White" BackgroundColor="#213c68" Command="{Binding LoginAction}"/>
+                    <Button Text="{Binding LoginButtonText}" TextColor="White" BackgroundColor="#213c68" Command="{Binding LoginAction}"/>
                     <Button Text="SØG ARTIKLER" TextColor="White" BackgroundColor="#213c68" Command="{Binding SearchArticlesAction}"/>
 
                 </StackLayout>
