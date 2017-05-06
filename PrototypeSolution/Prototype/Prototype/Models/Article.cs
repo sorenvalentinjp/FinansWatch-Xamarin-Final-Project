@@ -8,7 +8,7 @@ namespace Prototype.Models
     /// <summary>
     /// JSON Generated class
     /// </summary>
-    public class Article
+    public class Article : IEquatable<Article>
     {
 
         //Generated fields start
@@ -59,35 +59,49 @@ namespace Prototype.Models
             ImagePlaceholderSmall = ImageSource.FromFile("imagePlaceholderSmall.png");
             ImageTransparentSmall = ImageSource.FromFile("imageTransparentSmall.png");
         }
+
+        //Implementation of IEquatable<Article> so we can call contains on a Collection<Article>. This is to avoid dublicates in eg. savedArticles in the statecontroller.
+        public bool Equals(Article other)
+        {
+            return null != other && contentUrl == other.contentUrl;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Article);
+        }
+
+        //-----------------> we should override public override int gethashcode() also!!
+
         //public void addFieldsFromAnotherArticle(Article article)
         //{
-            //image = article.image;
-            //desktopUrl = article.desktopUrl;
-            //homeSectionName = article.homeSectionName;
-            //contentUrl = article.contentUrl;
-            //titles = article.titles;
-            //teasers = article.teasers;
-            //homeSectionId = article.homeSectionId;
-            //publishedDate = article.publishedDate;
-            //locked = article.locked;
-            //isTopArticle = article.isTopArticle;
-            //inlineImages = article.inlineImages;
-            //metadata = article.metadata;
-            //breakingNews = article.breakingNews;
-            //partner = article.partner;
-            //bodyText = article.bodyText;
-            //c_name = article.c_name;
-            //c_category = article.c_category;
-            //tags = article.tags;
-            //relatedArticles = article.relatedArticles;
-            //topImages = article.topImages;
-            //video = article.video;
-            //quoteBoxes = article.quoteBoxes;
-            //reviewBoxes = article.reviewBoxes;
-            //updateInfo = article.updateInfo;
-            //publishData = article.publishData;
-            //lastModified = article.lastModified;
-            //id = article.id;
+        //image = article.image;
+        //desktopUrl = article.desktopUrl;
+        //homeSectionName = article.homeSectionName;
+        //contentUrl = article.contentUrl;
+        //titles = article.titles;
+        //teasers = article.teasers;
+        //homeSectionId = article.homeSectionId;
+        //publishedDate = article.publishedDate;
+        //locked = article.locked;
+        //isTopArticle = article.isTopArticle;
+        //inlineImages = article.inlineImages;
+        //metadata = article.metadata;
+        //breakingNews = article.breakingNews;
+        //partner = article.partner;
+        //bodyText = article.bodyText;
+        //c_name = article.c_name;
+        //c_category = article.c_category;
+        //tags = article.tags;
+        //relatedArticles = article.relatedArticles;
+        //topImages = article.topImages;
+        //video = article.video;
+        //quoteBoxes = article.quoteBoxes;
+        //reviewBoxes = article.reviewBoxes;
+        //updateInfo = article.updateInfo;
+        //publishData = article.publishData;
+        //lastModified = article.lastModified;
+        //id = article.id;
         //}
     }
 
@@ -155,5 +169,4 @@ namespace Prototype.Models
         public string publishedTimeFormatted { get; set; }
 
     }
-
 }
