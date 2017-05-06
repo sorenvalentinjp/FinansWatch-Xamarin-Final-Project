@@ -79,7 +79,7 @@ namespace Prototype.ViewModels
             {
                 return new Command(() =>
                 {
-                    string url = "http://finanswatch.dk";
+                    string url = "https://secure.finanswatch.dk/user/create?mode=trial";
                     Device.OpenUri(new Uri(url));
                 });
             }
