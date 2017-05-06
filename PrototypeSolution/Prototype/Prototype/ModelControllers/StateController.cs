@@ -2,24 +2,39 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Prototype.ModelControllers
 {
-    public class StateController
+    public class StateController : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public ArticleController ArticleController;
         public ObservableCollection<Article> SavedArticles;
         public LoginController LoginController;
-        public Subscriber Subscriber;
+        private Subscriber _subscriber;
+        public Subscriber Subscriber
+        {
+            get { return _subscriber; }
+            set
+            {
+                if (_subscriber == value) { return; }
+                _subscriber = value;
+                Notify("Subscriber");
+            }
+        }
 
         public StateController()
         {
             this.ArticleController = new ArticleController();
             this.SavedArticles = new ObservableCollection<Article>();
-            this.LoginController = new LoginController();
+            this.LoginController = new LoginController(this);
+
         }
 
         /// <summary>
@@ -41,7 +56,13 @@ namespace Prototype.ModelControllers
             return this.ArticleController.GetArticleDetailsAsync(article);
         }
 
-
+        protected void Notify(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
     }
 
 }

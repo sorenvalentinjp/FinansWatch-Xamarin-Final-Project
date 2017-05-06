@@ -10,12 +10,14 @@ namespace Prototype.ModelControllers
     public class LoginController
     {
         private readonly LoginApi _loginApi;
+        private readonly StateController _stateController;
         public event Action<Error> LoginErrorOccured;
         public event Action<Subscriber> LoginSucceeded;
 
-        public LoginController()
+        public LoginController(StateController stateController)
         {
             _loginApi = new LoginApi();
+            _stateController = stateController;
         }
 
         public async void LoginAsync(string email, string password)
@@ -28,8 +30,11 @@ namespace Prototype.ModelControllers
                 Subscriber subscriber = JsonConvert.DeserializeObject<Subscriber>(await _loginApi.DownloadSubscriber(token));
 
                 //code = 0 once again means no error occured
-                if(subscriber.error.code == 0)
+                if (subscriber.error.code == 0)
+                {
+                    _stateController.Subscriber = subscriber;
                     LoginSucceeded(subscriber);
+                }
                 else
                     LoginErrorOccured(subscriber.error);
             }

@@ -10,8 +10,9 @@ namespace Prototype.Models
         public Error error { get; set; }
         public User user { get; set; }
 
-        public bool HasAccessToSite(string site)
+        public bool HasAccessToSite()
         {
+            string site = "finanswatch";
             foreach (var featureAccess in featureAccessList)
             {
                 if (featureAccess.code == site.ToUpper()) return featureAccess.access;

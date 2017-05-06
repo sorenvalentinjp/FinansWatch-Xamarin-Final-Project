@@ -49,9 +49,21 @@ namespace Prototype.ViewModels
         //This event fires when the user logs in successfully. The detail's view is then set to direct the user back to the last visisted view.
         private void LoginSucceeded(Subscriber subscriber)
         {
-            _masterDetail.Detail = _latestVisitedView;
-            LoginButtonText = "LOG UD";
-            _masterDetail.IsPresented = false;
+            //Set login button text to "LOG UD"
+            SetLogInButtonText();
+
+            // If the user clicked log in from an article, pop and go back to the article
+            if (App.Navigation.NavigationStack.Count > 1)
+            {                
+                App.Navigation.PopAsync();
+            }
+            //If the user is logging in from the master menu go back to the latest visisted view
+            else
+            {
+                _masterDetail.Detail = _latestVisitedView;
+                _masterDetail.IsPresented = false;
+            }
+            
         }
 
         /// <summary>
@@ -147,7 +159,7 @@ namespace Prototype.ViewModels
                     else
                     {
                         _stateController.Subscriber = null;
-                        LoginButtonText = "LOG IND";
+                        SetLogInButtonText();
                         //set _loginView to a new LogInView to avoid email and password entries being populated when the user want to log in again
                         _loginView = new LoginView(new LoginViewModel(_stateController));
                         _masterDetail.IsPresented = false;

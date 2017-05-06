@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Input;
 using Prototype.ModelControllers;
 using Prototype.Models;
+using Prototype.Views;
 using Prototype.Views.TemplateSelectors;
 using Xamarin.Forms;
 
@@ -39,15 +40,15 @@ namespace Prototype.ViewModels
             }
         }
 
-        private bool _hasAccess;
-        public bool HasAccess
+        private bool _locked;
+        public bool Locked
         {
-            get { return _hasAccess; }
+            get { return _locked; }
             set
             {
-                if (_hasAccess == value) { return; }
-                _hasAccess = value;
-                Notify("HasAccess");
+                if (_locked == value) { return; }
+                _locked = value;
+                Notify("Locked");
             }
         }
 
@@ -56,16 +57,34 @@ namespace Prototype.ViewModels
             this._stateController = stateController;
             DataTemplate = new RelatedArticlesTemplateSelector(_stateController);
 
-            if (_stateController.Subscriber != null)
-            {
-                HasAccess = _stateController.Subscriber.HasAccessToSite("finanswatch");
-            }
-            else
-            {
-                HasAccess = false;
-            }
+            Locked = CalculateIfArticleShouldBeLocked(articleToDisplay, _stateController.Subscriber);
+
+            _stateController.LoginController.LoginSucceeded += LoginSucceeded;
 
             GetArticleDetails(articleToDisplay);
+        }
+
+        //Subscribed Event
+        //If the user just logged in, recalculate if the article should display as locked
+        private void LoginSucceeded(Subscriber subscriber)
+        {
+            Locked = CalculateIfArticleShouldBeLocked(Article, _stateController.Subscriber);
+        }
+
+        /// <summary>
+        /// Calculates wether the view should lock the article based on the logged or not not logged in subscribers access and the locked property on the article.
+        /// </summary>
+        /// <param name="article"></param>
+        /// <param name="subscriber"></param>
+        /// <returns></returns>
+        private bool CalculateIfArticleShouldBeLocked(Article article, Subscriber subscriber)
+        {
+            var locked = article.locked;
+            if (locked && subscriber != null)
+            {
+                if (subscriber.HasAccessToSite()) locked = false;
+            }
+            return locked;
         }
 
         private async void GetArticleDetails(Article articleToDisplay)
@@ -80,13 +99,31 @@ namespace Prototype.ViewModels
             Article = articleToDisplay;
         }
 
+        /// <summary>
+        /// When user clicks on login the view navigates to login screen
+        /// </summary>
         public ICommand LoginCommand
         {
             get
             {
                 return new Command(() =>
                 {
-                    //App.Navigation.PushAsync();
+                App.Navigation.PushAsync(new LoginView(new LoginViewModel(_stateController)));
+            });
+            }
+        }
+
+        /// <summary>
+        /// When user clicks try watch, the user gets linked to site try url.
+        /// </summary>
+        public ICommand TryWatchCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    string url = "http://finanswatch.dk";
+                    Device.OpenUri(new Uri(url));
                 });
             }
         }
