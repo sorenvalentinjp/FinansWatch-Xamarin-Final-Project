@@ -77,6 +77,7 @@
       <DependentUpon>FrontPageView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Helpers\ImageResourceExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Helpers\ListViewHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -196,6 +197,14 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Cells\DateTimeCellGroupHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\saved.png">
+      <LogicalName>saved.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\unlocked.png">
+      <LogicalName>unlocked.png</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

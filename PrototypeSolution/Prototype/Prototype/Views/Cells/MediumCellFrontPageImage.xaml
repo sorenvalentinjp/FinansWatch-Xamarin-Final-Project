@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:helpers="clr-namespace:Prototype.Views.Helpers;assembly=Prototype.Android"
              x:Class="Prototype.Views.Cells.MediumCellFrontPageImage"
              Tapped="TappedGesture"
              LongPressing="LongPressingGesture">
@@ -19,16 +20,24 @@
             </Grid.ColumnDefinitions>
 
             <ffimageloading:CachedImage x:Name="image"
-                                        Grid.Row="0" 
-                                        Grid.Column="0" 
-                                        LoadingPlaceholder="{Binding ImageTransparentSmall}"
-                                        Source="{Binding image.versions.small_article_220.url}"
-                                        HorizontalOptions="StartAndExpand"/>
+                Grid.Row="0" 
+                Grid.Column="0" 
+                LoadingPlaceholder="{Binding ImageTransparentSmall}"
+                Source="{Binding image.versions.small_article_220.url}"
+                HorizontalOptions="StartAndExpand"/>
             <Label Text="{Binding titles.FRONTPAGE}" 
+               Grid.Row="0" 
+               Grid.Column="1" 
+               Grid.ColumnSpan="2"
+               FontSize="Small"/>
+            
+            <!--<ffimageloading:CachedImage Source="{helpers:ImageResource unlocked.png}" 
                    Grid.Row="0" 
                    Grid.Column="1" 
                    Grid.ColumnSpan="2"
-                   FontSize="Small"/>
+                   HorizontalOptions="End"
+                   VerticalOptions="End"/>-->
         </Grid>
     </ViewCell.View>
 </mr:ViewCell>
+
