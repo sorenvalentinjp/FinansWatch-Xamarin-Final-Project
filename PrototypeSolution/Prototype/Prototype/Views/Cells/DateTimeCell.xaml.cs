@@ -30,8 +30,8 @@ namespace Prototype.Views.Cells
 
         private void LongPressingGesture(object sender, MR.Gestures.LongPressEventArgs e)
         {
-            Article article = (Article)BindingContext;
-            CellGestures.LongPressingGesture(this._stateController, article);
+            ArticleViewModel articleViewModel = (ArticleViewModel)BindingContext;
+            CellGestures.LongPressingGesture(this._stateController, articleViewModel);
         }
     }
 }
