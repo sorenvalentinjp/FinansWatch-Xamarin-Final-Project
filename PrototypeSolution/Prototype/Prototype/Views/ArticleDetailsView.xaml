@@ -4,8 +4,8 @@
              xmlns:customRenderers="clr-namespace:Prototype.Views.CustomRenderers"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:converters="clr-namespace:Prototype.Views.Converters;"
-             x:Class="Prototype.Views.ArticleView"
-             Title="{Binding Article.homeSectionName}">
+             x:Class="Prototype.Views.ArticleDetailsView"
+             Title="{Binding ArticleViewModel.Article.homeSectionName}">
 
     <ContentPage.Content>
         <ScrollView>
@@ -13,29 +13,29 @@
 
                 <StackLayout>
                     <ffimageloading:CachedImage DownsampleToViewSize="true" 
-                            Source="{Binding Article.topImage.small.url}"
+                            Source="{Binding ArticleViewModel.Article.topImage.small.url}"
                             HorizontalOptions="Fill"
-                            IsVisible="{Binding Article.topImage, Converter={converters:NullToBooleanConverter}}"/>
-                    <Label Text="{Binding Article.topImage.imageCaption}" 
+                            IsVisible="{Binding ArticleViewModel.Article.topImage, Converter={converters:NullToBooleanConverter}}"/>
+                    <Label Text="{Binding ArticleViewModel.Article.topImage.imageCaption}" 
                            Margin="10,0,30,10" 
                            FontSize="Micro"
-                           IsVisible="{Binding Article.topImage, Converter={converters:NullToBooleanConverter}}"/>
-                    <Label Text="{Binding Article.titles.DEFAULT}" 
+                           IsVisible="{Binding ArticleViewModel.Article.topImage, Converter={converters:NullToBooleanConverter}}"/>
+                    <Label Text="{Binding ArticleViewModel.Article.titles.DEFAULT}" 
                            Margin="10,0,30,0" 
                            FontSize="Large" 
                            FontAttributes="Bold"/>
                     <customRenderers:HtmlFormattedLabel 
-                        Text="{Binding Article.teasers.DEFAULT}" 
+                        Text="{Binding ArticleViewModel.Article.teasers.DEFAULT}" 
                         Margin="10,10,30,0" FontSize="Medium"/>
-                    <Label Text="{Binding Article.publishData.publishInfo}" 
+                    <Label Text="{Binding ArticleViewModel.Article.publishData.publishInfo}" 
                            Margin="10,10,30,0" 
                            FontSize="Micro" />
-                    <customRenderers:HtmlFormattedLabel IsVisible="{Binding Locked, Converter={converters:InverseBooleanConverter}}"
-                        Text="{Binding Article.bodyText}" 
+                    <customRenderers:HtmlFormattedLabel IsVisible="{Binding ArticleViewModel.Locked, Converter={converters:InverseBooleanConverter}}"
+                        Text="{Binding ArticleViewModel.Article.bodyText}" 
                         Margin="10,15,20,10" 
                         FontSize="Small"
                         />
-                    <StackLayout IsVisible="{Binding Locked}" 
+                    <StackLayout IsVisible="{Binding ArticleViewModel.Locked}" 
                         Orientation="Vertical"
                         BackgroundColor="LightGray"
                         Margin="10,0,10,5">
@@ -64,7 +64,7 @@
                 </StackLayout>
 
         <ListView x:Name="listView"
-                ItemsSource="{Binding Article.relatedDetailedArticles}"
+                ItemsSource="{Binding ArticleViewModel.Article.relatedDetailedArticles}"
                 ItemTemplate="{Binding DataTemplate}"
                 HasUnevenRows="True"
                 CachingStrategy="RecycleElement"/>

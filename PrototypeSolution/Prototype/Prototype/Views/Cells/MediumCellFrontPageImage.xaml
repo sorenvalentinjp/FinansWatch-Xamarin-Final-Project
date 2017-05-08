@@ -23,24 +23,36 @@
             <ffimageloading:CachedImage x:Name="image"
                 Grid.Row="0" 
                 Grid.Column="0" 
-                LoadingPlaceholder="{Binding ImageTransparentSmall}"
-                Source="{Binding image.versions.small_article_220.url}"
+                LoadingPlaceholder="{Binding Article.ImageTransparentSmall}"
+                Source="{Binding Article.image.versions.small_article_220.url}"
                 HorizontalOptions="StartAndExpand"/>
-            <Label Text="{Binding titles.FRONTPAGE}" 
+            <Label Text="{Binding Article.titles.FRONTPAGE}" 
                Grid.Row="0" 
                Grid.Column="1" 
                Grid.ColumnSpan="2"
                FontSize="Small"/>
 
-            <ffimageloading:CachedImage Source="{helpers:ImageResource locked.png}" 
-                                        Grid.Row="0" 
-                                        Grid.Column="1" 
-                                        Grid.ColumnSpan="2"
-                                        HeightRequest="24"
-                                        WidthRequest="24"
-                                        HorizontalOptions="End"
-                                        VerticalOptions="End"
-                                        IsVisible="{Binding locked}"/>
+            <ffimageloading:CachedImage Source="{Binding LockedIndicatorImageSource}" 
+                               Grid.Row="0" 
+                               Grid.Column="1"
+                               Grid.ColumnSpan="2"  
+                               HeightRequest="24"
+                               WidthRequest="24"
+                               HorizontalOptions="End"
+                               VerticalOptions="End"
+                               BitmapOptimizations="True"
+                               DownsampleToViewSize="True"/>
+
+            <!--<ffimageloading:CachedImage Source="{helpers:ImageResource unlocked.png}" 
+                               Grid.Row="0" 
+                               Grid.Column="7" 
+                               HeightRequest="24"
+                               WidthRequest="24"
+                               HorizontalOptions="End"
+                               VerticalOptions="End"
+                               BitmapOptimizations="True"
+                               DownsampleToViewSize="True"
+                               IsVisible="{Binding Article.locked, Converter={converters:UnlockedIndicatorVisibilityConverter}}"/>-->
         </Grid>
     </ViewCell.View>
 </mr:ViewCell>

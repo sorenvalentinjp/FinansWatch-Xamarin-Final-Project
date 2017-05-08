@@ -17,16 +17,21 @@ using Xamarin.Forms.Xaml;
 namespace Prototype.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ArticleView : ContentPage
+    public partial class ArticleDetailsView : ContentPage
     {
 
-        public ArticleView(ArticleViewModel viewModel)
+        public ArticleDetailsView(StateController stateController, ArticleViewModel viewModel)
         {
             InitializeComponent();
 
             ListViewHelper.DisableItemSelectedAction(listView);
 
-            BindingContext = viewModel;
+            SetBindingContext(stateController, viewModel);
+        }
+
+        public async void SetBindingContext(StateController stateController, ArticleViewModel viewModel)
+        {
+            BindingContext = new ArticleDetailsViewModel(stateController, await viewModel.GetArticleDetails());
         }
     }
 }

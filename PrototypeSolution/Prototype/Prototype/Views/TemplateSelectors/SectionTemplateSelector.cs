@@ -4,6 +4,7 @@ using System.Text;
 using Prototype.Models;
 using Xamarin.Forms;
 using Prototype.ModelControllers;
+using Prototype.ViewModels;
 using Prototype.Views.Cells;
 
 namespace Prototype.Views.TemplateSelectors
@@ -28,22 +29,22 @@ namespace Prototype.Views.TemplateSelectors
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            Article article = (Article)item;
+            ArticleViewModel articleViewModel = (ArticleViewModel)item;
 
-            if (article.isTopArticle)
-            {
-                if (article.image == null)
-                    return this.LargeCellNoImageTemplate;
-                else
-                    return this.LargeCellFrontPageImageTemplate;
-            }
-            else
-            {
-                if (article.image == null)
-                    return this.MediumCellNoImageTemplate;
-                else
+            //if (articleViewModel.Article.isTopArticle)
+            //{
+            //    if (articleViewModel.Article.image == null)
+            //        return this.LargeCellNoImageTemplate;
+            //    else
+            //        return this.LargeCellFrontPageImageTemplate;
+            //}
+            //else
+            //{
+                //if (articleViewModel.Article.image == null)
+                //    return this.MediumCellNoImageTemplate;
+                //else
                     return this.MediumCellFrontPageImageTemplate;
-            }
+            //}
         }
     }
 }

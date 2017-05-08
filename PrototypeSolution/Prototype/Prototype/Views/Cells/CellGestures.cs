@@ -11,9 +11,9 @@ namespace Prototype.Views.Cells
 {
     public static class CellGestures
     {
-        public static async void TappedGesture(StateController stateController, Article article)
+        public static async void TappedGesture(StateController stateController, ArticleViewModel articleViewModel)
         {
-            var newPage = new ArticleView(new ArticleViewModel(stateController, article));
+            var newPage = new ArticleDetailsView(stateController, articleViewModel);
             NavigationPage.SetBackButtonTitle(newPage, "");
             await App.Navigation.PushAsync(newPage, true);
         }

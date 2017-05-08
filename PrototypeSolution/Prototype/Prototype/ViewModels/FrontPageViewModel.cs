@@ -12,8 +12,8 @@ namespace Prototype.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private IList<Article> _articles;
-        public IList<Article> Articles
+        private IList<ArticleViewModel> _articles;
+        public IList<ArticleViewModel> Articles
         {
             get { return _articles; }
             set
@@ -63,7 +63,12 @@ namespace Prototype.ViewModels
 
         private void FrontPageArticlesAreReady(IList<Article> newArticles)
         {
-            Articles = newArticles;
+            IList<ArticleViewModel> articles = new List<ArticleViewModel>();
+            foreach (var article in newArticles)
+            {
+                articles.Add(new ArticleViewModel(_stateController, article));
+            }
+            Articles = articles;
         }
 
         //IsRefreshing is used to display an 'busy' icon while the listview is refreshing its content.

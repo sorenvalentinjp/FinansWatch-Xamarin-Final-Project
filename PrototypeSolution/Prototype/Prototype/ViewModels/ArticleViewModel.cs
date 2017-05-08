@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Prototype.ModelControllers;
 using Prototype.Models;
 using Prototype.Views;
+using Prototype.Views.Helpers;
 using Prototype.Views.TemplateSelectors;
 using Xamarin.Forms;
 
@@ -28,18 +30,6 @@ namespace Prototype.ViewModels
             }
         }
 
-        private DataTemplate _dateTemplate;
-        public DataTemplate DataTemplate
-        {
-            get { return _dateTemplate; }
-            set
-            {
-                if (_dateTemplate == value) { return; }
-                _dateTemplate = value;
-                Notify("DataTemplate");
-            }
-        }
-
         private bool _locked;
         public bool Locked
         {
@@ -52,16 +42,28 @@ namespace Prototype.ViewModels
             }
         }
 
+        private ImageSource _lockedIndicatorImageSource;
+
+        public ImageSource LockedIndicatorImageSource
+        {
+            get { return _lockedIndicatorImageSource;}
+            set
+            {
+                if (_lockedIndicatorImageSource == value) { return; }
+                _lockedIndicatorImageSource = value;
+                Notify("LockedIndicatorImageSource");
+            }
+        }
+
         public ArticleViewModel(StateController stateController, Article articleToDisplay)
         {
             this._stateController = stateController;
-            DataTemplate = new RelatedArticlesTemplateSelector(_stateController);
 
             Locked = CalculateIfArticleShouldBeLocked(articleToDisplay, _stateController.Subscriber);
 
             _stateController.LoginController.LoginSucceeded += LoginSucceeded;
 
-            GetArticleDetails(articleToDisplay);
+            Article = articleToDisplay;
         }
 
         //Subscribed Event
@@ -82,50 +84,30 @@ namespace Prototype.ViewModels
             var locked = article.locked;
             if (locked && subscriber != null)
             {
-                if (subscriber.HasAccessToSite()) locked = false;
+                if (subscriber.HasAccessToSite())
+                    locked = false;
+                //If the subscriber is logged in, has access and the article is also locked, show the unlocked icon
+                this.LockedIndicatorImageSource = ImageSource.FromResource("unlocked.png");
             }
+            else if(locked)
+            {
+                //If the article is locked and subscriber is not logged in or does not have access, show the locked icon
+                this.LockedIndicatorImageSource = ImageSource.FromResource("locked.png");
+            }
+            
             return locked;
         }
 
-        private async void GetArticleDetails(Article articleToDisplay)
+        public async Task<ArticleViewModel> GetArticleDetails()
         {
-            if (articleToDisplay.bodyText == "")
+            if (Article.bodyText == "")
             {
-                articleToDisplay = await this._stateController.GetArticleDetails(articleToDisplay);
+                Article = await this._stateController.GetArticleDetails(Article);
             }
 
-            articleToDisplay.relatedDetailedArticles = await this._stateController.GetRelatedArticles(articleToDisplay);
+            Article.relatedDetailedArticles = await this._stateController.GetRelatedArticles(Article);
 
-            Article = articleToDisplay;
-        }
-
-        /// <summary>
-        /// When user clicks on login the view navigates to login screen
-        /// </summary>
-        public ICommand LoginCommand
-        {
-            get
-            {
-                return new Command(() =>
-                {
-                App.Navigation.PushAsync(new LoginView(new LoginViewModel(_stateController)));
-            });
-            }
-        }
-
-        /// <summary>
-        /// When user clicks try watch, the user gets linked to site try url.
-        /// </summary>
-        public ICommand TryWatchCommand
-        {
-            get
-            {
-                return new Command(() =>
-                {
-                    string url = "https://secure.finanswatch.dk/user/create?mode=trial";
-                    Device.OpenUri(new Uri(url));
-                });
-            }
+            return this;
         }
 
         protected void Notify(string propName)

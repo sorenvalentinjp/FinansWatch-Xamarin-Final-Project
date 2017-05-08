@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Prototype.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,8 +24,8 @@ namespace Prototype.Views.Cells
 
         private void TappedGesture(object sender, MR.Gestures.TapEventArgs e)
         {
-            Article article = (Article)BindingContext;
-            CellGestures.TappedGesture(this._stateController, article);
+            //ArticleViewModel articleViewModel = (ArticleViewModel)BindingContext;
+            //CellGestures.TappedGesture(this._stateController, articleViewModel);
         }
 
         private void LongPressingGesture(object sender, MR.Gestures.LongPressEventArgs e)

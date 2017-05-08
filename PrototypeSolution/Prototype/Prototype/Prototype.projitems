@@ -25,6 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Article.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Subscriber.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SubscriberToken.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ArticleDetailsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ArticleViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AllArticlesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FrontPageViewModel.cs" />
@@ -37,8 +38,8 @@
       <DependentUpon>AllArticlesView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\ArticleView.xaml.cs">
-      <DependentUpon>ArticleView.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ArticleDetailsView.xaml.cs">
+      <DependentUpon>ArticleDetailsView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\CellGestures.cs" />
@@ -154,7 +155,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\ArticleView.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\ArticleDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

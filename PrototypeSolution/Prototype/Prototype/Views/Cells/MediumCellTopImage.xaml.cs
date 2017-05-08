@@ -24,8 +24,8 @@ namespace Prototype.Views.Cells
 
         private void TappedGesture(object sender, MR.Gestures.TapEventArgs e)
         {
-            Article article = (Article)BindingContext;
-            CellGestures.TappedGesture(this._stateController, article);
+            //Article article = (Article)BindingContext;
+            //CellGestures.TappedGesture(this._stateController, article);
         }
 
         private void LongPressingGesture(object sender, MR.Gestures.LongPressEventArgs e)
