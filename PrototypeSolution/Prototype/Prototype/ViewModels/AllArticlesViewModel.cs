@@ -2,6 +2,7 @@
 using Prototype.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
 using Prototype.Views.Cells;
@@ -77,19 +78,22 @@ namespace Prototype.ViewModels
 
 
 
-        private void LatestArticlesAreReady(IList<Grouping<string, Article>> groupedArticles)
+        private void LatestArticlesAreReady(IList<Article> articles)
         {
-            var groupedArticleViewModels = new List<Grouping<string, ArticleViewModel>>();
+            IList<ArticleViewModel> articleViewModels = new List<ArticleViewModel>();
 
-            foreach (var group in groupedArticles)
+            foreach (var article in articles)
             {
-                var articleViewModels = new List<ArticleViewModel>();
-                foreach (var article in group.ToList())
-                {
-                    articleViewModels.Add(new ArticleViewModel(_stateController, article));
-                }
-                groupedArticleViewModels.Add(new Grouping<string, ArticleViewModel>(group.Key, articleViewModels));
+                articleViewModels.Add(new ArticleViewModel(_stateController, article));
             }
+            
+                
+            var sortedArticleViewModels = from articleViewModel in articleViewModels
+                    orderby articleViewModel.Article.publishedDateTime descending
+                    group articleViewModel by articleViewModel.Article.publishedDateTime.Date.ToString("dd. MMMM", CultureInfo.InvariantCulture) into articleGroup
+                    select new Grouping<string, ArticleViewModel>(articleGroup.Key, articleGroup);
+            
+            var groupedArticleViewModels = new List<Grouping<string, ArticleViewModel>>(sortedArticleViewModels);
 
             Grouped = groupedArticleViewModels;
         }
