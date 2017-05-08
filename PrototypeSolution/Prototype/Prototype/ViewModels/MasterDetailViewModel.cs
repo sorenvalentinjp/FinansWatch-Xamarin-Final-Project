@@ -155,7 +155,7 @@ namespace Prototype.ViewModels
         {
             get
             {
-                return new Command(() =>
+                return new Command(async () =>
                 {
                     //If logget out, then present the log in view
                     if (LoginButtonText == "LOG IND")
@@ -168,14 +168,19 @@ namespace Prototype.ViewModels
                         _masterDetail.IsPresented = false;
                     }
 
-                    //Else log the user out right away
+                    //Else log the user out after he confirms the log out action
                     else
                     {
-                        _stateController.Subscriber = null;
-                        SetLogInButtonText();
-                        //set _loginView to a new LogInView to avoid email and password entries being populated when the user want to log in again
-                        _loginView = new LoginView(new LoginViewModel(_stateController));
                         _masterDetail.IsPresented = false;
+                        var answer = await App.Navigation.NavigationStack.First().DisplayAlert("", "Er du sikker på, at du vil logge ud?", "Log ud", "Afbryd");
+
+                        if (answer)
+                        {
+                            _stateController.Subscriber = null;
+                            SetLogInButtonText();
+                            //set _loginView to a new LogInView to avoid email and password entries being populated when the user want to log in again
+                            _loginView = new LoginView(new LoginViewModel(_stateController));
+                        }
                     }
                 });
             }
