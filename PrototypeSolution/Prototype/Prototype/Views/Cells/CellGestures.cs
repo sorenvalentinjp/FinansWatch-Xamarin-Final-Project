@@ -18,16 +18,16 @@ namespace Prototype.Views.Cells
             await App.Navigation.PushAsync(newPage, true);
         }
 
-        public static async void LongPressingGesture(StateController stateController, Article article)
+        public static async void LongPressingGesture(StateController stateController, ArticleViewModel articleViewModel)
         {
-            if (stateController.SavedArticles.Contains(article))
+            if (stateController.SavedArticles.Contains(articleViewModel))
             {
-                stateController.SavedArticles.Remove(article);
+                stateController.SavedArticles.Remove(articleViewModel);
                 await App.Navigation.NavigationStack.First().DisplayAlert("", "Artiklen er fjernet fra læselisten.", "OK");
             }
             else
             {
-                stateController.SavedArticles.Add(article);
+                stateController.SavedArticles.Add(articleViewModel);
                 await App.Navigation.NavigationStack.First().DisplayAlert("", "Artiklen er gemt i læselisten.", "OK");
             }
         }

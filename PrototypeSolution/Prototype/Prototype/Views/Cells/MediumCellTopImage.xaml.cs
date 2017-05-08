@@ -1,5 +1,6 @@
 ﻿using Prototype.ModelControllers;
 using Prototype.Models;
+using Prototype.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,14 +25,14 @@ namespace Prototype.Views.Cells
 
         private void TappedGesture(object sender, MR.Gestures.TapEventArgs e)
         {
-            //Article article = (Article)BindingContext;
-            //CellGestures.TappedGesture(this._stateController, article);
+            ArticleViewModel articleViewModel = (ArticleViewModel)BindingContext;
+            CellGestures.TappedGesture(_stateController, articleViewModel);
         }
 
         private void LongPressingGesture(object sender, MR.Gestures.LongPressEventArgs e)
         {
-            Article article = (Article)BindingContext;
-            CellGestures.LongPressingGesture(this._stateController, article);
+            ArticleViewModel articleViewModel = (ArticleViewModel)BindingContext;
+            CellGestures.LongPressingGesture(_stateController, articleViewModel);
         }
     }
 }

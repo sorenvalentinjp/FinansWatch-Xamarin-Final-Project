@@ -15,8 +15,8 @@ namespace Prototype.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly StateController _stateController;
 
-        private ObservableCollection<Article> _savedArticles;
-        public ObservableCollection<Article> SavedArticles
+        private ObservableCollection<ArticleViewModel> _savedArticles;
+        public ObservableCollection<ArticleViewModel> SavedArticles
         {
             get { return _savedArticles; }
             set
@@ -42,7 +42,7 @@ namespace Prototype.ViewModels
         public SavedArticlesViewModel(StateController stateController)
         {
             this._stateController = stateController;
-            this.SavedArticles = this._stateController.SavedArticles;
+            this.SavedArticles = _stateController.SavedArticles;
             this.DataTemplate = new SavedArticlesTemplateSelector(this._stateController);
         }
 

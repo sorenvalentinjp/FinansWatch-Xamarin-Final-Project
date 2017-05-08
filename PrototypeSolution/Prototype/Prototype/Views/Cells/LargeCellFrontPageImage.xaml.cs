@@ -26,13 +26,13 @@ namespace Prototype.Views.Cells
         private void TappedGesture(object sender, MR.Gestures.TapEventArgs e)
         {
             ArticleViewModel articleViewModel = (ArticleViewModel)BindingContext;
-            CellGestures.TappedGesture(this._stateController, articleViewModel);
+            CellGestures.TappedGesture(_stateController, articleViewModel);
         }
 
         private void LongPressingGesture(object sender, MR.Gestures.LongPressEventArgs e)
         {
-            Article article = (Article)BindingContext;
-            CellGestures.LongPressingGesture(this._stateController, article);
+            ArticleViewModel articleViewModel = (ArticleViewModel)BindingContext;
+            CellGestures.LongPressingGesture(_stateController, articleViewModel);
         }
     }
 }

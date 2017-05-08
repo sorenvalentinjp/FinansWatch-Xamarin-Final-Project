@@ -1,5 +1,6 @@
 ﻿using Prototype.ModelControllers;
 using Prototype.Models;
+using Prototype.ViewModels;
 using Prototype.Views.Cells;
 using System;
 using System.Collections.Generic;
@@ -23,11 +24,11 @@ namespace Prototype.Views.TemplateSelectors
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            Article article = (Article)item;
+            ArticleViewModel articleViewModel = (ArticleViewModel)item;
 
-            if (article.image == null && article.topImage == null)
+            if (articleViewModel.Article.image == null && articleViewModel.Article.topImage == null)
                 return this.MediumCellNoImageTemplate;
-            else if (article.image != null)
+            else if (articleViewModel.Article.image != null)
                 return this.MediumCellFrontPageImageTemplate;
             else
                 return this.MediumCellTopImageTemplate;
