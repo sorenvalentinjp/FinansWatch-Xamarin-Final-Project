@@ -4,6 +4,7 @@ using Prototype.Views.Cells;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Prototype.ViewModels;
 using Xamarin.Forms;
 
 namespace Prototype.Views.TemplateSelectors
@@ -24,9 +25,9 @@ namespace Prototype.Views.TemplateSelectors
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            Article article = (Article)item;
+            ArticleViewModel articleViewModel = (ArticleViewModel)item;
 
-            if (article.topImage == null)
+            if (articleViewModel.Article.topImage == null)
                 return this.MediumCellNoImageTemplate;
             else
                 return this.MediumCellTopImageTemplate;
