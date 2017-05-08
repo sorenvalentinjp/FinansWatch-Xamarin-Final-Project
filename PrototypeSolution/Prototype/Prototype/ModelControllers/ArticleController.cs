@@ -64,8 +64,11 @@ namespace Prototype.ModelControllers
 
         public async Task<Article> GetArticleDetailsAsync(Article article)
         {
-            return DeserializeArticle(await _contentApi.DownloadArticle(article.contentUrl));
+            Article detailedArticle = DeserializeArticle(await _contentApi.DownloadArticle(article.contentUrl));
+            article.AddFieldsFromAnotherArticle(detailedArticle);
+            SetArticleFields(article);
 
+            return article;
         }
 
         public async Task<Article> GetArticleDetailsAsync(string contentUrl)
@@ -116,7 +119,7 @@ namespace Prototype.ModelControllers
         //Helper methods
         private Article SetArticleFields(Article article)
         {
-            //article.addFieldsFromAnotherArticle(newArt);
+            //article.AddFieldsFromAnotherArticle(newArt);
             article = StripArticle(article);
 
             if (article.topImages.Count > 0)
