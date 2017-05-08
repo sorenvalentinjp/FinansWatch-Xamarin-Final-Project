@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.Views.Cells.DateTimeCell"
              xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:helpers="clr-namespace:Prototype.Views.Helpers;assembly=Prototype.Android"
              Tapped="TappedGesture"
              LongPressing="LongPressingGesture">
 
@@ -31,6 +33,17 @@
                                 Grid.Row="0" 
                                 Grid.Column="2" 
                                 Grid.ColumnSpan="5"/>
+
+            <forms:CachedImage Source="{helpers:ImageResource locked.png}" 
+                                       Grid.Row="0" 
+                                       Grid.Column="7" 
+                                       HeightRequest="24"
+                                       WidthRequest="24"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="End"
+                                       BitmapOptimizations="True"
+                                       DownsampleToViewSize="True"
+                                       IsVisible="{Binding locked}"/>
         </Grid>
     </ViewCell.View>
 </mr:ViewCell>

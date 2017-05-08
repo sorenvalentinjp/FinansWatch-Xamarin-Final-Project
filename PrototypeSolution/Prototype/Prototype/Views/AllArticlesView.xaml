@@ -18,6 +18,7 @@
                   RefreshCommand="{Binding RefreshCommand}"
                   IsGroupingEnabled="true" 
                   HasUnevenRows="True"
+                  CachingStrategy="RecycleElement"
                   GroupDisplayBinding="{Binding Key}"
                   GroupShortNameBinding="{Binding Key}"/>
     </ContentPage.Content>

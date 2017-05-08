@@ -4,13 +4,16 @@
              xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:customRenderers="clr-namespace:Prototype.Views.CustomRenderers"
+             xmlns:helpers="clr-namespace:Prototype.Views.Helpers;assembly=Prototype.Android"
              x:Class="Prototype.Views.Cells.LargeCellFrontPageImage"
              Tapped="TappedGesture"
              LongPressing="LongPressingGesture">
 
     <ViewCell.View>
         <StackLayout Orientation="Vertical">
-            <ffimageloading:CachedImage Source="{Binding image.versions.big_article_460.url}"/>
+            <ffimageloading:CachedImage Source="{Binding image.versions.big_article_460.url}"
+                                        BitmapOptimizations="True"
+                                        DownsampleToViewSize="True"/>
             <StackLayout Orientation="Vertical"
                          Padding="10,0,10,10">
                 <Label Text="{Binding titles.FRONTPAGE}"
@@ -18,6 +21,18 @@
                        FontAttributes="Bold"/>
                 <customRenderers:HtmlFormattedLabel Text="{Binding teasers.FRONTPAGE}"
                                                     FontSize="Medium"/>
+
+                <ffimageloading:CachedImage Source="{helpers:ImageResource locked.png}" 
+                                            Grid.Row="0" 
+                                            Grid.Column="1" 
+                                            Grid.ColumnSpan="2"
+                                            HeightRequest="24"
+                                            WidthRequest="24"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="End"
+                                            BitmapOptimizations="True"
+                                            DownsampleToViewSize="True"
+                                            IsVisible="{Binding locked}"/>
             </StackLayout>
         </StackLayout>
     </ViewCell.View>

@@ -4,6 +4,7 @@
              xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:helpers="clr-namespace:Prototype.Views.Helpers;assembly=Prototype.Android"
+             xmlns:converters="clr-namespace:Prototype.Views.Converters;assembly=Prototype.Android"
              x:Class="Prototype.Views.Cells.MediumCellFrontPageImage"
              Tapped="TappedGesture"
              LongPressing="LongPressingGesture">
@@ -30,13 +31,16 @@
                Grid.Column="1" 
                Grid.ColumnSpan="2"
                FontSize="Small"/>
-            
-            <!--<ffimageloading:CachedImage Source="{helpers:ImageResource unlocked.png}" 
-                   Grid.Row="0" 
-                   Grid.Column="1" 
-                   Grid.ColumnSpan="2"
-                   HorizontalOptions="End"
-                   VerticalOptions="End"/>-->
+
+            <ffimageloading:CachedImage Source="{helpers:ImageResource locked.png}" 
+                                        Grid.Row="0" 
+                                        Grid.Column="1" 
+                                        Grid.ColumnSpan="2"
+                                        HeightRequest="24"
+                                        WidthRequest="24"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="End"
+                                        IsVisible="{Binding locked}"/>
         </Grid>
     </ViewCell.View>
 </mr:ViewCell>
