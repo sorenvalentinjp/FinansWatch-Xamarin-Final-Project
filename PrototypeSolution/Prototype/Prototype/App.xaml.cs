@@ -15,7 +15,7 @@ namespace Prototype
     public partial class App : Application
     {
         public static INavigation Navigation { get; set; }
-        private StateController _stateController;
+        private static StateController _stateController;
 
         public App()
         {
@@ -49,6 +49,11 @@ namespace Prototype
             // Handle when your app resumes
             if (Application.Current.Properties.ContainsKey("stateController"))
                 _stateController = LocalStorage.DeserializeFromJson<StateController>(Application.Current.Properties["stateController"].ToString());
+        }
+
+        public static bool IsSubscriberLoggedIn()
+        {
+            return _stateController.Subscriber != null;
         }
     }
 }

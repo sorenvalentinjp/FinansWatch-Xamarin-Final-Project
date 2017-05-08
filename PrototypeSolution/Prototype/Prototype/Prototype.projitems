@@ -71,6 +71,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\Converters\InverseBooleanConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Converters\LockedIndicatorVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Converters\NullToBooleanConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\CustomRenderers\HtmlFormattedLabel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\FrontPageView.xaml.cs">
@@ -209,22 +210,22 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\144x144.png" >
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\144x144.png">
       <LogicalName>144x144.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\192x192.png" >
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\192x192.png">
       <LogicalName>192x192.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\48x48.png" >
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\48x48.png">
       <LogicalName>48x48.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\72x72.png" >
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\72x72.png">
       <LogicalName>72x72.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\96x96.png" >
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\96x96.png">
       <LogicalName>96x96.png</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\locked.png" >
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\locked.png">
       <LogicalName>locked.png</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
