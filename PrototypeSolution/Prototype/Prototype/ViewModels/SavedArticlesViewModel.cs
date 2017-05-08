@@ -42,8 +42,24 @@ namespace Prototype.ViewModels
         public SavedArticlesViewModel(StateController stateController)
         {
             this._stateController = stateController;
-            this.SavedArticles = _stateController.SavedArticles;
-            this.DataTemplate = new SavedArticlesTemplateSelector(this._stateController);
+            this.SavedArticles = GetSavedArticles(); //to populate the list when the view loads
+            //because our statecontroller's SavedArticles property contains Article objects, we cant reference that collection directly (we use ArticleViewModels here). Therefore we mus t create this event listener to get notified when the collection changes
+            _stateController.SavedArticles.CollectionChanged += SavedArticles_CollectionChanged;
+            this.DataTemplate = new SavedArticlesTemplateSelector(_stateController);
+        }
+
+        private void SavedArticles_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            this.SavedArticles = GetSavedArticles();
+        }
+
+        //Helper method to get the statecontroller's SavedArticles
+        private ObservableCollection<ArticleViewModel> GetSavedArticles()
+        {
+            ObservableCollection<ArticleViewModel> toReturn = new ObservableCollection<ArticleViewModel>();
+            foreach (var article in _stateController.SavedArticles)
+                toReturn.Add(new ArticleViewModel(_stateController, article));
+            return toReturn;
         }
 
         protected void Notify(string propName)

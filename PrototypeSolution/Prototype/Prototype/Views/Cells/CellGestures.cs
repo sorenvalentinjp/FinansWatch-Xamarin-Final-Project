@@ -20,14 +20,14 @@ namespace Prototype.Views.Cells
 
         public static async void LongPressingGesture(StateController stateController, ArticleViewModel articleViewModel)
         {
-            if (stateController.SavedArticles.Contains(articleViewModel))
+            if (stateController.SavedArticles.Contains(articleViewModel.Article))
             {
-                stateController.SavedArticles.Remove(articleViewModel);
+                stateController.SavedArticles.Remove(articleViewModel.Article);
                 await App.Navigation.NavigationStack.First().DisplayAlert("", "Artiklen er fjernet fra læselisten.", "OK");
             }
             else
             {
-                stateController.SavedArticles.Add(articleViewModel);
+                stateController.SavedArticles.Add(articleViewModel.Article);
                 await App.Navigation.NavigationStack.First().DisplayAlert("", "Artiklen er gemt i læselisten.", "OK");
             }
         }
