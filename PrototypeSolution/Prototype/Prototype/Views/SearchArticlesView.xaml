@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:Prototype.Views.Helpers"
              x:Class="Prototype.Views.SearchArticlesView"
              Title="SØG EFTER ARTIKLER">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="ALL"/>
+        <ToolbarItem Text="ALL" Command="{helpers:ToolBarExtension}"/>
     </ContentPage.ToolbarItems>
 
     <StackLayout Margin="5">

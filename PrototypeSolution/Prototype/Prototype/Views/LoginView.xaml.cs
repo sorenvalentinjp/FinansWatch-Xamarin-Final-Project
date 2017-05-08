@@ -20,5 +20,10 @@ namespace Prototype.Views
 
             BindingContext = viewModel;
 		}
-	}
+
+        private void ToolbarItem_Activated(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

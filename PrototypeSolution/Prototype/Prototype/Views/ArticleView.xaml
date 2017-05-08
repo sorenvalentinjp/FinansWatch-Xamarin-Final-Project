@@ -7,10 +7,6 @@
              x:Class="Prototype.Views.ArticleView"
              Title="{Binding Article.homeSectionName}">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="ALL"/>
-    </ContentPage.ToolbarItems>
-
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Orientation="Vertical">
