@@ -58,7 +58,6 @@ namespace Prototype.ViewModels
             this._stateController.ArticleController.FrontPageArticlesAreReady += FrontPageArticlesAreReady;
             DataTemplate = new SectionTemplateSelector(_stateController);
             this._stateController.GetFrontPageArticles();
-         
         }
 
         private void FrontPageArticlesAreReady(IList<Article> newArticles)

@@ -31,20 +31,20 @@ namespace Prototype.Views.TemplateSelectors
         {
             ArticleViewModel articleViewModel = (ArticleViewModel)item;
 
-            //if (articleViewModel.Article.isTopArticle)
-            //{
-            //    if (articleViewModel.Article.image == null)
-            //        return this.LargeCellNoImageTemplate;
-            //    else
-            //        return this.LargeCellFrontPageImageTemplate;
-            //}
-            //else
-            //{
-                //if (articleViewModel.Article.image == null)
-                //    return this.MediumCellNoImageTemplate;
-                //else
+            if (articleViewModel.Article.isTopArticle)
+            {
+                if (articleViewModel.Article.image == null)
+                    return this.LargeCellNoImageTemplate;
+                else
+                    return this.LargeCellFrontPageImageTemplate;
+            }
+            else
+            {
+                if (articleViewModel.Article.image == null)
+                    return this.MediumCellNoImageTemplate;
+                else
                     return this.MediumCellFrontPageImageTemplate;
-            //}
+            }
         }
     }
 }

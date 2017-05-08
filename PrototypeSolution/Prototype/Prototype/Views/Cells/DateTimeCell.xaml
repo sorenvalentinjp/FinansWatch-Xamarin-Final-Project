@@ -43,8 +43,7 @@
                                        HorizontalOptions="End"
                                        VerticalOptions="End"
                                        BitmapOptimizations="True"
-                                       DownsampleToViewSize="True"
-                                       IsVisible="{Binding locked, Converter={converters:LockedIndicatorVisibilityConverter}}"/>
+                                       DownsampleToViewSize="True"/>
 
             <forms:CachedImage Source="{helpers:ImageResource unlocked.png}" 
                                Grid.Row="0" 
@@ -54,8 +53,7 @@
                                HorizontalOptions="End"
                                VerticalOptions="End"
                                BitmapOptimizations="True"
-                               DownsampleToViewSize="True"
-                               IsVisible="{Binding locked, Converter={converters:UnlockedIndicatorVisibilityConverter}}"/>
+                               DownsampleToViewSize="True"/>
         </Grid>
     </ViewCell.View>
 </mr:ViewCell>
