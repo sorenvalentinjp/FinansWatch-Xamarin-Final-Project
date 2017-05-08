@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:helpers="clr-namespace:Prototype.Views.Helpers;assembly=Prototype.Android"
              x:Class="Prototype.Views.Cells.MediumCellTopImage"
              Tapped="TappedGesture"
              LongPressing="LongPressingGesture">
@@ -22,18 +21,18 @@
             <ffimageloading:CachedImage x:Name="image"
                                         Grid.Row="0" 
                                         Grid.Column="0" 
-                                        LoadingPlaceholder="{Binding ImageTransparentSmall}"
-                                        Source="{Binding topImage.thumb.url}"
+                                        LoadingPlaceholder="{Binding Article.ImageTransparentSmall}"
+                                        Source="{Binding Article.topImage.thumb.url}"
                                         BitmapOptimizations="True"
                                         DownsampleToViewSize="True"
                                         HorizontalOptions="StartAndExpand"/>
-            <Label Text="{Binding titles.FRONTPAGE}" 
+            <Label Text="{Binding Article.titles.FRONTPAGE}" 
                    Grid.Row="0" 
                    Grid.Column="1" 
                    Grid.ColumnSpan="2"
                    FontSize="Small"/>
 
-            <ffimageloading:CachedImage Source="{helpers:ImageResource locked.png}" 
+            <ffimageloading:CachedImage Source="{Binding LockedIndicatorImageSource}" 
                                         Grid.Row="0" 
                                         Grid.Column="1" 
                                         Grid.ColumnSpan="2"
@@ -42,8 +41,7 @@
                                         HorizontalOptions="End"
                                         VerticalOptions="End"
                                         BitmapOptimizations="True"
-                                        DownsampleToViewSize="True"
-                                        IsVisible="{Binding locked}"/>
+                                        DownsampleToViewSize="True"/>
         </Grid>
     </ViewCell.View>
 </mr:ViewCell>
