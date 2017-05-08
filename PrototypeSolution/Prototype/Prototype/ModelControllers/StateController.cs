@@ -1,5 +1,4 @@
 ﻿using Prototype.Models;
-using Prototype.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,7 +15,7 @@ namespace Prototype.ModelControllers
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ArticleController ArticleController;
-        public ObservableCollection<ArticleViewModel> SavedArticles;
+        public ObservableCollection<Article> SavedArticles;
         public LoginController LoginController;
         private Subscriber _subscriber;
         public Subscriber Subscriber
@@ -32,9 +31,10 @@ namespace Prototype.ModelControllers
 
         public StateController()
         {
-            this.ArticleController = new ArticleController(this);
-            this.SavedArticles = new ObservableCollection<ArticleViewModel>();
+            this.ArticleController = new ArticleController();
+            this.SavedArticles = new ObservableCollection<Article>();
             this.LoginController = new LoginController(this);
+
         }
 
         /// <summary>

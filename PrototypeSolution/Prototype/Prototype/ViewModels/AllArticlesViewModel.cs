@@ -2,6 +2,7 @@
 using Prototype.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using Prototype.Views.Cells;
 using Xamarin.Forms;
@@ -76,9 +77,21 @@ namespace Prototype.ViewModels
 
 
 
-        private void LatestArticlesAreReady(List<Grouping<string, ArticleViewModel>> groupedArticles)
+        private void LatestArticlesAreReady(IList<Grouping<string, Article>> groupedArticles)
         {
-            Grouped = groupedArticles;
+            var groupedArticleViewModels = new List<Grouping<string, ArticleViewModel>>();
+
+            foreach (var group in groupedArticles)
+            {
+                var articleViewModels = new List<ArticleViewModel>();
+                foreach (var article in group.ToList())
+                {
+                    articleViewModels.Add(new ArticleViewModel(_stateController, article));
+                }
+                groupedArticleViewModels.Add(new Grouping<string, ArticleViewModel>(group.Key, articleViewModels));
+            }
+
+            Grouped = groupedArticleViewModels;
         }
 
         private void IsRefreshingChanged(bool isRefreshing)
