@@ -24,12 +24,12 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Label Text="{Binding publishedDateTime, StringFormat='{0:HH:mm}'}" 
+            <Label Text="{Binding Article.publishedDateTime, StringFormat='{0:HH:mm}'}" 
                                    Margin="10"
                                    Grid.Row="0" 
                                    Grid.Column="0"
                                    Grid.ColumnSpan="2"/>
-            <Label Text="{Binding titles.FRONTPAGE}" 
+            <Label Text="{Binding Article.titles.FRONTPAGE}" 
                                 Margin="10"
                                 Grid.Row="0" 
                                 Grid.Column="2" 

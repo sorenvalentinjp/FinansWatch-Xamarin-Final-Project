@@ -31,7 +31,7 @@ namespace Prototype.ModelControllers
 
         public StateController()
         {
-            this.ArticleController = new ArticleController();
+            this.ArticleController = new ArticleController(this);
             this.SavedArticles = new ObservableCollection<Article>();
             this.LoginController = new LoginController(this);
 
