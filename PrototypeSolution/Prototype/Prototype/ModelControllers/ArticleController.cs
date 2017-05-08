@@ -12,19 +12,22 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Linq;
 using Newtonsoft.Json.Converters;
+using Prototype.ViewModels;
 
 namespace Prototype.ModelControllers
 {
     public class ArticleController
     {
         private readonly ContentApi _contentApi;
+        private readonly StateController _stateController;
         public event Action<IList<Article>> FrontPageArticlesAreReady;
-        public event Action<List<Grouping<string, Article>>> LatestArticlesAreReady;
+        public event Action<List<Grouping<string, ArticleViewModel>>> LatestArticlesAreReady;
         public event Action<bool> IsRefreshingFrontPage;
         public event Action<bool> IsRefreshingLatestArticles;
 
-        public ArticleController()
+        public ArticleController(StateController stateController)
         {
+            _stateController = stateController;
             _contentApi = new ContentApi();
         }
 
@@ -34,14 +37,22 @@ namespace Prototype.ModelControllers
 
             IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadLatestArticles());
 
-            var sortedArticles = from article in articles
-                                 orderby article.publishedDateTime descending
-                                 group article by article.publishedDateTime.Date.ToString("dd. MMMM", CultureInfo.InvariantCulture) into articleGroup
-                                 select new Grouping<string, Article>(articleGroup.Key, articleGroup);
+            IList<ArticleViewModel> articleViewModels = new List<ArticleViewModel>();
 
-            var groupedArticles = new List<Grouping<string, Article>>(sortedArticles);
+            foreach (var article in articles)
+            {
+                articleViewModels.Add(new ArticleViewModel(_stateController, article));
+            }
 
-            LatestArticlesAreReady(groupedArticles);
+
+            var sortedArticleViewModels = from articleViewModel in articleViewModels
+                                 orderby articleViewModel.Article.publishedDateTime descending
+                                 group articleViewModel by articleViewModel.Article.publishedDateTime.Date.ToString("dd. MMMM", CultureInfo.InvariantCulture) into articleGroup
+                                 select new Grouping<string, ArticleViewModel>(articleGroup.Key, articleGroup);
+
+            var groupedArticleViewModels = new List<Grouping<string, ArticleViewModel>>(sortedArticleViewModels);
+
+            LatestArticlesAreReady(groupedArticleViewModels);
             IsRefreshingLatestArticles(false);
         }
 

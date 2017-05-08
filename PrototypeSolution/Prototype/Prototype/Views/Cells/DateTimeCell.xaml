@@ -24,18 +24,18 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Label Text="{Binding publishedDateTime, StringFormat='{0:HH:mm}'}" 
+            <Label Text="{Binding Article.publishedDateTime, StringFormat='{0:HH:mm}'}" 
                                    Margin="10"
                                    Grid.Row="0" 
                                    Grid.Column="0"
                                    Grid.ColumnSpan="2"/>
-            <Label Text="{Binding titles.FRONTPAGE}" 
+            <Label Text="{Binding Article.titles.FRONTPAGE}" 
                                 Margin="10"
                                 Grid.Row="0" 
                                 Grid.Column="2" 
                                 Grid.ColumnSpan="5"/>
 
-            <forms:CachedImage Source="{helpers:ImageResource locked.png}" 
+            <forms:CachedImage Source="{Binding LockedIndicatorImageSource}" 
                                        Grid.Row="0" 
                                        Grid.Column="7" 
                                        HeightRequest="24"
@@ -44,16 +44,6 @@
                                        VerticalOptions="End"
                                        BitmapOptimizations="True"
                                        DownsampleToViewSize="True"/>
-
-            <forms:CachedImage Source="{helpers:ImageResource unlocked.png}" 
-                               Grid.Row="0" 
-                               Grid.Column="7" 
-                               HeightRequest="24"
-                               WidthRequest="24"
-                               HorizontalOptions="End"
-                               VerticalOptions="End"
-                               BitmapOptimizations="True"
-                               DownsampleToViewSize="True"/>
         </Grid>
     </ViewCell.View>
 </mr:ViewCell>

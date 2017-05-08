@@ -13,8 +13,8 @@ namespace Prototype.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly StateController _stateController;
 
-        private IList<Grouping<string, Article>> _grouped;
-        public IList<Grouping<string, Article>> Grouped
+        private IList<Grouping<string, ArticleViewModel>> _grouped;
+        public IList<Grouping<string, ArticleViewModel>> Grouped
         {
             get { return _grouped; }
             set
@@ -76,7 +76,7 @@ namespace Prototype.ViewModels
 
 
 
-        private void LatestArticlesAreReady(List<Grouping<string, Article>> groupedArticles)
+        private void LatestArticlesAreReady(List<Grouping<string, ArticleViewModel>> groupedArticles)
         {
             Grouped = groupedArticles;
         }
