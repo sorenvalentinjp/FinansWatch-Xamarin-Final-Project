@@ -7,6 +7,8 @@ using Xamarin.Forms;
 using System.Windows.Input;
 using Prototype.Models;
 using System.ComponentModel;
+using Prototype.Views.Helpers;
+using System.Linq;
 
 namespace Prototype.ViewModels
 {
@@ -36,10 +38,13 @@ namespace Prototype.ViewModels
             }
         }
 
+        //private ToolBarExtension _toolBarExtension;
+
         public MasterDetailViewModel(StateController stateController, MasterDetailPage masterDetail)
         {
             _stateController = stateController;
             _stateController.LoginController.LoginSucceeded += LoginSucceeded;
+            ToolBarExtension.AllArticlesShortcutActionOccured += AllArticlesShortcutActionOccured;
             _masterDetail = masterDetail;
             _frontPageView = new FrontPageView(new FrontPageViewModel(stateController));
             _masterDetail.Detail = _frontPageView;
@@ -63,7 +68,15 @@ namespace Prototype.ViewModels
                 _masterDetail.Detail = _latestVisitedView;
                 _masterDetail.IsPresented = false;
             }
-            
+        }
+
+        //This event fires when the user taps the shorcut button placed in the navigation bar to show AllArticlesView
+        private void AllArticlesShortcutActionOccured()
+        {
+            if (this._allArticlesView == null)
+                this._allArticlesView = new AllArticlesView(new AllArticlesViewModel(this._stateController));
+
+            _masterDetail.Detail = _allArticlesView;
         }
 
         /// <summary>
