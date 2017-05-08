@@ -20,7 +20,7 @@ namespace Prototype.ModelControllers
     {
         private readonly ContentApi _contentApi;
         public event Action<IList<Article>> FrontPageArticlesAreReady;
-        public event Action<IList<Grouping<string, Article>>> LatestArticlesAreReady;
+        public event Action<IList<Article>> LatestArticlesAreReady;
         public event Action<bool> IsRefreshingFrontPage;
         public event Action<bool> IsRefreshingLatestArticles;
 
@@ -35,14 +35,8 @@ namespace Prototype.ModelControllers
 
             IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadLatestArticles());
 
-            var sortedArticles = from article in articles
-                                orderby article.publishedDateTime descending
-                                group article by article.publishedDateTime.Date.ToString("dd. MMMM", CultureInfo.InvariantCulture) into articleGroup
-                                select new Grouping<string, Article>(articleGroup.Key, articleGroup);
+            LatestArticlesAreReady(articles);
 
-            var groupedArticles = new List<Grouping<string, Article>>(sortedArticles);
-
-            LatestArticlesAreReady(groupedArticles);
             IsRefreshingLatestArticles(false);
         }
 
