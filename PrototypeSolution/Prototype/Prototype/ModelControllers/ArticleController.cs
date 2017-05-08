@@ -19,15 +19,13 @@ namespace Prototype.ModelControllers
     public class ArticleController
     {
         private readonly ContentApi _contentApi;
-        private readonly StateController _stateController;
         public event Action<IList<Article>> FrontPageArticlesAreReady;
-        public event Action<List<Grouping<string, ArticleViewModel>>> LatestArticlesAreReady;
+        public event Action<IList<Grouping<string, Article>>> LatestArticlesAreReady;
         public event Action<bool> IsRefreshingFrontPage;
         public event Action<bool> IsRefreshingLatestArticles;
 
-        public ArticleController(StateController stateController)
+        public ArticleController()
         {
-            _stateController = stateController;
             _contentApi = new ContentApi();
         }
 
@@ -37,22 +35,14 @@ namespace Prototype.ModelControllers
 
             IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadLatestArticles());
 
-            IList<ArticleViewModel> articleViewModels = new List<ArticleViewModel>();
+            var sortedArticles = from article in articles
+                                orderby article.publishedDateTime descending
+                                group article by article.publishedDateTime.Date.ToString("dd. MMMM", CultureInfo.InvariantCulture) into articleGroup
+                                select new Grouping<string, Article>(articleGroup.Key, articleGroup);
 
-            foreach (var article in articles)
-            {
-                articleViewModels.Add(new ArticleViewModel(_stateController, article));
-            }
+            var groupedArticles = new List<Grouping<string, Article>>(sortedArticles);
 
-
-            var sortedArticleViewModels = from articleViewModel in articleViewModels
-                                 orderby articleViewModel.Article.publishedDateTime descending
-                                 group articleViewModel by articleViewModel.Article.publishedDateTime.Date.ToString("dd. MMMM", CultureInfo.InvariantCulture) into articleGroup
-                                 select new Grouping<string, ArticleViewModel>(articleGroup.Key, articleGroup);
-
-            var groupedArticleViewModels = new List<Grouping<string, ArticleViewModel>>(sortedArticleViewModels);
-
-            LatestArticlesAreReady(groupedArticleViewModels);
+            LatestArticlesAreReady(groupedArticles);
             IsRefreshingLatestArticles(false);
         }
 
