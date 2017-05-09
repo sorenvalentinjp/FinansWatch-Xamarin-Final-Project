@@ -106,6 +106,11 @@ namespace Prototype.ViewModels
         {
             this._stateController = stateController;
 
+            if (_stateController.Subscriber != null)
+            {
+                SubscriberHasAccess = _stateController.Subscriber.HasAccessToSite();
+            }            
+
             Locked = CalculateIfArticleShouldBeLocked(articleToDisplay, _stateController.Subscriber);
 
             _stateController.LoginController.LoginEventSucceeded += LoginSucceeded;
@@ -113,9 +118,6 @@ namespace Prototype.ViewModels
             _stateController.LoginController.LogoutEvent += LogoutEvent;
 
             _stateController.SavedArticlesChangedEvent += SavedArticlesChanged;
-
-            //if (_stateController.SavedArticles.Contains(articleToDisplay))
-            //    articleToDisplay.IsSaved = true;
 
             UnlockedIndicatorImageSource = ImageSource.FromFile("unlocked.png");
             LockedIndicatorImageSource = ImageSource.FromFile("locked.png");
@@ -165,9 +167,12 @@ namespace Prototype.ViewModels
             if (locked && subscriber != null)
             {
                 if (SubscriberHasAccess)
-                //If the subscriber is logged in, has access and the article is also locked, show the unlocked icon
-                UnlockedIndicatorImageVisible = true;
-                LockedIndicatorImageVisible = false;
+                {
+                    //If the subscriber is logged in, has access and the article is also locked, show the unlocked icon
+                    UnlockedIndicatorImageVisible = true;
+                    LockedIndicatorImageVisible = false;
+                }
+                
             }
             else if(locked)
             {
