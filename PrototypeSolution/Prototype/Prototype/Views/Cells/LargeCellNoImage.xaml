@@ -21,16 +21,25 @@
                 <customRenderers:HtmlFormattedLabel Text="{Binding Article.teasers.FRONTPAGE}"
                                                     FontSize="Medium"/>
 
-                <ffimageloading:CachedImage Source="{Binding LockedIndicatorImageSource}" 
-                                            Grid.Row="0" 
-                                            Grid.Column="1" 
-                                            Grid.ColumnSpan="2"
-                                            HeightRequest="24"
-                                            WidthRequest="24"
-                                            HorizontalOptions="End"
-                                            VerticalOptions="End"
-                                            BitmapOptimizations="True"
-                                            DownsampleToViewSize="True"/>
+                <StackLayout
+                    Orientation="Horizontal"
+                    Grid.Row="0" 
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2" 
+                    HorizontalOptions="End"
+                    VerticalOptions="End">
+                    <ffimageloading:CachedImage Source="{Binding Article.SavedImageSource}"  
+                                                HeightRequest="24"
+                                                WidthRequest="24"
+                                                BitmapOptimizations="True"
+                                                DownsampleToViewSize="True"/>
+
+                    <ffimageloading:CachedImage Source="{Binding LockedIndicatorImageSource}"  
+                                                HeightRequest="24"
+                                                WidthRequest="24"
+                                                BitmapOptimizations="True"
+                                                DownsampleToViewSize="True"/>
+                </StackLayout>
             </StackLayout>
         </StackLayout>
     </ViewCell.View>

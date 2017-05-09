@@ -64,6 +64,7 @@ namespace Prototype.ViewModels
             _stateController.LoginController.LoginSucceeded += LoginSucceeded;
 
             Article = articleToDisplay;
+
         }
 
         //Subscribed Event

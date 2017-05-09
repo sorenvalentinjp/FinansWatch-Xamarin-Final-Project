@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using Xamarin.Forms;
 
@@ -8,8 +9,9 @@ namespace Prototype.Models
     /// <summary>
     /// JSON Generated class
     /// </summary>
-    public class Article : IEquatable<Article>
+    public class Article : IEquatable<Article>, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
 
         //Generated fields start
         public Image image { get; set; }
@@ -51,6 +53,18 @@ namespace Prototype.Models
         public ImageSource ImagePlaceholderBig { get; set; }
         public ImageSource ImagePlaceholderSmall { get; set; }
         public ImageSource ImageTransparentSmall { get; set; }
+        private ImageSource _savedImageSource;
+        public ImageSource SavedImageSource
+        {
+            get { return _savedImageSource; }
+            set
+            {
+                if (_savedImageSource == value) { return; }
+                _savedImageSource = value;
+                Notify("SavedImageSource");
+            }
+        }
+
         //Manually made fields end
 
         public Article()
@@ -78,7 +92,7 @@ namespace Prototype.Models
             //image = article.image;
             //desktopUrl = article.desktopUrl;
             //homeSectionName = article.homeSectionName;
-            //contentUrl = article.contentUrl;
+            contentUrl = article.contentUrl;
             //titles = article.titles;
             //teasers = article.teasers;
             //homeSectionId = article.homeSectionId;
@@ -102,6 +116,14 @@ namespace Prototype.Models
             publishData = article.publishData;
             lastModified = article.lastModified;
             id = article.id;
+        }
+
+        protected void Notify(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
         }
     }
 

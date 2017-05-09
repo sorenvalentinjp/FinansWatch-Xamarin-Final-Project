@@ -29,28 +29,28 @@
                Grid.Column="1" 
                Grid.ColumnSpan="2"
                FontSize="Small"/>
+            
+            <StackLayout
+                Orientation="Horizontal"
+                Grid.Row="0" 
+                Grid.Column="1"
+                Grid.ColumnSpan="2" 
+                HorizontalOptions="End"
+                VerticalOptions="End">
+                <ffimageloading:CachedImage Source="{Binding Article.SavedImageSource}"  
+                                            HeightRequest="24"
+                                            WidthRequest="24"
+                                            BitmapOptimizations="True"
+                                            DownsampleToViewSize="True"/>
 
-            <ffimageloading:CachedImage Source="{Binding LockedIndicatorImageSource}" 
-                               Grid.Row="0" 
-                               Grid.Column="1"
-                               Grid.ColumnSpan="2"  
-                               HeightRequest="24"
-                               WidthRequest="24"
-                               HorizontalOptions="End"
-                               VerticalOptions="End"
-                               BitmapOptimizations="True"
-                               DownsampleToViewSize="True"/>
+                <ffimageloading:CachedImage Source="{Binding LockedIndicatorImageSource}"  
+                                            HeightRequest="24"
+                                            WidthRequest="24"
+                                            BitmapOptimizations="True"
+                                            DownsampleToViewSize="True"/>
+            </StackLayout>
 
-            <!--<ffimageloading:CachedImage Source="{helpers:ImageResource unlocked.png}" 
-                               Grid.Row="0" 
-                               Grid.Column="7" 
-                               HeightRequest="24"
-                               WidthRequest="24"
-                               HorizontalOptions="End"
-                               VerticalOptions="End"
-                               BitmapOptimizations="True"
-                               DownsampleToViewSize="True"
-                               IsVisible="{Binding Article.locked, Converter={converters:UnlockedIndicatorVisibilityConverter}}"/>-->
+           
         </Grid>
     </ViewCell.View>
 </mr:ViewCell>

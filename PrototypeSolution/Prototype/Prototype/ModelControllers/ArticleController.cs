@@ -13,19 +13,22 @@ using System.Threading.Tasks;
 using System.Linq;
 using Newtonsoft.Json.Converters;
 using Prototype.ViewModels;
+using Xamarin.Forms;
 
 namespace Prototype.ModelControllers
 {
     public class ArticleController
     {
         private readonly ContentApi _contentApi;
+        private StateController _stateController;
         public event Action<IList<Article>> FrontPageArticlesAreReady;
         public event Action<IList<Article>> LatestArticlesAreReady;
         public event Action<bool> IsRefreshingFrontPage;
         public event Action<bool> IsRefreshingLatestArticles;
 
-        public ArticleController()
+        public ArticleController(StateController stateController)
         {
+            _stateController = stateController;
             _contentApi = new ContentApi();
         }
 
@@ -57,8 +60,17 @@ namespace Prototype.ModelControllers
             IList<Article> newRelatedArticles = new List<Article>();
             foreach (var relatedArticle in article.relatedArticles)
             {
-                newRelatedArticles.Add(await GetArticleDetailsAsync(relatedArticle.url));
+                var newRelatedArticle = await GetArticleDetailsAsync(relatedArticle.url);
+                //We reuse the url from the related article in order to make equals work
+                newRelatedArticle.contentUrl = relatedArticle.url;
+                if (_stateController.SavedArticles.Contains(newRelatedArticle))
+                {
+                    newRelatedArticle.SavedImageSource = ImageSource.FromResource("saved.png");
+                }
+                    
+                newRelatedArticles.Add(newRelatedArticle);
             }
+            
             return newRelatedArticles;
         }
 

@@ -32,7 +32,7 @@ namespace Prototype.ModelControllers
 
         public StateController()
         {
-            this.ArticleController = new ArticleController();
+            this.ArticleController = new ArticleController(this);
             this.SavedArticles = new ObservableCollection<Article>();
             this.LoginController = new LoginController(this);
 
@@ -62,6 +62,27 @@ namespace Prototype.ModelControllers
             if (this.PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
+
+        /// <summary>
+        /// If the article is not in the list, add it and return true, if it is in the list, remove it and return false
+        /// </summary>
+        /// <param name="article"></param>
+        /// <returns></returns>
+        public bool AddOrRemoveSavedArticle(Article article)
+        {
+            if (!SavedArticles.Contains(article))
+            {
+                article.SavedImageSource = ImageSource.FromResource("saved.png");
+                SavedArticles.Add(article);
+                return true;
+            }
+            else
+            {
+                article.SavedImageSource = null;
+                SavedArticles.Remove(article);
+                return false;
             }
         }
     }
