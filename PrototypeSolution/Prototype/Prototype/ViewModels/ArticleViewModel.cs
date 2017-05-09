@@ -42,6 +42,30 @@ namespace Prototype.ViewModels
             }
         }
 
+        private ImageSource _savedImageSource;
+        public ImageSource SavedImageSource
+        {
+            get { return _savedImageSource; }
+            set
+            {
+                if (_savedImageSource == value) { return; }
+                _savedImageSource = value;
+                Notify("SavedImageSource");
+            }
+        }
+
+        private ImageSource _lockedIndicatorImageSource;
+        public ImageSource LockedIndicatorImageSource
+        {
+            get { return _lockedIndicatorImageSource; }
+            set
+            {
+                if (_lockedIndicatorImageSource == value) { return; }
+                _lockedIndicatorImageSource = value;
+                Notify("LockedIndicatorImageSource");
+            }
+        }
+
         public ArticleViewModel(StateController stateController, Article articleToDisplay)
         {
             this._stateController = stateController;
@@ -51,6 +75,9 @@ namespace Prototype.ViewModels
             _stateController.LoginController.LoginEventSucceeded += LoginSucceeded;
 
             _stateController.LoginController.LogoutEvent += LogoutEvent;
+
+            if (_stateController.SavedArticles.Contains(articleToDisplay))
+                this.SavedImageSource = ImageSource.FromResource("saved.png");
 
             Article = articleToDisplay;
 
@@ -82,12 +109,12 @@ namespace Prototype.ViewModels
                 if (subscriber.HasAccessToSite())
                     locked = false;
                 //If the subscriber is logged in, has access and the article is also locked, show the unlocked icon
-                article.LockedIndicatorImageSource = ImageSource.FromResource("unlocked.png");
+                this.LockedIndicatorImageSource = ImageSource.FromResource("unlocked.png");
             }
             else if(locked)
             {
                 //If the article is locked and subscriber is not logged in or does not have access, show the locked icon
-                article.LockedIndicatorImageSource = ImageSource.FromResource("locked.png");
+                this.LockedIndicatorImageSource = ImageSource.FromResource("locked.png");
             }
             
             return locked;

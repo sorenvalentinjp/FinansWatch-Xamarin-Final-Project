@@ -38,6 +38,20 @@ namespace Prototype.ModelControllers
 
         }
 
+        //-----------------Bucket methods start
+        //bucket events
+        public event Action<IList<Article>> Bucket1IsReady;
+        public event Action<IList<Article>> Bucket2IsReady;
+
+        public IList<Article> FrontPageArticles;
+        public async void GetBucket1()
+        {
+            this.FrontPageArticles = await ArticleController.GetFrontPageArticlesBucketAsync();
+            Bucket1IsReady(this.FrontPageArticles);
+        }
+        //-----------------Bucket methods end
+
+
         /// <summary>
         /// Fetches all frontpage articles async and wait for the articleIsReady events to fire
         /// During this operation a 'refresh' icon is displayed.
@@ -68,20 +82,20 @@ namespace Prototype.ModelControllers
         /// <summary>
         /// If the article is not in the list, add it and return true, if it is in the list, remove it and return false
         /// </summary>
-        /// <param name="article"></param>
+        /// <param name="articleViewModel"></param>
         /// <returns></returns>
-        public bool AddOrRemoveSavedArticle(Article article)
+        public bool AddOrRemoveSavedArticle(ArticleViewModel articleViewModel)
         {
-            if (!SavedArticles.Contains(article))
+            if (!SavedArticles.Contains(articleViewModel.Article))
             {
-                article.SavedImageSource = ImageSource.FromResource("saved.png");
-                SavedArticles.Add(article);
+                articleViewModel.SavedImageSource = ImageSource.FromResource("saved.png");
+                SavedArticles.Add(articleViewModel.Article);
                 return true;
             }
             else
             {
-                article.SavedImageSource = null;
-                SavedArticles.Remove(article);
+                articleViewModel.SavedImageSource = null;
+                SavedArticles.Remove(articleViewModel.Article);
                 return false;
             }
         }

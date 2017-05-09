@@ -20,7 +20,7 @@ namespace Prototype.Views.Cells
 
         public static async void LongPressingGesture(StateController stateController, ArticleViewModel articleViewModel)
         {
-            if (stateController.AddOrRemoveSavedArticle(articleViewModel.Article))
+            if (stateController.AddOrRemoveSavedArticle(articleViewModel))
             {
                 await App.Navigation.NavigationStack.First().DisplayAlert("", "Artiklen er gemt i læselisten.", "OK");
             }

@@ -53,31 +53,8 @@ namespace Prototype.Models
         public ImageSource ImagePlaceholderBig { get; set; }
         public ImageSource ImagePlaceholderSmall { get; set; }
         public ImageSource ImageTransparentSmall { get; set; }
-        private ImageSource _savedImageSource;
-        public ImageSource SavedImageSource
-        {
-            get { return _savedImageSource; }
-            set
-            {
-                if (_savedImageSource == value) { return; }
-                _savedImageSource = value;
-                Notify("SavedImageSource");
-            }
-        }
-        private ImageSource _lockedIndicatorImageSource;
-        public ImageSource LockedIndicatorImageSource
-        {
-            get { return _lockedIndicatorImageSource; }
-            set
-            {
-                if (_lockedIndicatorImageSource == value) { return; }
-                _lockedIndicatorImageSource = value;
-                Notify("LockedIndicatorImageSource");
-            }
-        }
 
         //Manually made fields end
-
         public Article()
         {
             ImagePlaceholderBig = ImageSource.FromFile("imagePlaceholderBig.png");

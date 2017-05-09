@@ -26,12 +26,41 @@ namespace Prototype.ModelControllers
         public event Action<bool> IsRefreshingFrontPage;
         public event Action<bool> IsRefreshingLatestArticles;
 
+        
+
         public ArticleController(StateController stateController)
         {
             _stateController = stateController;
             _contentApi = new ContentApi();
         }
 
+
+        //-------------------Bucket methods start
+        public async void GetBucket1()
+        {
+            IList<Article> articles = await GetFrontPageArticlesBucketAsync();
+            foreach(var article in articles)
+            {
+                //GetArticleDetailsBucketAsync(article);
+                await GetArticleDetailsAsync(article);
+            }
+        }
+
+        public async Task<IList<Article>> GetFrontPageArticlesBucketAsync()
+        {
+            IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadFrontPageArticles());
+            return articles;
+        }
+
+        public async void GetArticleDetailsBucketAsync(Article article)
+        {
+            Article detailedArticle = DeserializeArticle(await _contentApi.DownloadArticle(article.contentUrl));
+            article.AddFieldsFromAnotherArticle(detailedArticle);
+            SetArticleFields(article);
+        }
+        //------------------Bucket methods end
+
+        ////////////////////////////////////////////////////////////////////////////////////
         public async void GetLatestArticlesAsync()
         {
             IsRefreshingLatestArticles(true);
@@ -65,7 +94,7 @@ namespace Prototype.ModelControllers
                 newRelatedArticle.contentUrl = relatedArticle.url;
                 if (_stateController.SavedArticles.Contains(newRelatedArticle))
                 {
-                    newRelatedArticle.SavedImageSource = ImageSource.FromResource("saved.png");
+                    //newRelatedArticle.SavedImageSource = ImageSource.FromResource("saved.png");
                 }
                     
                 newRelatedArticles.Add(newRelatedArticle);

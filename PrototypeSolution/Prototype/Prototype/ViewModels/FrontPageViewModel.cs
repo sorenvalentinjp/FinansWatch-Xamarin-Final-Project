@@ -54,10 +54,23 @@ namespace Prototype.ViewModels
         {
             this._stateController = stateController;
             IsRefreshing = false;
-            this._stateController.ArticleController.IsRefreshingFrontPage += IsRefreshingChanged;
-            this._stateController.ArticleController.FrontPageArticlesAreReady += FrontPageArticlesAreReady;
+            //this._stateController.ArticleController.IsRefreshingFrontPage += IsRefreshingChanged;
+            //this._stateController.ArticleController.FrontPageArticlesAreReady += FrontPageArticlesAreReady;
+
+            //bucket1 event
+            _stateController.Bucket1IsReady += FrontPageArticlesAreReady;
+
             DataTemplate = new SectionTemplateSelector(_stateController);
-            this._stateController.GetFrontPageArticles();
+            //this._stateController.GetFrontPageArticles();
+
+            if(_stateController.FrontPageArticles == null)
+            {
+                _stateController.GetBucket1();
+            }
+            else
+            {
+                FrontPageArticlesAreReady(_stateController.FrontPageArticles);
+            }
         }
 
         private void FrontPageArticlesAreReady(IList<Article> newArticles)

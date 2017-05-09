@@ -36,13 +36,13 @@
                 Grid.ColumnSpan="2" 
                 HorizontalOptions="End"
                 VerticalOptions="End">
-                <ffimageloading:CachedImage Source="{Binding Article.SavedImageSource}"  
+                <ffimageloading:CachedImage Source="{Binding SavedImageSource}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"
                                             DownsampleToViewSize="True"/>
 
-                <ffimageloading:CachedImage Source="{Binding Article.LockedIndicatorImageSource}"    
+                <ffimageloading:CachedImage Source="{Binding LockedIndicatorImageSource}"    
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"

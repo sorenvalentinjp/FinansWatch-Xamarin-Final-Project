@@ -39,13 +39,13 @@
                 Grid.Column="7"
                 HorizontalOptions="End"
                 VerticalOptions="End">
-                <forms:CachedImage Source="{Binding Article.SavedImageSource}"  
+                <forms:CachedImage Source="{Binding SavedImageSource}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"
                                             DownsampleToViewSize="True"/>
 
-                <forms:CachedImage Source="{Binding Article.LockedIndicatorImageSource}"  
+                <forms:CachedImage Source="{Binding LockedIndicatorImageSource}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"
