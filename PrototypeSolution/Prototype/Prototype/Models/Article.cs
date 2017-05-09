@@ -64,6 +64,17 @@ namespace Prototype.Models
                 Notify("SavedImageSource");
             }
         }
+        private ImageSource _lockedIndicatorImageSource;
+        public ImageSource LockedIndicatorImageSource
+        {
+            get { return _lockedIndicatorImageSource; }
+            set
+            {
+                if (_lockedIndicatorImageSource == value) { return; }
+                _lockedIndicatorImageSource = value;
+                Notify("LockedIndicatorImageSource");
+            }
+        }
 
         //Manually made fields end
 
@@ -92,7 +103,7 @@ namespace Prototype.Models
             //image = article.image;
             //desktopUrl = article.desktopUrl;
             //homeSectionName = article.homeSectionName;
-            contentUrl = article.contentUrl;
+            //contentUrl = article.contentUrl;
             //titles = article.titles;
             //teasers = article.teasers;
             //homeSectionId = article.homeSectionId;

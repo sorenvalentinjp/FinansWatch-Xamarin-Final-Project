@@ -33,7 +33,7 @@
                                                 WidthRequest="24"
                                                 BitmapOptimizations="True"
                                                 DownsampleToViewSize="True"/>
-                    <ffimageloading:CachedImage Source="{Binding LockedIndicatorImageSource}"  
+                    <ffimageloading:CachedImage Source="{Binding Article.LockedIndicatorImageSource}"  
                                                 HeightRequest="24"
                                                 WidthRequest="24"
                                                 BitmapOptimizations="True"

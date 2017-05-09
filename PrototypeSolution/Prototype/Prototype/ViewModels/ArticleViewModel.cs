@@ -42,19 +42,6 @@ namespace Prototype.ViewModels
             }
         }
 
-        private ImageSource _lockedIndicatorImageSource;
-
-        public ImageSource LockedIndicatorImageSource
-        {
-            get { return _lockedIndicatorImageSource;}
-            set
-            {
-                if (_lockedIndicatorImageSource == value) { return; }
-                _lockedIndicatorImageSource = value;
-                Notify("LockedIndicatorImageSource");
-            }
-        }
-
         public ArticleViewModel(StateController stateController, Article articleToDisplay)
         {
             this._stateController = stateController;
@@ -95,12 +82,12 @@ namespace Prototype.ViewModels
                 if (subscriber.HasAccessToSite())
                     locked = false;
                 //If the subscriber is logged in, has access and the article is also locked, show the unlocked icon
-                this.LockedIndicatorImageSource = ImageSource.FromResource("unlocked.png");
+                article.LockedIndicatorImageSource = ImageSource.FromResource("unlocked.png");
             }
             else if(locked)
             {
                 //If the article is locked and subscriber is not logged in or does not have access, show the locked icon
-                this.LockedIndicatorImageSource = ImageSource.FromResource("locked.png");
+                article.LockedIndicatorImageSource = ImageSource.FromResource("locked.png");
             }
             
             return locked;
