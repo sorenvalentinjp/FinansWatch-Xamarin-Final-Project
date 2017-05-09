@@ -82,20 +82,20 @@ namespace Prototype.ModelControllers
         /// <summary>
         /// If the article is not in the list, add it and return true, if it is in the list, remove it and return false
         /// </summary>
-        /// <param name="articleViewModel"></param>
+        /// <param name="article"></param>
         /// <returns></returns>
-        public bool AddOrRemoveSavedArticle(ArticleViewModel articleViewModel)
+        public bool AddOrRemoveSavedArticle(Article article)
         {
-            if (!SavedArticles.Contains(articleViewModel.Article))
+            if (!SavedArticles.Contains(article))
             {
-                articleViewModel.SavedImageSource = ImageSource.FromResource("saved.png");
-                SavedArticles.Add(articleViewModel.Article);
+                article.IsSaved = true;
+                SavedArticles.Add(article);
                 return true;
             }
             else
             {
-                articleViewModel.SavedImageSource = null;
-                SavedArticles.Remove(articleViewModel.Article);
+                article.IsSaved = false;
+                SavedArticles.Remove(article);
                 return false;
             }
         }

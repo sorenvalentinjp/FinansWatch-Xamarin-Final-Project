@@ -92,10 +92,6 @@ namespace Prototype.ModelControllers
                 var newRelatedArticle = await GetArticleDetailsAsync(relatedArticle.url);
                 //We reuse the url from the related article in order to make equals work
                 newRelatedArticle.contentUrl = relatedArticle.url;
-                if (_stateController.SavedArticles.Contains(newRelatedArticle))
-                {
-                    //newRelatedArticle.SavedImageSource = ImageSource.FromResource("saved.png");
-                }
                     
                 newRelatedArticles.Add(newRelatedArticle);
             }

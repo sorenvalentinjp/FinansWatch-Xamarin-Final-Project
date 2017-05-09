@@ -47,6 +47,24 @@ namespace Prototype.Models
 
 
         //Manually made fields start
+
+        private bool _isSaved;
+        public bool IsSaved
+        {
+            get { return _isSaved; }
+            set
+            {
+                if (_isSaved == value) { return; }
+                _isSaved = value;
+                Notify("IsSaved");
+            }
+        }
+        //private ImageSource _savedImageSource;
+        public ImageSource SavedImageSource { get; set; }
+
+        public ImageSource LockedIndicatorImageSource { get; set; }
+        public ImageSource UnlockedIndicatorImageSource { get; set; }
+
         public IList<Article> relatedDetailedArticles { get; set; }
         //Used because we want to acces the first topImage in the topImages list. 
         public TopImage topImage { get; set; }
@@ -60,6 +78,9 @@ namespace Prototype.Models
             ImagePlaceholderBig = ImageSource.FromFile("imagePlaceholderBig.png");
             ImagePlaceholderSmall = ImageSource.FromFile("imagePlaceholderSmall.png");
             ImageTransparentSmall = ImageSource.FromFile("imageTransparentSmall.png");
+            UnlockedIndicatorImageSource = ImageSource.FromFile("unlocked.png");
+            LockedIndicatorImageSource = ImageSource.FromFile("locked.png");
+            SavedImageSource = ImageSource.FromFile("saved.png");
         }
 
         //Implementation of IEquatable<Article> so we can call contains on a Collection<Article>. This is to avoid dublicates in eg. savedArticles in the statecontroller.

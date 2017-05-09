@@ -202,32 +202,4 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\saved.png">
-      <LogicalName>saved.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\unlocked.png">
-      <LogicalName>unlocked.png</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\144x144.png">
-      <LogicalName>144x144.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\192x192.png">
-      <LogicalName>192x192.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\48x48.png">
-      <LogicalName>48x48.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\72x72.png">
-      <LogicalName>72x72.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\96x96.png">
-      <LogicalName>96x96.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Images\locked.png">
-      <LogicalName>locked.png</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
 </Project>

@@ -39,17 +39,26 @@
                 Grid.Column="7"
                 HorizontalOptions="End"
                 VerticalOptions="End">
-                <forms:CachedImage Source="{Binding SavedImageSource}"  
+                <forms:CachedImage Source="{Binding Article.SavedImageSource}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"
-                                            DownsampleToViewSize="True"/>
+                                            DownsampleToViewSize="True"
+                                            IsVisible="{Binding Article.IsSaved}"/>
 
                 <forms:CachedImage Source="{Binding LockedIndicatorImageSource}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"
-                                            DownsampleToViewSize="True"/>
+                                            DownsampleToViewSize="True"
+                                            IsVisible="{Binding LockedIndicatorImageVisible}"/>
+
+                <forms:CachedImage Source="{Binding UnlockedIndicatorImageSource}"  
+                                            HeightRequest="24"
+                                            WidthRequest="24"
+                                            BitmapOptimizations="True"
+                                            DownsampleToViewSize="True"
+                                            IsVisible="{Binding UnlockedIndicatorImageVisible}"/>
             </StackLayout>
         </Grid>
     </ViewCell.View>

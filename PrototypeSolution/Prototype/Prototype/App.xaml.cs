@@ -42,6 +42,7 @@ namespace Prototype
         {
             // Handle when your app sleeps
             Application.Current.Properties["stateController"] = LocalStorage.SerializeToJson(_stateController);
+
         }
 
         protected override void OnResume()

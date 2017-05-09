@@ -42,15 +42,27 @@ namespace Prototype.ViewModels
             }
         }
 
-        private ImageSource _savedImageSource;
-        public ImageSource SavedImageSource
+        private bool _subscriberHasAccess;
+        public bool SubscriberHasAccess
         {
-            get { return _savedImageSource; }
+            get { return _subscriberHasAccess; }
             set
             {
-                if (_savedImageSource == value) { return; }
-                _savedImageSource = value;
-                Notify("SavedImageSource");
+                if (_subscriberHasAccess == value) { return; }
+                _subscriberHasAccess = value;
+                Notify("SubscriberHasAccess");
+            }
+        }
+
+        private ImageSource _unlockedIndicatorImageSource;
+        public ImageSource UnlockedIndicatorImageSource
+        {
+            get { return _unlockedIndicatorImageSource; }
+            set
+            {
+                if (_unlockedIndicatorImageSource == value) { return; }
+                _unlockedIndicatorImageSource = value;
+                Notify("UnlockedIndicatorImageSource");
             }
         }
 
@@ -66,6 +78,30 @@ namespace Prototype.ViewModels
             }
         }
 
+        private bool _lockedIndicatorImageVisible;
+        public bool LockedIndicatorImageVisible
+        {
+            get { return _lockedIndicatorImageVisible; }
+            set
+            {
+                if (_lockedIndicatorImageVisible == value) { return; }
+                _lockedIndicatorImageVisible = value;
+                Notify("LockedIndicatorImageVisible");
+            }
+        }
+
+        private bool _unlockedIndicatorImageVisible;
+        public bool UnlockedIndicatorImageVisible
+        {
+            get { return _unlockedIndicatorImageVisible; }
+            set
+            {
+                if (_unlockedIndicatorImageVisible == value) { return; }
+                _unlockedIndicatorImageVisible = value;
+                Notify("UnlockedIndicatorImageVisible");
+            }
+        }
+
         public ArticleViewModel(StateController stateController, Article articleToDisplay)
         {
             this._stateController = stateController;
@@ -77,7 +113,10 @@ namespace Prototype.ViewModels
             _stateController.LoginController.LogoutEvent += LogoutEvent;
 
             if (_stateController.SavedArticles.Contains(articleToDisplay))
-                this.SavedImageSource = ImageSource.FromResource("saved.png");
+                articleToDisplay.IsSaved = true;
+
+            UnlockedIndicatorImageSource = ImageSource.FromFile("unlocked.png");
+            LockedIndicatorImageSource = ImageSource.FromFile("locked.png");
 
             Article = articleToDisplay;
 
@@ -87,11 +126,13 @@ namespace Prototype.ViewModels
         //If the user just logged in, recalculate if the article should display as locked
         private void LoginSucceeded(Subscriber subscriber)
         {
+            SubscriberHasAccess = subscriber.HasAccessToSite();
             Locked = CalculateIfArticleShouldBeLocked(Article, _stateController.Subscriber);
         }
 
         private void LogoutEvent()
         {
+            SubscriberHasAccess = false;
             Locked = CalculateIfArticleShouldBeLocked(Article, _stateController.Subscriber);
         }
 
@@ -106,15 +147,22 @@ namespace Prototype.ViewModels
             var locked = article.locked;
             if (locked && subscriber != null)
             {
-                if (subscriber.HasAccessToSite())
-                    locked = false;
+                if (SubscriberHasAccess)
                 //If the subscriber is logged in, has access and the article is also locked, show the unlocked icon
-                this.LockedIndicatorImageSource = ImageSource.FromResource("unlocked.png");
+                UnlockedIndicatorImageVisible = true;
+                LockedIndicatorImageVisible = false;
             }
             else if(locked)
             {
                 //If the article is locked and subscriber is not logged in or does not have access, show the locked icon
-                this.LockedIndicatorImageSource = ImageSource.FromResource("locked.png");
+                LockedIndicatorImageVisible = true;
+                UnlockedIndicatorImageVisible = false;
+
+            } else
+            {
+                //If article is not locked, show no icons
+                LockedIndicatorImageVisible = false;
+                UnlockedIndicatorImageVisible = false;
             }
             
             return locked;

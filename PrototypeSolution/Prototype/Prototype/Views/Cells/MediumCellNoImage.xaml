@@ -36,17 +36,26 @@
                 Grid.ColumnSpan="2" 
                 HorizontalOptions="End"
                 VerticalOptions="End">
-                <ffimageloading:CachedImage Source="{Binding SavedImageSource}"  
+                <ffimageloading:CachedImage Source="{Binding Article.SavedImageSource}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"
-                                            DownsampleToViewSize="True"/>
+                                            DownsampleToViewSize="True"
+                                            IsVisible="{Binding Article.IsSaved}"/>
 
-                <ffimageloading:CachedImage Source="{Binding LockedIndicatorImageSource}"    
+                <ffimageloading:CachedImage Source="{Binding LockedIndicatorImageSource}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"
-                                            DownsampleToViewSize="True"/>
+                                            DownsampleToViewSize="True"
+                                            IsVisible="{Binding LockedIndicatorImageVisible}"/>
+
+                <ffimageloading:CachedImage Source="{Binding UnlockedIndicatorImageSource}"  
+                                            HeightRequest="24"
+                                            WidthRequest="24"
+                                            BitmapOptimizations="True"
+                                            DownsampleToViewSize="True"
+                                            IsVisible="{Binding UnlockedIndicatorImageVisible}"/>
             </StackLayout>
         </Grid>
     </ViewCell.View>

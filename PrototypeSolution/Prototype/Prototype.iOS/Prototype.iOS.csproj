@@ -172,6 +172,30 @@
   <ItemGroup>
     <BundleResource Include="Resources\imageTransparentSmall.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\MyIcon%40144x144.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\MyIcon%40192x192.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\72x72.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\96x96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\locked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\saved.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\unlocked.png" />
+  </ItemGroup>
   <Import Project="..\Prototype\Prototype.projitems" Label="Shared" Condition="Exists('..\Prototype\Prototype.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

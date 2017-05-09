@@ -30,12 +30,12 @@
                     <Label Text="{Binding ArticleViewModel.Article.publishData.publishInfo}" 
                            Margin="10,10,30,0" 
                            FontSize="Micro" />
-                    <customRenderers:HtmlFormattedLabel IsVisible="{Binding ArticleViewModel.Locked, Converter={converters:InverseBooleanConverter}}"
+                    <customRenderers:HtmlFormattedLabel IsVisible="{Binding ArticleViewModel.SubscriberHasAccess}"
                         Text="{Binding ArticleViewModel.Article.bodyText}" 
                         Margin="10,15,20,10" 
                         FontSize="Small"
                         />
-                    <StackLayout IsVisible="{Binding ArticleViewModel.Locked}" 
+                    <StackLayout IsVisible="{Binding ArticleViewModel.SubscriberHasAccess, Converter={converters:InverseBooleanConverter}}" 
                         Orientation="Vertical"
                         BackgroundColor="LightGray"
                         Margin="10,0,10,5">
