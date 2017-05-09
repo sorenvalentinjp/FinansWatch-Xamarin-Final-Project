@@ -14,6 +14,7 @@ namespace Prototype.ModelControllers
     public class StateController : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public event Action SavedArticlesChangedEvent;
 
         public ArticleController ArticleController;
         public ObservableCollection<Article> SavedArticles;
@@ -90,12 +91,14 @@ namespace Prototype.ModelControllers
             {
                 article.IsSaved = true;
                 SavedArticles.Add(article);
+                SavedArticlesChangedEvent();
                 return true;
             }
             else
             {
                 article.IsSaved = false;
                 SavedArticles.Remove(article);
+                SavedArticlesChangedEvent();
                 return false;
             }
         }

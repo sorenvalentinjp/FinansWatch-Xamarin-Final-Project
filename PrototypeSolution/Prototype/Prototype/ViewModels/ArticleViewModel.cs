@@ -112,14 +112,31 @@ namespace Prototype.ViewModels
 
             _stateController.LoginController.LogoutEvent += LogoutEvent;
 
-            if (_stateController.SavedArticles.Contains(articleToDisplay))
-                articleToDisplay.IsSaved = true;
+            _stateController.SavedArticlesChangedEvent += SavedArticlesChanged;
+
+            //if (_stateController.SavedArticles.Contains(articleToDisplay))
+            //    articleToDisplay.IsSaved = true;
 
             UnlockedIndicatorImageSource = ImageSource.FromFile("unlocked.png");
             LockedIndicatorImageSource = ImageSource.FromFile("locked.png");
 
             Article = articleToDisplay;
 
+            SavedArticlesChanged();
+
+        }
+
+        private void SavedArticlesChanged()
+        {
+            if (_stateController.SavedArticles.Contains(Article))
+            {
+                Article.IsSaved = true;
+            }
+            else
+            {
+                Article.IsSaved = false;
+            }
+                
         }
 
         //Subscribed Event
