@@ -61,7 +61,9 @@ namespace Prototype.ViewModels
 
             Locked = CalculateIfArticleShouldBeLocked(articleToDisplay, _stateController.Subscriber);
 
-            _stateController.LoginController.LoginSucceeded += LoginSucceeded;
+            _stateController.LoginController.LoginEventSucceeded += LoginSucceeded;
+
+            _stateController.LoginController.LogoutEvent += LogoutEvent;
 
             Article = articleToDisplay;
 
@@ -70,6 +72,11 @@ namespace Prototype.ViewModels
         //Subscribed Event
         //If the user just logged in, recalculate if the article should display as locked
         private void LoginSucceeded(Subscriber subscriber)
+        {
+            Locked = CalculateIfArticleShouldBeLocked(Article, _stateController.Subscriber);
+        }
+
+        private void LogoutEvent()
         {
             Locked = CalculateIfArticleShouldBeLocked(Article, _stateController.Subscriber);
         }

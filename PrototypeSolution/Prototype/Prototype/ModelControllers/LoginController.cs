@@ -11,8 +11,9 @@ namespace Prototype.ModelControllers
     {
         private readonly LoginApi _loginApi;
         private readonly StateController _stateController;
-        public event Action<Error> LoginErrorOccured;
-        public event Action<Subscriber> LoginSucceeded;
+        public event Action<Error> LoginEventErrorOccured;
+        public event Action<Subscriber> LoginEventSucceeded;
+        public event Action LogoutEvent;
 
         public LoginController(StateController stateController)
         {
@@ -33,13 +34,19 @@ namespace Prototype.ModelControllers
                 if (subscriber.error.code == 0)
                 {
                     _stateController.Subscriber = subscriber;
-                    LoginSucceeded(subscriber);
+                    LoginEventSucceeded(subscriber);
                 }
                 else
-                    LoginErrorOccured(subscriber.error);
+                    LoginEventErrorOccured(subscriber.error);
             }
             else
-                LoginErrorOccured(token.error);
+                LoginEventErrorOccured(token.error);
+        }
+
+        public void LogoutEventAction()
+        {
+            _stateController.Subscriber = null;
+            LogoutEvent();
         }
     }
 }
