@@ -44,8 +44,8 @@ namespace Prototype.ViewModels
             _stateController = stateController;
 
             //two event for failed and successfull login
-            _stateController.LoginController.LoginErrorOccured += LoginErrorOccured;
-            _stateController.LoginController.LoginSucceeded += LoginSucceeded;
+            _stateController.LoginController.LoginEventErrorOccured += LoginErrorOccured;
+            _stateController.LoginController.LoginEventSucceeded += LoginSucceeded;
         }
 
         private void LoginErrorOccured(Error error)

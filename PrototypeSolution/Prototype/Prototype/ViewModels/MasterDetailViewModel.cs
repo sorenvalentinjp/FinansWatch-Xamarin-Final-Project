@@ -43,7 +43,7 @@ namespace Prototype.ViewModels
         public MasterDetailViewModel(StateController stateController, MasterDetailPage masterDetail)
         {
             _stateController = stateController;
-            _stateController.LoginController.LoginSucceeded += LoginSucceeded;
+            _stateController.LoginController.LoginEventSucceeded += LoginSucceeded;
             ToolBarExtension.AllArticlesShortcutActionOccured += AllArticlesShortcutActionOccured;
             _masterDetail = masterDetail;
             _frontPageView = new FrontPageView(new FrontPageViewModel(stateController));
@@ -176,7 +176,7 @@ namespace Prototype.ViewModels
 
                         if (answer)
                         {
-                            _stateController.Subscriber = null;
+                            _stateController.LoginController.LogoutEventAction(); //this method fires the logout event which is then notifying ArticleViewModel
                             SetLogInButtonText();
                             //set _loginView to a new LogInView to avoid email and password entries being populated when the user want to log in again
                             _loginView = new LoginView(new LoginViewModel(_stateController));
