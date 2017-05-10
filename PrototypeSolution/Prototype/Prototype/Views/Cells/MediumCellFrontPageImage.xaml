@@ -9,61 +9,47 @@
              LongPressing="LongPressingGesture">
 
     <ViewCell.View>
-        <Grid Margin="10,10,10,10">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
+        <StackLayout Margin="10" Orientation="Horizontal" HorizontalOptions="Fill">
             <ffimageloading:CachedImage x:Name="image"
-                Grid.Row="0" 
-                Grid.Column="0" 
                 LoadingPlaceholder="{helpers:ImageFromFile imageTransparentSmall.png}"
                 Source="{Binding Article.image.versions.small_article_220.url}"
                 BitmapOptimizations="True"
                 DownsampleToViewSize="True"
-                HorizontalOptions="StartAndExpand"/>
+                HorizontalOptions="Fill"
+                IsOpaque="True"
+                HeightRequest="80"/>
             <Label Text="{Binding Article.titles.FRONTPAGE}" 
-               Grid.Row="0" 
-               Grid.Column="1" 
-               Grid.ColumnSpan="2"
                FontSize="Small"/>
-            
-            <StackLayout
-                Orientation="Horizontal"
-                Grid.Row="0" 
-                Grid.Column="1"
-                Grid.ColumnSpan="2" 
-                HorizontalOptions="End"
-                VerticalOptions="End">
-                <ffimageloading:CachedImage Source="{helpers:ImageFromFile saved.png}"  
+            <ffimageloading:CachedImage Source="{helpers:ImageFromFile saved.png}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"
                                             DownsampleToViewSize="True"
-                                            IsVisible="{Binding Article.IsSaved}"/>
+                                            IsVisible="{Binding Article.IsSaved}"
+                                            IsOpaque="True"
+                                            HorizontalOptions="EndAndExpand" 
+                                            VerticalOptions="End"/>
 
                 <ffimageloading:CachedImage Source="{helpers:ImageFromFile locked.png}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"
                                             DownsampleToViewSize="True"
-                                            IsVisible="{Binding LockedIndicatorImageVisible}"/>
+                                            IsVisible="{Binding LockedIndicatorImageVisible}"
+                                            IsOpaque="True"
+                                            HorizontalOptions="EndAndExpand" 
+                                            VerticalOptions="End"/>
 
-                <ffimageloading:CachedImage Source="{helpers:ImageFromFile unlocked.png}"  
+                    <ffimageloading:CachedImage Source="{helpers:ImageFromFile unlocked.png}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"
                                             DownsampleToViewSize="True"
-                                            IsVisible="{Binding UnlockedIndicatorImageVisible}"/>
-            </StackLayout>
-
-           
-        </Grid>
+                                            IsVisible="{Binding UnlockedIndicatorImageVisible}"
+                                            IsOpaque="True"
+                                            HorizontalOptions="EndAndExpand" 
+                                            VerticalOptions="End"/>
+        </StackLayout >
     </ViewCell.View>
 </mr:ViewCell>
 

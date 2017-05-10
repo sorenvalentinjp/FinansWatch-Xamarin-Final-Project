@@ -12,11 +12,11 @@ namespace Prototype.Views
 
         public FrontPageView(FrontPageViewModel viewModel)
 		{
-			InitializeComponent();
-
 		    BindingContext = viewModel;
+		   
+            InitializeComponent();
 
-            ListViewHelper.DisableItemSelectedAction(listView);
+		    ListViewHelper.DisableItemSelectedAction(listView);
         }     
     }
 }

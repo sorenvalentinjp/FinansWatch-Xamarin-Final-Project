@@ -37,7 +37,9 @@ namespace Prototype
             NavigationPage.SetBackButtonTitle(MainPage, "");
 
             if (App.Navigation == null)
+            {
                 App.Navigation = MainPage.Navigation;
+            }
         }
 
         protected override void OnSleep()
@@ -51,7 +53,9 @@ namespace Prototype
         {
             // Handle when your app resumes
             if (Application.Current.Properties.ContainsKey("stateController"))
+            {
                 _stateController = LocalStorage.DeserializeFromJson<StateController>(Application.Current.Properties["stateController"].ToString());
+            }
         }
 
         public static bool IsSubscriberLoggedIn()
