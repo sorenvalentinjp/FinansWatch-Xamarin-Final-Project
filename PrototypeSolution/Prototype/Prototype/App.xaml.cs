@@ -55,6 +55,7 @@ namespace Prototype
             if (Application.Current.Properties.ContainsKey("stateController"))
             {
                 _stateController = LocalStorage.DeserializeFromJson<StateController>(Application.Current.Properties["stateController"].ToString());
+                _stateController.LocalStorageLoaded();
             }
         }
 

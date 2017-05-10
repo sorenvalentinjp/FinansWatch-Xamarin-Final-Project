@@ -17,6 +17,8 @@ namespace Prototype.Views
             InitializeComponent();
 
 		    ListViewHelper.DisableItemSelectedAction(listView);
-        }     
+
+            viewModel.GetBucket2();
+        }
     }
 }

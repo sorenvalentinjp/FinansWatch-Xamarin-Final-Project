@@ -21,7 +21,6 @@ namespace Prototype.ModelControllers
     {
         private readonly ContentApi _contentApi;
         private StateController _stateController;
-        public event Action<IList<Article>> FrontPageArticlesAreReady;
         public event Action<IList<Article>> LatestArticlesAreReady;
         public event Action<bool> IsRefreshingFrontPage;
         public event Action<bool> IsRefreshingLatestArticles;
@@ -36,50 +35,75 @@ namespace Prototype.ModelControllers
 
 
         //-------------------Bucket methods start
-        public async void GetBucket1()
+
+        //BUCKET 1
+        /// <summary>
+        /// Downloading all frontpage articles WITHOUT including their details. This is to speed up load of the FrontPageView
+        /// </summary>
+        public async Task<IList<Article>> GetBucket1FrontPage()
         {
-            IList<Article> articles = await GetFrontPageArticlesBucketAsync();
-            foreach(var article in articles)
+            return await GetFrontPageArticlesAsync();
+        }
+
+        /// <summary>
+        /// Downloading details for the frontpage articles + all other articles the app is capable of presenting
+        /// </summary>
+        /// <param name="frontPageArticles"></param>
+        /// <returns></returns>
+        public async Task<IList<Article>> GetBucket2(IList<Article> frontPageArticles)
+        {
+            //Details for frontpage articles
+            GetArticleDetailsForCollection(frontPageArticles);
+
+            //Latest articles
+            IList<Article> latestArticles = await GetLatestArticlesAsync();
+            GetArticleDetailsForCollection(latestArticles);
+            return latestArticles;
+
+            //TODO
+            //Section X
+
+            //Section Y
+        }
+
+        //BUCKET HELPER
+        /// <summary>
+        /// Downloading all details for the collection of articles
+        /// </summary>
+        /// <param name="articles"></param>
+        public async void GetArticleDetailsForCollection(IList<Article> articles)
+        {
+            foreach (var article in articles)
             {
-                //GetArticleDetailsBucketAsync(article);
                 await GetArticleDetailsAsync(article);
             }
         }
 
-        public async Task<IList<Article>> GetFrontPageArticlesBucketAsync()
-        {
-            IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadFrontPageArticles());
-            return articles;
-        }
-
-        public async void GetArticleDetailsBucketAsync(Article article)
-        {
-            Article detailedArticle = DeserializeArticle(await _contentApi.DownloadArticle(article.contentUrl));
-            article.AddFieldsFromAnotherArticle(detailedArticle);
-            SetArticleFields(article);
-        }
         //------------------Bucket methods end
 
         ////////////////////////////////////////////////////////////////////////////////////
-        public async void GetLatestArticlesAsync()
+        public async Task<IList<Article>> GetLatestArticlesAsync()
         {
-            IsRefreshingLatestArticles(true);
+            IsRefreshingLatestArticles?.Invoke(true);
 
             IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadLatestArticles());
 
-            LatestArticlesAreReady(articles);
+            LatestArticlesAreReady?.Invoke(articles);
 
-            IsRefreshingLatestArticles(false);
+            IsRefreshingLatestArticles?.Invoke(false);
+
+            return articles;
         }
 
-        public async void GetFrontPageArticlesAsync()
+        public async Task<IList<Article>> GetFrontPageArticlesAsync()
         {
-            IsRefreshingFrontPage(true);
+            IsRefreshingFrontPage?.Invoke(true);
 
             IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadFrontPageArticles());
            
-            FrontPageArticlesAreReady(articles);
-            IsRefreshingFrontPage(false);
+            IsRefreshingFrontPage?.Invoke(false);
+
+            return articles;
         }
 
 

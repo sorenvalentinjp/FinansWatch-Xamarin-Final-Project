@@ -53,27 +53,27 @@ namespace Prototype.ViewModels
         public FrontPageViewModel(StateController stateController)
         {
             this._stateController = stateController;
+                        
             IsRefreshing = false;
-            //this._stateController.ArticleController.IsRefreshingFrontPage += IsRefreshingChanged;
-            //this._stateController.ArticleController.FrontPageArticlesAreReady += FrontPageArticlesAreReady;
+            this._stateController.ArticleController.IsRefreshingFrontPage += IsRefreshingChanged;
 
             //bucket1 event
-            _stateController.Bucket1IsReady += FrontPageArticlesAreReady;
+            _stateController.Bucket1IsReady += Bucket1IsReady;
 
             DataTemplate = new SectionTemplateSelector(_stateController);
-            //this._stateController.GetFrontPageArticles();
 
+            //
             if(_stateController.FrontPageArticles == null)
             {
                 _stateController.GetBucket1();
             }
             else
             {
-                FrontPageArticlesAreReady(_stateController.FrontPageArticles);
+                Bucket1IsReady(_stateController.FrontPageArticles);
             }
         }
 
-        private void FrontPageArticlesAreReady(IList<Article> newArticles)
+        private void Bucket1IsReady(IList<Article> newArticles)
         {
             IList<ArticleViewModel> articles = new List<ArticleViewModel>();
             foreach (var article in newArticles)
@@ -83,6 +83,11 @@ namespace Prototype.ViewModels
             Articles = articles;
         }
 
+        public void GetBucket2()
+        {
+            _stateController.GetBucket2();
+        }
+
         //IsRefreshing is used to display an 'busy' icon while the listview is refreshing its content.
         private void IsRefreshingChanged(bool isRefreshing)
         {
@@ -90,7 +95,7 @@ namespace Prototype.ViewModels
         }
 
         /// <summary>
-        /// When the user refreshed the view, this.articles is updated.
+        /// When the user refreshed the view, the corresponding method in the statecontroller is called.
         /// </summary>
         public ICommand RefreshCommand
         {
@@ -98,7 +103,7 @@ namespace Prototype.ViewModels
             {
                 return new Command(() =>
                 {
-                    this._stateController.GetFrontPageArticles();
+                    this._stateController.RefreshFrontPage();
                 });
             }
         }

@@ -36,31 +36,43 @@ namespace Prototype.ModelControllers
             this.ArticleController = new ArticleController(this);
             this.SavedArticles = new ObservableCollection<Article>();
             this.LoginController = new LoginController(this);
-
         }
 
         //-----------------Bucket methods start
         //bucket events
         public event Action<IList<Article>> Bucket1IsReady;
-        public event Action<IList<Article>> Bucket2IsReady;
+        public event Action Bucket2IsReady;
 
         public IList<Article> FrontPageArticles;
         public async void GetBucket1()
         {
-            this.FrontPageArticles = await ArticleController.GetFrontPageArticlesBucketAsync();
-            Bucket1IsReady(this.FrontPageArticles);
+            this.FrontPageArticles = await ArticleController.GetBucket1FrontPage();
+            Bucket1IsReady?.Invoke(this.FrontPageArticles);
         }
-        //-----------------Bucket methods end
 
+        public IList<Article> LatestArticles;
+        public async void GetBucket2()
+        {
+            this.LatestArticles = await ArticleController.GetBucket2(this.FrontPageArticles);
+            Bucket2IsReady?.Invoke();
+        }
 
         /// <summary>
-        /// Fetches all frontpage articles async and wait for the articleIsReady events to fire
-        /// During this operation a 'refresh' icon is displayed.
+        /// When the user pulls down to refresh, all frontpage articles and their details are downloaded again
         /// </summary>
-        public void GetFrontPageArticles()
+        public async void RefreshFrontPage()
         {
-            ArticleController.GetFrontPageArticlesAsync();
+            this.FrontPageArticles = await this.ArticleController.GetBucket1FrontPage();
+            this.ArticleController.GetArticleDetailsForCollection(this.FrontPageArticles);
         }
+
+
+        public void LocalStorageLoaded()
+        {
+            this.Bucket1IsReady?.Invoke(this.FrontPageArticles);
+            this.Bucket2IsReady?.Invoke();
+        }
+        //-----------------Bucket methods end
 
         public Task<IList<Article>> GetRelatedArticles(Article article)
         {
