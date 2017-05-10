@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.Views.Cells.DateTimeCell"
              xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
-             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:helpers="clr-namespace:Prototype.Views.Helpers;assembly=Prototype.Android"
+             xmlns:components="clr-namespace:Prototype.Views.Components"
              Tapped="TappedGesture"
              LongPressing="LongPressingGesture">
 
@@ -34,33 +33,12 @@
                                 Grid.Column="2" 
                                 Grid.ColumnSpan="5"/>
 
-            <StackLayout
+            <components:IconStackLayoutComponent 
                 Orientation="Vertical"
                 Grid.Row="0" 
                 Grid.Column="7"
                 HorizontalOptions="End"
-                VerticalOptions="End">
-                <forms:CachedImage Source="{helpers:ImageFromFile saved.png}"  
-                                            HeightRequest="24"
-                                            WidthRequest="24"
-                                            BitmapOptimizations="True"
-                                            DownsampleToViewSize="True"
-                                            IsVisible="{Binding Article.IsSaved}"/>
-
-                <forms:CachedImage Source="{helpers:ImageFromFile locked.png}"  
-                                            HeightRequest="24"
-                                            WidthRequest="24"
-                                            BitmapOptimizations="True"
-                                            DownsampleToViewSize="True"
-                                            IsVisible="{Binding LockedIndicatorImageVisible}"/>
-
-                <forms:CachedImage Source="{helpers:ImageFromFile unlocked.png}"  
-                                            HeightRequest="24"
-                                            WidthRequest="24"
-                                            BitmapOptimizations="True"
-                                            DownsampleToViewSize="True"
-                                            IsVisible="{Binding UnlockedIndicatorImageVisible}"/>
-            </StackLayout>
+                VerticalOptions="End"/>
         </Grid>
     </ViewCell.View>
 </mr:ViewCell>

@@ -4,7 +4,7 @@
              xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:customRenderers="clr-namespace:Prototype.Views.CustomRenderers"
-             xmlns:helpers="clr-namespace:Prototype.Views.Helpers;assembly=Prototype.Android"
+             xmlns:components="clr-namespace:Prototype.Views.Components"
              x:Class="Prototype.Views.Cells.LargeCellFrontPageImage"
              Tapped="TappedGesture"
              LongPressing="LongPressingGesture">
@@ -22,34 +22,10 @@
                 <customRenderers:HtmlFormattedLabel Text="{Binding Article.teasers.FRONTPAGE}"
                                                     FontSize="Medium"/>
 
-                <StackLayout
+                <components:IconStackLayoutComponent 
                     Orientation="Horizontal"
-                    Grid.Row="0" 
-                    Grid.Column="1"
-                    Grid.ColumnSpan="2" 
                     HorizontalOptions="End"
-                    VerticalOptions="End">
-                    <ffimageloading:CachedImage Source="{helpers:ImageFromFile saved.png}"  
-                                                HeightRequest="24"
-                                                WidthRequest="24"
-                                                BitmapOptimizations="True"
-                                                DownsampleToViewSize="True"
-                                                IsVisible="{Binding Article.IsSaved}"/>
-
-                    <ffimageloading:CachedImage Source="{helpers:ImageFromFile locked.png}"  
-                                                HeightRequest="24"
-                                                WidthRequest="24"
-                                                BitmapOptimizations="True"
-                                                DownsampleToViewSize="True"
-                                                IsVisible="{Binding LockedIndicatorImageVisible}"/>
-
-                    <ffimageloading:CachedImage Source="{helpers:ImageFromFile unlocked.png}"  
-                                                HeightRequest="24"
-                                                WidthRequest="24"
-                                                BitmapOptimizations="True"
-                                                DownsampleToViewSize="True"
-                                                IsVisible="{Binding UnlockedIndicatorImageVisible}"/>
-                </StackLayout>
+                    VerticalOptions="End"/>
             </StackLayout>
         </StackLayout>
     </ViewCell.View>

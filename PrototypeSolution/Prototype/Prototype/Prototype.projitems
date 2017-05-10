@@ -83,6 +83,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Helpers\ImageResourceExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Helpers\ListViewHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Helpers\ToolBarExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Components\IconStackLayoutComponent.xaml.cs">
+      <DependentUpon>IconStackLayoutComponent.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -202,5 +206,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Components\IconStackLayoutComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Components\" />
   </ItemGroup>
 </Project>
