@@ -22,8 +22,9 @@
             <!--In this case we dont have a picture. Therefore a a local transparent image is used in its place-->
             <ffimageloading:CachedImage Grid.Row="0" 
                                         Grid.Column="0" 
-                                        LoadingPlaceholder="{Binding Article.ImageTransparentSmall}"
-                                        Source="{Binding Article.ImageTransparentSmall}"/>
+                                        Source="{helpers:ImageFromFile imageTransparentSmall.png}"
+                                        BitmapOptimizations="True"
+                                        DownsampleToViewSize="True"/>
             <Label Text="{Binding Article.titles.FRONTPAGE}" 
                    Grid.Row="0" 
                    Grid.Column="1" 
@@ -37,7 +38,7 @@
                 Grid.ColumnSpan="2" 
                 HorizontalOptions="End"
                 VerticalOptions="End">
-                <ffimageloading:CachedImage Source="{Binding Article.SavedImageSource}"  
+                <ffimageloading:CachedImage Source="{helpers:ImageFromFile saved.png}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"

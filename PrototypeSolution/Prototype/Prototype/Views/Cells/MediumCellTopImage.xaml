@@ -22,7 +22,7 @@
             <ffimageloading:CachedImage x:Name="image"
                                         Grid.Row="0" 
                                         Grid.Column="0" 
-                                        LoadingPlaceholder="{Binding Article.ImageTransparentSmall}"
+                                        LoadingPlaceholder="{helpers:ImageFromFile imageTransparentSmall.png}"
                                         Source="{Binding Article.topImage.thumb.url}"
                                         BitmapOptimizations="True"
                                         DownsampleToViewSize="True"
@@ -40,7 +40,7 @@
                 Grid.ColumnSpan="2" 
                 HorizontalOptions="End"
                 VerticalOptions="End">
-                <ffimageloading:CachedImage Source="{Binding Article.SavedImageSource}"  
+                <ffimageloading:CachedImage Source="{helpers:ImageFromFile saved.png}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"

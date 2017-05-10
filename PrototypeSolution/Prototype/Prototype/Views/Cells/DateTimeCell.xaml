@@ -40,7 +40,7 @@
                 Grid.Column="7"
                 HorizontalOptions="End"
                 VerticalOptions="End">
-                <forms:CachedImage Source="{Binding Article.SavedImageSource}"  
+                <forms:CachedImage Source="{helpers:ImageFromFile saved.png}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"

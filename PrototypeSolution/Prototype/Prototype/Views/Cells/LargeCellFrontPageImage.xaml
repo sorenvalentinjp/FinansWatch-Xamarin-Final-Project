@@ -29,7 +29,7 @@
                     Grid.ColumnSpan="2" 
                     HorizontalOptions="End"
                     VerticalOptions="End">
-                    <ffimageloading:CachedImage Source="{Binding Article.SavedImageSource}"  
+                    <ffimageloading:CachedImage Source="{helpers:ImageFromFile saved.png}"  
                                                 HeightRequest="24"
                                                 WidthRequest="24"
                                                 BitmapOptimizations="True"

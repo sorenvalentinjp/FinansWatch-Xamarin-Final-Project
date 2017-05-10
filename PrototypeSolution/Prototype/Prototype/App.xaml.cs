@@ -9,7 +9,9 @@ using System.Text;
 using Prototype.ViewModels;
 using Xamarin.Forms;
 using Prototype.Database;
+using Xamarin.Forms.Xaml;
 
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Prototype
 {
     public partial class App : Application

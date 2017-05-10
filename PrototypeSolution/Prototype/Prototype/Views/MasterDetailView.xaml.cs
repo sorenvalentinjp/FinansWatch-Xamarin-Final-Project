@@ -4,7 +4,6 @@ using Prototype.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Prototype.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
