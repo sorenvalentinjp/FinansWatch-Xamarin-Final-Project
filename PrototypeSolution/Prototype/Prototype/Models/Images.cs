@@ -26,7 +26,7 @@ namespace Prototype.Models
         //public E e { get; set; }
         public SmallArticle220 small_article_220 { get; set; }
         public BigArticle460 big_article_460 { get; set; }
-        //public F f { get; set; }
+        public F f { get; set; }
         //public HugeArticle620 huge_article_620 { get; set; }
     }
 
@@ -81,10 +81,10 @@ namespace Prototype.Models
     /// <summary>
     /// JSON Generated class that is used in Image
     /// </summary>
-    //public class F
-    //{
-    //    public string url { get; set; }
-    //}
+    public class F
+    {
+        public string url { get; set; }
+    }
 
     /// <summary>
     /// JSON Generated class that is used in Image
