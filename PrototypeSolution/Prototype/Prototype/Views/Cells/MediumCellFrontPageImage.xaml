@@ -21,7 +21,7 @@
                 Grid.Row="0" 
                 Grid.Column="0" 
                 LoadingPlaceholder="{helpers:ImageFromFile imageTransparentSmall.png}"
-                Source="{Binding Article.image.versions.small_article_220.ImageSource}"
+                Source="{Binding Article.image.versions.small_article_220.url}"
                 BitmapOptimizations="True"
                 DownsampleToViewSize="True"
                 HorizontalOptions="StartAndExpand"
