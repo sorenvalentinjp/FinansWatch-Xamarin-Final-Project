@@ -8,14 +8,17 @@
              Title="{Binding ArticleViewModel.Article.homeSectionName}">
 
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Orientation="Vertical">
-
+        <ListView x:Name="listView"
+                ItemsSource="{Binding RelatedArticleViewModels}"
+                ItemTemplate="{Binding DataTemplate}"
+                HasUnevenRows="True"
+                CachingStrategy="RecycleElement">
+            <ListView.Header>
                 <StackLayout>
                     <ffimageloading:CachedImage DownsampleToViewSize="true" 
-                            Source="{Binding ArticleViewModel.Article.image.versions.big_article_460.url}"
-                            HorizontalOptions="Fill"
-                            IsVisible="{Binding ArticleViewModel.Article.topImage, Converter={converters:NullToBooleanConverter}}"/>
+                                       Source="{Binding ArticleViewModel.Article.topImage.small.url}"
+                                       HorizontalOptions="Fill"
+                                       IsVisible="{Binding ArticleViewModel.Article.topImage, Converter={converters:NullToBooleanConverter}}"/>
                     <Label Text="{Binding ArticleViewModel.Article.topImage.imageCaption}" 
                            Margin="10,0,30,10" 
                            FontSize="Micro"
@@ -31,14 +34,13 @@
                            Margin="10,10,30,0" 
                            FontSize="Micro" />
                     <customRenderers:HtmlFormattedLabel IsVisible="{Binding ArticleViewModel.SubscriberHasAccess}"
-                        Text="{Binding ArticleViewModel.Article.bodyText}" 
-                        Margin="10,15,20,10" 
-                        FontSize="Small"
-                        />
+                                                        Text="{Binding ArticleViewModel.Article.bodyText}" 
+                                                        Margin="10,15,20,10" 
+                                                        FontSize="Small"/>
                     <StackLayout IsVisible="{Binding ArticleViewModel.SubscriberHasAccess, Converter={converters:InverseBooleanConverter}}" 
-                        Orientation="Vertical"
-                        BackgroundColor="LightGray"
-                        Margin="10,0,10,5">
+                                 Orientation="Vertical"
+                                 BackgroundColor="LightGray"
+                                 Margin="10,0,10,5">
                         <Label 
                             Text="LOG IND FOR AT LÆSE ARTIKLEN"
                             Margin="30,25,30,25"
@@ -62,13 +64,7 @@
                         HeightRequest=".5" 
                         BackgroundColor="LightGray"/>
                 </StackLayout>
-
-        <ListView x:Name="listView"
-                ItemsSource="{Binding RelatedArticleViewModels}"
-                ItemTemplate="{Binding DataTemplate}"
-                HasUnevenRows="True"
-                CachingStrategy="RecycleElement"/>
-            </StackLayout>
-        </ScrollView>
+            </ListView.Header>
+        </ListView>
     </ContentPage.Content>
 </ContentPage>

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using Prototype.ModelControllers;
@@ -24,6 +25,7 @@ namespace Prototype.Database
             }
             catch(Exception ex)
             {
+                Debug.WriteLine(@"ERROR {0}", ex.Message);
                 throw;
             }
         }
@@ -40,8 +42,9 @@ namespace Prototype.Database
 
                 return result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                Debug.WriteLine(@"ERROR {0}", ex.Message);
                 throw;
             }
         }

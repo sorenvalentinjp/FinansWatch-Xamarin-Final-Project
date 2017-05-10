@@ -76,6 +76,19 @@ namespace Prototype.Models
             return null != other && contentUrl == other.contentUrl;
         }
 
+        public override int GetHashCode()
+        {
+            if (contentUrl != null)
+            {
+                return contentUrl.GetHashCode();
+            }
+            else
+            {
+                return -1;
+            }
+            
+        }
+
         public override bool Equals(object obj)
         {
             return Equals(obj as Article);
