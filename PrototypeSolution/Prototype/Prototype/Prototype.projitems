@@ -52,6 +52,10 @@
       <DependentUpon>DateTimeCellGroupHeader.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\DetailsArticleCell.xaml.cs">
+      <DependentUpon>DetailsArticleCell.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\LargeCellFrontPageImage.xaml.cs">
       <DependentUpon>LargeCellFrontPageImage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -215,5 +219,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\Components\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Cells\DetailsArticleCell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
