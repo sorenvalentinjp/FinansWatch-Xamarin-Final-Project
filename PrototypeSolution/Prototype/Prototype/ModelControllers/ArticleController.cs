@@ -24,15 +24,11 @@ namespace Prototype.ModelControllers
         public event Action<IList<Article>> LatestArticlesAreReady;
         public event Action<bool> IsRefreshingFrontPage;
         public event Action<bool> IsRefreshingLatestArticles;
-        private ImageDownloader _imageDownloader;
-
-        
 
         public ArticleController(StateController stateController)
         {
             _stateController = stateController;
             _contentApi = new ContentApi();
-            _imageDownloader = new ImageDownloader();           
         }
 
 
@@ -186,7 +182,6 @@ namespace Prototype.ModelControllers
         private Article PrepareArticle(Article article)
         {
             article = StripArticle(article);
-            article.BuildImageResources(_imageDownloader);
 
             if (article.topImages?.Count > 0)
             {
@@ -230,8 +225,5 @@ namespace Prototype.ModelControllers
             var pattern = "<ul.*</ul>";
             return Regex.Replace(html, pattern, "");
         }
-
     }
-
-
 }
