@@ -101,9 +101,10 @@ namespace Prototype.ViewModels
         {
             get
             {
-                return new Command(() =>
+                return new Command(async () =>
                 {
-                    this._stateController.RefreshFrontPage();
+                    IList<Article> refreshedArticles = await _stateController.RefreshFrontPage();
+                    Bucket1IsReady(refreshedArticles);
                 });
             }
         }

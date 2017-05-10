@@ -58,14 +58,26 @@ namespace Prototype.ModelControllers
         }
 
         /// <summary>
-        /// When the user pulls down to refresh, all frontpage articles and their details are downloaded again
+        /// When the user pulls down to refresh the frontpage, all frontpage articles and their details are downloaded again
         /// </summary>
-        public async void RefreshFrontPage()
+        /// <returns></returns>
+        public async Task<IList<Article>> RefreshFrontPage()
         {
             this.FrontPageArticles = await this.ArticleController.GetBucket1FrontPage();
             this.ArticleController.GetArticleDetailsForCollection(this.FrontPageArticles);
+            return this.FrontPageArticles;
         }
 
+        /// <summary>
+        /// When the user pulls down to refresh latest articles view, all articles and their details are downloaded again
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IList<Article>> RefreshLatestArticles()
+        {
+            this.LatestArticles = await this.ArticleController.GetLatestArticlesAsync();
+            this.ArticleController.GetArticleDetailsForCollection(this.LatestArticles);
+            return this.LatestArticles;
+        }
 
         public void LocalStorageLoaded()
         {

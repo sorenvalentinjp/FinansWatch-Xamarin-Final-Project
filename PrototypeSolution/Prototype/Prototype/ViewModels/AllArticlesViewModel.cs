@@ -68,17 +68,27 @@ namespace Prototype.ViewModels
             this._stateController = stateController;
             IsRefreshing = false;
             this._stateController.ArticleController.IsRefreshingLatestArticles += IsRefreshingChanged;
-            this._stateController.ArticleController.LatestArticlesAreReady += LatestArticlesAreReady;
-            this._stateController.ArticleController.GetLatestArticlesAsync();
+            this._stateController.Bucket2IsReady += Bucket2IsReady;
 
             this.DataTemplate = new DataTemplate(() => new DateTimeCell(stateController));
             this.DataTemplateGroupHeader = new DataTemplate(() => new DateTimeCellGroupHeader());
 
+            if (_stateController.LatestArticles == null)
+            {
+                _stateController.GetBucket2();
+            }
+            else
+            {
+                Bucket2IsReady();
+            }
         }
 
+        private void Bucket2IsReady()
+        {
+            GroupArticles(_stateController.LatestArticles);
+        }
 
-
-        private void LatestArticlesAreReady(IList<Article> articles)
+        private void GroupArticles(IList<Article> articles)
         {
             IList<ArticleViewModel> articleViewModels = new List<ArticleViewModel>();
 
@@ -86,13 +96,12 @@ namespace Prototype.ViewModels
             {
                 articleViewModels.Add(new ArticleViewModel(_stateController, article));
             }
-            
-                
+
             var sortedArticleViewModels = from articleViewModel in articleViewModels
-                    orderby articleViewModel.Article.publishedDateTime descending
-                    group articleViewModel by articleViewModel.Article.publishedDateTime.Date.ToString("dd. MMMM", CultureInfo.InvariantCulture) into articleGroup
-                    select new Grouping<string, ArticleViewModel>(articleGroup.Key, articleGroup);
-            
+                                          orderby articleViewModel.Article.publishedDateTime descending
+                                          group articleViewModel by articleViewModel.Article.publishedDateTime.Date.ToString("dd. MMMM", CultureInfo.InvariantCulture) into articleGroup
+                                          select new Grouping<string, ArticleViewModel>(articleGroup.Key, articleGroup);
+
             var groupedArticleViewModels = new List<Grouping<string, ArticleViewModel>>(sortedArticleViewModels);
 
             Grouped = groupedArticleViewModels;
@@ -110,9 +119,10 @@ namespace Prototype.ViewModels
         {
             get
             {
-                return new Command(() =>
+                return new Command(async () =>
                 {
-                    this._stateController.ArticleController.GetLatestArticlesAsync();
+                    IList<Article> refreshedArticles = await _stateController.RefreshLatestArticles();
+                    GroupArticles(refreshedArticles);
                 });
             }
         }

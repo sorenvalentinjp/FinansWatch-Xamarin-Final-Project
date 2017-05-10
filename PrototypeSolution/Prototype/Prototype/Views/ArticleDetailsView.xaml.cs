@@ -22,16 +22,11 @@ namespace Prototype.Views
 
         public ArticleDetailsView(StateController stateController, ArticleViewModel viewModel)
         {
+            BindingContext = new ArticleDetailsViewModel(stateController, viewModel);
+
             InitializeComponent();
 
             ListViewHelper.DisableItemSelectedAction(listView);
-
-            SetBindingContext(stateController, viewModel);
-        }
-
-        public async void SetBindingContext(StateController stateController, ArticleViewModel viewModel)
-        {
-            BindingContext = new ArticleDetailsViewModel(stateController, await viewModel.GetArticleDetails());
         }
     }
 }

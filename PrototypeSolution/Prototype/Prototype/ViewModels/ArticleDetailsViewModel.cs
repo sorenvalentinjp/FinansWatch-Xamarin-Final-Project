@@ -17,7 +17,6 @@ namespace Prototype.ViewModels
     public class ArticleDetailsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
         private readonly StateController _stateController;
         private ArticleViewModel _articleViewModel;
         public ArticleViewModel ArticleViewModel
@@ -112,6 +111,5 @@ namespace Prototype.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
-
     }
 }

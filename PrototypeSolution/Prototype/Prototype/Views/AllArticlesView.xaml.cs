@@ -12,9 +12,9 @@ namespace Prototype.Views
     {
         public AllArticlesView(AllArticlesViewModel viewModel)
         {
-			InitializeComponent();
-
             BindingContext = viewModel;
+
+            InitializeComponent();
 
             ListViewHelper.DisableItemSelectedAction(listView);
         }
