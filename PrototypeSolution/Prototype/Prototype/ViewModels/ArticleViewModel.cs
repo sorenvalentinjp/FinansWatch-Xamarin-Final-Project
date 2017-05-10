@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Prototype.ModelControllers;
 using Prototype.Models;
-using Prototype.Views;
-using Prototype.Views.Helpers;
-using Prototype.Views.TemplateSelectors;
-using Xamarin.Forms;
 
 namespace Prototype.ViewModels
 {
@@ -54,30 +46,6 @@ namespace Prototype.ViewModels
             }
         }
 
-        private ImageSource _unlockedIndicatorImageSource;
-        public ImageSource UnlockedIndicatorImageSource
-        {
-            get { return _unlockedIndicatorImageSource; }
-            set
-            {
-                if (_unlockedIndicatorImageSource == value) { return; }
-                _unlockedIndicatorImageSource = value;
-                Notify("UnlockedIndicatorImageSource");
-            }
-        }
-
-        private ImageSource _lockedIndicatorImageSource;
-        public ImageSource LockedIndicatorImageSource
-        {
-            get { return _lockedIndicatorImageSource; }
-            set
-            {
-                if (_lockedIndicatorImageSource == value) { return; }
-                _lockedIndicatorImageSource = value;
-                Notify("LockedIndicatorImageSource");
-            }
-        }
-
         private bool _lockedIndicatorImageVisible;
         public bool LockedIndicatorImageVisible
         {
@@ -104,23 +72,14 @@ namespace Prototype.ViewModels
 
         public ArticleViewModel(StateController stateController, Article articleToDisplay)
         {
-            this._stateController = stateController;
+            this._stateController = stateController;       
 
-            if (_stateController.Subscriber != null)
-            {
-                SubscriberHasAccess = _stateController.Subscriber.HasAccessToSite();
-            }            
+            Locked = CalculateIfArticleShouldBeLocked(articleToDisplay);
 
-            Locked = CalculateIfArticleShouldBeLocked(articleToDisplay, _stateController.Subscriber);
-
+            //Subscribe to events that update GUI
             _stateController.LoginController.LoginEventSucceeded += LoginSucceeded;
-
             _stateController.LoginController.LogoutEvent += LogoutEvent;
-
             _stateController.SavedArticlesChangedEvent += SavedArticlesChanged;
-
-            UnlockedIndicatorImageSource = ImageSource.FromFile("unlocked.png");
-            LockedIndicatorImageSource = ImageSource.FromFile("locked.png");
 
             Article = articleToDisplay;
 
@@ -145,34 +104,29 @@ namespace Prototype.ViewModels
         //If the user just logged in, recalculate if the article should display as locked
         private void LoginSucceeded(Subscriber subscriber)
         {
-            SubscriberHasAccess = subscriber.HasAccessToSite();
-            Locked = CalculateIfArticleShouldBeLocked(Article, _stateController.Subscriber);
+            Locked = CalculateIfArticleShouldBeLocked(Article);
         }
 
         private void LogoutEvent()
         {
-            SubscriberHasAccess = false;
-            Locked = CalculateIfArticleShouldBeLocked(Article, _stateController.Subscriber);
+            Locked = CalculateIfArticleShouldBeLocked(Article);
         }
 
         /// <summary>
         /// Calculates wether the view should lock the article based on the logged or not not logged in subscribers access and the locked property on the article.
         /// </summary>
         /// <param name="article"></param>
-        /// <param name="subscriber"></param>
         /// <returns></returns>
-        private bool CalculateIfArticleShouldBeLocked(Article article, Subscriber subscriber)
+        private bool CalculateIfArticleShouldBeLocked(Article article)
         {
+            SubscriberHasAccess = _stateController.Subscriber.HasAccessToSite();
+
             var locked = article.locked;
-            if (locked && subscriber != null)
+            if (locked && SubscriberHasAccess)
             {
-                if (SubscriberHasAccess)
-                {
                     //If the subscriber is logged in, has access and the article is also locked, show the unlocked icon
                     UnlockedIndicatorImageVisible = true;
-                    LockedIndicatorImageVisible = false;
-                }
-                
+                    LockedIndicatorImageVisible = false;       
             }
             else if(locked)
             {

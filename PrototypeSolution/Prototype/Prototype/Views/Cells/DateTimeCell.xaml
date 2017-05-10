@@ -4,6 +4,7 @@
              x:Class="Prototype.Views.Cells.DateTimeCell"
              xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:helpers="clr-namespace:Prototype.Views.Helpers;assembly=Prototype.Android"
              Tapped="TappedGesture"
              LongPressing="LongPressingGesture">
 
@@ -46,14 +47,14 @@
                                             DownsampleToViewSize="True"
                                             IsVisible="{Binding Article.IsSaved}"/>
 
-                <forms:CachedImage Source="{Binding LockedIndicatorImageSource}"  
+                <forms:CachedImage Source="{helpers:ImageFromFile locked.png}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"
                                             DownsampleToViewSize="True"
                                             IsVisible="{Binding LockedIndicatorImageVisible}"/>
 
-                <forms:CachedImage Source="{Binding UnlockedIndicatorImageSource}"  
+                <forms:CachedImage Source="{helpers:ImageFromFile unlocked.png}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"

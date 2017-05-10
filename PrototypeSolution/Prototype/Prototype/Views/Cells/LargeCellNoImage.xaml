@@ -4,6 +4,7 @@
              xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:customRenderers="clr-namespace:Prototype.Views.CustomRenderers"
+             xmlns:helpers="clr-namespace:Prototype.Views.Helpers;assembly=Prototype.Android"
              x:Class="Prototype.Views.Cells.LargeCellNoImage"
              Tapped="TappedGesture"
              LongPressing="LongPressingGesture">
@@ -35,14 +36,14 @@
                                                 DownsampleToViewSize="True"
                                                 IsVisible="{Binding Article.IsSaved}"/>
 
-                    <ffimageloading:CachedImage Source="{Binding LockedIndicatorImageSource}"  
+                    <ffimageloading:CachedImage Source="{helpers:ImageFromFile locked.png}"  
                                                 HeightRequest="24"
                                                 WidthRequest="24"
                                                 BitmapOptimizations="True"
                                                 DownsampleToViewSize="True"
                                                 IsVisible="{Binding LockedIndicatorImageVisible}"/>
 
-                    <ffimageloading:CachedImage Source="{Binding UnlockedIndicatorImageSource}"  
+                    <ffimageloading:CachedImage Source="{helpers:ImageFromFile unlocked.png}"  
                                                 HeightRequest="24"
                                                 WidthRequest="24"
                                                 BitmapOptimizations="True"

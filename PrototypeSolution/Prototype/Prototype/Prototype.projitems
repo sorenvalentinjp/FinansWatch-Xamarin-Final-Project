@@ -79,6 +79,7 @@
       <DependentUpon>FrontPageView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Helpers\ImageFromFileExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Helpers\ImageResourceExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Helpers\ListViewHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Helpers\ToolBarExtension.cs" />
