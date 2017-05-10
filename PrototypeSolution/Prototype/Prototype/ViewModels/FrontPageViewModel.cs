@@ -65,12 +65,18 @@ namespace Prototype.ViewModels
             //
             if(_stateController.FrontPageArticles == null)
             {
-                _stateController.GetBucket1();
+                InitBucketsDownload();
             }
             else
             {
                 Bucket1IsReady(_stateController.FrontPageArticles);
             }
+        }
+
+        private async void InitBucketsDownload()
+        {
+            await _stateController.GetBucket1();
+            _stateController.GetBucket2();
         }
 
         private void Bucket1IsReady(IList<Article> newArticles)

@@ -44,10 +44,11 @@ namespace Prototype.ModelControllers
         public event Action Bucket2IsReady;
 
         public IList<Article> FrontPageArticles;
-        public async void GetBucket1()
+        public async Task<IList<Article>> GetBucket1()
         {
             this.FrontPageArticles = await ArticleController.GetBucket1FrontPage();
             Bucket1IsReady?.Invoke(this.FrontPageArticles);
+            return this.FrontPageArticles;
         }
 
         public IList<Article> LatestArticles;

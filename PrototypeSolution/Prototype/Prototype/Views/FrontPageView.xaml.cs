@@ -9,7 +9,6 @@ namespace Prototype.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FrontPageView : ContentPage
     {
-
         public FrontPageView(FrontPageViewModel viewModel)
 		{
 		    BindingContext = viewModel;
@@ -17,8 +16,6 @@ namespace Prototype.Views
             InitializeComponent();
 
 		    ListViewHelper.DisableItemSelectedAction(listView);
-
-            viewModel.GetBucket2();
         }
     }
 }
