@@ -18,7 +18,7 @@ namespace Prototype.Database
             _client = new HttpClient();
         }
 
-        public async Task<ImageSource> DownloadImage(string url)
+        public async Task<StreamImageSource> DownloadImage(string url)
         {
             return await Task.Run(async () =>
             {
@@ -26,7 +26,13 @@ namespace Prototype.Database
                 var uri = new Uri(url);
                 var imageAsBytes = await _client.GetByteArrayAsync(uri); // get the downloaded data
 
-                return ImageSource.FromStream(() => new MemoryStream(imageAsBytes)); // Create imagesource with downloaded data
+                StreamImageSource streamImageSource = (StreamImageSource) ImageSource.FromStream(() => new MemoryStream(imageAsBytes)); // Create imagesource with downloaded data
+
+                return streamImageSource;
+
+                //return new StreamImageSource{Stream = () => { new MemoryStream(imageAsBytes)}; // Create imagesource with downloaded data
+                
+                
             });
 
         }

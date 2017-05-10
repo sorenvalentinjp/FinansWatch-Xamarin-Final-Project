@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace Prototype.Models
 {
@@ -34,14 +35,16 @@ namespace Prototype.Models
     public class FrontpageLarge380
     {
         public string url { get; set; }
+        public StreamImageSource ImageSource { get; set; }
     }
 
     /// <summary>
     /// JSON Generated class that is used in Image
-    /// </summary>
+    /// </summary>z
     public class D
     {
         public string url { get; set; }
+        public StreamImageSource ImageSource { get; set; }
     }
 
     /// <summary>
@@ -50,6 +53,7 @@ namespace Prototype.Models
     public class MediumFrontpage300
     {
         public string url { get; set; }
+        public StreamImageSource ImageSource { get; set; }
     }
 
     /// <summary>
@@ -58,6 +62,7 @@ namespace Prototype.Models
     public class E
     {
         public string url { get; set; }
+        public StreamImageSource ImageSource { get; set; }
     }
 
     /// <summary>
@@ -66,6 +71,7 @@ namespace Prototype.Models
     public class SmallArticle220
     {
         public string url { get; set; }
+        public StreamImageSource ImageSource { get; set; }
     }
 
     /// <summary>
@@ -74,6 +80,7 @@ namespace Prototype.Models
     public class BigArticle460
     {
         public string url { get; set; }
+        public StreamImageSource ImageSource { get; set; }
     }
 
     /// <summary>
@@ -82,6 +89,7 @@ namespace Prototype.Models
     public class F
     {
         public string url { get; set; }
+        public StreamImageSource ImageSource { get; set; }
     }
 
     /// <summary>
@@ -90,6 +98,7 @@ namespace Prototype.Models
     public class HugeArticle620
     {
         public string url { get; set; }
+        public StreamImageSource ImageSource { get; set; }
     }
 
 
@@ -112,6 +121,7 @@ namespace Prototype.Models
     public class Big
     {
         public string url { get; set; }
+        public StreamImageSource ImageSource { get; set; }
     }
 
     /// <summary>
@@ -120,6 +130,7 @@ namespace Prototype.Models
     public class Small
     {
         public string url { get; set; }
+        public StreamImageSource ImageSource { get; set; }
     }
 
     /// <summary>
@@ -128,6 +139,7 @@ namespace Prototype.Models
     public class Thumb
     {
         public string url { get; set; }
+        public StreamImageSource ImageSource { get; set; }
     }
 
 

@@ -24,6 +24,7 @@ namespace Prototype.ModelControllers
         public event Action<IList<Article>> LatestArticlesAreReady;
         public event Action<bool> IsRefreshingFrontPage;
         public event Action<bool> IsRefreshingLatestArticles;
+        private ImageDownloader _imageDownloader;
 
         
 
@@ -31,6 +32,7 @@ namespace Prototype.ModelControllers
         {
             _stateController = stateController;
             _contentApi = new ContentApi();
+            _imageDownloader = new ImageDownloader();           
         }
 
 
@@ -100,6 +102,11 @@ namespace Prototype.ModelControllers
             IsRefreshingFrontPage?.Invoke(true);
 
             IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadFrontPageArticles());
+
+            foreach (var article in articles)
+            {
+                PrepareArticle(article);
+            }
            
             IsRefreshingFrontPage?.Invoke(false);
 
@@ -127,7 +134,7 @@ namespace Prototype.ModelControllers
         {
             Article detailedArticle = DeserializeArticle(await _contentApi.DownloadArticle(article.contentUrl));
             article.AddFieldsFromAnotherArticle(detailedArticle);
-            SetArticleFields(article);
+            PrepareArticle(article);
 
             return article;
         }
@@ -159,7 +166,7 @@ namespace Prototype.ModelControllers
             if (articles.Count > 0)
             {
                 articles[0].isTopArticle = true;
-            }
+            }            
 
             return articles;
         }
@@ -169,24 +176,23 @@ namespace Prototype.ModelControllers
         {        
             var article = JsonConvert.DeserializeObject<Article>(json);
 
-            article = SetArticleFields(article);
+            article = PrepareArticle(article);
 
             return article;
 
         }
 
-
-
         //Helper methods
-        private Article SetArticleFields(Article article)
+        private Article PrepareArticle(Article article)
         {
-            //article.AddFieldsFromAnotherArticle(newArt);
             article = StripArticle(article);
+            article.BuildImageResources(_imageDownloader);
 
-            if (article.topImages.Count > 0)
+            if (article.topImages?.Count > 0)
             {
                 article.topImage = article.topImages[0];
             }
+
             return article;
         }
 

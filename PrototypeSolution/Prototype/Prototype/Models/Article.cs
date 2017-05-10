@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using Prototype.Database;
 using Xamarin.Forms;
 
 namespace Prototype.Models
@@ -82,6 +83,28 @@ namespace Prototype.Models
 
         //-----------------> we should override public override int gethashcode() also!!
 
+
+        /// <summary>
+        /// In order to save downloaded images, we build imagesources where we can save them inside
+        /// </summary>
+        public async void BuildImageResources(ImageDownloader imageDownloader)
+        {
+            if (topImages != null)
+            {
+                foreach (var topImage in topImages)
+                {
+                    topImage.big.ImageSource = await imageDownloader.DownloadImage(topImage.big.url);
+                    topImage.small.ImageSource = await imageDownloader.DownloadImage(topImage.small.url);
+                    topImage.thumb.ImageSource = await imageDownloader.DownloadImage(topImage.thumb.url);
+                }
+            }
+
+            if (image != null)
+            {
+                image.versions.big_article_460.ImageSource = await imageDownloader.DownloadImage(image.versions.big_article_460.url);
+                image.versions.small_article_220.ImageSource = await imageDownloader.DownloadImage(image.versions.small_article_220.url);
+            }           
+        }
         public void AddFieldsFromAnotherArticle(Article article)
         {
             //image = article.image;

@@ -11,7 +11,7 @@
 
     <ViewCell.View>
         <StackLayout Orientation="Vertical">
-            <ffimageloading:CachedImage Source="{Binding Article.image.versions.big_article_460.url}"
+            <ffimageloading:CachedImage Source="{Binding Article.image.versions.big_article_460.ImageSource}"
                                         BitmapOptimizations="True"
                                         DownsampleToViewSize="True"/>
             <StackLayout Orientation="Vertical"
