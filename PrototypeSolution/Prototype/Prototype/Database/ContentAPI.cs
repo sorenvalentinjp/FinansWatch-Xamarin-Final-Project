@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 
 namespace Prototype.Database
 {
-    internal class ContentApi : IContentApi
+    internal class ContentApi
     {
         private readonly HttpClient _client;
 
@@ -42,7 +42,6 @@ namespace Prototype.Database
         {
             //Full url example: https://content.watchmedier.dk/api/finanswatch/content/frontpagearticles
             var uri = new Uri(Constants.ContentApiUrl + "finanswatch/content/frontpagearticles?max=30");
-
             return DownloadJson(uri);
         }
 
@@ -54,7 +53,13 @@ namespace Prototype.Database
         {
             //Full url example: "https://content.watchmedier.dk/api/finanswatch/content/latest?hoursago=168"
             var uri = new Uri(Constants.ContentApiUrl + "finanswatch/content/latest?hoursago=168&max=100");
+            return DownloadJson(uri);
+        }
 
+        public Task<string> DownloadNamesAndJobsSection()
+        {
+            //Full url example: "http://content.watchmedier.dk/api/finanswatch/content/sections/344/top?max=30"
+            var uri = new Uri(Constants.ContentApiUrl + "finanswatch/content/sections/344/top?max=30");
             return DownloadJson(uri);
         }
 

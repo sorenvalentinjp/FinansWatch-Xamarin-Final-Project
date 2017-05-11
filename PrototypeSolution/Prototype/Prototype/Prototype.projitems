@@ -14,7 +14,6 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\ContentApi.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Database\IContentApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\LocalStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\LoginApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ModelControllers\ArticleController.cs" />

@@ -64,6 +64,61 @@ namespace Prototype.ModelControllers
             //Section Y
         }
 
+        public async Task<IList<Article>> GetSection(string sectionName)
+        {
+            IList<Article> toReturn = await GetArticlesForSection(sectionName);
+            GetArticleDetailsForCollection(toReturn);
+            return toReturn;
+        }
+
+        public async Task<IList<Article>> GetArticlesForSection(string sectionName)
+        {
+            IList<Article> toReturn = new List<Article>();
+
+            if (sectionName == "frontPageSection")
+            {
+                //get frontpage here instead of usings its own method?
+            }
+            else if(sectionName == "banksSection")
+            {
+                //pengeinstitutter (id 373)
+                //Fire event here like in eg. GetLatestArticlesAsync()
+            }
+            else if(sectionName == "insuranceSection")
+            {
+                //forsikringer (id 3002)
+            }
+            else if(sectionName == "pensionSection")
+            {
+                //pension (id 356)
+            }
+            else if(sectionName == "mortgageSection")
+            {
+                //realkredit (id 404)
+            }
+            else if(sectionName == "namesAndJobsSection")
+            {
+                //Virker
+                //navne og job (id 344)
+                toReturn = DeserializeArticlesFromJson(await _contentApi.DownloadNamesAndJobsSection());
+            }
+            else if(sectionName == "columnsSection")
+            {
+                //klummer (413 ??)
+            }
+            else
+            {
+                Debug.Print("---------------------------> THE DESIRED SECTION WAS NOT FOUND: " + sectionName);
+            }
+
+            //other id's not currently used:
+            //finansnyt: 353 (formentlig forsiden)
+            //Kapitalforvaltning: 3011
+            
+            return toReturn;
+        }
+
+
         //BUCKET HELPER
         /// <summary>
         /// Downloading all details for the collection of articles
