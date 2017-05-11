@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Input;
 using Prototype.Models;
 using Prototype.ViewModels;
+using Prototype.Views.Components;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -32,11 +33,9 @@ namespace Prototype.Views
 
             foreach (var section in sections)
             {
-                StackLayoutButtons.Children.Add(new Button
+                StackLayoutButtons.Children.Add(new MasterButton
                 {
                     Text = section.Name,
-                    TextColor = Color.White,
-                    BackgroundColor = Color.DarkBlue,
                     Command = new Command(() =>
                             {
                                 viewModel.SectionAction(section);

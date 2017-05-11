@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:Prototype.Views.Components;assembly=Prototype.Android"
              x:Class="Prototype.Views.MasterDetailView"
              MasterBehavior="Default"
              Title="{Binding MasterDetail.Detail.Title}">
@@ -12,11 +13,11 @@
                     Padding="5,30,5,5"
                              BackgroundColor="#213c68">
 
-                    <Button Text="FORSIDE" TextColor="White" BackgroundColor="#213c68" Command="{Binding FrontPageAction}"/>
-                    <Button Text="ALLE NYHEDER" TextColor="White" BackgroundColor="#213c68" Command="{Binding AllArticlesAction}"/>
-                    <Button Text="LÆSELISTE" TextColor="White" BackgroundColor="#213c68" Command="{Binding SavedArticlesAction}"/>
-                    <Button Text="{Binding LoginButtonText}" TextColor="White" BackgroundColor="#213c68" Command="{Binding LoginAction}"/>
-                    <Button Text="SØG ARTIKLER" TextColor="White" BackgroundColor="#213c68" Command="{Binding SearchArticlesAction}"/>
+                    <components:MasterButton Text="FORSIDE" Command="{Binding FrontPageAction}"/>
+                    <components:MasterButton Text="ALLE NYHEDER" Command="{Binding AllArticlesAction}"/>
+                    <components:MasterButton Text="LÆSELISTE" Command="{Binding SavedArticlesAction}"/>
+                    <components:MasterButton Text="{Binding LoginButtonText}" Command="{Binding LoginAction}"/>
+                    <components:MasterButton Text="SØG ARTIKLER" Command="{Binding SearchArticlesAction}"/>
 
                 </StackLayout>
             </ContentPage.Content>

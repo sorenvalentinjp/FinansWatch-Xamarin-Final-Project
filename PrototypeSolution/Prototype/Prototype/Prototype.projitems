@@ -71,6 +71,10 @@
       <DependentUpon>MediumCellTopImage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Components\MasterButton.xaml.cs">
+      <DependentUpon>MasterButton.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\Converters\InverseBooleanConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Converters\NullToBooleanConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\CustomRenderers\HtmlFormattedLabel.cs" />
@@ -213,6 +217,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Views\Components\" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Components\MasterButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
