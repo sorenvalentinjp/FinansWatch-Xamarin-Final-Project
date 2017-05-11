@@ -28,7 +28,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ArticleDetailsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ArticleViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AllArticlesViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FrontPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MasterDetailViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SavedArticlesViewModel.cs" />
@@ -78,10 +77,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Converters\InverseBooleanConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Converters\NullToBooleanConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\CustomRenderers\HtmlFormattedLabel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\FrontPageView.xaml.cs">
-      <DependentUpon>FrontPageView.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\Helpers\ImageFromFileExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Helpers\ImageResourceExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Helpers\ListViewHelper.cs" />
@@ -122,12 +117,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MasterDetailView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\FrontPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

@@ -15,9 +15,8 @@ namespace Prototype.ViewModels
     public class MasterDetailViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private Page _frontPageView;
+
         private Page _savedArticlesView;
-        private Page _sectionView;
         private Page _allArticlesView;
         private Page _loginView;
         private Page _searchArticlesView;
@@ -52,18 +51,44 @@ namespace Prototype.ViewModels
             }
         }
 
-        //private ToolBarExtension _toolBarExtension;
-
-        public MasterDetailViewModel(StateController stateController, MasterDetailPage masterDetail)
+        public MasterDetailViewModel(StateController stateController, MasterDetailPage masterDetail, Section frontPageSection)
         {
             _stateController = stateController;
             _stateController.LoginController.LoginEventSucceeded += LoginSucceeded;
             ToolBarExtension.AllArticlesShortcutActionOccured += AllArticlesShortcutActionOccured;
             _masterDetail = masterDetail;
-            _frontPageView = new FrontPageView(new FrontPageViewModel(stateController));
-            _masterDetail.Detail = _frontPageView;
-            SetLogInButtonText();
+
             _sectionViews = new List<SectionView>();
+
+            //Set frontpageSection
+            SectionViewModel frontPageSectionViewModel = new SectionViewModel(stateController, frontPageSection);
+            SectionView frontPageSectionView = new SectionView(frontPageSectionViewModel);
+            _sectionViews.Add(frontPageSectionView);
+
+            _masterDetail.Detail = frontPageSectionView;
+            SetLogInButtonText();
+
+            //If this is the first time the app is loaded, start bucket downloads and build the model layer
+            if (frontPageSection.Articles == null)
+            {
+                InitBucketsDownload();
+            }
+            else
+            {
+                frontPageSectionViewModel.BucketIsReady();
+            }
+            
+        }
+
+        private async void InitBucketsDownload()
+        {
+            await _stateController.GetBucket1();
+            _stateController.GetBucket2();
+        }
+
+        public void GetBucket2()
+        {
+            _stateController.GetBucket2();
         }
 
         //This event fires when the user logs in successfully. The detail's view is then set to direct the user back to the last visisted view.
@@ -105,19 +130,6 @@ namespace Prototype.ViewModels
                 LoginButtonText = "LOG UD";
         }
 
-        //No need to check if _frontPageView is set, as this is done in the constructor
-        public ICommand FrontPageAction
-        {
-            get
-            {
-                return new Command(() =>
-                {
-                    _masterDetail.Detail = _frontPageView;
-                    _masterDetail.IsPresented = false;
-                });
-            }
-        }
-
         public ICommand AllArticlesAction
         {
             get
@@ -151,11 +163,11 @@ namespace Prototype.ViewModels
             }
         }
 
-        public void SectionAction(Section section)
+        public SectionView SectionViewAction(Section section)
         {
             //If a view for this section already exists, save it in var so we can navigate directly to it.
             SectionView sectionView = _sectionViews.FirstOrDefault(
-                (s) => ((SectionViewModel)s.BindingContext).Section.Equals(section));
+                (s) => ((SectionViewModel) s.BindingContext).Section.Equals(section));
 
 
             if (sectionView == null)
@@ -168,11 +180,9 @@ namespace Prototype.ViewModels
             //Navigate to section view
             _masterDetail.Detail = sectionView;
             _masterDetail.IsPresented = false;
+
+            return sectionView;
         }
-
-
-
-
 
         /// <summary>
         /// Contains logged to log in (a new view is presented) or to log the user out right away

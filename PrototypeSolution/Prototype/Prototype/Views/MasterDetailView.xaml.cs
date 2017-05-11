@@ -23,23 +23,44 @@ namespace Prototype.Views
 
             _stateController = stateController;
 
-            var viewModel = new MasterDetailViewModel(stateController, this);
+            Section frontPageSection = GetFrontPageSection();
+
+            var viewModel = new MasterDetailViewModel(stateController, this, frontPageSection);
+
+            //Set frontpagebutton to navigate to frontPageSection and set first pageload to frontpage section   
+            
+            FrontPageButton.Command = new Command(() =>
+            {
+                viewModel.SectionViewAction(frontPageSection);
+            });
 
             BindingContext = viewModel;
 
-
-
+            //Create a button for each section except the frontpage, and make a command that handles navigation on button press.
             foreach (var section in _stateController.Sections)
             {
-                StackLayoutButtons.Children.Add(new MasterButton
+                if (section != frontPageSection)
                 {
-                    Text = section.Name,
-                    Command = new Command(() =>
-                            {
-                                viewModel.SectionAction(section);
-                            })
-                });
+                    StackLayoutButtons.Children.Add(new MasterButton
+                    {
+                        Text = section.Name,
+                        Command = new Command(() =>
+                        {
+                            //Create navigation inside the viewmodel
+                            viewModel.SectionViewAction(section);
+                        })
+                    });
+                }
             }
+         
+        }
+        /// <summary>
+        /// The first section in the statecontrollers Sections list, is always the frontpage section
+        /// </summary>
+        /// <returns></returns>
+        private Section GetFrontPageSection()
+        {
+            return _stateController.Sections.FirstOrDefault();
         }
     }
 }

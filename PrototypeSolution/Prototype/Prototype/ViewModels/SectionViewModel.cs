@@ -69,7 +69,7 @@ namespace Prototype.ViewModels
             this.ArticleViewModels = new List<ArticleViewModel>();
             Section = section;
 
-            this._stateController.Bucket2IsReady += Bucket2IsReady;
+            this._stateController.Bucket2IsReady += BucketIsReady;
 
             DataTemplate = new SectionTemplateSelector(_stateController);
 
@@ -80,11 +80,11 @@ namespace Prototype.ViewModels
             }
             else
             {
-                Bucket2IsReady();
+                BucketIsReady();
             }
         }
 
-        private void Bucket2IsReady()
+        public void BucketIsReady()
         {
             IList<ArticleViewModel> articleViewModels = new List<ArticleViewModel>();
             foreach (var article in this.Section.Articles)
@@ -114,7 +114,7 @@ namespace Prototype.ViewModels
                 {
                     IsRefreshing = true;
                     this.Section = await _stateController.GetArticlesForSection(this.Section);
-                    Bucket2IsReady();
+                    BucketIsReady();
                 });
             }
         }

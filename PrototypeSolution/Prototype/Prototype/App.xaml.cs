@@ -28,10 +28,24 @@ namespace Prototype
         {
             // Handle when your app starts
             if (Application.Current.Properties.ContainsKey("stateController"))
+            {
                 _stateController = LocalStorage.DeserializeFromJson<StateController>(Application.Current.Properties["stateController"].ToString());
+            }
+                
             if (_stateController == null)
+            {
                 _stateController = new StateController();
 
+                //Create sections
+                _stateController.Sections.Add(new Section("FORSIDE", "finanswatch/content/frontpagearticles?max=30"));
+                _stateController.Sections.Add(new Section("PENGEINSTITUTTER", "finanswatch/content/latest?hoursago=500&max=30&section=fw_finansnyt_penge"));
+                _stateController.Sections.Add(new Section("FORSIKRINGER", "finanswatch/content/latest?hoursago=500&max=30&section=fw_forsikring"));
+                _stateController.Sections.Add(new Section("PENSION", "finanswatch/content/latest?hoursago=500&max=30&section=fw_pension"));
+                _stateController.Sections.Add(new Section("REALKREDIT", "finanswatch/content/latest?hoursago=500&max=30&section=fw_finansnyt_real"));
+                _stateController.Sections.Add(new Section("NAVNE OG JOB", "finanswatch/content/latest?hoursago=500&max=30&section=fw_finansliv"));
+                _stateController.Sections.Add(new Section("KLUMMER", "finanswatch/content/latest?hoursago=500&max=30&section=fw_klumme"));
+            }
+               
             MainPage = new NavigationPage(new MasterDetailView(_stateController));
 
             NavigationPage.SetBackButtonTitle(MainPage, "");

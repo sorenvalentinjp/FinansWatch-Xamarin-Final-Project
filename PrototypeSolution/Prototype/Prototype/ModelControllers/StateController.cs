@@ -48,15 +48,9 @@ namespace Prototype.ModelControllers
             this.SavedArticles = new ObservableCollection<Article>();
             this.LoginController = new LoginController(this);
 
-            //create sections
+            //create sections in MasterDetailView
             this.Sections = new List<Section>();
-            this.Sections.Add(new Section("FORSIDE", "finanswatch/content/frontpagearticles?max=30"));
-            this.Sections.Add(new Section("PENGEINSTITUTTER", "finanswatch/content/latest?hoursago=500&max=30&section=fw_finansnyt_penge"));
-            this.Sections.Add(new Section("FORSIKRINGER", "finanswatch/content/latest?hoursago=500&max=30&section=fw_forsikring"));
-            this.Sections.Add(new Section("PENSION", "finanswatch/content/latest?hoursago=500&max=30&section=fw_pension"));
-            this.Sections.Add(new Section("REALKREDIT", "finanswatch/content/latest?hoursago=500&max=30&section=fw_finansnyt_real"));
-            this.Sections.Add(new Section("NAVNE OG JOB", "finanswatch/content/latest?hoursago=500&max=30&section=fw_finansliv"));
-            this.Sections.Add(new Section("KLUMMER", "finanswatch/content/latest?hoursago=500&max=30&section=fw_klumme"));
+
         }
 
         //-----------------Bucket methods start

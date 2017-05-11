@@ -14,7 +14,7 @@
                     Padding="5,30,5,5"
                              BackgroundColor="#213c68">
 
-                        <components:MasterButton Text="FORSIDE" Command="{Binding FrontPageAction}"/>
+                        <components:MasterButton Text="FORSIDE" Command="{Binding FrontPageAction}" x:Name="FrontPageButton"/>
                         <components:MasterButton Text="ALLE NYHEDER" Command="{Binding AllArticlesAction}"/>
                         <components:MasterButton Text="LÆSELISTE" Command="{Binding SavedArticlesAction}"/>
                         <components:MasterButton Text="{Binding LoginButtonText}" Command="{Binding LoginAction}"/>
