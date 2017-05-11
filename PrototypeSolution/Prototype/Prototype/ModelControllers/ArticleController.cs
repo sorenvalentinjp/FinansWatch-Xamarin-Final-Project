@@ -77,7 +77,7 @@ namespace Prototype.ModelControllers
         //Kapitalforvaltning: 3011
         public async Task<IList<Article>> GetArticlesForSection(Section section)
         {
-            IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadSection(section.UniqueName));
+            IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadSection(section.SectionContentUrl));
             GetArticleDetailsForCollection(articles);
             return articles;
         }

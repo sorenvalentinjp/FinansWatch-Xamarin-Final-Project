@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Prototype.Models
 {
@@ -21,14 +23,14 @@ namespace Prototype.Models
             }
         }
 
-        private string _uniqueName;
-        public string UniqueName
+        private string _sectionContentUrl;
+        public string SectionContentUrl
         {
-            get { return _uniqueName; }
+            get { return _sectionContentUrl; }
             set
             {
-                if (_uniqueName == value) { return; }
-                _uniqueName = value;
+                if (_sectionContentUrl == value) { return; }
+                _sectionContentUrl = value;
                 Notify("Area");
             }
         }
@@ -45,11 +47,13 @@ namespace Prototype.Models
             }
         }
 
-        public Section(string name, string uniqueName)
+        public Section(string name, string sectionContentUrl)
         {
             this.Name = name;
-            this.UniqueName = uniqueName;
+            this.SectionContentUrl = sectionContentUrl;
         }
+
+
 
         protected void Notify(string propName)
         {

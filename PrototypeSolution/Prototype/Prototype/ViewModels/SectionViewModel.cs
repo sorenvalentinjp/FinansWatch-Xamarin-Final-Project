@@ -39,6 +39,18 @@ namespace Prototype.ViewModels
             }
         }
 
+        private bool _isRefreshing;
+        public bool IsRefreshing
+        {
+            get { return _isRefreshing; }
+            set
+            {
+                if (_isRefreshing == value) { return; }
+                _isRefreshing = value;
+                Notify("IsRefreshing");
+            }
+        }
+
         private DataTemplate _dateTemplate;
         public DataTemplate DataTemplate
         {
@@ -80,6 +92,7 @@ namespace Prototype.ViewModels
                 articleViewModels.Add(new ArticleViewModel(this._stateController, article));
             }
             this.ArticleViewModels = articleViewModels;
+            IsRefreshing = false;
         }
 
         public async void DownloadSectionArticles(Section section)
@@ -97,9 +110,11 @@ namespace Prototype.ViewModels
         {
             get
             {
-                return new Command(() =>
+                return new Command(async () =>
                 {
-                    //Refresh
+                    IsRefreshing = true;
+                    this.Section = await _stateController.GetArticlesForSection(this.Section);
+                    Bucket2IsReady();
                 });
             }
         }
