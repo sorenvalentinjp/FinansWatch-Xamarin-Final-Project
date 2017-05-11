@@ -133,19 +133,22 @@ namespace Prototype.ViewModels
             {
                     //If the subscriber is logged in, has access and the article is also locked, show the unlocked icon
                     UnlockedIndicatorImageVisible = true;
-                    LockedIndicatorImageVisible = false;       
+                    LockedIndicatorImageVisible = false;
+                    SubscriberHasAccess = true;
             }
             else if(locked)
             {
                 //If the article is locked and subscriber is not logged in or does not have access, show the locked icon
                 LockedIndicatorImageVisible = true;
                 UnlockedIndicatorImageVisible = false;
+                SubscriberHasAccess = false;
 
             } else
             {
                 //If article is not locked, show no icons
                 LockedIndicatorImageVisible = false;
                 UnlockedIndicatorImageVisible = false;
+                SubscriberHasAccess = true;
             }
             
             return locked;
