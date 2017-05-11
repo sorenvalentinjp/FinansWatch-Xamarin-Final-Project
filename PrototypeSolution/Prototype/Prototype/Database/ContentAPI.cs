@@ -58,7 +58,7 @@ namespace Prototype.Database
 
         public Task<string> DownloadSection(string uniqueSectionName)
         {
-            var uri = new Uri($"{Constants.ContentApiUrl}finanswatch/content/latest?hoursago=168&max=30&section={uniqueSectionName}");
+            var uri = new Uri($"{Constants.ContentApiUrl}finanswatch/content/latest?hoursago=500&max=30&section={uniqueSectionName}");
             return DownloadJson(uri);
         }
 
