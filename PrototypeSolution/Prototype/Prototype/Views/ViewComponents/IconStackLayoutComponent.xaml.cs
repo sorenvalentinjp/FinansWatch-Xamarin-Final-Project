@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Prototype.Views.Components
+namespace Prototype.Views.ViewComponents
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class IconStackLayoutComponent : StackLayout

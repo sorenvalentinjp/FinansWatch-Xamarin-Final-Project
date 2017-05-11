@@ -71,7 +71,7 @@
       <DependentUpon>MediumCellTopImage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Components\MasterButton.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ViewComponents\MasterButton.xaml.cs">
       <DependentUpon>MasterButton.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -86,7 +86,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Helpers\ImageResourceExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Helpers\ListViewHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Helpers\ToolBarExtension.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Components\IconStackLayoutComponent.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ViewComponents\IconStackLayoutComponent.xaml.cs">
       <DependentUpon>IconStackLayoutComponent.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -211,13 +211,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Components\IconStackLayoutComponent.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\ViewComponents\IconStackLayoutComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Components\MasterButton.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\ViewComponents\MasterButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

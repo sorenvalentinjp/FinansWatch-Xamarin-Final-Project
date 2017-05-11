@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Prototype.Views.Components.IconStackLayoutComponent"
+             x:Class="Prototype.Views.ViewComponents.IconStackLayoutComponent"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:helpers="clr-namespace:Prototype.Views.Helpers;assembly=Prototype.Android">
 

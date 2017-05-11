@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.Views.Cells.DateTimeCell"
              xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
-             xmlns:components="clr-namespace:Prototype.Views.Components"
+             xmlns:components="clr-namespace:Prototype.Views.ViewComponents"
              Tapped="TappedGesture"
              LongPressing="LongPressingGesture">
 
