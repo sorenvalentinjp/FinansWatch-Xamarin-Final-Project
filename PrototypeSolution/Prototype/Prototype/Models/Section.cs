@@ -21,26 +21,14 @@ namespace Prototype.Models
             }
         }
 
-        private int _id;
-        public int Id
-        { 
-            get { return _id; }
-            set
-            {
-                if (_id == value) { return; }
-                _id = value;
-                Notify("Id");
-            }
-        }
-
-        private string _area;
-        public string Area
+        private string _uniqueName;
+        public string UniqueName
         {
-            get { return _area; }
+            get { return _uniqueName; }
             set
             {
-                if (_area == value) { return; }
-                _area = value;
+                if (_uniqueName == value) { return; }
+                _uniqueName = value;
                 Notify("Area");
             }
         }
@@ -57,11 +45,10 @@ namespace Prototype.Models
             }
         }
 
-        public Section(string name, int id, string area)
+        public Section(string name, string uniqueName)
         {
             this.Name = name;
-            this.Id = id;
-            this.Area = area;
+            this.UniqueName = uniqueName;
         }
 
         protected void Notify(string propName)

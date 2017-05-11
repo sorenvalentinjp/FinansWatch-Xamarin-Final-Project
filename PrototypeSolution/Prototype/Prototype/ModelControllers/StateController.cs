@@ -13,12 +13,23 @@ namespace Prototype.ModelControllers
 {
     public class StateController : INotifyPropertyChanged
     {
+        //events
         public event PropertyChangedEventHandler PropertyChanged;
         public event Action SavedArticlesChangedEvent;
+        public event Action<IList<Article>> Bucket1IsReady;
+        public event Action Bucket2IsReady;
 
-        public ArticleController ArticleController;
+        //articles and sections
+        public IList<Article> FrontPageArticles;
+        public IList<Article> LatestArticles;
         public ObservableCollection<Article> SavedArticles;
+        public IList<Section> Sections;
+
+        //controllers
+        public ArticleController ArticleController;
         public LoginController LoginController;
+
+        //other
         private Subscriber _subscriber;
         public Subscriber Subscriber
         {
@@ -36,14 +47,19 @@ namespace Prototype.ModelControllers
             this.ArticleController = new ArticleController(this);
             this.SavedArticles = new ObservableCollection<Article>();
             this.LoginController = new LoginController(this);
+
+            //create sections
+            this.Sections = new List<Section>();
+            this.Sections.Add(new Section("PENGEINSTITUTTER", "fw_finansnyt_penge"));
+            this.Sections.Add(new Section("FORSIKRINGER", "fw_forsikring"));
+            this.Sections.Add(new Section("PENSION", "fw_pension"));
+            this.Sections.Add(new Section("REALKREDIT", "fw_finansnyt_real"));
+            this.Sections.Add(new Section("NAVNE OG JOB", "fw_finansliv"));
+            this.Sections.Add(new Section("KLUMMER", "fw_klumme"));
         }
 
         //-----------------Bucket methods start
-        //bucket events
-        public event Action<IList<Article>> Bucket1IsReady;
-        public event Action Bucket2IsReady;
-
-        public IList<Article> FrontPageArticles;
+        
         public async Task<IList<Article>> GetBucket1()
         {
             this.FrontPageArticles = await ArticleController.GetBucket1FrontPage();
@@ -51,10 +67,22 @@ namespace Prototype.ModelControllers
             return this.FrontPageArticles;
         }
 
-        public IList<Article> LatestArticles;
+        
         public async void GetBucket2()
         {
             this.LatestArticles = await ArticleController.GetBucket2(this.FrontPageArticles);
+
+            List<Task> taskList = new List<Task>();
+
+            foreach (var section in this.Sections)
+            {
+                var lastTask = GetArticlesForSection(section);
+                //lastTask.Start();
+                taskList.Add(lastTask);
+            }
+
+            await Task.WhenAll(taskList.ToArray());
+
             Bucket2IsReady?.Invoke();
         }
 
@@ -85,6 +113,15 @@ namespace Prototype.ModelControllers
             this.Bucket1IsReady?.Invoke(this.FrontPageArticles);
             this.Bucket2IsReady?.Invoke();
         }
+
+        //--------Sections
+        public async Task GetArticlesForSection(Section section)
+        {
+            section.Articles = await this.ArticleController.GetArticlesForSection(section);
+            this.ArticleController.GetArticleDetailsForCollection(section.Articles);
+        } 
+
+
         //-----------------Bucket methods end
 
         public Task<IList<Article>> GetRelatedArticles(Article article)
@@ -97,13 +134,7 @@ namespace Prototype.ModelControllers
             return this.ArticleController.GetArticleDetailsAsync(article);
         }
 
-        protected void Notify(string propName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
-        }
+        
 
         /// <summary>
         /// If the article is not in the list, add it and return true, if it is in the list, remove it and return false
@@ -127,6 +158,13 @@ namespace Prototype.ModelControllers
                 return false;
             }
         }
-    }
 
+        protected void Notify(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
+    }
 }
