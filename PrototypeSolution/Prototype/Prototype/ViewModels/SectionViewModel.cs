@@ -57,6 +57,8 @@ namespace Prototype.ViewModels
             this.ArticleViewModels = new List<ArticleViewModel>();
             Section = section;
 
+            this._stateController.Bucket2IsReady += Bucket2IsReady;
+
             DataTemplate = new SectionTemplateSelector(_stateController);
 
             //
@@ -66,8 +68,18 @@ namespace Prototype.ViewModels
             }
             else
             {
-                //Prepare articleViewModels
+                Bucket2IsReady();
             }
+        }
+
+        private void Bucket2IsReady()
+        {
+            IList<ArticleViewModel> articleViewModels = new List<ArticleViewModel>();
+            foreach (var article in this.Section.Articles)
+            {
+                articleViewModels.Add(new ArticleViewModel(this._stateController, article));
+            }
+            this.ArticleViewModels = articleViewModels;
         }
 
         public async void DownloadSectionArticles(Section section)

@@ -115,10 +115,11 @@ namespace Prototype.ModelControllers
         }
 
         //--------Sections
-        public async Task GetArticlesForSection(Section section)
+        public async Task<Section> GetArticlesForSection(Section section)
         {
             section.Articles = await this.ArticleController.GetArticlesForSection(section);
             this.ArticleController.GetArticleDetailsForCollection(section.Articles);
+            return section;
         } 
 
 

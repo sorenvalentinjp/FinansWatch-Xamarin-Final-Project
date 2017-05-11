@@ -27,11 +27,9 @@ namespace Prototype.Views
 
             BindingContext = viewModel;
 
-            IList<Section> sections = new List<Section>();
-            sections.Add(new Section("Navne og Job", "fw_finansliv"));
-            IList<Button> sectionButtons = new List<Button>();
 
-            foreach (var section in sections)
+
+            foreach (var section in _stateController.Sections)
             {
                 StackLayoutButtons.Children.Add(new MasterButton
                 {

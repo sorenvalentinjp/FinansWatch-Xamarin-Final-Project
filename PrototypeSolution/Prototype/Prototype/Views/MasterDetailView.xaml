@@ -9,17 +9,19 @@
     <MasterDetailPage.Master>
         <ContentPage Title="FINANSWATCH">
             <ContentPage.Content>
-                <StackLayout x:Name="StackLayoutButtons"
+                <ScrollView>
+                    <StackLayout x:Name="StackLayoutButtons"
                     Padding="5,30,5,5"
                              BackgroundColor="#213c68">
 
-                    <components:MasterButton Text="FORSIDE" Command="{Binding FrontPageAction}"/>
-                    <components:MasterButton Text="ALLE NYHEDER" Command="{Binding AllArticlesAction}"/>
-                    <components:MasterButton Text="LÆSELISTE" Command="{Binding SavedArticlesAction}"/>
-                    <components:MasterButton Text="{Binding LoginButtonText}" Command="{Binding LoginAction}"/>
-                    <components:MasterButton Text="SØG ARTIKLER" Command="{Binding SearchArticlesAction}"/>
+                        <components:MasterButton Text="FORSIDE" Command="{Binding FrontPageAction}"/>
+                        <components:MasterButton Text="ALLE NYHEDER" Command="{Binding AllArticlesAction}"/>
+                        <components:MasterButton Text="LÆSELISTE" Command="{Binding SavedArticlesAction}"/>
+                        <components:MasterButton Text="{Binding LoginButtonText}" Command="{Binding LoginAction}"/>
+                        <components:MasterButton Text="SØG ARTIKLER" Command="{Binding SearchArticlesAction}"/>
 
-                </StackLayout>
+                    </StackLayout>
+                </ScrollView>
             </ContentPage.Content>
         </ContentPage>
     </MasterDetailPage.Master>
