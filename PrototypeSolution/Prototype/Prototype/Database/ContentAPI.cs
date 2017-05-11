@@ -56,10 +56,9 @@ namespace Prototype.Database
             return DownloadJson(uri);
         }
 
-        public Task<string> DownloadNamesAndJobsSection()
+        public Task<string> DownloadSection(int sectionID, string sectionArea)
         {
-            //Full url example: "http://content.watchmedier.dk/api/finanswatch/content/sections/344/top?max=30"
-            var uri = new Uri(Constants.ContentApiUrl + "finanswatch/content/sections/344/top?max=30");
+            var uri = new Uri($"{Constants.ContentApiUrl}finanswatch/content/sections/{sectionID}/{sectionArea}?max=30");
             return DownloadJson(uri);
         }
 
