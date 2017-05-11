@@ -33,6 +33,18 @@ namespace Prototype.Models
             }
         }
 
+        private string _area;
+        public string Area
+        {
+            get { return _area; }
+            set
+            {
+                if (_area == value) { return; }
+                _area = value;
+                Notify("Area");
+            }
+        }
+
         private IList<Article> _articles;
         public IList<Article> Articles
         {
@@ -45,10 +57,11 @@ namespace Prototype.Models
             }
         }
 
-        public Section(string name, int id)
+        public Section(string name, int id, string area)
         {
             this.Name = name;
             this.Id = id;
+            this.Area = area;
         }
 
         protected void Notify(string propName)

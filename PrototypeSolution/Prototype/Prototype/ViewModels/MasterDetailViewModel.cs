@@ -63,9 +63,9 @@ namespace Prototype.ViewModels
             SetLogInButtonText();
 
 
-            IList<Section> sections = new List<Section>();
-            sections.Add(new Section("Navne og job", 344));
-            Sections = sections;
+            //IList<Section> sections = new List<Section>();
+            //sections.Add(new Section("Navne og job", 344));
+            //Sections = sections;
 
         }
 
@@ -157,11 +157,11 @@ namespace Prototype.ViewModels
             {
                 return new Command(() =>
                 {
-                    //if (this._sectionView == null)
-                        //this._sectionView = new SectionView(new SectionViewModel(_stateController, new Section("Sektionsnavn her")));
+                    if (this._sectionView == null)
+                        this._sectionView = new SectionView(new SectionViewModel(_stateController, new Section("Navne og Job", 344, "top")));
 
-                    //_masterDetail.Detail = this._sectionView;
-                    //_masterDetail.IsPresented = false;
+                    _masterDetail.Detail = this._sectionView;
+                    _masterDetail.IsPresented = false;
                 });
             }
         }

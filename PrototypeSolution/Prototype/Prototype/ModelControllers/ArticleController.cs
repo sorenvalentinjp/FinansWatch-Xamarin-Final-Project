@@ -64,14 +64,14 @@ namespace Prototype.ModelControllers
             //Section Y
         }
 
-        public async Task<IList<Article>> GetSection(string sectionName)
+        public async Task<IList<Article>> GetSection(Section section)
         {
-            IList<Article> toReturn = await GetArticlesForSection(sectionName);
+            IList<Article> toReturn = await GetArticlesForSection(section);
             GetArticleDetailsForCollection(toReturn);
             return toReturn;
         }
 
-        public async Task<IList<Article>> GetArticlesForSection(string sectionName)
+        public async Task<IList<Article>> GetArticlesForSection(Section section)
         {
             IList<Article> toReturn = new List<Article>();
 

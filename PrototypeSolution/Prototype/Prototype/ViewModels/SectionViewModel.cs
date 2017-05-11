@@ -15,15 +15,27 @@ namespace Prototype.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly StateController _stateController;
-        private Section section;
+        private Section _section;
         public Section Section
         {
-            get { return section; }
+            get { return _section; }
             set
             {
-                if (section == value) { return; }
-                section = value;
+                if (_section == value) { return; }
+                _section = value;
                 Notify("Section");
+            }
+        }
+
+        private IList<ArticleViewModel> _articleViewModels;
+        public Section ArticleViewModels
+        {
+            get { return _articleViewModels; }
+            set
+            {
+                if (_articleViewModels == value) { return; }
+                _articleViewModels = value;
+                Notify("ArticleViewModels");
             }
         }
 
@@ -43,17 +55,24 @@ namespace Prototype.ViewModels
         {
             this._stateController = stateController;
 
+            Section = section;
+
             DataTemplate = new SectionTemplateSelector(_stateController);
 
             //
             if (section.Articles == null)
             {
-                //Init download
+                DownloadSectionArticles(Section);
             }
             else
             {
                 //Prepare articleViewModels
             }
+        }
+
+        public async void DownloadSectionArticles(Section section)
+        {
+            section.Articles = await this._stateController.ArticleController.GetArticlesForSection("namesAndJobsSection");
         }
 
         public ICommand RefreshCommand
