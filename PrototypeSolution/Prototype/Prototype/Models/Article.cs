@@ -26,33 +26,185 @@ namespace Prototype.Models
                 Notify("image");
             }
         }
-    //public string desktopUrl { get; set; }
-    public string homeSectionName { get; set; }
-        public string contentUrl { get; set; }
-        public Titles titles { get; set; }
-        public Teasers teasers { get; set; }
-        public int homeSectionId { get; set; }
-        public string publishedDate { get; set; }
-        public DateTime publishedDateTime { get; set; }
-        public bool locked { get; set; }
-        public bool isTopArticle { get; set; }
-        public List<object> inlineImages { get; set; }
+        //public string desktopUrl { get; set; }
+        private string _homeSectionName;
+        public string homeSectionName
+        {
+            get { return _homeSectionName; }
+            set
+            {
+                if (_homeSectionName == value) { return; }
+                _homeSectionName = value;
+                Notify("homeSectionName");
+            }
+        }
+
+        private string _contentUrl;
+        public string contentUrl
+        {
+            get { return _contentUrl; }
+            set
+            {
+                if (_contentUrl == value) { return; }
+                _contentUrl = value;
+                Notify("contentUrl");
+            }
+        }
+
+        private Titles _titles;
+        public Titles titles
+        {
+            get { return _titles; }
+            set
+            {
+                if (_titles == value) { return; }
+                _titles = value;
+                Notify("titles");
+            }
+        }
+        private Teasers _teasers;
+        public Teasers teasers
+        {
+            get { return _teasers; }
+            set
+            {
+                if (_teasers == value) { return; }
+                _teasers = value;
+                Notify("teasers");
+            }
+        }
+        public int _homeSectionId;
+        public int homeSectionId
+        {
+            get { return _homeSectionId; }
+            set
+            {
+                if (_homeSectionId == value) { return; }
+                _homeSectionId = value;
+                Notify("homeSectionId");
+            }
+        }
+        private string _publishedDate;
+        public string publishedDate
+        {
+            get { return _publishedDate; }
+            set
+            {
+                if (_publishedDate == value) { return; }
+                _publishedDate = value;
+                Notify("publishedDate");
+            }
+        }
+        private DateTime _publishedDateTime;
+        public DateTime publishedDateTime
+        {
+            get { return _publishedDateTime; }
+            set
+            {
+                if (_publishedDateTime == value) { return; }
+                _publishedDateTime = value;
+                Notify("publishedDateTime");
+            }
+        }
+        private bool _locked;
+        public bool locked
+        {
+            get { return _locked; }
+            set
+            {
+                if (_locked == value) { return; }
+                _locked = value;
+                Notify("locked");
+            }
+        }
+        private bool _isTopArticle;
+        public bool isTopArticle
+        {
+            get { return _isTopArticle; }
+            set
+            {
+                if (_isTopArticle == value) { return; }
+                _isTopArticle = value;
+                Notify("isTopArticle");
+            }
+        }
+        private List<object> _inlineImages;
+        public List<object> inlineImages
+        {
+            get { return _inlineImages; }
+            set
+            {
+                if (_inlineImages == value) { return; }
+                _inlineImages = value;
+                Notify("inlineImages");
+            }
+        }
         //public Metadata metadata { get; set; }
         //public bool breakingNews { get; set; }
         //public object partner { get; set; }
-        public string bodyText { get; set; }
+        private string _bodyText;
+        public string bodyText
+        {
+            get { return _bodyText; }
+            set
+            {
+                if (_bodyText == value) { return; }
+                _bodyText = value;
+                Notify("bodyText");
+            }
+        }
         //public string c_name { get; set; }
         //public string c_category { get; set; }
         //public List<object> tags { get; set; }
-        public List<RelatedArticle> relatedArticles { get; set; }
-        public List<TopImage> topImages { get; set; }
+        private List<RelatedArticle> _relatedArticles;
+        public List<RelatedArticle> relatedArticles
+        {
+            get { return _relatedArticles; }
+            set
+            {
+                if (_relatedArticles == value) { return; }
+                _relatedArticles = value;
+                Notify("relatedArticles");
+            }
+        }
+        private List<TopImage> _topImages;
+        public List<TopImage> topImages
+        {
+            get { return _topImages; }
+            set
+            {
+                if (_topImages == value) { return; }
+                _topImages = value;
+                Notify("topImages");
+            }
+        }
         //public object video { get; set; }
         //public List<object> quoteBoxes { get; set; }
         //public List<object> reviewBoxes { get; set; }
         //public List<object> factsBoxes { get; set; }
         //public object updateInfo { get; set; }
-        public PublishData publishData { get; set; }
-        public string lastModified { get; set; }
+        private PublishData _publishData;
+        public PublishData publishData
+        {
+            get { return _publishData; }
+            set
+            {
+                if (_publishData == value) { return; }
+                _publishData = value;
+                Notify("publishData");
+            }
+        }
+        private string _lastModified;
+        public string lastModified
+        {
+            get { return _lastModified; }
+            set
+            {
+                if (_lastModified == value) { return; }
+                _lastModified = value;
+                Notify("lastModified");
+            }
+        }
         public int id { get; set; }
         //Generated fields end
 
@@ -71,7 +223,17 @@ namespace Prototype.Models
             }
         }
 
-        public IList<Article> relatedDetailedArticles { get; set; }
+        public IList<Article> _relatedDetailedArticles;
+        public IList<Article> relatedDetailedArticles
+        {
+            get { return _relatedDetailedArticles; }
+            set
+            {
+                if (_relatedDetailedArticles == value) { return; }
+                _relatedDetailedArticles = value;
+                Notify("relatedDetailedArticles");
+            }
+        }
         //Used because we want to acces the first topImage in the topImages list. 
         private TopImage _topImage;
         public TopImage topImage
@@ -106,7 +268,7 @@ namespace Prototype.Models
             {
                 return -1;
             }
-            
+
         }
 
         public override bool Equals(object obj)
@@ -160,11 +322,50 @@ namespace Prototype.Models
     /// <summary>
     /// JSON Generated class that is used in Article
     /// </summary>
-    public class Titles
+    public class Titles : INotifyPropertyChanged
     {
-        public string DEFAULT { get; set; }
-        public object KICKER { get; set; }
-        public string FRONTPAGE { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private string _DEFAULT;
+        public string DEFAULT
+        {
+            get { return _DEFAULT; }
+            set
+            {
+                if (_DEFAULT == value) { return; }
+                _DEFAULT = value;
+                Notify("DEFAULT");
+            }
+        }
+        private object _KICKER;
+        public object KICKER
+        {
+            get { return _KICKER; }
+            set
+            {
+                if (_KICKER == value) { return; }
+                _KICKER = value;
+                Notify("KICKER");
+            }
+        }
+        private string _FRONTPAGE;
+        public string FRONTPAGE
+        {
+            get { return _FRONTPAGE; }
+            set
+            {
+                if (_FRONTPAGE == value) { return; }
+                _FRONTPAGE = value;
+                Notify("FRONTPAGE");
+            }
+        }
+        protected void Notify(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
     }
 
     /// <summary>
