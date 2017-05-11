@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.Views.ViewComponents.IconStackLayoutComponent"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:helpers="clr-namespace:Prototype.Views.Helpers;assembly=Prototype.Android"
-             xmlns:converters="clr-namespace:Prototype.Views.Converters;assembly=Prototype.Android">
+             xmlns:helpers="clr-namespace:Prototype.Views.Helpers;assembly=Prototype.Android">
 
     <ffimageloading:CachedImage Source="{helpers:ImageFromFile saved.png}"  
                                             HeightRequest="24"
@@ -19,7 +18,7 @@
                                             WidthRequest="24"
                                             BitmapOptimizations="True"
                                             DownsampleToViewSize="True"
-                                            IsVisible="{Binding SubscriberHasAccess, Converter={converters:InverseBooleanConverter}}"
+                                            IsVisible="{Binding LockedIndicatorImageVisible}"
                                             IsOpaque="True"/>
 
     <ffimageloading:CachedImage Source="{helpers:ImageFromFile unlocked.png}"  
@@ -27,6 +26,6 @@
                                             WidthRequest="24"
                                             BitmapOptimizations="True"
                                             DownsampleToViewSize="True"
-                                            IsVisible="{Binding SubscriberHasAccess}"
+                                            IsVisible="{Binding UnlockedIndicatorImageVisible}"
                                             IsOpaque="True"/>
 </StackLayout>
