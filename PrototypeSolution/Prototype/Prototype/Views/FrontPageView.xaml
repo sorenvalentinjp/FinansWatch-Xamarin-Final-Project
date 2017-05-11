@@ -19,7 +19,6 @@
                   RefreshCommand="{Binding RefreshCommand}"
                   IsRefreshing="{Binding IsRefreshing}"
                   CachingStrategy="RecycleElement"
-                  RowHeight="100"
-                  HasUnevenRows="false"/>
+                  HasUnevenRows="True"/>
     </ContentPage.Content>
 </ContentPage>

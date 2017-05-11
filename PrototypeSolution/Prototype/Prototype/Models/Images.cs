@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 using Xamarin.Forms;
 
@@ -33,57 +34,197 @@ namespace Prototype.Models
     /// <summary>
     /// JSON Generated class that is used in Image
     /// </summary>
-    //public class FrontpageLarge380
+    //public class FrontpageLarge380 : INotifyPropertyChanged
     //{
-    //    public string url { get; set; }
+    //private string url;
+    //public string Url
+    //{
+    //    get { return url; }
+    //    set
+    //    {
+    //        if (url == value) { return; }
+    //        url = value;
+    //        Notify("Url");
+    //    }
+    //}
+
+    //public event PropertyChangedEventHandler PropertyChanged;
+
+    //protected void Notify(string propName)
+    //{
+    //    if (this.PropertyChanged != null)
+    //    {
+    //        PropertyChanged(this, new PropertyChangedEventArgs(propName));
+    //    }
+    //}
     //}
 
     /// <summary>
     /// JSON Generated class that is used in Image
     /// </summary>z
-    //public class D
+    //public class D : INotifyPropertyChanged
     //{
-    //    public string url { get; set; }
+    //private string url;
+    //public string Url
+    //{
+    //    get { return url; }
+    //    set
+    //    {
+    //        if (url == value) { return; }
+    //        url = value;
+    //        Notify("Url");
+    //    }
+    //}
+
+    //public event PropertyChangedEventHandler PropertyChanged;
+
+    //protected void Notify(string propName)
+    //{
+    //    if (this.PropertyChanged != null)
+    //    {
+    //        PropertyChanged(this, new PropertyChangedEventArgs(propName));
+    //    }
+    //}
     //}
 
     /// <summary>
     /// JSON Generated class that is used in Image
     /// </summary>
-    //public class MediumFrontpage300
+    //public class MediumFrontpage300 : INotifyPropertyChanged
     //{
-    //    public string url { get; set; }
+    //private string url;
+    //public string Url
+    //{
+    //    get { return url; }
+    //    set
+    //    {
+    //        if (url == value) { return; }
+    //        url = value;
+    //        Notify("Url");
+    //    }
+    //}
+
+    //public event PropertyChangedEventHandler PropertyChanged;
+
+    //protected void Notify(string propName)
+    //{
+    //    if (this.PropertyChanged != null)
+    //    {
+    //        PropertyChanged(this, new PropertyChangedEventArgs(propName));
+    //    }
+    //}
     //}
 
     /// <summary>
     /// JSON Generated class that is used in Image
     /// </summary>
-    //public class E
+    //public class E : INotifyPropertyChanged
     //{
-    //    public string url { get; set; }
+    //private string url;
+    //public string Url
+    //{
+    //    get { return url; }
+    //    set
+    //    {
+    //        if (url == value) { return; }
+    //        url = value;
+    //        Notify("Url");
+    //    }
+    //}
+
+    //public event PropertyChangedEventHandler PropertyChanged;
+
+    //protected void Notify(string propName)
+    //{
+    //    if (this.PropertyChanged != null)
+    //    {
+    //        PropertyChanged(this, new PropertyChangedEventArgs(propName));
+    //    }
+    //}
     //}
 
     /// <summary>
     /// JSON Generated class that is used in Image
     /// </summary>
-    public class SmallArticle220
+    public class SmallArticle220 : INotifyPropertyChanged
     {
-        public string url { get; set; }
+        private string url;
+        public string Url
+        {
+            get { return url; }
+            set
+            {
+                if (url == value) { return; }
+                url = value;
+                Notify("Url");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void Notify(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
     }
 
     /// <summary>
     /// JSON Generated class that is used in Image
     /// </summary>
-    public class BigArticle460
+    public class BigArticle460 : INotifyPropertyChanged
     {
-        public string url { get; set; }
+        private string url;
+        public string Url
+        {
+            get { return url; }
+            set
+            {
+                if (url == value) { return; }
+                url = value;
+                Notify("Url");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void Notify(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
     }
 
     /// <summary>
     /// JSON Generated class that is used in Image
     /// </summary>
-    public class F
+    public class F : INotifyPropertyChanged
     {
-        public string url { get; set; }
+        private string url;
+        public string Url
+        {
+            get { return url; }
+            set
+            {
+                if (url == value) { return; }
+                url = value;
+                Notify("Url");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void Notify(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
     }
 
     /// <summary>
@@ -111,24 +252,84 @@ namespace Prototype.Models
     /// <summary>
     /// JSON Generated class that is used in TopImage
     /// </summary>
-    //public class Big
+    //public class Big : INotifyPropertyChanged
     //{
-    //    public string url { get; set; }
+    //    private string url;
+    //    public string Url
+    //    {
+    //        get { return url; }
+    //        set
+    //        {
+    //            if (url == value) { return; }
+    //            url = value;
+    //            Notify("Url");
+    //        }
+    //    }
+
+    //    public event PropertyChangedEventHandler PropertyChanged;
+
+    //    protected void Notify(string propName)
+    //    {
+    //        if (this.PropertyChanged != null)
+    //        {
+    //            PropertyChanged(this, new PropertyChangedEventArgs(propName));
+    //        }
+    //    }
     //}
 
     /// <summary>
     /// JSON Generated class that is used in TopImage
     /// </summary>
-    public class Small
+    public class Small : INotifyPropertyChanged
     {
-        public string url { get; set; }
+        private string url;
+        public string Url
+        {
+            get { return url; }
+            set
+            {
+                if (url == value) { return; }
+                url = value;
+                Notify("Url");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void Notify(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
     }
 
     /// <summary>
     /// JSON Generated class that is used in TopImage
     /// </summary>
-    public class Thumb
+    public class Thumb : INotifyPropertyChanged
     {
-        public string url { get; set; }
+        private string url;
+        public string Url
+        {
+            get { return url; }
+            set
+            {
+                if (url == value) { return; }
+                url = value;
+                Notify("Url");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void Notify(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
     }
 }

@@ -16,8 +16,18 @@ namespace Prototype.Models
 
         //Generated fields start
         public Image image { get; set; }
-        //public string desktopUrl { get; set; }
-        public string homeSectionName { get; set; }
+        public Image Image
+        {
+            get { return image; }
+            set
+            {
+                if (image == value) { return; }
+                image = value;
+                Notify("image");
+            }
+        }
+    //public string desktopUrl { get; set; }
+    public string homeSectionName { get; set; }
         public string contentUrl { get; set; }
         public Titles titles { get; set; }
         public Teasers teasers { get; set; }
@@ -64,6 +74,16 @@ namespace Prototype.Models
         public IList<Article> relatedDetailedArticles { get; set; }
         //Used because we want to acces the first topImage in the topImages list. 
         public TopImage topImage { get; set; }
+        public TopImage TopImage
+        {
+            get { return topImage; }
+            set
+            {
+                if (topImage == value) { return; }
+                topImage = value;
+                Notify("TopImage");
+            }
+        }
 
         //Manually made fields end
         public Article()

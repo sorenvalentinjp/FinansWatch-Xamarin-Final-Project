@@ -11,21 +11,23 @@
 
     <ViewCell.View>
         <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="20*"/>
             </Grid.ColumnDefinitions>
 
             <ffimageloading:CachedImage x:Name="image"
-                Grid.Row="0" 
-                Grid.Column="0" 
-                LoadingPlaceholder="{Binding Article.image.versions.f.url}"
-                Source="{Binding Article.topImage.small.url}"
+                LoadingPlaceholder="{Binding Article.image.versions.f.Url}"
+                Source="{Binding Article.image.versions.small_article_220.Url}"
                 BitmapOptimizations="True"
                 DownsampleToViewSize="True"
-                HorizontalOptions="StartAndExpand"
-                IsOpaque="True"/>
+                IsOpaque="True"
+                HorizontalOptions="StartAndExpand"/>
+
             <Label Text="{Binding Article.titles.FRONTPAGE}" 
                Grid.Row="0" 
                Grid.Column="1" 
@@ -39,8 +41,8 @@
                 Grid.ColumnSpan="2" 
                 HorizontalOptions="End"
                 VerticalOptions="End"/>
-            
-        </Grid>
+
+            </Grid> 
     </ViewCell.View>
 </mr:ViewCell>
 
