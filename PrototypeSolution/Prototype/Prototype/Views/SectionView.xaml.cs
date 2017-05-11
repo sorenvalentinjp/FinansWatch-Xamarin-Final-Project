@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Prototype.Views.Helpers;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,9 +16,11 @@ namespace Prototype.Views
 	{
 		public SectionView (SectionViewModel viewModel)
 		{
-			InitializeComponent();
+		    BindingContext = viewModel;
 
-            BindingContext = viewModel;
-		}
+		    InitializeComponent();
+
+		    ListViewHelper.DisableItemSelectedAction(listView);
+        }
 	}
 }

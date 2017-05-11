@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Grouping.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Images.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Article.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Section.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Subscriber.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SubscriberToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ArticleDetailsViewModel.cs" />

@@ -38,6 +38,18 @@ namespace Prototype.ViewModels
             }
         }
 
+        private IList<Section> _sections;
+        public IList<Section> Sections
+        {
+            get { return _sections; }
+            set
+            {
+                if (_sections == value) { return; }
+                _sections = value;
+                Notify("Sections");
+            }
+        }
+
         //private ToolBarExtension _toolBarExtension;
 
         public MasterDetailViewModel(StateController stateController, MasterDetailPage masterDetail)
@@ -49,6 +61,12 @@ namespace Prototype.ViewModels
             _frontPageView = new FrontPageView(new FrontPageViewModel(stateController));
             _masterDetail.Detail = _frontPageView;
             SetLogInButtonText();
+
+
+            IList<Section> sections = new List<Section>();
+            sections.Add(new Section("Navne og job", 344));
+            Sections = sections;
+
         }
 
         //This event fires when the user logs in successfully. The detail's view is then set to direct the user back to the last visisted view.
@@ -139,11 +157,11 @@ namespace Prototype.ViewModels
             {
                 return new Command(() =>
                 {
-                    if (this._sectionView == null)
-                        this._sectionView = new SectionView(new SectionViewModel(_stateController));
+                    //if (this._sectionView == null)
+                        //this._sectionView = new SectionView(new SectionViewModel(_stateController, new Section("Sektionsnavn her")));
 
-                    _masterDetail.Detail = this._sectionView;
-                    _masterDetail.IsPresented = false;
+                    //_masterDetail.Detail = this._sectionView;
+                    //_masterDetail.IsPresented = false;
                 });
             }
         }
