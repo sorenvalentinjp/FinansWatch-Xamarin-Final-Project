@@ -28,7 +28,7 @@ namespace Prototype.ViewModels
         }
 
         private IList<ArticleViewModel> _articleViewModels;
-        public Section ArticleViewModels
+        public IList<ArticleViewModel> ArticleViewModels
         {
             get { return _articleViewModels; }
             set
@@ -72,7 +72,7 @@ namespace Prototype.ViewModels
 
         public async void DownloadSectionArticles(Section section)
         {
-            section.Articles = await this._stateController.ArticleController.GetArticlesForSection("namesAndJobsSection");
+            section.Articles = await this._stateController.ArticleController.GetArticlesForSection(section);
         }
 
         public ICommand RefreshCommand
