@@ -56,9 +56,9 @@ namespace Prototype.Database
             return DownloadJson(uri);
         }
 
-        public Task<string> DownloadSection(int sectionID, string sectionArea)
+        public Task<string> DownloadSection(string uniqueSectionName)
         {
-            var uri = new Uri($"{Constants.ContentApiUrl}finanswatch/content/sections/{sectionID}/{sectionArea}?max=30");
+            var uri = new Uri($"{Constants.ContentApiUrl}finanswatch/content/latest?hoursago=168&max=30&section={uniqueSectionName}");
             return DownloadJson(uri);
         }
 
