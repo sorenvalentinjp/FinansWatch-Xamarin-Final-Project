@@ -13,7 +13,7 @@
     <!--This view only contains a listview. The template is set by the created templateselector-->
     <ContentPage.Content>
         <ListView x:Name="listView" 
-                  ItemsSource="{Binding Section.Articles}"
+                  ItemsSource="{Binding ArticleViewModels}"
                   ItemTemplate="{Binding DataTemplate}"
                   IsPullToRefreshEnabled="True"
                   RefreshCommand="{Binding RefreshCommand}"

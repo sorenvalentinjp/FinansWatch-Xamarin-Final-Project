@@ -116,7 +116,7 @@ namespace Prototype.ModelControllers
             //Kapitalforvaltning: 3011
 
             toReturn = DeserializeArticlesFromJson(await _contentApi.DownloadNamesAndJobsSection());
-
+            GetArticleDetailsForCollection(toReturn);
             return toReturn;
         }
 

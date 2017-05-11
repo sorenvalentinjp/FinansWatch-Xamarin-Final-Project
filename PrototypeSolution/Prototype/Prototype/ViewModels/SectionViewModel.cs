@@ -54,7 +54,7 @@ namespace Prototype.ViewModels
         public SectionViewModel(StateController stateController, Section section)
         {
             this._stateController = stateController;
-
+            this.ArticleViewModels = new List<ArticleViewModel>();
             Section = section;
 
             DataTemplate = new SectionTemplateSelector(_stateController);
@@ -73,6 +73,12 @@ namespace Prototype.ViewModels
         public async void DownloadSectionArticles(Section section)
         {
             section.Articles = await this._stateController.ArticleController.GetArticlesForSection(section);
+            IList<ArticleViewModel> articleViewModels = new List<ArticleViewModel>();
+            foreach (var article in section.Articles)
+            {
+                articleViewModels.Add(new ArticleViewModel(_stateController, article));
+            }
+            this.ArticleViewModels = articleViewModels;
         }
 
         public ICommand RefreshCommand
