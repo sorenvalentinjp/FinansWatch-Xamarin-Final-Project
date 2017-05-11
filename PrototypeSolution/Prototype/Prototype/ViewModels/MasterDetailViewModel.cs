@@ -151,42 +151,22 @@ namespace Prototype.ViewModels
             }
         }
 
-        //public ICommand SectionAction
-        //{
-        //    get
-        //    {
-        //        return new Command(() =>
-        //        {
-        //            if (this._sectionView == null)
-        //            {
-        //                var section = new Section("Navne og Job", 344, "top");
-        //                this._sectionView = new SectionView(new SectionViewModel(_stateController, section));
-        //            }
-
-
-        //            _masterDetail.Detail = this._sectionView;
-        //            _masterDetail.IsPresented = false;
-        //        });
-        //    }
-        //}
-
         public void SectionAction(Section section)
         {
+            //If a view for this section already exists, save it in var so we can navigate directly to it.
             SectionView sectionView = _sectionViews.FirstOrDefault(
                 (s) => ((SectionViewModel)s.BindingContext).Section.Equals(section));
 
 
-            if (sectionView != null)
-            {
-                //Navigate
-            }
-            else
+            if (sectionView == null)
             {
                 //Create new sectionview with this section and navigate
-                this._sectionView = new SectionView(new SectionViewModel(_stateController, section));
+                sectionView = new SectionView(new SectionViewModel(_stateController, section));
+                this._sectionViews.Add(sectionView);
             }
 
-            _masterDetail.Detail = this._sectionView;
+            //Navigate to section view
+            _masterDetail.Detail = sectionView;
             _masterDetail.IsPresented = false;
         }
 
