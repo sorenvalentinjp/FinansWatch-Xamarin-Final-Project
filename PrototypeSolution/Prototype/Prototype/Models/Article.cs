@@ -170,54 +170,206 @@ namespace Prototype.Models
     /// <summary>
     /// JSON Generated class that is used in Article
     /// </summary>
-    public class Teasers
+    public class Teasers : INotifyPropertyChanged
     {
-        public string DEFAULT { get; set; }
-        public string FRONTPAGE { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private string _DEFAULT;
+        public string DEFAULT
+        {
+            get { return _DEFAULT; }
+            set
+            {
+                if (_DEFAULT == value) { return; }
+                _DEFAULT = value;
+                Notify("DEFAULT");
+            }
+        }
+
+        private string _FRONTPAGE;
+        public string FRONTPAGE
+        {
+            get { return _FRONTPAGE; }
+            set
+            {
+                if (_FRONTPAGE == value) { return; }
+                _FRONTPAGE = value;
+                Notify("FRONTPAGE");
+            }
+        }
+
+        protected void Notify(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
     }
 
     /// <summary>
     /// JSON Generated class that is used in Article
     /// </summary>
-    public class Metadata
+    public class Metadata : INotifyPropertyChanged
     {
-        public string sectionDisplayName { get; set; }
-        public string c_name { get; set; }
-        public string c_category { get; set; }
-        public string color { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private string _sectionDisplayName;
+        public string sectionDisplayName
+        {
+            get { return _sectionDisplayName; }
+            set
+            {
+                if (_sectionDisplayName == value) { return; }
+                _sectionDisplayName = value;
+                Notify("sectionDisplayName");
+            }
+        }
+
+        private string _c_name;
+        public string c_name
+        {
+            get { return _c_name; }
+            set
+            {
+                if (_c_name == value) { return; }
+                _c_name = value;
+                Notify("c_name");
+            }
+        }
+
+        private string _c_category;
+        public string c_category
+        {
+            get { return _c_category; }
+            set
+            {
+                if (_c_category == value) { return; }
+                _c_category = value;
+                Notify("c_category");
+            }
+        }
+
+        private string _color;
+        public string color
+        {
+            get { return _color; }
+            set
+            {
+                if (_color == value) { return; }
+                _color = value;
+                Notify("color");
+            }
+        }
+
+        protected void Notify(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
     }
 
     /// <summary>
     /// JSON Generated class that is used in Article
     /// </summary>
-    public class Teaser
+    public class Teaser : INotifyPropertyChanged
     {
-        public string DEFAULT { get; set; }
-        public string FRONTPAGE { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private string _DEFAULT;
+        public string DEFAULT
+        {
+            get { return _DEFAULT; }
+            set
+            {
+                if (_DEFAULT == value) { return; }
+                _DEFAULT = value;
+                Notify("DEFAULT");
+            }
+        }
+
+        private string _FRONTPAGE;
+        public string FRONTPAGE
+        {
+            get { return _FRONTPAGE; }
+            set
+            {
+                if (_FRONTPAGE == value) { return; }
+                _FRONTPAGE = value;
+                Notify("FRONTPAGE");
+            }
+        }
+
+        protected void Notify(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
     }
 
     /// <summary>
     /// JSON Generated class that is used in Article
     /// </summary>
-    public class RelatedArticle
+    public class RelatedArticle : INotifyPropertyChanged
     {
-        public string url { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        private string _url;
+        public string url
+        {
+            get { return _url; }
+            set
+            {
+                if (_url == value) { return; }
+                _url = value;
+                Notify("url");
+            }
+        }
         //public string title { get; set; }
         //public string sectionName { get; set; }
         //public string publishedTime { get; set; }
         //public Teaser teaser { get; set; }
         //public bool locked { get; set; }
+
+        protected void Notify(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
     }
 
     /// <summary>
     /// JSON Generated class that is used in Article
     /// </summary>
-    public class PublishData
+    public class PublishData : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         //public List<object> authors { get; set; }
-        public string publishInfo { get; set; }
+        private string _publishInfo;
+        public string publishInfo
+        {
+            get { return _publishInfo; }
+            set
+            {
+                if (_publishInfo == value) { return; }
+                _publishInfo = value;
+                Notify("publishInfo");
+            }
+        }
         //public string publishedTime { get; set; }
         //public string publishedTimeFormatted { get; set; }
 
+        protected void Notify(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
     }
 }
