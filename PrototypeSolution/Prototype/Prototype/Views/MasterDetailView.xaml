@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.Views.MasterDetailView"
              MasterBehavior="Default"
-             Title="FINANSWATCH">
+             Title="{Binding MasterDetail.Detail.Title}">
 
     <MasterDetailPage.Master>
         <ContentPage Title="FINANSWATCH">

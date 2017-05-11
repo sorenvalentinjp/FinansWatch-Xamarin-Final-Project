@@ -22,7 +22,18 @@ namespace Prototype.ViewModels
         private Page _loginView;
         private Page _searchArticlesView;
         private readonly StateController _stateController;
-        private readonly MasterDetailPage _masterDetail;
+        private MasterDetailPage _masterDetail;
+        public MasterDetailPage MasterDetail
+        {
+            get { return _masterDetail; }
+            set
+            {
+                if (_masterDetail == value) { return; }
+                _masterDetail = value;
+                Notify("MasterDetail");
+            }
+        }
+
         //We want to direct the user back to the latest visited view after login, hence this variable is needed.
         private Page _latestVisitedView;
         //When the user is logged in, the text of the login button should be changed automatically
@@ -143,9 +154,12 @@ namespace Prototype.ViewModels
                 return new Command(() =>
                 {
                     if (this._savedArticlesView == null)
+                    {
                         this._savedArticlesView = new SavedArticlesView(new SavedArticlesViewModel(_stateController));
+                    }
 
                     _masterDetail.Detail = this._savedArticlesView;
+                    
                     _masterDetail.IsPresented = false;
                 });
             }
@@ -158,7 +172,12 @@ namespace Prototype.ViewModels
                 return new Command(() =>
                 {
                     if (this._sectionView == null)
-                        this._sectionView = new SectionView(new SectionViewModel(_stateController, new Section("Navne og Job", 344, "top")));
+                    {
+                        var section = new Section("Navne og Job", 344, "top");
+                        this._sectionView = new SectionView(new SectionViewModel(_stateController, section));
+                        _masterDetail.Master.Title = section.Name;
+                    }
+                        
 
                     _masterDetail.Detail = this._sectionView;
                     _masterDetail.IsPresented = false;
