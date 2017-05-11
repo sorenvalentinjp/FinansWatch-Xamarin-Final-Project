@@ -16,8 +16,8 @@
             <ListView.Header>
                 <StackLayout>
                     <ffimageloading:CachedImage DownsampleToViewSize="true" 
-                                       Source="{Binding ArticleViewModel.Article.topImage.small.Url}"
-                                       LoadingPlaceholder="{Binding ArticleViewModel.Article.topImage.thumb.Url}"
+                                       Source="{Binding ArticleViewModel.Article.topImage.small.url}"
+                                       LoadingPlaceholder="{Binding ArticleViewModel.Article.topImage.thumb.url}"
                                        HorizontalOptions="Fill"
                                        IsVisible="{Binding ArticleViewModel.Article.topImage, Converter={converters:NullToBooleanConverter}}"/>
                     <Label Text="{Binding ArticleViewModel.Article.topImage.imageCaption}" 

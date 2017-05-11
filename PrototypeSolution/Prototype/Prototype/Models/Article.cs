@@ -15,14 +15,14 @@ namespace Prototype.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         //Generated fields start
-        public Image image { get; set; }
-        public Image Image
+        private Image _image;
+        public Image image
         {
-            get { return image; }
+            get { return _image; }
             set
             {
-                if (image == value) { return; }
-                image = value;
+                if (_image == value) { return; }
+                _image = value;
                 Notify("image");
             }
         }
@@ -73,15 +73,15 @@ namespace Prototype.Models
 
         public IList<Article> relatedDetailedArticles { get; set; }
         //Used because we want to acces the first topImage in the topImages list. 
-        public TopImage topImage { get; set; }
-        public TopImage TopImage
+        private TopImage _topImage;
+        public TopImage topImage
         {
-            get { return topImage; }
+            get { return _topImage; }
             set
             {
-                if (topImage == value) { return; }
-                topImage = value;
-                Notify("TopImage");
+                if (_topImage == value) { return; }
+                _topImage = value;
+                Notify("topImage");
             }
         }
 
