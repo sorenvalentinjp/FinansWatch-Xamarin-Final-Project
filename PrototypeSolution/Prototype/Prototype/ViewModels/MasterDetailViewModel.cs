@@ -22,6 +22,9 @@ namespace Prototype.ViewModels
         private Page _loginView;
         private Page _searchArticlesView;
         private readonly StateController _stateController;
+
+        private IList<SectionView> _sectionViews;
+
         private MasterDetailPage _masterDetail;
         public MasterDetailPage MasterDetail
         {
@@ -49,18 +52,6 @@ namespace Prototype.ViewModels
             }
         }
 
-        private IList<Section> _sections;
-        public IList<Section> Sections
-        {
-            get { return _sections; }
-            set
-            {
-                if (_sections == value) { return; }
-                _sections = value;
-                Notify("Sections");
-            }
-        }
-
         //private ToolBarExtension _toolBarExtension;
 
         public MasterDetailViewModel(StateController stateController, MasterDetailPage masterDetail)
@@ -72,12 +63,7 @@ namespace Prototype.ViewModels
             _frontPageView = new FrontPageView(new FrontPageViewModel(stateController));
             _masterDetail.Detail = _frontPageView;
             SetLogInButtonText();
-
-
-            //IList<Section> sections = new List<Section>();
-            //sections.Add(new Section("Navne og job", 344));
-            //Sections = sections;
-
+            _sectionViews = new List<SectionView>();
         }
 
         //This event fires when the user logs in successfully. The detail's view is then set to direct the user back to the last visisted view.
@@ -88,7 +74,7 @@ namespace Prototype.ViewModels
 
             // If the user clicked log in from an article, pop and go back to the article
             if (App.Navigation.NavigationStack.Count > 1)
-            {                
+            {
                 App.Navigation.PopAsync();
             }
             //If the user is logging in from the master menu go back to the latest visisted view
@@ -159,31 +145,54 @@ namespace Prototype.ViewModels
                     }
 
                     _masterDetail.Detail = this._savedArticlesView;
-                    
+
                     _masterDetail.IsPresented = false;
                 });
             }
         }
 
-        public ICommand SectionAction
+        //public ICommand SectionAction
+        //{
+        //    get
+        //    {
+        //        return new Command(() =>
+        //        {
+        //            if (this._sectionView == null)
+        //            {
+        //                var section = new Section("Navne og Job", 344, "top");
+        //                this._sectionView = new SectionView(new SectionViewModel(_stateController, section));
+        //            }
+
+
+        //            _masterDetail.Detail = this._sectionView;
+        //            _masterDetail.IsPresented = false;
+        //        });
+        //    }
+        //}
+
+        public void SectionAction(Section section)
         {
-            get
-            {
-                return new Command(() =>
-                {
-                    if (this._sectionView == null)
-                    {
-                        var section = new Section("Navne og Job", 344, "top");
-                        this._sectionView = new SectionView(new SectionViewModel(_stateController, section));
-                        _masterDetail.Master.Title = section.Name;
-                    }
-                        
+            SectionView sectionView = _sectionViews.FirstOrDefault(
+                (s) => ((SectionViewModel)s.BindingContext).Section.Equals(section));
 
-                    _masterDetail.Detail = this._sectionView;
-                    _masterDetail.IsPresented = false;
-                });
+
+            if (sectionView != null)
+            {
+                //Navigate
             }
+            else
+            {
+                //Create new sectionview with this section and navigate
+                this._sectionView = new SectionView(new SectionViewModel(_stateController, section));
+            }
+
+            _masterDetail.Detail = this._sectionView;
+            _masterDetail.IsPresented = false;
         }
+
+
+
+
 
         /// <summary>
         /// Contains logged to log in (a new view is presented) or to log the user out right away

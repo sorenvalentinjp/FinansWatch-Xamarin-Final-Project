@@ -8,13 +8,13 @@
     <MasterDetailPage.Master>
         <ContentPage Title="FINANSWATCH">
             <ContentPage.Content>
-                <StackLayout Padding="5,30,5,5"
+                <StackLayout x:Name="StackLayoutButtons"
+                    Padding="5,30,5,5"
                              BackgroundColor="#213c68">
 
                     <Button Text="FORSIDE" TextColor="White" BackgroundColor="#213c68" Command="{Binding FrontPageAction}"/>
                     <Button Text="ALLE NYHEDER" TextColor="White" BackgroundColor="#213c68" Command="{Binding AllArticlesAction}"/>
                     <Button Text="LÆSELISTE" TextColor="White" BackgroundColor="#213c68" Command="{Binding SavedArticlesAction}"/>
-                    <Button Text="SEKTIONER" TextColor="White" BackgroundColor="#213c68" Command="{Binding SectionAction}"/>
                     <Button Text="{Binding LoginButtonText}" TextColor="White" BackgroundColor="#213c68" Command="{Binding LoginAction}"/>
                     <Button Text="SØG ARTIKLER" TextColor="White" BackgroundColor="#213c68" Command="{Binding SearchArticlesAction}"/>
 
