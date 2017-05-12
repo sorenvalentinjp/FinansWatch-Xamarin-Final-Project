@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Prototype.Views.Cells;
 using Xamarin.Forms;
@@ -96,7 +97,7 @@ namespace Prototype.ViewModels
             {
                 foreach (var articleViewModel in grouping)
                 {
-                    articleViewModel.LoginEvent();
+                    articleViewModel.CalculateIfArticleShouldBeLocked();
                 }
                 
             }
@@ -123,21 +124,26 @@ namespace Prototype.ViewModels
 
         private void GroupArticles(IList<Article> articles)
         {
-            IList<ArticleViewModel> articleViewModels = new List<ArticleViewModel>();
-
-            foreach (var article in articles)
+            Task.Run(() =>
             {
-                articleViewModels.Add(new ArticleViewModel(_stateController, article));
-            }
+                IList<ArticleViewModel> articleViewModels = new List<ArticleViewModel>();
 
-            var sortedArticleViewModels = from articleViewModel in articleViewModels
-                                          orderby articleViewModel.Article.publishedDateTime descending
-                                          group articleViewModel by articleViewModel.Article.publishedDateTime.Date.ToString("dd. MMMM", CultureInfo.InvariantCulture) into articleGroup
-                                          select new Grouping<string, ArticleViewModel>(articleGroup.Key, articleGroup);
+                foreach (var article in articles)
+                {
+                    articleViewModels.Add(new ArticleViewModel(_stateController, article));
+                }
 
-            var groupedArticleViewModels = new List<Grouping<string, ArticleViewModel>>(sortedArticleViewModels);
+                var sortedArticleViewModels = from articleViewModel in articleViewModels
+                    orderby articleViewModel.Article.publishedDateTime descending
+                    group articleViewModel by articleViewModel.Article.publishedDateTime.Date.ToString("dd. MMMM",
+                        CultureInfo.InvariantCulture)
+                    into articleGroup
+                    select new Grouping<string, ArticleViewModel>(articleGroup.Key, articleGroup);
 
-            Grouped = groupedArticleViewModels;
+                var groupedArticleViewModels = new List<Grouping<string, ArticleViewModel>>(sortedArticleViewModels);
+
+                Grouped = groupedArticleViewModels;
+            });
         }
 
         private void IsRefreshingChanged(bool isRefreshing)

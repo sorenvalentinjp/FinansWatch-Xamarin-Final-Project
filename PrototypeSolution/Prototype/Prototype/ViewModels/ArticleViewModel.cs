@@ -76,7 +76,7 @@ namespace Prototype.ViewModels
 
             Article = articleToDisplay;
 
-            Locked = CalculateIfArticleShouldBeLocked(articleToDisplay);
+            Locked = CalculateIfArticleShouldBeLocked();
 
             SavedArticlesChanged();
         }
@@ -94,20 +94,11 @@ namespace Prototype.ViewModels
                 
         }
 
-        //Subscribed Event
-        //If the user just logged in, recalculate if the article should display as locked
-        public void LoginEvent()
-        {
-            Locked = CalculateIfArticleShouldBeLocked(Article);
-        }
-
-
         /// <summary>
         /// Calculates wether the view should lock the article based on the logged or not not logged in subscribers access and the locked property on the article.
         /// </summary>
-        /// <param name="article"></param>
         /// <returns></returns>
-        public bool CalculateIfArticleShouldBeLocked(Article article)
+        public bool CalculateIfArticleShouldBeLocked()
         {
             if (_stateController.Subscriber != null)
             {
@@ -118,7 +109,7 @@ namespace Prototype.ViewModels
                 SubscriberHasAccess = false;
             }
 
-            var locked = article.locked;
+            var locked = Article.locked;
             if (locked && SubscriberHasAccess)
             {
                     //If the subscriber is logged in, has access and the article is also locked, show the unlocked icon
