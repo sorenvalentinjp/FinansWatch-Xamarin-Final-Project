@@ -73,6 +73,9 @@ namespace Prototype.ViewModels
             this.DataTemplate = new DataTemplate(() => new DateTimeCell(stateController));
             this.DataTemplateGroupHeader = new DataTemplate(() => new DateTimeCellGroupHeader());
 
+            _stateController.LoginController.LoginEventSucceeded += LoginEvent;
+            _stateController.SavedArticlesChangedEvent += SavedArticlesChanged;
+
             if (_stateController.LatestArticles == null)
             {
                 _stateController.GetBucket2();
@@ -80,6 +83,36 @@ namespace Prototype.ViewModels
             else
             {
                 Bucket2IsReady();
+            }
+
+
+        }
+
+        //Subscribed Event
+        //If the user just logged in, recalculate if the article should display as locked
+        private void LoginEvent(Subscriber subscriber)
+        {
+            foreach (var grouping in Grouped)
+            {
+                foreach (var articleViewModel in grouping)
+                {
+                    articleViewModel.LoginEvent();
+                }
+                
+            }
+        }
+
+        //Subscribed Event
+        //If the user adds an article to saved articles, notify article viewm models to update the cell icons
+        private void SavedArticlesChanged()
+        {
+            foreach (var grouping in Grouped)
+            {
+                foreach (var articleViewModel in grouping)
+                {
+                    articleViewModel.SavedArticlesChanged();
+                }
+
             }
         }
 

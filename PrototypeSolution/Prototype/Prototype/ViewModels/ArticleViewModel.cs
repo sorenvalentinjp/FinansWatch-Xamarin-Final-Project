@@ -74,20 +74,14 @@ namespace Prototype.ViewModels
         {
             this._stateController = stateController;       
 
-            Locked = CalculateIfArticleShouldBeLocked(articleToDisplay);
-
-            //Subscribe to events that update GUI
-            _stateController.LoginController.LoginEventSucceeded += LoginSucceeded;
-            _stateController.LoginController.LogoutEvent += LogoutEvent;
-            _stateController.SavedArticlesChangedEvent += SavedArticlesChanged;
-
             Article = articleToDisplay;
 
-            SavedArticlesChanged();
+            Locked = CalculateIfArticleShouldBeLocked(articleToDisplay);
 
+            SavedArticlesChanged();
         }
 
-        private void SavedArticlesChanged()
+        public void SavedArticlesChanged()
         {
             if (_stateController.SavedArticles.Contains(Article))
             {
@@ -102,22 +96,18 @@ namespace Prototype.ViewModels
 
         //Subscribed Event
         //If the user just logged in, recalculate if the article should display as locked
-        private void LoginSucceeded(Subscriber subscriber)
+        public void LoginEvent()
         {
             Locked = CalculateIfArticleShouldBeLocked(Article);
         }
 
-        private void LogoutEvent()
-        {
-            Locked = CalculateIfArticleShouldBeLocked(Article);
-        }
 
         /// <summary>
         /// Calculates wether the view should lock the article based on the logged or not not logged in subscribers access and the locked property on the article.
         /// </summary>
         /// <param name="article"></param>
         /// <returns></returns>
-        private bool CalculateIfArticleShouldBeLocked(Article article)
+        public bool CalculateIfArticleShouldBeLocked(Article article)
         {
             if (_stateController.Subscriber != null)
             {

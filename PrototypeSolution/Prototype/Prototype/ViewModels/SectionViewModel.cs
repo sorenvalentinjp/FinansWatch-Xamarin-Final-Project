@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Prototype.Models;
 using Prototype.Views.TemplateSelectors;
@@ -73,6 +74,9 @@ namespace Prototype.ViewModels
 
             DataTemplate = new SectionTemplateSelector(_stateController);
 
+            _stateController.LoginController.LoginEventSucceeded += LoginEvent;
+            _stateController.SavedArticlesChangedEvent += SavedArticlesChanged;
+
             //
             if (section.Articles == null)
             {
@@ -84,15 +88,38 @@ namespace Prototype.ViewModels
             }
         }
 
+        //Subscribed Event
+        //If the user just logged in, recalculate if the article should display as locked
+        private void LoginEvent(Subscriber subscriber)
+        {
+            foreach (var articleViewModel in ArticleViewModels)
+            {
+                articleViewModel.LoginEvent();
+            }
+        }
+
+        //Subscribed Event
+        //If the user adds an article to saved articles, notify article viewm models to update the cell icons
+        private void SavedArticlesChanged()
+        {
+            foreach (var articleViewModel in ArticleViewModels)
+            {
+                articleViewModel.SavedArticlesChanged();
+            }
+        }
+
         public void BucketIsReady()
         {
-            IList<ArticleViewModel> articleViewModels = new List<ArticleViewModel>();
-            foreach (var article in this.Section.Articles)
+            Task.Run(() =>
             {
-                articleViewModels.Add(new ArticleViewModel(this._stateController, article));
-            }
-            this.ArticleViewModels = articleViewModels;
-            IsRefreshing = false;
+                IList<ArticleViewModel> articleViewModels = new List<ArticleViewModel>();
+                foreach (var article in this.Section.Articles)
+                {
+                    articleViewModels.Add(new ArticleViewModel(this._stateController, article));
+                }
+                this.ArticleViewModels = articleViewModels;
+                IsRefreshing = false;
+            });
         }
 
         public async void DownloadSectionArticles(Section section)
