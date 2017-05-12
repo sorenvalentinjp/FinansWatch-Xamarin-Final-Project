@@ -26,7 +26,8 @@
                 BitmapOptimizations="True"
                 DownsampleToViewSize="True"
                 IsOpaque="True"
-                HorizontalOptions="StartAndExpand"/>
+                HorizontalOptions="StartAndExpand"
+                CacheType="All"/>
 
             <Label Text="{Binding Article.titles.FRONTPAGE}" 
                Grid.Row="0" 

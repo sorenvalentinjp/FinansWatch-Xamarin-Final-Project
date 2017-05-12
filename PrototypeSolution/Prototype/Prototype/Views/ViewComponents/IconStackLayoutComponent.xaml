@@ -11,7 +11,8 @@
                                             BitmapOptimizations="True"
                                             DownsampleToViewSize="True"
                                             IsVisible="{Binding Article.IsSaved}"
-                                            IsOpaque="True"/>
+                                            IsOpaque="True"
+                                            CacheType="All"/>
 
     <ffimageloading:CachedImage Source="{helpers:ImageFromFile locked.png}"  
                                             HeightRequest="24"
@@ -19,7 +20,8 @@
                                             BitmapOptimizations="True"
                                             DownsampleToViewSize="True"
                                             IsVisible="{Binding LockedIndicatorImageVisible}"
-                                            IsOpaque="True"/>
+                                            IsOpaque="True"
+                                            CacheType="All"/>
 
     <ffimageloading:CachedImage Source="{helpers:ImageFromFile unlocked.png}"  
                                             HeightRequest="24"
@@ -27,5 +29,6 @@
                                             BitmapOptimizations="True"
                                             DownsampleToViewSize="True"
                                             IsVisible="{Binding UnlockedIndicatorImageVisible}"
-                                            IsOpaque="True"/>
+                                            IsOpaque="True"
+                                            CacheType="All"/>
 </StackLayout>

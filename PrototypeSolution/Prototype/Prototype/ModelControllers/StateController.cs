@@ -59,6 +59,7 @@ namespace Prototype.ModelControllers
         {
             this.FrontPageArticles = await ArticleController.GetBucket1FrontPage();
             Bucket1IsReady?.Invoke(this.FrontPageArticles);
+            GC.Collect(0);
             return this.FrontPageArticles;
         }
 
@@ -77,7 +78,7 @@ namespace Prototype.ModelControllers
             }
 
             await Task.WhenAll(taskList.ToArray());
-
+            GC.Collect(0);
             Bucket2IsReady?.Invoke();
         }
 

@@ -15,7 +15,8 @@
             <ffimageloading:CachedImage Source="{Binding Article.topImage.small.url}"
                                         LoadingPlaceholder="{Binding Article.image.versions.f.url}"
                                         BitmapOptimizations="True"
-                                        DownsampleToViewSize="True"/>
+                                        DownsampleToViewSize="True"
+                                        CacheType="All"/>
             <StackLayout Orientation="Vertical"
                          Padding="10,0,10,10">
                 <Label Text="{Binding Article.titles.FRONTPAGE}"
