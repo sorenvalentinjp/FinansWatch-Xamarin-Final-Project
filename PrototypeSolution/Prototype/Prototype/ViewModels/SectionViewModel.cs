@@ -94,7 +94,7 @@ namespace Prototype.ViewModels
         {
             foreach (var articleViewModel in ArticleViewModels)
             {
-                articleViewModel.LoginEvent();
+                articleViewModel.CalculateIfArticleShouldBeLocked();
             }
         }
 
