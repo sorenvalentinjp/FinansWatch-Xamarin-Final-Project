@@ -105,7 +105,11 @@ namespace Prototype.ViewModels
             //If the user is logging in from the master menu go back to the latest visisted view
             else
             {
-                _masterDetail.Detail = _latestVisitedView;
+                if(subscriber != null)
+                {
+                    _masterDetail.Detail = _latestVisitedView;
+                }
+
                 _masterDetail.IsPresented = false;
             }
         }
