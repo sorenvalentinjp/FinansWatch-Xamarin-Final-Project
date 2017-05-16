@@ -62,6 +62,16 @@ namespace Prototype.ViewModels
             ArticleViewModel = articleViewModel;
 
             GetRelatedArticleViewModels(ArticleViewModel.Article);
+
+            _stateController.LoginController.LoginEventSucceeded += LoginEvent;
+        }
+
+        private void LoginEvent(Subscriber subscriber)
+        {
+            foreach (var relatedArticleViewModel in RelatedArticleViewModels)
+            {
+                relatedArticleViewModel.CalculateIfArticleShouldBeLocked();
+            }
         }
 
         private async void GetRelatedArticleViewModels(Article article)
