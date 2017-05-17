@@ -46,15 +46,22 @@ namespace Prototype.ModelControllers
         {
             this.ArticleController = new ArticleController();
             this.SavedArticles = new ObservableCollection<Article>();
-            this.LoginController = new LoginController(this);
+            this.LoginController = new LoginController();
+
+            this.LoginController.LoginEventSucceeded += LoginController_LoginEventSucceeded;
 
             //create sections in MasterDetailView
             this.Sections = new List<Section>();
 
         }
 
+        private void LoginController_LoginEventSucceeded(Subscriber subscriber)
+        {
+            this.Subscriber = subscriber;
+        }
+
         //-----------------Bucket methods start
-        
+
         public async Task<IList<Article>> GetBucket1()
         {
             this.FrontPageArticles = await ArticleController.GetBucket1FrontPage();

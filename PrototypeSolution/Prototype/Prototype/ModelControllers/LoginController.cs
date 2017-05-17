@@ -10,14 +10,12 @@ namespace Prototype.ModelControllers
     public class LoginController
     {
         private readonly LoginApi _loginApi;
-        private readonly StateController _stateController;
         public event Action<Error> LoginEventErrorOccured;
         public event Action<Subscriber> LoginEventSucceeded;
 
-        public LoginController(StateController stateController)
+        public LoginController()
         {
             _loginApi = new LoginApi();
-            _stateController = stateController;
         }
 
         public async void LoginAsync(string email, string password)
@@ -32,7 +30,6 @@ namespace Prototype.ModelControllers
                 //code = 0 once again means no error occured
                 if (subscriber.error.code == 0)
                 {
-                    _stateController.Subscriber = subscriber;
                     LoginEventSucceeded?.Invoke(subscriber);
                 }
                 else
@@ -44,7 +41,6 @@ namespace Prototype.ModelControllers
 
         public void LogoutEventAction()
         {
-            _stateController.Subscriber = null;
             LoginEventSucceeded?.Invoke(null);
         }
     }
