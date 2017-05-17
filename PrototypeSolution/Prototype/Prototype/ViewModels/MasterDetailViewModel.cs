@@ -18,7 +18,7 @@ namespace Prototype.ViewModels
 
         private Page _savedArticlesView;
         private Page _allArticlesView;
-        private Page _loginView;
+        private LoginView _loginView;
         private Page _searchArticlesView;
         private readonly StateController _stateController;
 
@@ -218,8 +218,8 @@ namespace Prototype.ViewModels
                         {
                             _stateController.LoginController.LogoutEventAction(); //this method fires the logout event which is then notifying ArticleViewModel
                             SetLogInButtonText();
-                            //set _loginView to a new LogInView to avoid email and password entries being populated when the user want to log in again
-                            _loginView = new LoginView(new LoginViewModel(_stateController));
+                            //Clear entrys in loginview
+                            _loginView.ClearEntrys();
                         }
                     }
                 });
