@@ -14,11 +14,14 @@ namespace Prototype.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LoginView : ContentPage
 	{
+	    private LoginViewModel _viewModel;
 		public LoginView(LoginViewModel viewModel)
 		{
 			InitializeComponent();
 
-            BindingContext = viewModel;
+		    _viewModel = viewModel;
+
+            BindingContext = _viewModel;            
 		}
 
 	    public void ClearEntrys()
@@ -26,5 +29,18 @@ namespace Prototype.Views
 	        entryEmail.Text = "";
 	        entryPassword.Text = "";
 	    }
-	}
+
+	    protected override void OnDisappearing()
+	    {
+
+	            _viewModel.UnsubscribeLoginEvents();  
+	    }
+
+	    protected override void OnAppearing()
+	    {
+
+	            _viewModel.SubscribeToLoginEvents();
+	    }
+
+    }
 }

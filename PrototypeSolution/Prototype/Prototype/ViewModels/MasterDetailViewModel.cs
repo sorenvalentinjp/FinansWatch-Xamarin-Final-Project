@@ -200,8 +200,7 @@ namespace Prototype.ViewModels
                     //If logget out, then present the log in view
                     if (LoginButtonText == "LOG IND")
                     {
-                        if (this._loginView == null)
-                            this._loginView = new LoginView(new LoginViewModel(_stateController));
+                        this._loginView = new LoginView(new LoginViewModel(_stateController));
 
                         _latestVisitedView = _masterDetail.Detail;
                         _masterDetail.Detail = this._loginView;
@@ -219,7 +218,10 @@ namespace Prototype.ViewModels
                             _stateController.LoginController.LogoutEventAction(); //this method fires the logout event which is then notifying ArticleViewModel
                             SetLogInButtonText();
                             //Clear entrys in loginview
-                            _loginView.ClearEntrys();
+                            if (_loginView != null)
+                            {
+                                _loginView.ClearEntrys();
+                            }                           
                         }
                     }
                 });
