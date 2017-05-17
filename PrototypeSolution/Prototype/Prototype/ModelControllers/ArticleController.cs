@@ -20,14 +20,12 @@ namespace Prototype.ModelControllers
     public class ArticleController
     {
         private readonly ContentApi _contentApi;
-        private StateController _stateController;
         public event Action<IList<Article>> LatestArticlesAreReady;
         public event Action<bool> IsRefreshingFrontPage;
         public event Action<bool> IsRefreshingLatestArticles;
 
-        public ArticleController(StateController stateController)
+        public ArticleController()
         {
-            _stateController = stateController;
             _contentApi = new ContentApi();
         }
 
