@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,24 +29,12 @@ namespace Prototype.ModelControllers
 
         public async Task<IList<Article>> GetBucket1()
         {
-            await this.ArticleController.GetBucket1FrontPage();
-            return this.ArticleController.FrontPageArticles;
+            return await this.ArticleController.GetBucket1FrontPage();
         }
 
         public async void GetBucket2()
         {
             await this.ArticleController.GetBucket2();
-        }
-
-        /// <summary>
-        /// When the user pulls down to refresh the frontpage, all frontpage articles and their details are downloaded again
-        /// </summary>
-        /// <returns></returns>
-        public async Task<IList<Article>> RefreshFrontPage()
-        {
-            await this.ArticleController.GetBucket1FrontPage();
-            this.ArticleController.GetArticleDetailsForCollection(this.ArticleController.FrontPageArticles);
-            return this.ArticleController.FrontPageArticles;
         }
 
         /// <summary>

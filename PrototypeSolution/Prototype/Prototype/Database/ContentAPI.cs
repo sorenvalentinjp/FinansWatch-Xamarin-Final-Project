@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 
 namespace Prototype.Database
 {
-    internal class ContentApi
+    public class ContentApi
     {
         private readonly HttpClient _client;
 
@@ -35,29 +35,19 @@ namespace Prototype.Database
         }
 
         /// <summary>
-        /// Downloads all front page articles and returns them as a string
-        /// </summary>
-        /// <returns></returns>
-        public Task<string> DownloadFrontPageArticles()
-        {
-            //Full url example: https://content.watchmedier.dk/api/finanswatch/content/frontpagearticles
-            var uri = new Uri(Constants.ContentApiUrl + "finanswatch/content/frontpagearticles?max=30");
-            return DownloadJson(uri);
-        }
-
-        /// <summary>
         /// Downloads allArticles page articles and returns them as a string
         /// </summary>
         /// <returns></returns>
         public Task<string> DownloadLatestArticles()
         {
-            //Full url example: "https://content.watchmedier.dk/api/finanswatch/content/latest?hoursago=168"
+            //Full url example: "https://content.watchmedier.dk/api/finanswatch/content/latest?hoursago=168&max=100"
             var uri = new Uri(Constants.ContentApiUrl + "finanswatch/content/latest?hoursago=168&max=100");
             return DownloadJson(uri);
         }
 
         public Task<string> DownloadSection(string sectionContentUrl)
         {
+            //Full url example: "https://content.watchmedier.dk/api/finanswatch/content/latest?hoursago=500&max=30&section=fw_finansnyt_penge"
             var uri = new Uri($"{Constants.ContentApiUrl}{sectionContentUrl}");
             return DownloadJson(uri);
         }
@@ -83,28 +73,9 @@ namespace Prototype.Database
             }
         }
 
-        //Not currently used. Not deleted as we might need it later on to check url's
-        public async Task<bool> IsValidUrl(string url)
+        public void DisposeClient()
         {
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Head, url);
-            HttpResponseMessage response = new HttpResponseMessage();
-            try
-            {
-                response = await _client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-                response.EnsureSuccessStatusCode();
-                response.Dispose(); //not sure if this is needed. Does it close the client or just the response message?
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"ERROR: {url} is not valid.");
-                Debug.WriteLine($"ERRORMESSAGE: {ex.Message}");
-                return false;
-            }
-            finally
-            {
-                response.Dispose();
-            }
+            _client.Dispose();
         }
     }
 }

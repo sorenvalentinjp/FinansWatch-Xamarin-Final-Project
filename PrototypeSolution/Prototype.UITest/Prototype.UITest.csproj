@@ -86,6 +86,7 @@
     <Compile Include="UnitTests\Models\ImageTest.cs" />
     <Compile Include="UnitTests\Models\SectionTest.cs" />
     <Compile Include="UnitTests\Models\SubscriberTest.cs" />
+    <Compile Include="UnitTests\Database\ContentApiTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -93,9 +94,16 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup> 
+    <ProjectReference Include="..\Prototype\Prototype.Android\Prototype.Android.csproj">
+      <Project>{56EC61C6-1670-4DAD-BA8E-9F3FFA6276AC}</Project>
+      <Name>Prototype.Android</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Folder Include="UnitTests\Database\" />
     <Folder Include="UnitTests\ModelControllers\" />
+    <Folder Include="UnitTests\Models\" />
     <Folder Include="UnitTests\ViewModels\" />
     <Folder Include="UnitTests\Views\" />
   </ItemGroup>
