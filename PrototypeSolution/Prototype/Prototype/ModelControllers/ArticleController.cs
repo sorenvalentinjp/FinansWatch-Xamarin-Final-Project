@@ -25,9 +25,15 @@ namespace Prototype.ModelControllers
     public class ArticleController
     {
         private readonly ContentApi _contentApi;
+
+        //events
         public event Action<IList<Article>> LatestArticlesAreReady;
         public event Action<bool> IsRefreshingFrontPage;
         public event Action<bool> IsRefreshingLatestArticles;
+
+        //collections of articles
+        //public IList<Article> FrontPageArticles;
+
 
         public ArticleController()
         {
@@ -60,7 +66,7 @@ namespace Prototype.ModelControllers
         }
 
         /// <summary>
-        /// This method downloads articles 
+        /// This method downloads articles for a given section + the details for each article in the section.
         /// </summary>
         /// <param name="section"></param>
         /// <returns></returns>
@@ -71,7 +77,6 @@ namespace Prototype.ModelControllers
             return articles;
         }
 
-        //BUCKET HELPER
         /// <summary>
         /// Downloading all details for the collection of articles
         /// </summary>
@@ -84,9 +89,6 @@ namespace Prototype.ModelControllers
             }
         }
 
-        //------------------Bucket methods end
-
-        ////////////////////////////////////////////////////////////////////////////////////
         public async Task<IList<Article>> GetLatestArticlesAsync()
         {
             IsRefreshingLatestArticles?.Invoke(true);
@@ -143,7 +145,6 @@ namespace Prototype.ModelControllers
         public async Task<Article> GetArticleDetailsAsync(string contentUrl)
         {
             return DeserializeArticle(await _contentApi.DownloadArticle(contentUrl));
-
         }
 
 
