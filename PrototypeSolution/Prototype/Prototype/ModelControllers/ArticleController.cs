@@ -33,7 +33,6 @@ namespace Prototype.ModelControllers
 
         public event Action<IList<Article>> Bucket1IsReady;
         public event Action Bucket2IsReady;
-        public event Action<IList<Article>> LatestArticlesAreReady;
         public event Action SavedArticlesChangedEvent;
 
         //collections of articles
@@ -128,8 +127,6 @@ namespace Prototype.ModelControllers
             IsRefreshingLatestArticles?.Invoke(true);
 
             this.LatestArticles = DeserializeArticlesFromJson(await _contentApi.DownloadLatestArticles());
-
-            LatestArticlesAreReady?.Invoke(this.LatestArticles);
 
             IsRefreshingLatestArticles?.Invoke(false);
 
