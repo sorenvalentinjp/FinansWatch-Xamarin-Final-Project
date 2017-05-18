@@ -66,16 +66,16 @@ namespace Prototype.ViewModels
 
         public SectionViewModel(StateController stateController, Section section)
         {
-            this._stateController = stateController;
+            _stateController = stateController;
             this.ArticleViewModels = new List<ArticleViewModel>();
             Section = section;
 
-            this._stateController.Bucket2IsReady += BucketIsReady;
+            _stateController.ArticleController.Bucket2IsReady += BucketIsReady;
 
             DataTemplate = new SectionTemplateSelector(_stateController);
 
             _stateController.LoginController.LoginEventSucceeded += LoginEvent;
-            _stateController.SavedArticlesChangedEvent += SavedArticlesChanged;
+            _stateController.ArticleController.SavedArticlesChangedEvent += SavedArticlesChanged;
 
             //
             if (section.Articles == null)

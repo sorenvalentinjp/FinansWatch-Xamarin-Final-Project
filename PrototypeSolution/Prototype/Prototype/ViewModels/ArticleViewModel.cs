@@ -83,7 +83,7 @@ namespace Prototype.ViewModels
 
         public void SavedArticlesChanged()
         {
-            if (_stateController.SavedArticles.Contains(Article))
+            if (_stateController.ArticleController.SavedArticles.Contains(Article))
             {
                 Article.IsSaved = true;
             }

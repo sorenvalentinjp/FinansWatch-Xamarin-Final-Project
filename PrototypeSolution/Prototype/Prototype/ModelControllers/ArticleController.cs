@@ -14,6 +14,7 @@ using System.Linq;
 using Newtonsoft.Json.Converters;
 using Prototype.ViewModels;
 using Xamarin.Forms;
+using System.Collections.ObjectModel;
 
 namespace Prototype.ModelControllers
 {
@@ -27,17 +28,35 @@ namespace Prototype.ModelControllers
         private readonly ContentApi _contentApi;
 
         //events
-        public event Action<IList<Article>> LatestArticlesAreReady;
         public event Action<bool> IsRefreshingFrontPage;
         public event Action<bool> IsRefreshingLatestArticles;
 
-        //collections of articles
-        //public IList<Article> FrontPageArticles;
+        public event Action<IList<Article>> Bucket1IsReady;
+        public event Action Bucket2IsReady;
+        public event Action<IList<Article>> LatestArticlesAreReady;
+        public event Action SavedArticlesChangedEvent;
 
+        //collections of articles
+        public IList<Article> FrontPageArticles;
+        public IList<Article> LatestArticles;
+        public ObservableCollection<Article> SavedArticles;
+        public IList<Section> Sections;
 
         public ArticleController()
         {
             _contentApi = new ContentApi();
+
+            //init collections
+            //this.FrontPageArticles = new List<Article>();
+            //this.LatestArticles = new List<Article>();
+            this.SavedArticles = new ObservableCollection<Article>();
+            this.Sections = new List<Section>();
+        }
+
+        public void LocalStorageLoaded()
+        {
+            this.Bucket1IsReady?.Invoke(this.FrontPageArticles);
+            this.Bucket2IsReady?.Invoke();
         }
 
         /// <summary>
@@ -45,23 +64,38 @@ namespace Prototype.ModelControllers
         /// </summary>
         public async Task<IList<Article>> GetBucket1FrontPage()
         {
-            return await GetFrontPageArticlesAsync();
+            this.FrontPageArticles = await GetFrontPageArticlesAsync();
+            Bucket1IsReady?.Invoke(this.FrontPageArticles);
+            return this.FrontPageArticles;
         }
 
         /// <summary>
-        /// Downloading details for the FrontPageArticles + LatestArticles and their details.
+        /// Downloading details for the FrontPageArticles + LatestArticles + Sections and their details.
         /// </summary>
-        /// <param name="frontPageArticles"></param>
         /// <returns></returns>
-        public async Task<IList<Article>> GetBucket2(IList<Article> frontPageArticles)
+        public async Task<IList<Article>> GetBucket2()
         {
             //Details for frontpage articles is downloaded async
-            GetArticleDetailsForCollection(frontPageArticles);
+            GetArticleDetailsForCollection(this.FrontPageArticles);
 
             //Latest articles is downloaded and awaited. Afterwards the details are downloaded
             //This is to speed up the loading of LatestArticlesView
             IList<Article> latestArticles = await GetLatestArticlesAsync();
             GetArticleDetailsForCollection(latestArticles);
+
+            //Downloading sections
+            List<Task> taskList = new List<Task>();
+
+            foreach (var section in this.Sections)
+            {
+                var lastTask = GetArticlesAndDetailsForSection(section);
+                taskList.Add(lastTask);
+            }
+
+            await Task.WhenAll(taskList.ToArray());
+
+            Bucket2IsReady?.Invoke();
+
             return latestArticles;
         }
 
@@ -93,13 +127,13 @@ namespace Prototype.ModelControllers
         {
             IsRefreshingLatestArticles?.Invoke(true);
 
-            IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadLatestArticles());
+            this.LatestArticles = DeserializeArticlesFromJson(await _contentApi.DownloadLatestArticles());
 
-            LatestArticlesAreReady?.Invoke(articles);
+            LatestArticlesAreReady?.Invoke(this.LatestArticles);
 
             IsRefreshingLatestArticles?.Invoke(false);
 
-            return articles;
+            return this.LatestArticles;
         }
 
         public async Task<IList<Article>> GetFrontPageArticlesAsync()
@@ -147,6 +181,29 @@ namespace Prototype.ModelControllers
             return DeserializeArticle(await _contentApi.DownloadArticle(contentUrl));
         }
 
+
+        /// <summary>
+        /// If the article is not in the list, add it and return true, if it is in the list, remove it and return false
+        /// </summary>
+        /// <param name="article"></param>
+        /// <returns></returns>
+        public bool AddOrRemoveSavedArticle(Article article)
+        {
+            if (!this.SavedArticles.Contains(article))
+            {
+                article.IsSaved = true;
+                this.SavedArticles.Add(article);
+                this.SavedArticlesChangedEvent();
+                return true;
+            }
+            else
+            {
+                article.IsSaved = false;
+                this.SavedArticles.Remove(article);
+                this.SavedArticlesChangedEvent();
+                return false;
+            }
+        }
 
         //Deserialize methods
         private IList<Article> DeserializeArticlesFromJson(string json)

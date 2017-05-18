@@ -69,15 +69,15 @@ namespace Prototype.ViewModels
             this._stateController = stateController;
             IsRefreshing = false;
             this._stateController.ArticleController.IsRefreshingLatestArticles += IsRefreshingChanged;
-            this._stateController.Bucket2IsReady += Bucket2IsReady;
+            this._stateController.ArticleController.Bucket2IsReady += Bucket2IsReady;
 
             this.DataTemplate = new DataTemplate(() => new DateTimeCell(stateController));
             this.DataTemplateGroupHeader = new DataTemplate(() => new DateTimeCellGroupHeader());
 
             _stateController.LoginController.LoginEventSucceeded += LoginEvent;
-            _stateController.SavedArticlesChangedEvent += SavedArticlesChanged;
+            _stateController.ArticleController.SavedArticlesChangedEvent += SavedArticlesChanged;
 
-            if (_stateController.LatestArticles == null)
+            if (_stateController.ArticleController.LatestArticles == null)
             {
                 _stateController.GetBucket2();
             }
@@ -119,7 +119,7 @@ namespace Prototype.ViewModels
 
         private void Bucket2IsReady()
         {
-            GroupArticles(_stateController.LatestArticles);
+            GroupArticles(_stateController.ArticleController.LatestArticles);
         }
 
         private void GroupArticles(IList<Article> articles)
