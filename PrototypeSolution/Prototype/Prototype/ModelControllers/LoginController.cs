@@ -12,6 +12,7 @@ namespace Prototype.ModelControllers
         private readonly LoginApi _loginApi;
         public event Action<Error> LoginEventErrorOccured;
         public event Action<Subscriber> LoginEventSucceeded;
+        public Subscriber Subscriber;
 
         public LoginController()
         {
@@ -30,6 +31,7 @@ namespace Prototype.ModelControllers
                 //code = 0 once again means no error occured
                 if (subscriber.error.code == 0)
                 {
+                    Subscriber = subscriber;
                     LoginEventSucceeded?.Invoke(subscriber);
                 }
                 else
@@ -41,6 +43,7 @@ namespace Prototype.ModelControllers
 
         public void LogoutEventAction()
         {
+            Subscriber = null;
             LoginEventSucceeded?.Invoke(null);
         }
     }

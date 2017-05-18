@@ -42,10 +42,6 @@ namespace Prototype.ViewModels
         public LoginViewModel(StateController stateController)
         {
             _stateController = stateController;
-
-            //two event for failed and successfull login
-            _stateController.LoginController.LoginEventErrorOccured += LoginErrorOccured;
-            _stateController.LoginController.LoginEventSucceeded += LoginSucceeded;
         }
 
         private void LoginErrorOccured(Error error)
@@ -56,7 +52,7 @@ namespace Prototype.ViewModels
 
         private void LoginSucceeded(Subscriber subscriber)
         {
-            _stateController.Subscriber = subscriber; //setting the subscriber, so we can reference him from other pages
+            _stateController.LoginController.Subscriber = subscriber; //setting the subscriber, so we can reference him from other pages
         }
 
         public ICommand LoginCommand
@@ -91,6 +87,20 @@ namespace Prototype.ViewModels
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
+        }
+
+        public void SubscribeToLoginEvents()
+        {
+            //events for successfull and failed login
+            _stateController.LoginController.LoginEventErrorOccured += LoginErrorOccured;
+            _stateController.LoginController.LoginEventSucceeded += LoginSucceeded;
+        }
+
+        public void UnsubscribeLoginEvents()
+        {
+            //events for successfull and failed login
+            _stateController.LoginController.LoginEventErrorOccured -= LoginErrorOccured;
+            _stateController.LoginController.LoginEventSucceeded -= LoginSucceeded;
         }
     }
 }

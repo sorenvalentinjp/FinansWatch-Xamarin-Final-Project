@@ -18,7 +18,7 @@ namespace Prototype.ViewModels
 
         private Page _savedArticlesView;
         private Page _allArticlesView;
-        private Page _loginView;
+        private LoginView _loginView;
         private Page _searchArticlesView;
         private readonly StateController _stateController;
 
@@ -128,7 +128,7 @@ namespace Prototype.ViewModels
         /// </summary>
         private void SetLogInButtonText()
         {
-            if (_stateController.Subscriber == null)
+            if (_stateController.LoginController.Subscriber == null)
                 LoginButtonText = "LOG IND";
             else
                 LoginButtonText = "LOG UD";
@@ -200,8 +200,7 @@ namespace Prototype.ViewModels
                     //If logget out, then present the log in view
                     if (LoginButtonText == "LOG IND")
                     {
-                        if (this._loginView == null)
-                            this._loginView = new LoginView(new LoginViewModel(_stateController));
+                        this._loginView = new LoginView(new LoginViewModel(_stateController));
 
                         _latestVisitedView = _masterDetail.Detail;
                         _masterDetail.Detail = this._loginView;
@@ -218,8 +217,11 @@ namespace Prototype.ViewModels
                         {
                             _stateController.LoginController.LogoutEventAction(); //this method fires the logout event which is then notifying ArticleViewModel
                             SetLogInButtonText();
-                            //set _loginView to a new LogInView to avoid email and password entries being populated when the user want to log in again
-                            _loginView = new LoginView(new LoginViewModel(_stateController));
+                            //Clear entrys in loginview
+                            if (_loginView != null)
+                            {
+                                _loginView.ClearEntrys();
+                            }                           
                         }
                     }
                 });
