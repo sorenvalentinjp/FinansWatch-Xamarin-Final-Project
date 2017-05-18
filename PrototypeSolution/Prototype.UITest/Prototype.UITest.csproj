@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UnitTests\Database\ContentApiTest.cs" />
+    <Compile Include="UnitTests\Database\LocalStorageTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
