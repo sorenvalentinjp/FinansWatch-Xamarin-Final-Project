@@ -46,6 +46,17 @@ namespace Prototype.ViewModels
             //because our statecontroller's SavedArticles property contains Article objects, we cant reference that collection directly (we use ArticleViewModels here). Therefore we mus t create this event listener to get notified when the collection changes
             _stateController.ArticleController.SavedArticles.CollectionChanged += SavedArticles_CollectionChanged;
             this.DataTemplate = new SavedArticlesTemplateSelector(_stateController);
+            this._stateController.LoginController.LoginEventSucceeded += LoginEvent;
+        }
+
+        //Subscribed Event
+        //If the user just logged in, recalculate if the article should display as locked
+        private void LoginEvent(Subscriber subscriber)
+        {
+                foreach (var articleViewModel in SavedArticles)
+                {
+                    articleViewModel.CalculateIfArticleShouldBeLocked();
+                }
         }
 
         private void SavedArticles_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
