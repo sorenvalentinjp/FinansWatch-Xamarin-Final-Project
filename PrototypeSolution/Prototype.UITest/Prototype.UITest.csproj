@@ -87,6 +87,7 @@
     <Compile Include="UnitTests\Models\SectionTest.cs" />
     <Compile Include="UnitTests\Models\SubscriberTest.cs" />
     <Compile Include="UnitTests\Database\ContentApiTest.cs" />
+    <Compile Include="UnitTests\Database\LocalStorageTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
