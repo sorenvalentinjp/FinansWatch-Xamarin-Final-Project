@@ -10,6 +10,7 @@ namespace Prototype.Models
     public class Section : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public event Action ArticlesChanged;
 
         private string _name;
         public string Name
@@ -44,6 +45,7 @@ namespace Prototype.Models
                 if (_articles == value) { return; }
                 _articles = value;
                 Notify("Articles");
+                ArticlesChanged?.Invoke();
             }
         }
 

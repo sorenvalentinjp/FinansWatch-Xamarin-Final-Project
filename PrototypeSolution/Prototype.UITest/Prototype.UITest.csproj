@@ -57,7 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTests\Models\ArticleTest.cs" />
+    <Compile Include="UnitTests\Database\ContentApiTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -72,8 +72,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UnitTests\Database\" />
     <Folder Include="UnitTests\ModelControllers\" />
+    <Folder Include="UnitTests\Models\" />
     <Folder Include="UnitTests\ViewModels\" />
     <Folder Include="UnitTests\Views\" />
   </ItemGroup>

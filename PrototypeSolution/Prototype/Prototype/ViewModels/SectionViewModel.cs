@@ -76,13 +76,9 @@ namespace Prototype.ViewModels
 
             _stateController.LoginController.LoginEventSucceeded += LoginEvent;
             _stateController.ArticleController.SavedArticlesChangedEvent += SavedArticlesChanged;
-
-            //
-            if (section.Articles == null)
-            {
-                DownloadSectionArticles(Section);
-            }
-            else
+            
+            this.Section.ArticlesChanged += BucketIsReady;
+            if(this.Section.Articles != null)
             {
                 BucketIsReady();
             }

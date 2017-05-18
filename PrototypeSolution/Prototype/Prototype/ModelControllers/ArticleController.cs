@@ -36,7 +36,7 @@ namespace Prototype.ModelControllers
         public event Action SavedArticlesChangedEvent;
 
         //collections of articles
-        public IList<Article> FrontPageArticles;
+        //public IList<Article> FrontPageArticles;
         public IList<Article> LatestArticles;
         public ObservableCollection<Article> SavedArticles;
         public IList<Section> Sections;
@@ -54,7 +54,7 @@ namespace Prototype.ModelControllers
 
         public void LocalStorageLoaded()
         {
-            this.Bucket1IsReady?.Invoke(this.FrontPageArticles);
+            this.Bucket1IsReady?.Invoke(this.Sections.FirstOrDefault().Articles);
             this.Bucket2IsReady?.Invoke();
         }
 
@@ -63,9 +63,9 @@ namespace Prototype.ModelControllers
         /// </summary>
         public async Task<IList<Article>> GetBucket1FrontPage()
         {
-            this.FrontPageArticles = await GetFrontPageArticlesAsync();
-            Bucket1IsReady?.Invoke(this.FrontPageArticles);
-            return this.FrontPageArticles;
+            this.Sections.FirstOrDefault().Articles = await GetFrontPageArticlesAsync();
+            Bucket1IsReady?.Invoke(this.Sections.FirstOrDefault().Articles);
+            return this.Sections.FirstOrDefault().Articles;
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Prototype.ModelControllers
         public async Task<IList<Article>> GetBucket2()
         {
             //Details for frontpage articles is downloaded async
-            GetArticleDetailsForCollection(this.FrontPageArticles);
+            GetArticleDetailsForCollection(this.Sections.FirstOrDefault().Articles);
 
             //Latest articles is downloaded and awaited. Afterwards the details are downloaded
             //This is to speed up the loading of LatestArticlesView
@@ -85,10 +85,10 @@ namespace Prototype.ModelControllers
             //Downloading sections
             List<Task> taskList = new List<Task>();
 
-            foreach (var section in this.Sections)
+            for(int i = 1; i < this.Sections.Count; i++)
             {
-                var lastTask = GetArticlesAndDetailsForSection(section);
-                taskList.Add(lastTask);
+                Section currentSection = this.Sections[i];
+                currentSection.Articles = await GetArticlesAndDetailsForSection(currentSection);
             }
 
             await Task.WhenAll(taskList.ToArray());
@@ -137,7 +137,7 @@ namespace Prototype.ModelControllers
         {
             IsRefreshingFrontPage?.Invoke(true);
 
-            IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadFrontPageArticles());
+            IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadSection(this.Sections[0].SectionContentUrl));
 
             foreach (var article in articles)
             {
