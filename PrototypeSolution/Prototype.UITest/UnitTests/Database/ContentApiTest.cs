@@ -23,7 +23,7 @@ namespace Prototype.UITest.UnitTests.Database
         public void Init()
         {
             _contentApi = new ContentApi();
-            _validArticleUrl = "";
+            _validArticleUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9517468";
             _validFrontPageArticleUrl = "https://content.watchmedier.dk/api/finanswatch/content/frontpagearticles";
             _validLatestArticleUrl = "https://content.watchmedier.dk/api/finanswatch/content/latest?hoursago=168&max=10";
             _validSectionUrl = "https://content.watchmedier.dk/api/finanswatch/content/latest?hoursago=500&max=30&section=fw_finansnyt_penge";
@@ -77,6 +77,58 @@ namespace Prototype.UITest.UnitTests.Database
 
         [Test]
         public async void DownloadLatestArticlesInvalid()
+        {
+            //prepare
+            Uri uri = new Uri(_invalidUrl);
+
+            //act
+            string result = await _contentApi.DownloadJson(uri);
+
+            //assert
+            Assert.IsNullOrEmpty(result);
+        }
+
+        [Test]
+        public async void DownloadSectionValid()
+        {
+            //prepare
+            Uri uri = new Uri(_validSectionUrl);
+
+            //act
+            string result = await _contentApi.DownloadJson(uri);
+
+            //assert
+            Assert.IsNotNullOrEmpty(result);
+        }
+
+        [Test]
+        public async void DownloadSectionInvalid()
+        {
+            //prepare
+            Uri uri = new Uri(_invalidUrl);
+
+            //act
+            string result = await _contentApi.DownloadJson(uri);
+
+            //assert
+            Assert.IsNullOrEmpty(result);
+        }
+
+        [Test]
+        public async void DownloadArticleValid()
+        {
+            //prepare
+            Uri uri = new Uri(_validArticleUrl);
+
+            //act
+            string result = await _contentApi.DownloadJson(uri);
+
+            //assert
+            Assert.IsNotNullOrEmpty(result);
+        }
+
+        [Test]
+        public async void DownloadArticleInvalid()
         {
             //prepare
             Uri uri = new Uri(_invalidUrl);
