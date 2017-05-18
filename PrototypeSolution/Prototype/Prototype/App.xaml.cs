@@ -75,7 +75,7 @@ namespace Prototype
 
         public static bool IsSubscriberLoggedIn()
         {
-            return _stateController.Subscriber != null;
+            return _stateController.LoginController.Subscriber != null;
         }
     }
 }

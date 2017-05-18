@@ -29,35 +29,15 @@ namespace Prototype.ModelControllers
         public ArticleController ArticleController;
         public LoginController LoginController;
 
-        //other
-        private Subscriber _subscriber;
-        public Subscriber Subscriber
-        {
-            get { return _subscriber; }
-            set
-            {
-                if (_subscriber == value) { return; }
-                _subscriber = value;
-                Notify("Subscriber");
-            }
-        }
-
         public StateController()
         {
             this.ArticleController = new ArticleController();
             this.SavedArticles = new ObservableCollection<Article>();
             this.LoginController = new LoginController();
 
-            this.LoginController.LoginEventSucceeded += LoginController_LoginEventSucceeded;
-
             //create sections in MasterDetailView
             this.Sections = new List<Section>();
 
-        }
-
-        private void LoginController_LoginEventSucceeded(Subscriber subscriber)
-        {
-            this.Subscriber = subscriber;
         }
 
         //-----------------Bucket methods start
@@ -80,7 +60,6 @@ namespace Prototype.ModelControllers
             foreach (var section in this.Sections)
             {
                 var lastTask = GetArticlesForSection(section);
-                //lastTask.Start();
                 taskList.Add(lastTask);
             }
 

@@ -52,7 +52,7 @@ namespace Prototype.ViewModels
 
         private void LoginSucceeded(Subscriber subscriber)
         {
-            _stateController.Subscriber = subscriber; //setting the subscriber, so we can reference him from other pages
+            _stateController.LoginController.Subscriber = subscriber; //setting the subscriber, so we can reference him from other pages
         }
 
         public ICommand LoginCommand

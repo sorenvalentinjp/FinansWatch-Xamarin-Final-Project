@@ -100,9 +100,9 @@ namespace Prototype.ViewModels
         /// <returns></returns>
         public bool CalculateIfArticleShouldBeLocked()
         {
-            if (_stateController.Subscriber != null)
+            if (_stateController.LoginController.Subscriber != null)
             {
-                SubscriberHasAccess = _stateController.Subscriber.HasAccessToSite();
+                SubscriberHasAccess = _stateController.LoginController.Subscriber.HasAccessToSite();
             }
             else
             {

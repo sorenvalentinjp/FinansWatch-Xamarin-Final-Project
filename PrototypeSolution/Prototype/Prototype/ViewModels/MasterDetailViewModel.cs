@@ -128,7 +128,7 @@ namespace Prototype.ViewModels
         /// </summary>
         private void SetLogInButtonText()
         {
-            if (_stateController.Subscriber == null)
+            if (_stateController.LoginController.Subscriber == null)
                 LoginButtonText = "LOG IND";
             else
                 LoginButtonText = "LOG UD";
