@@ -15,7 +15,7 @@ namespace Prototype.Models
             string site = "finanswatch";
             foreach (var featureAccess in featureAccessList)
             {
-                if (featureAccess.code == site.ToUpper()) return featureAccess.access;
+                if (featureAccess.code.ToUpper() == site.ToUpper()) return featureAccess.access;
             }
             return false;
         }

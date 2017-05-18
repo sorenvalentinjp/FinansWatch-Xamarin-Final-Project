@@ -8,7 +8,6 @@ namespace Prototype.Models
     public class Grouping<TK, T> : ObservableCollection<T>
     {
         public TK Key { get; private set; }
-        public T List { get; private set; }
 
         public Grouping(TK key, IEnumerable<T> items)
         {

@@ -13,6 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype.UITest", "Prototy
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Prototype\Prototype\Prototype.projitems*{13e7f2f3-8010-4cb1-8d83-0500ad2cc6a8}*SharedItemsImports = 4
 		Prototype\Prototype\Prototype.projitems*{56ec61c6-1670-4dad-ba8e-9f3ffa6276ac}*SharedItemsImports = 4
 		Prototype\Prototype\Prototype.projitems*{7dd12f5b-ca05-42ca-b138-f4ec1e2dc4c1}*SharedItemsImports = 13
 		Prototype\Prototype\Prototype.projitems*{97a9de53-62d3-46c3-a457-e350dbf392b9}*SharedItemsImports = 4

@@ -73,7 +73,7 @@ namespace Prototype.Models
                 Notify("teasers");
             }
         }
-        public int _homeSectionId;
+        private int _homeSectionId;
         public int homeSectionId
         {
             get { return _homeSectionId; }
@@ -128,17 +128,17 @@ namespace Prototype.Models
                 Notify("isTopArticle");
             }
         }
-        private List<object> _inlineImages;
-        public List<object> inlineImages
-        {
-            get { return _inlineImages; }
-            set
-            {
-                if (_inlineImages == value) { return; }
-                _inlineImages = value;
-                Notify("inlineImages");
-            }
-        }
+        //private List<object> _inlineImages;
+        //public List<object> inlineImages
+        //{
+        //    get { return _inlineImages; }
+        //    set
+        //    {
+        //        if (_inlineImages == value) { return; }
+        //        _inlineImages = value;
+        //        Notify("inlineImages");
+        //    }
+        //}
         //public Metadata metadata { get; set; }
         //public bool breakingNews { get; set; }
         //public object partner { get; set; }
@@ -205,7 +205,17 @@ namespace Prototype.Models
                 Notify("lastModified");
             }
         }
-        public int id { get; set; }
+        private int _id;
+        public int id
+        {
+            get { return _id; }
+            set
+            {
+                if (_id == value) { return; }
+                _id = value;
+                Notify("id");
+            }
+        }
         //Generated fields end
 
 
@@ -223,7 +233,7 @@ namespace Prototype.Models
             }
         }
 
-        public IList<Article> _relatedDetailedArticles;
+        private IList<Article> _relatedDetailedArticles;
         public IList<Article> relatedDetailedArticles
         {
             get { return _relatedDetailedArticles; }
@@ -290,7 +300,7 @@ namespace Prototype.Models
             //publishedDate = article.publishedDate;
             //locked = article.locked;
             //isTopArticle = article.isTopArticle;
-            inlineImages = article.inlineImages;
+            //inlineImages = article.inlineImages;
             //metadata = article.metadata;
             //breakingNews = article.breakingNews;
             //partner = article.partner;
