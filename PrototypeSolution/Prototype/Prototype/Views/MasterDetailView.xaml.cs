@@ -37,7 +37,7 @@ namespace Prototype.Views
             BindingContext = viewModel;
 
             //Create a button for each section except the frontpage, and make a command that handles navigation on button press.
-            foreach (var section in _stateController.Sections)
+            foreach (var section in _stateController.ArticleController.Sections)
             {
                 if (section != frontPageSection)
                 {
@@ -60,7 +60,7 @@ namespace Prototype.Views
         /// <returns></returns>
         private Section GetFrontPageSection()
         {
-            return _stateController.Sections.FirstOrDefault();
+            return _stateController.ArticleController.Sections.FirstOrDefault();
         }
     }
 }
