@@ -17,6 +17,11 @@ using Xamarin.Forms;
 
 namespace Prototype.ModelControllers
 {
+    /// <summary>
+    /// This class is responsible for keeping track of all articles that have been downloaded.
+    /// The class also contains methods to update the articles that is stored in the various collections using.
+    /// These methods use _contentApi to download the articles through Jyllands-Postens Content API.
+    /// </summary>
     public class ArticleController
     {
         private readonly ContentApi _contentApi;
@@ -29,12 +34,8 @@ namespace Prototype.ModelControllers
             _contentApi = new ContentApi();
         }
 
-
-        //-------------------Bucket methods start
-
-        //BUCKET 1
         /// <summary>
-        /// Downloading all frontpage articles WITHOUT including their details. This is to speed up load of the FrontPageView
+        /// Downloads all FrontPageArticles WITHOUT including their details. This is to speed up the loading/refreshing of the FrontPageView.
         /// </summary>
         public async Task<IList<Article>> GetBucket1FrontPage()
         {
@@ -42,37 +43,27 @@ namespace Prototype.ModelControllers
         }
 
         /// <summary>
-        /// Downloading details for the frontpage articles + all other articles the app is capable of presenting
+        /// Downloading details for the FrontPageArticles + LatestArticles and their details.
         /// </summary>
         /// <param name="frontPageArticles"></param>
         /// <returns></returns>
         public async Task<IList<Article>> GetBucket2(IList<Article> frontPageArticles)
         {
-            //Details for frontpage articles
+            //Details for frontpage articles is downloaded async
             GetArticleDetailsForCollection(frontPageArticles);
 
-            //Latest articles
+            //Latest articles is downloaded and awaited. Afterwards the details are downloaded
+            //This is to speed up the loading of LatestArticlesView
             IList<Article> latestArticles = await GetLatestArticlesAsync();
             GetArticleDetailsForCollection(latestArticles);
             return latestArticles;
-
-            //TODO
-            //Section X
-
-            //Section Y
         }
 
-        //Currently used
-        //pengeinstitutter(id 373)
-        //forsikringer (id 3002)
-        //pension (id 356)
-        //realkredit (id 404)
-        //navne og job(id 344)
-        //klummer (413 ??)
-
-        //not used atm
-        //finansnyt: 353 (formentlig forsiden)
-        //Kapitalforvaltning: 3011
+        /// <summary>
+        /// D
+        /// </summary>
+        /// <param name="section"></param>
+        /// <returns></returns>
         public async Task<IList<Article>> GetArticlesForSection(Section section)
         {
             IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadSection(section.SectionContentUrl));
@@ -124,8 +115,6 @@ namespace Prototype.ModelControllers
 
             return articles;
         }
-
-
 
         public async Task<IList<Article>> GetRelatedArticlesAsync(Article article)
         {
