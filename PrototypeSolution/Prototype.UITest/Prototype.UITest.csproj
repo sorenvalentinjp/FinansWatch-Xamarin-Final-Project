@@ -53,8 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tests.cs" />
-    <Compile Include="AppInitializer.cs" />
+    <Compile Include="UnitTests\Models\ArticleTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -67,6 +66,12 @@
       <Project>{56EC61C6-1670-4DAD-BA8E-9F3FFA6276AC}</Project>
       <Name>Prototype.Android</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UnitTests\Database\" />
+    <Folder Include="UnitTests\ModelControllers\" />
+    <Folder Include="UnitTests\ViewModels\" />
+    <Folder Include="UnitTests\Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

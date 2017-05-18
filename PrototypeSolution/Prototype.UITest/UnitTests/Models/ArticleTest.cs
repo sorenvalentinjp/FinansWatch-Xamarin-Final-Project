@@ -8,7 +8,7 @@ using Xamarin.UITest.Queries;
 using Prototype.ModelControllers;
 using Prototype.Models;
 
-namespace Prototype.UITest
+namespace Prototype.UITest.UnitTests.Models
 {
     public class Tests
     {
@@ -23,7 +23,15 @@ namespace Prototype.UITest
         [Test]
         public async void ArticleControllerShouldReturnArticles()
         {
+            var articles = await stateController.RefreshFrontPage();
+            Assert.NotNull(articles);
             Assert.IsTrue(true);
+        }
+
+        [Test]
+        public  void test()
+        {
+
         }
     }
 }
