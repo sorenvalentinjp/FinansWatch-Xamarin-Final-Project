@@ -124,7 +124,7 @@ namespace Prototype.ViewModels
 
         public async void DownloadSectionArticles(Section section)
         {
-            section.Articles = await this._stateController.ArticleController.GetArticlesForSection(section);
+            section.Articles = await this._stateController.ArticleController.GetArticlesAndDetailsForSection(section);
             IList<ArticleViewModel> articleViewModels = new List<ArticleViewModel>();
             foreach (var article in section.Articles)
             {

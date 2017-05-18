@@ -60,11 +60,11 @@ namespace Prototype.ModelControllers
         }
 
         /// <summary>
-        /// D
+        /// This method downloads articles 
         /// </summary>
         /// <param name="section"></param>
         /// <returns></returns>
-        public async Task<IList<Article>> GetArticlesForSection(Section section)
+        public async Task<IList<Article>> GetArticlesAndDetailsForSection(Section section)
         {
             IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadSection(section.SectionContentUrl));
             GetArticleDetailsForCollection(articles);
