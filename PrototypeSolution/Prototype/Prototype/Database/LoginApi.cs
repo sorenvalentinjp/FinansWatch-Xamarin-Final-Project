@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Prototype.Database
 {
-    public class LoginApi
+    public class LoginApi : ILoginApi
     {
         private readonly HttpClient _client;
 
