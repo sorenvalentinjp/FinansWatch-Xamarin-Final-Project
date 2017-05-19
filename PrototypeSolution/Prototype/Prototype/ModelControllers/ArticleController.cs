@@ -25,7 +25,7 @@ namespace Prototype.ModelControllers
     /// </summary>
     public class ArticleController
     {
-        private readonly ContentApi _contentApi;
+        private readonly IContentApi _contentApi;
 
         //events
         public event Action SavedArticlesChangedEvent;
@@ -39,10 +39,14 @@ namespace Prototype.ModelControllers
         public ArticleController()
         {
             _contentApi = new ContentApi();
+            this.SavedArticles = new ObservableCollection<Article>();
+            this.Sections = new List<Section>();
+        }
 
-            //init collections
-            //this.FrontPageArticles = new List<Article>();
-            //this.LatestArticles = new List<Article>();
+        //Constructor for tests
+        public ArticleController(IContentApi contentApi)
+        {
+            _contentApi = contentApi;
             this.SavedArticles = new ObservableCollection<Article>();
             this.Sections = new List<Section>();
         }
@@ -60,15 +64,15 @@ namespace Prototype.ModelControllers
         /// Downloading details for the FrontPageArticles + LatestArticles + Sections and their details.
         /// </summary>
         /// <returns></returns>
-        public async void GetBucket2Async()
+        public async Task GetBucket2Async()
         {
             //Details for frontpage articles is downloaded async
-            GetArticleDetailsForCollection(this.Sections.FirstOrDefault().Articles);
+            GetArticleDetailsForCollectionAsync(this.Sections.FirstOrDefault().Articles);
 
             //Latest articles is downloaded and awaited. Afterwards the details are downloaded
             //This is to speed up the loading of LatestArticlesView
             IList<Article> latestArticles = await GetLatestArticlesAsync();
-            GetArticleDetailsForCollection(latestArticles);
+            GetArticleDetailsForCollectionAsync(latestArticles);
 
             //Downloading sections
             List<Task> taskList = new List<Task>();
@@ -76,7 +80,7 @@ namespace Prototype.ModelControllers
             for(int i = 1; i < this.Sections.Count; i++)
             {
                 Section currentSection = this.Sections[i];
-                currentSection.Articles = await GetArticlesAndDetailsForSection(currentSection);
+                currentSection.Articles = await GetArticlesAndDetailsForSectionAsync(currentSection);
             }
 
             await Task.WhenAll(taskList.ToArray());
@@ -87,10 +91,10 @@ namespace Prototype.ModelControllers
         /// </summary>
         /// <param name="section"></param>
         /// <returns></returns>
-        public async Task<IList<Article>> GetArticlesAndDetailsForSection(Section section)
+        public async Task<IList<Article>> GetArticlesAndDetailsForSectionAsync(Section section)
         {
             IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadSection(section.SectionContentUrl));
-            GetArticleDetailsForCollection(articles);
+            GetArticleDetailsForCollectionAsync(articles);
             return articles;
         }
 
@@ -98,7 +102,7 @@ namespace Prototype.ModelControllers
         /// Downloading all details for the collection of articles
         /// </summary>
         /// <param name="articles"></param>
-        public async void GetArticleDetailsForCollection(IList<Article> articles)
+        public async void GetArticleDetailsForCollectionAsync(IList<Article> articles)
         {
             foreach (var article in articles)
             {

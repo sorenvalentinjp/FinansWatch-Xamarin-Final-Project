@@ -88,6 +88,7 @@
   <ItemGroup>
     <Compile Include="UnitTests\Database\LoginApiTest.cs" />
     <Compile Include="UnitTests\Helpers\PropertyChangedAsserter.cs" />
+    <Compile Include="UnitTests\Helpers\ReadJsonFile.cs" />
     <Compile Include="UnitTests\ModelControllers\ArticleControllerTest.cs" />
     <Compile Include="UnitTests\ModelControllers\LoginControllerTest.cs" />
     <Compile Include="UnitTests\Models\ArticleTest.cs" />
@@ -100,7 +101,10 @@
     <Compile Include="UnitTests\Models\SubscriberTokenTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="JsonFiles\ContentApiArticle.json" />
+    <None Include="JsonFiles\ContentApiSection.json" />
     <None Include="packages.config" />
+    <None Include="JsonFiles\ContentApiLatestArticles.json" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
