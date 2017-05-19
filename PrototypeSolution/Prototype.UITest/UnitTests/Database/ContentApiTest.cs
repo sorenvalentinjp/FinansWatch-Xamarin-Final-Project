@@ -39,7 +39,7 @@ namespace Prototype.UITest.UnitTests.Database
         [Test]
         public async void DownloadJsonWithValidUri()
         {
-            //prepare
+            //arrange
             Uri uri = new Uri(_validFrontPageArticleUrl);
 
             //act
@@ -52,7 +52,7 @@ namespace Prototype.UITest.UnitTests.Database
         [Test]
         public async void DownloadJsonWithInvalidUri()
         {
-            //prepare
+            //arrange
             Uri uri = new Uri(_invalidUrl);
 
             //act
@@ -65,7 +65,7 @@ namespace Prototype.UITest.UnitTests.Database
         [Test]
         public async void DownloadLatestArticlesValid()
         {
-            //prepare
+            //arrange
             Uri uri = new Uri(_validLatestArticleUrl);
 
             //act
@@ -78,7 +78,7 @@ namespace Prototype.UITest.UnitTests.Database
         [Test]
         public async void DownloadLatestArticlesInvalid()
         {
-            //prepare
+            //arrange
             Uri uri = new Uri(_invalidUrl);
 
             //act
@@ -91,7 +91,7 @@ namespace Prototype.UITest.UnitTests.Database
         [Test]
         public async void DownloadSectionValid()
         {
-            //prepare
+            //arrange
             Uri uri = new Uri(_validSectionUrl);
 
             //act
@@ -104,7 +104,7 @@ namespace Prototype.UITest.UnitTests.Database
         [Test]
         public async void DownloadSectionInvalid()
         {
-            //prepare
+            //arrange
             Uri uri = new Uri(_invalidUrl);
 
             //act
@@ -117,7 +117,7 @@ namespace Prototype.UITest.UnitTests.Database
         [Test]
         public async void DownloadArticleValid()
         {
-            //prepare
+            //arrange
             Uri uri = new Uri(_validArticleUrl);
 
             //act
@@ -130,7 +130,7 @@ namespace Prototype.UITest.UnitTests.Database
         [Test]
         public async void DownloadArticleInvalid()
         {
-            //prepare
+            //arrange
             Uri uri = new Uri(_invalidUrl);
 
             //act

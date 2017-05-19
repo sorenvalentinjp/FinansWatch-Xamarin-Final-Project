@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Prototype.Database
 {
-    internal class LoginApi : ILoginApi
+    public class LoginApi
     {
         private readonly HttpClient _client;
 
@@ -84,6 +84,11 @@ namespace Prototype.Database
             {
                 request.Dispose(); //important to dispose the HttpRequestMessage for performance gain
             }
+        }
+
+        public void DisposeClient()
+        {
+            _client.Dispose();
         }
     }
 }

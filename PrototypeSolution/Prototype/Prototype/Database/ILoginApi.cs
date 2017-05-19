@@ -4,7 +4,7 @@ using Prototype.Models;
 
 namespace Prototype.Database
 {
-    internal interface ILoginApi
+    public interface ILoginApi
     {
         /// <summary>
         /// Downloads the token using an email and password
