@@ -63,16 +63,6 @@ namespace Prototype
 
         }
 
-        protected override void OnResume()
-        {
-            // Handle when your app resumes
-            if (Application.Current.Properties.ContainsKey("stateController"))
-            {
-                _stateController = LocalStorage.DeserializeFromJson<StateController>(Application.Current.Properties["stateController"].ToString());
-                _stateController.ArticleController.LocalStorageLoaded();
-            }
-        }
-
         public static bool IsSubscriberLoggedIn()
         {
             return _stateController.LoginController.Subscriber != null;

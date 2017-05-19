@@ -66,11 +66,10 @@ namespace Prototype.ViewModels
 
         public SectionViewModel(StateController stateController, Section section)
         {
+            IsRefreshing = true;
             _stateController = stateController;
             this.ArticleViewModels = new List<ArticleViewModel>();
             Section = section;
-
-            _stateController.ArticleController.Bucket2IsReady += BucketIsReady;
 
             DataTemplate = new SectionTemplateSelector(_stateController);
 

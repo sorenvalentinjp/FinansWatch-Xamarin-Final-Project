@@ -68,8 +68,6 @@ namespace Prototype.ViewModels
         {
             this._stateController = stateController;
             IsRefreshing = false;
-            this._stateController.ArticleController.IsRefreshingLatestArticles += IsRefreshingChanged;
-            this._stateController.ArticleController.Bucket2IsReady += Bucket2IsReady;
 
             this.DataTemplate = new DataTemplate(() => new DateTimeCell(stateController));
             this.DataTemplateGroupHeader = new DataTemplate(() => new DateTimeCellGroupHeader());
@@ -79,11 +77,11 @@ namespace Prototype.ViewModels
 
             if (_stateController.ArticleController.LatestArticles == null)
             {
-                _stateController.GetBucket2();
+                RefreshLatestArticles();
             }
             else
             {
-                Bucket2IsReady();
+                GroupArticles(_stateController.ArticleController.LatestArticles);
             }
 
 
@@ -117,9 +115,11 @@ namespace Prototype.ViewModels
             }
         }
 
-        private void Bucket2IsReady()
+        private void RefreshLatestArticles()
         {
+            IsRefreshing = true;
             GroupArticles(_stateController.ArticleController.LatestArticles);
+            IsRefreshing = false;
         }
 
         private void GroupArticles(IList<Article> articles)
@@ -146,11 +146,6 @@ namespace Prototype.ViewModels
             });
         }
 
-        private void IsRefreshingChanged(bool isRefreshing)
-        {
-            IsRefreshing = isRefreshing;
-        }
-
         /// <summary>
         /// When the user refreshed the view, this.articles is updated.
         /// </summary>
@@ -158,11 +153,7 @@ namespace Prototype.ViewModels
         {
             get
             {
-                return new Command(async () =>
-                {
-                    IList<Article> refreshedArticles = await _stateController.RefreshLatestArticles();
-                    GroupArticles(refreshedArticles);
-                });
+                return new Command(RefreshLatestArticles);
             }
         }
 
