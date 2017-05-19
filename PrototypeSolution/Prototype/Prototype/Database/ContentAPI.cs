@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 
 namespace Prototype.Database
 {
-    public class ContentApi
+    public class ContentApi : IContentApi
     {
         private readonly HttpClient _client;
 

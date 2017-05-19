@@ -25,7 +25,7 @@ namespace Prototype.ModelControllers
     /// </summary>
     public class ArticleController
     {
-        private readonly ContentApi _contentApi;
+        private readonly IContentApi _contentApi;
 
         //events
         public event Action SavedArticlesChangedEvent;
@@ -39,10 +39,14 @@ namespace Prototype.ModelControllers
         public ArticleController()
         {
             _contentApi = new ContentApi();
+            this.SavedArticles = new ObservableCollection<Article>();
+            this.Sections = new List<Section>();
+        }
 
-            //init collections
-            //this.FrontPageArticles = new List<Article>();
-            //this.LatestArticles = new List<Article>();
+        //Constructor for tests
+        public ArticleController(IContentApi contentApi)
+        {
+            _contentApi = contentApi;
             this.SavedArticles = new ObservableCollection<Article>();
             this.Sections = new List<Section>();
         }
@@ -60,7 +64,7 @@ namespace Prototype.ModelControllers
         /// Downloading details for the FrontPageArticles + LatestArticles + Sections and their details.
         /// </summary>
         /// <returns></returns>
-        public async void GetBucket2Async()
+        public async Task GetBucket2Async()
         {
             //Details for frontpage articles is downloaded async
             GetArticleDetailsForCollectionAsync(this.Sections.FirstOrDefault().Articles);

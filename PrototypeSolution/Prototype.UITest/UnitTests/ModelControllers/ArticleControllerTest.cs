@@ -3,23 +3,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Moq;
 using NUnit.Framework;
+using Prototype.Database;
 using Prototype.ModelControllers;
 using Prototype.Models;
 using Prototype.UITest.UnitTests.Helpers;
 
 namespace Prototype.UITest.UnitTests.ModelControllers
 {
+    [TestFixture]
     public class ArticleControllerTest
     {
         ArticleController _articleController;
-        [SetUp]
-        public void Setup()
+
+        Mock<IContentApi> _mock;
+
+        string _validSectionUrl;
+        string _validArticleUrl;
+
+        string _validArticleResponse;
+        string _validLatestArticlesResponse;
+        string _validSectionResponse;
+
+        [TestFixtureSetUp]
+        public void Init()
         {
-            _articleController = new ArticleController();
+            //setting up mock
+            _mock = new Mock<IContentApi>();
+            _validSectionUrl = "";
+            _validArticleUrl = "";
+
+            //setting up for fetching articles
+            _validArticleResponse = ReadJsonFile.GetFileFromDisk("/../../JsonFiles/ContentApiArticle.json");
+            _validSectionResponse = ReadJsonFile.GetFileFromDisk("/../../JsonFiles/ContentApiSection.json");
+            _validLatestArticlesResponse = ReadJsonFile.GetFileFromDisk("/../../JsonFiles/ContentApiLatestArticles.json");
+
+            //Setup methods
+            _mock.Setup(m => m.DownloadArticle(_validArticleUrl)).Returns(Task.FromResult(_validArticleResponse));
+            _mock.Setup(m => m.DownloadSection(_validSectionUrl)).Returns(Task.FromResult(_validSectionResponse));
+            _mock.Setup(m => m.DownloadLatestArticles()).Returns(Task.FromResult(_validLatestArticlesResponse));
+
+            //Create ArticleController with mock LoginApi
+            _articleController = new ArticleController(_mock.Object);
         }
 
- 
+
         [Test]
         public void SavedArticlesChangedEventShouldBeFired()
         {
@@ -36,12 +65,10 @@ namespace Prototype.UITest.UnitTests.ModelControllers
         }
 
         [Test]
-        public void GetBucket1FrontpageShouldReturnArticles()
+        public async void GetBucket1FrontpageShouldReturnArticles()
         {
-            //Prepare
-
             //Assert
-
+            Assert.IsNotEmpty(await _articleController.GetBucket1FrontPageAsync());
         }
 
         [Test]
