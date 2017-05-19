@@ -15,7 +15,7 @@ namespace Prototype.UITest.UnitTests.Database
         [Test]
         public void SerializeToJson()
         {
-            //prepare
+            //arrange
             StateController stateController = new StateController();
 
             //act
@@ -28,7 +28,7 @@ namespace Prototype.UITest.UnitTests.Database
         [Test]
         public void DeserializeFromJson()
         {
-            //prepare
+            //arrange
             string str = "serialize me";
             string strSerialized = LocalStorage.SerializeToJson(str);
 

@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UnitTests\Database\LoginApiTest.cs" />
     <Compile Include="UnitTests\Helpers\PropertyChangedAsserter.cs" />
     <Compile Include="UnitTests\Models\ArticleTest.cs" />
     <Compile Include="UnitTests\Models\GroupingTest.cs" />
