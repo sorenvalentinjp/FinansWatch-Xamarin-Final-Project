@@ -89,6 +89,7 @@
     <Compile Include="UnitTests\Database\LoginApiTest.cs" />
     <Compile Include="UnitTests\Helpers\PropertyChangedAsserter.cs" />
     <Compile Include="UnitTests\ModelControllers\ArticleControllerTest.cs" />
+    <Compile Include="UnitTests\ModelControllers\LoginControllerTest.cs" />
     <Compile Include="UnitTests\Models\ArticleTest.cs" />
     <Compile Include="UnitTests\Models\GroupingTest.cs" />
     <Compile Include="UnitTests\Models\ImageTest.cs" />
