@@ -24,15 +24,15 @@ namespace Prototype.UITest.UnitTests.ModelControllers
 
         string _validArticleResponse;
         string _validLatestArticlesResponse;
-        string _validSectionResponse;
+        string _validSectionResponse;        
 
         [TestFixtureSetUp]
         public void Init()
         {
             //setting up mock
             _mock = new Mock<IContentApi>();
-            _validSectionUrl = "";
-            _validArticleUrl = "";
+            _validSectionUrl = "https://content.watchmedier.dk/api/finanswatch/content/latest?hoursago=500&max=30&section=fw_finansnyt_penge";
+            _validArticleUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291";
 
             //setting up for fetching articles
             _validArticleResponse = ReadJsonFile.GetFileFromDisk("/../../JsonFiles/ContentApiArticle.json");
@@ -40,12 +40,27 @@ namespace Prototype.UITest.UnitTests.ModelControllers
             _validLatestArticlesResponse = ReadJsonFile.GetFileFromDisk("/../../JsonFiles/ContentApiLatestArticles.json");
 
             //Setup methods
-            _mock.Setup(m => m.DownloadArticle(_validArticleUrl)).Returns(Task.FromResult(_validArticleResponse));
+            _mock.Setup(m => m.DownloadArticle(It.IsAny<string>())).Returns(Task.FromResult(_validArticleResponse));
             _mock.Setup(m => m.DownloadSection(_validSectionUrl)).Returns(Task.FromResult(_validSectionResponse));
             _mock.Setup(m => m.DownloadLatestArticles()).Returns(Task.FromResult(_validLatestArticlesResponse));
 
+
+        }
+
+        [SetUp]
+        public void Setup()
+        {
             //Create ArticleController with mock LoginApi
-            _articleController = new ArticleController(_mock.Object);
+            IList<Section> sections = new List<Section>();
+            sections.Add(new Section("FORSIDE", _validSectionUrl));
+            sections.Add(new Section("PENGEINSTITUTTER", _validSectionUrl));
+            sections.Add(new Section("FORSIKRINGER", _validSectionUrl));
+            sections.Add(new Section("PENSION", _validSectionUrl));
+            sections.Add(new Section("REALKREDIT", _validSectionUrl));
+            sections.Add(new Section("NAVNE OG JOB", _validSectionUrl));
+            sections.Add(new Section("KLUMMER", _validSectionUrl));
+
+            _articleController = new ArticleController(_mock.Object, sections);
         }
 
 
@@ -67,61 +82,83 @@ namespace Prototype.UITest.UnitTests.ModelControllers
         [Test]
         public async void GetBucket1FrontpageShouldReturnArticles()
         {
+            //Prepare
+            IList<Article> articles = new List<Article>();
+
+            //Act
+            articles = await _articleController.GetBucket1FrontPageAsync();
+
             //Assert
-            Assert.IsNotEmpty(await _articleController.GetBucket1FrontPageAsync());
+            Assert.IsNotEmpty(articles);
         }
 
         [Test]
-        public void GetBucket2ReturnArticles()
+        public async void GetBucket2ShouldPopulateLatestArticlesAndAllSections()
         {
             //Prepare
+            await  _articleController.GetBucket1FrontPageAsync();
+
+            //Act
+            await _articleController.GetBucket2Async();
 
             //Assert
-
+            foreach (var section in _articleController.Sections)
+            {
+                Assert.IsNotEmpty(section.Articles);
+            }
+            Assert.IsNotEmpty(_articleController.LatestArticles);
         }
 
         [Test]
-        public void GetBucket2ShouldPopulateLatestArticlesAndAllSections()
+        public async void GetArticlesAndDetailsForSectionShouldReturnSectionWithArticles()
         {
-            //Prepare
-
+            //Act
+            IList<Article> articles = await _articleController.GetArticlesAndDetailsForSectionAsync(_articleController.Sections.FirstOrDefault());
+            
             //Assert
+            Assert.IsNotEmpty(articles);
+            Assert.IsNotNull(articles.FirstOrDefault().bodyText);
 
-        }
-
-        [Test]
-        public void GetArticlesAndDetailsForSectionShouldReturnSectionWithArticles()
-        {
-            //Prepare
-
-            //Assert
-
-        }
-
-        [Test]
-        public void GetArticleDetailsForCollectionShouldReturnArticles()
-        {
-            //Prepare
-
-            //Assert
-
-        }
-
-        [Test]
-        public void GetLatestArticlesAsyncShouldReturnLatestArticles()
-        {
-            //Prepare
-
-            //Assert
 
         }
 
         [Test]
-        public void GetRelatedArticlesAsyncShouldReturnRelatedArticles()
+        public async void GetArticleDetailsForCollectionShouldReturnArticles()
         {
             //Prepare
+            IList<Article> articles = await _articleController.GetSectionArticlesAsync(_articleController.Sections.FirstOrDefault());
+
+            //Act
+            articles = await _articleController.GetArticleDetailsForCollectionAsync(articles);
 
             //Assert
+            Assert.IsNotEmpty(articles);
+            Assert.IsNotNull(articles.FirstOrDefault().bodyText);
+
+        }
+
+        [Test]
+        public async void GetLatestArticlesAsyncShouldReturnLatestArticles()
+        {
+            //Prepare
+            IList<Article> articles = await _articleController.GetLatestArticlesAsync();
+
+            //Assert
+            Assert.IsNotEmpty(articles);
+        }
+
+        [Test]
+        public async void GetRelatedArticlesAsyncShouldReturnRelatedArticles()
+        {
+            //Prepare
+            Article article = new Article {contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291" };
+            article = await _articleController.GetArticleDetailsAsync(article);
+
+            //Act
+            IList<Article> relatedArticles = await _articleController.GetRelatedArticlesAsync(article);
+
+            //Assert
+            Assert.IsNotEmpty(relatedArticles);
 
         }
 

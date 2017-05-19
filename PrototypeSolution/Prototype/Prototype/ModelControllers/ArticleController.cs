@@ -44,11 +44,11 @@ namespace Prototype.ModelControllers
         }
 
         //Constructor for tests
-        public ArticleController(IContentApi contentApi)
+        public ArticleController(IContentApi contentApi, IList<Section> sections)
         {
             _contentApi = contentApi;
             this.SavedArticles = new ObservableCollection<Article>();
-            this.Sections = new List<Section>();
+            this.Sections = sections;
         }
 
         /// <summary>
@@ -56,8 +56,17 @@ namespace Prototype.ModelControllers
         /// </summary>
         public async Task<IList<Article>> GetBucket1FrontPageAsync()
         {
-            this.Sections.FirstOrDefault().Articles = await GetFrontPageArticlesAsync();
-            return this.Sections.FirstOrDefault().Articles;
+
+            Section frontPageSection = this.Sections.FirstOrDefault();
+            if (frontPageSection != null)
+            {
+                frontPageSection.Articles = await GetSectionArticlesAsync(frontPageSection);
+                return frontPageSection.Articles;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -67,7 +76,11 @@ namespace Prototype.ModelControllers
         public async Task GetBucket2Async()
         {
             //Details for frontpage articles is downloaded async
-            GetArticleDetailsForCollectionAsync(this.Sections.FirstOrDefault().Articles);
+            Section frontPageSection = this.Sections.FirstOrDefault();
+            if (frontPageSection != null)
+            {
+                GetArticleDetailsForCollectionAsync(frontPageSection.Articles);
+            }            
 
             //Latest articles is downloaded and awaited. Afterwards the details are downloaded
             //This is to speed up the loading of LatestArticlesView
@@ -75,15 +88,11 @@ namespace Prototype.ModelControllers
             GetArticleDetailsForCollectionAsync(latestArticles);
 
             //Downloading sections
-            List<Task> taskList = new List<Task>();
-
             for(int i = 1; i < this.Sections.Count; i++)
             {
                 Section currentSection = this.Sections[i];
                 currentSection.Articles = await GetArticlesAndDetailsForSectionAsync(currentSection);
             }
-
-            await Task.WhenAll(taskList.ToArray());
         }
 
         /// <summary>
@@ -93,7 +102,8 @@ namespace Prototype.ModelControllers
         /// <returns></returns>
         public async Task<IList<Article>> GetArticlesAndDetailsForSectionAsync(Section section)
         {
-            IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadSection(section.SectionContentUrl));
+            string json = await _contentApi.DownloadSection(section.SectionContentUrl);
+            IList<Article> articles = DeserializeArticlesFromJson(json);
             GetArticleDetailsForCollectionAsync(articles);
             return articles;
         }
@@ -102,12 +112,13 @@ namespace Prototype.ModelControllers
         /// Downloading all details for the collection of articles
         /// </summary>
         /// <param name="articles"></param>
-        public async void GetArticleDetailsForCollectionAsync(IList<Article> articles)
+        public async Task<IList<Article>> GetArticleDetailsForCollectionAsync(IList<Article> articles)
         {
             foreach (var article in articles)
             {
                 await GetArticleDetailsAsync(article);
             }
+            return articles;
         }
 
         public async Task<IList<Article>> GetLatestArticlesAsync()
@@ -116,17 +127,15 @@ namespace Prototype.ModelControllers
             return this.LatestArticles;
         }
 
-        public async Task<IList<Article>> GetFrontPageArticlesAsync()
+        public async Task<IList<Article>> GetSectionArticlesAsync(Section section)
         {
 
-            IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadSection(this.Sections[0].SectionContentUrl));
+            IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadSection(section.SectionContentUrl));
 
             foreach (var article in articles)
             {
                 PrepareArticle(article);
-            }
-           
-
+            }            
             return articles;
         }
 
@@ -235,8 +244,11 @@ namespace Prototype.ModelControllers
         private Article StripArticle(Article article)
         {
             article.bodyText = StripRelatedArticles(article.bodyText);
-            article.teasers.FRONTPAGE = StripAllHtmlParagraphTags(article.teasers.FRONTPAGE);
-            article.teasers.DEFAULT = StripAllHtmlParagraphTags(article.teasers.DEFAULT);
+            if (article.teasers != null)
+            {
+                article.teasers.FRONTPAGE = StripAllHtmlParagraphTags(article.teasers.FRONTPAGE);
+                article.teasers.DEFAULT = StripAllHtmlParagraphTags(article.teasers.DEFAULT);
+            }
             return article;
         }
 
