@@ -77,7 +77,7 @@ namespace Prototype.ViewModels
 
             if (_stateController.ArticleController.LatestArticles == null)
             {
-                RefreshLatestArticles();
+                RefreshLatestArticlesAsync();
             }
             else
             {
@@ -115,10 +115,10 @@ namespace Prototype.ViewModels
             }
         }
 
-        private void RefreshLatestArticles()
+        private async void RefreshLatestArticlesAsync()
         {
-            IsRefreshing = true;
-            GroupArticles(_stateController.ArticleController.LatestArticles);
+            IsRefreshing = true;            
+            GroupArticles(await _stateController.ArticleController.GetLatestArticlesAsync());
             IsRefreshing = false;
         }
 
@@ -153,7 +153,7 @@ namespace Prototype.ViewModels
         {
             get
             {
-                return new Command(RefreshLatestArticles);
+                return new Command(RefreshLatestArticlesAsync);
             }
         }
 

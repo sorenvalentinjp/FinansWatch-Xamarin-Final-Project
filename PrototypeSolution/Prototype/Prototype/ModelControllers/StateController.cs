@@ -44,13 +44,13 @@ namespace Prototype.ModelControllers
         public async Task<IList<Article>> RefreshLatestArticles()
         {
             await this.ArticleController.GetLatestArticlesAsync();
-            this.ArticleController.GetArticleDetailsForCollection(this.ArticleController.LatestArticles);
+            this.ArticleController.GetArticleDetailsForCollectionAsync(this.ArticleController.LatestArticles);
             return this.ArticleController.LatestArticles;
         }
 
         public async Task<Section> GetArticlesForSection(Section section)
         {
-            section.Articles = await this.ArticleController.GetArticlesAndDetailsForSection(section);
+            section.Articles = await this.ArticleController.GetArticlesAndDetailsForSectionAsync(section);
             return section;
         } 
 
