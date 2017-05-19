@@ -29,12 +29,12 @@ namespace Prototype.ModelControllers
 
         public async Task<IList<Article>> GetBucket1()
         {
-            return await this.ArticleController.GetBucket1FrontPage();
+            return await this.ArticleController.GetBucket1FrontPageAsync();
         }
 
-        public async void GetBucket2()
+        public void GetBucket2()
         {
-            await this.ArticleController.GetBucket2();
+            this.ArticleController.GetBucket2Async();
         }
 
         /// <summary>

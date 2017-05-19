@@ -50,7 +50,7 @@ namespace Prototype.ModelControllers
         /// <summary>
         /// Downloads all FrontPageArticles WITHOUT including their details. This is to speed up the loading/refreshing of the FrontPageView.
         /// </summary>
-        public async Task<IList<Article>> GetBucket1FrontPage()
+        public async Task<IList<Article>> GetBucket1FrontPageAsync()
         {
             this.Sections.FirstOrDefault().Articles = await GetFrontPageArticlesAsync();
             return this.Sections.FirstOrDefault().Articles;
@@ -60,7 +60,7 @@ namespace Prototype.ModelControllers
         /// Downloading details for the FrontPageArticles + LatestArticles + Sections and their details.
         /// </summary>
         /// <returns></returns>
-        public async Task<IList<Article>> GetBucket2()
+        public async void GetBucket2Async()
         {
             //Details for frontpage articles is downloaded async
             GetArticleDetailsForCollection(this.Sections.FirstOrDefault().Articles);
@@ -80,8 +80,6 @@ namespace Prototype.ModelControllers
             }
 
             await Task.WhenAll(taskList.ToArray());
-
-            return latestArticles;
         }
 
         /// <summary>
