@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Prototype.Database
 {
-    internal class LoginApi
+    internal class LoginApi : ILoginApi
     {
         private readonly HttpClient _client;
 
@@ -66,7 +66,7 @@ namespace Prototype.Database
         /// </summary>
         /// <param name="request">The HttpRequestMessage</param>
         /// <returns>The result as json string</returns>
-        private async Task<string> DownloadJson(HttpRequestMessage request)
+        public async Task<string> DownloadJson(HttpRequestMessage request)
         {
             try
             {
