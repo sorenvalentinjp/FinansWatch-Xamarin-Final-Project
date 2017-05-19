@@ -28,11 +28,6 @@ namespace Prototype.ModelControllers
         private readonly ContentApi _contentApi;
 
         //events
-        public event Action<bool> IsRefreshingFrontPage;
-        public event Action<bool> IsRefreshingLatestArticles;
-
-        public event Action<IList<Article>> Bucket1IsReady;
-        public event Action Bucket2IsReady;
         public event Action SavedArticlesChangedEvent;
 
         //collections of articles
@@ -52,19 +47,12 @@ namespace Prototype.ModelControllers
             this.Sections = new List<Section>();
         }
 
-        public void LocalStorageLoaded()
-        {
-            this.Bucket1IsReady?.Invoke(this.Sections.FirstOrDefault().Articles);
-            this.Bucket2IsReady?.Invoke();
-        }
-
         /// <summary>
         /// Downloads all FrontPageArticles WITHOUT including their details. This is to speed up the loading/refreshing of the FrontPageView.
         /// </summary>
         public async Task<IList<Article>> GetBucket1FrontPage()
         {
             this.Sections.FirstOrDefault().Articles = await GetFrontPageArticlesAsync();
-            Bucket1IsReady?.Invoke(this.Sections.FirstOrDefault().Articles);
             return this.Sections.FirstOrDefault().Articles;
         }
 
@@ -92,8 +80,6 @@ namespace Prototype.ModelControllers
             }
 
             await Task.WhenAll(taskList.ToArray());
-
-            Bucket2IsReady?.Invoke();
 
             return latestArticles;
         }
@@ -124,18 +110,12 @@ namespace Prototype.ModelControllers
 
         public async Task<IList<Article>> GetLatestArticlesAsync()
         {
-            IsRefreshingLatestArticles?.Invoke(true);
-
             this.LatestArticles = DeserializeArticlesFromJson(await _contentApi.DownloadLatestArticles());
-
-            IsRefreshingLatestArticles?.Invoke(false);
-
             return this.LatestArticles;
         }
 
         public async Task<IList<Article>> GetFrontPageArticlesAsync()
         {
-            IsRefreshingFrontPage?.Invoke(true);
 
             IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadSection(this.Sections[0].SectionContentUrl));
 
@@ -144,7 +124,6 @@ namespace Prototype.ModelControllers
                 PrepareArticle(article);
             }
            
-            IsRefreshingFrontPage?.Invoke(false);
 
             return articles;
         }

@@ -88,6 +88,7 @@
   <ItemGroup>
     <Compile Include="UnitTests\Database\LoginApiTest.cs" />
     <Compile Include="UnitTests\Helpers\PropertyChangedAsserter.cs" />
+    <Compile Include="UnitTests\ModelControllers\ArticleControllerTest.cs" />
     <Compile Include="UnitTests\Models\ArticleTest.cs" />
     <Compile Include="UnitTests\Models\GroupingTest.cs" />
     <Compile Include="UnitTests\Models\ImageTest.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="UnitTests\Models\SubscriberTest.cs" />
     <Compile Include="UnitTests\Database\ContentApiTest.cs" />
     <Compile Include="UnitTests\Database\LocalStorageTest.cs" />
+    <Compile Include="UnitTests\Models\SubscriberTokenTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -103,7 +105,6 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UnitTests\ModelControllers\" />
     <Folder Include="UnitTests\ViewModels\" />
     <Folder Include="UnitTests\Views\" />
   </ItemGroup>
