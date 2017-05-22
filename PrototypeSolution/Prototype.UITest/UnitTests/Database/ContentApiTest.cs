@@ -40,7 +40,7 @@ namespace Prototype.UITest.UnitTests.Database
         }
 
         [Test]
-        public async void DownloadJsonWithValidUri()
+        public async void DownloadJsonWithValidUriShouldReturnNotNullOrEmptyResult()
         {
             //arrange
             Uri uri = new Uri(_validFrontPageArticleUrl);
@@ -53,7 +53,7 @@ namespace Prototype.UITest.UnitTests.Database
         }
 
         [Test]
-        public async void DownloadJsonWithInvalidUri()
+        public async void DownloadJsonWithInvalidUriShouldReturnNullOrEmptyResult()
         {
             //arrange
             Uri uri = new Uri(_invalidUrl);
@@ -66,7 +66,7 @@ namespace Prototype.UITest.UnitTests.Database
         }
 
         [Test]
-        public async void DownloadLatestArticlesValid()
+        public async void DownloadLatestArticlesValidShouldReturnNotNullOrEmptyResult()
         {
             //arrange
             Uri uri = new Uri(_validLatestArticleUrl);
@@ -79,7 +79,7 @@ namespace Prototype.UITest.UnitTests.Database
         }
 
         [Test]
-        public async void DownloadLatestArticlesInvalid()
+        public async void DownloadLatestArticlesInvalidShouldReturnNullOrEmptyResult()
         {
             //arrange
             Uri uri = new Uri(_invalidUrl);
@@ -92,7 +92,7 @@ namespace Prototype.UITest.UnitTests.Database
         }
 
         [Test]
-        public async void DownloadSectionValid()
+        public async void DownloadSectionValidShouldReturnNotNullOrEmptyResult()
         {
             //arrange
             Uri uri = new Uri(_validSectionUrl);
@@ -105,7 +105,7 @@ namespace Prototype.UITest.UnitTests.Database
         }
 
         [Test]
-        public async void DownloadSectionInvalid()
+        public async void DownloadSectionInvalidShouldReturnNullOrEmptyResult()
         {
             //arrange
             Uri uri = new Uri(_invalidUrl);
@@ -118,7 +118,7 @@ namespace Prototype.UITest.UnitTests.Database
         }
 
         [Test]
-        public async void DownloadArticleValid()
+        public async void DownloadArticleValidShouldNotReturnNullOrEmptyResult()
         {
             //arrange
             Uri uri = new Uri(_validArticleUrl);
@@ -131,7 +131,7 @@ namespace Prototype.UITest.UnitTests.Database
         }
 
         [Test]
-        public async void DownloadArticleInvalid()
+        public async void DownloadArticleInvalidShouldReturnNullOrEmptyResult()
         {
             //arrange
             Uri uri = new Uri(_invalidUrl);

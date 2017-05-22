@@ -37,7 +37,7 @@ namespace Prototype.UITest.UnitTests.ModelControllers
      }
 
         [Test]
-        public void LoginAsyncValidToken()
+        public void LoginAsyncValidTokenShouldRaiseLoginEventSucceeded()
         {
             //arrange
             bool loginEventSuccededIsInvoked = false;
@@ -54,7 +54,7 @@ namespace Prototype.UITest.UnitTests.ModelControllers
         }
 
         [Test]
-        public void LoginAsyncInvalidToken()
+        public void LoginAsyncInvalidTokenShouldRaiseLoginEventErrorOccured()
         {
             //arrange
             bool loginEventSuccededIsInvoked = false;
@@ -71,7 +71,7 @@ namespace Prototype.UITest.UnitTests.ModelControllers
         }
 
         [Test]
-        public void LogoutEventAction()
+        public void LogoutEventActionShouldRaiseLoginEventSucceeded()
         {
             //arrange
             bool loginEventSuccededIsInvoked = false;
