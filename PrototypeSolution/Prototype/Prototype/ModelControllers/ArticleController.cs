@@ -32,7 +32,6 @@ namespace Prototype.ModelControllers
         public event Action SavedArticlesChangedEvent;
 
         //collections of articles
-        //public IList<Article> FrontPageArticles;
         public IList<Article> LatestArticles;
         public ObservableCollection<Article> SavedArticles;
         public IList<Section> Sections;
@@ -44,7 +43,9 @@ namespace Prototype.ModelControllers
             this.Sections = new List<Section>();
         }
 
-        //Constructor for tests
+        /// <summary>
+        /// Constructor for tests only
+        /// </summary>
         public ArticleController(IContentApi contentApi, IList<Section> sections)
         {
             _contentApi = contentApi;
@@ -122,15 +123,23 @@ namespace Prototype.ModelControllers
             return articles;
         }
 
+        /// <summary>
+        /// Downloading latest articles without their details
+        /// </summary>
+        /// <returns></returns>
         public async Task<IList<Article>> GetLatestArticlesAsync()
         {
             this.LatestArticles = DeserializeArticlesFromJson(await _contentApi.DownloadLatestArticles());
             return this.LatestArticles;
         }
 
+        /// <summary>
+        /// Downloading a sections articles without the details.
+        /// </summary>
+        /// <param name="section"></param>
+        /// <returns></returns>
         public async Task<IList<Article>> GetSectionArticlesAsync(Section section)
         {
-
             IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadSection(section.SectionContentUrl));
 
             foreach (var article in articles)
@@ -140,6 +149,11 @@ namespace Prototype.ModelControllers
             return articles;
         }
 
+        /// <summary>
+        /// Downloading all related articles for an article
+        /// </summary>
+        /// <param name="article"></param>
+        /// <returns></returns>
         public async Task<IList<Article>> GetRelatedArticlesAsync(Article article)
         {
             IList<Article> newRelatedArticles = new List<Article>();
@@ -155,6 +169,11 @@ namespace Prototype.ModelControllers
             return newRelatedArticles;
         }
 
+        /// <summary>
+        /// Downloading the details for an article
+        /// </summary>
+        /// <param name="article"></param>
+        /// <returns></returns>
         public async Task<Article> GetArticleDetailsAsync(Article article)
         {
             Article detailedArticle = DeserializeArticle(await _contentApi.DownloadArticle(article.contentUrl));
@@ -164,6 +183,11 @@ namespace Prototype.ModelControllers
             return article;
         }
 
+        /// <summary>
+        /// Downloading the details for an article using its contentUrl
+        /// </summary>
+        /// <param name="contentUrl"></param>
+        /// <returns></returns>
         public async Task<Article> GetArticleDetailsAsync(string contentUrl)
         {
             return DeserializeArticle(await _contentApi.DownloadArticle(contentUrl));
@@ -193,7 +217,11 @@ namespace Prototype.ModelControllers
             }
         }
 
-        //Deserialize methods
+        /// <summary>
+        /// Deserializes a list of articles from json
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
         private IList<Article> DeserializeArticlesFromJson(string json)
         {
             IList<Article> articles = JsonConvert.DeserializeObject<List<Article>>(json);
@@ -219,7 +247,11 @@ namespace Prototype.ModelControllers
             return articles;
         }
 
-
+        /// <summary>
+        /// Deserializes a single article from json
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
         public Article DeserializeArticle(string json)
         {        
             var article = JsonConvert.DeserializeObject<Article>(json);
@@ -230,7 +262,11 @@ namespace Prototype.ModelControllers
 
         }
 
-        //Helper methods
+        /// <summary>
+        /// Prepares the an article so it looks good in the app.
+        /// </summary>
+        /// <param name="article"></param>
+        /// <returns></returns>
         public Article PrepareArticle(Article article)
         {
             article = ArticleStripper.StripArticleBodyText(article);
@@ -243,7 +279,5 @@ namespace Prototype.ModelControllers
 
             return article;
         }
-
-
     }
 }
