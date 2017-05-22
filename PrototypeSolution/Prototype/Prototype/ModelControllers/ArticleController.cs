@@ -157,16 +157,24 @@ namespace Prototype.ModelControllers
         public async Task<IList<Article>> GetRelatedArticlesAsync(Article article)
         {
             IList<Article> newRelatedArticles = new List<Article>();
-            foreach (var relatedArticle in article.relatedArticles)
+            try
             {
-                var newRelatedArticle = await GetArticleDetailsAsync(relatedArticle.url);
-                //We reuse the url from the related article in order to make equals work
-                newRelatedArticle.contentUrl = relatedArticle.url;
-                    
-                newRelatedArticles.Add(newRelatedArticle);
+                
+                foreach (var relatedArticle in article.relatedArticles)
+                {
+                    var newRelatedArticle = await GetArticleDetailsAsync(relatedArticle.url);
+                    //We reuse the url from the related article in order to make equals work
+                    newRelatedArticle.contentUrl = relatedArticle.url;
+
+                    newRelatedArticles.Add(newRelatedArticle);
+                }
+                return newRelatedArticles;
             }
-            
-            return newRelatedArticles;
+            catch (Exception e)
+            {
+                Debug.Print("Could not download related articles: " + e.Message);
+                return newRelatedArticles;
+            }
         }
 
         /// <summary>
@@ -224,7 +232,16 @@ namespace Prototype.ModelControllers
         /// <returns></returns>
         private IList<Article> DeserializeArticlesFromJson(string json)
         {
-            IList<Article> articles = JsonConvert.DeserializeObject<List<Article>>(json);
+            IList<Article> articles = new List<Article>();
+            try
+            {
+                articles = JsonConvert.DeserializeObject<List<Article>>(json);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Could not deserialize articles: " + e.Message);
+                return articles;
+            }
 
             foreach (var article in articles)
             {
@@ -253,13 +270,20 @@ namespace Prototype.ModelControllers
         /// <param name="json"></param>
         /// <returns></returns>
         public Article DeserializeArticle(string json)
-        {        
-            var article = JsonConvert.DeserializeObject<Article>(json);
+        {
+            try
+            {
+                var article = JsonConvert.DeserializeObject<Article>(json);
 
-            article = PrepareArticle(article);
+                article = PrepareArticle(article);
 
-            return article;
-
+                return article;
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Could not deserialize article: " + e.Message);
+                return null;
+            }
         }
 
         /// <summary>

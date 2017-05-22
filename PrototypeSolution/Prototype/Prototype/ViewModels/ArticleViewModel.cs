@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Prototype.ModelControllers;
 using Prototype.Models;
@@ -72,7 +73,7 @@ namespace Prototype.ViewModels
 
         public ArticleViewModel(StateController stateController, Article articleToDisplay)
         {
-            this._stateController = stateController;       
+            this._stateController = stateController;
 
             Article = articleToDisplay;
 
@@ -91,7 +92,7 @@ namespace Prototype.ViewModels
             {
                 Article.IsSaved = false;
             }
-                
+
         }
 
         /// <summary>
@@ -112,37 +113,46 @@ namespace Prototype.ViewModels
             var locked = Article.locked;
             if (locked && SubscriberHasAccess)
             {
-                    //If the subscriber is logged in, has access and the article is also locked, show the unlocked icon
-                    UnlockedIndicatorImageVisible = true;
-                    LockedIndicatorImageVisible = false;
-                    SubscriberHasAccess = true;
+                //If the subscriber is logged in, has access and the article is also locked, show the unlocked icon
+                UnlockedIndicatorImageVisible = true;
+                LockedIndicatorImageVisible = false;
+                SubscriberHasAccess = true;
             }
-            else if(locked)
+            else if (locked)
             {
                 //If the article is locked and subscriber is not logged in or does not have access, show the locked icon
                 LockedIndicatorImageVisible = true;
                 UnlockedIndicatorImageVisible = false;
                 SubscriberHasAccess = false;
 
-            } else
+            }
+            else
             {
                 //If article is not locked, show no icons
                 LockedIndicatorImageVisible = false;
                 UnlockedIndicatorImageVisible = false;
                 SubscriberHasAccess = true;
             }
-            
+
             return locked;
         }
 
         public async Task<ArticleViewModel> GetArticleDetails()
         {
-            if (Article.bodyText == "")
+            try
             {
-                Article = await this._stateController.GetArticleDetails(Article);
+                if (Article.bodyText == "")
+                {
+                    Article = await this._stateController.GetArticleDetails(Article);
+                }
             }
+            catch (Exception e) { }
 
-            Article.relatedDetailedArticles = await this._stateController.GetRelatedArticles(Article);
+            try
+            {
+                Article.relatedDetailedArticles = await this._stateController.GetRelatedArticles(Article);
+            }
+            catch (Exception e) { }
 
             return this;
         }

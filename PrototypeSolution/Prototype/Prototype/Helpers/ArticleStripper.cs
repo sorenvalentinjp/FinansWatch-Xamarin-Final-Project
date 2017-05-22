@@ -10,7 +10,10 @@ namespace Prototype.Helpers
     {
         public static Article StripArticleBodyText(Article article)
         {
-            article.bodyText = StripRelatedArticles(article.bodyText);
+            if (!string.IsNullOrEmpty(article.bodyText))
+            {
+                article.bodyText = StripRelatedArticles(article.bodyText);
+            }
             return article;
         }
 

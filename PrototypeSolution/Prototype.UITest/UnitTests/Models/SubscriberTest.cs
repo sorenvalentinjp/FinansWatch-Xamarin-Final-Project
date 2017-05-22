@@ -13,7 +13,7 @@ namespace Prototype.UITest.UnitTests.Models
         [Test]
         public void SubscriberShouldHaveAccesToSite()
         {
-            //arrange
+            //prepare
             var subscriber = new Subscriber();
             var featureAccessList = new FeatureAccessList { access = true, code = "FINANSWATCH" };
             subscriber.featureAccessList = new List<FeatureAccessList>();
@@ -29,7 +29,7 @@ namespace Prototype.UITest.UnitTests.Models
         [Test]
         public void SubscriberShouldNotHaveAccesToSite()
         {
-            //arrange
+            //prepare
             var subscriber = new Subscriber();
             var featureAccessList = new FeatureAccessList { access = true, code = "falsesite" };
             subscriber.featureAccessList = new List<FeatureAccessList>();
@@ -45,7 +45,7 @@ namespace Prototype.UITest.UnitTests.Models
         [Test]
         public void SubscriberShouldNotHaveAccesToSite2()
         {
-            //arrange
+            //prepare
             var subscriber = new Subscriber();
             var featureAccessList = new FeatureAccessList { access = false, code = "finanswatch" };
             subscriber.featureAccessList = new List<FeatureAccessList>();

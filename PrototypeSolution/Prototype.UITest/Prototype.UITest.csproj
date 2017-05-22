@@ -91,6 +91,7 @@
     <Compile Include="Mocks\LoginApiMockGenerator.cs" />
     <Compile Include="Mocks\StateControllerMockGenerator.cs" />
     <Compile Include="UnitTests\ViewModels\AllArticlesViewModelTest.cs" />
+    <Compile Include="UnitTests\ViewModels\ArticleViewModelTest.cs" />
     <None Include="JsonFiles\LoginApi_InvalidTokenResponse.json" />
     <Compile Include="UnitTests\Database\LoginApiTest.cs" />
     <Compile Include="UnitTests\Helpers\ArticleStripperTest.cs" />
