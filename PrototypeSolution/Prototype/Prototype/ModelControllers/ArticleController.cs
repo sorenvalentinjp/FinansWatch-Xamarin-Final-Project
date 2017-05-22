@@ -15,6 +15,7 @@ using Newtonsoft.Json.Converters;
 using Prototype.ViewModels;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
+using Prototype.Helpers;
 
 namespace Prototype.ModelControllers
 {
@@ -180,14 +181,14 @@ namespace Prototype.ModelControllers
             {
                 article.IsSaved = true;
                 this.SavedArticles.Add(article);
-                this.SavedArticlesChangedEvent();
+                this.SavedArticlesChangedEvent?.Invoke();
                 return true;
             }
             else
             {
                 article.IsSaved = false;
                 this.SavedArticles.Remove(article);
-                this.SavedArticlesChangedEvent();
+                this.SavedArticlesChangedEvent?.Invoke();
                 return false;
             }
         }
@@ -195,12 +196,12 @@ namespace Prototype.ModelControllers
         //Deserialize methods
         private IList<Article> DeserializeArticlesFromJson(string json)
         {
-            //var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = "dd-MM-yyyy HH:mm" };
             IList<Article> articles = JsonConvert.DeserializeObject<List<Article>>(json);
 
             foreach (var article in articles)
             {
-                StripArticle(article);
+                //Strip teasers to remove unwanted html tags
+                ArticleStripper.StripArticleTeasers(article);
                 try
                 {
                     DateTime publishedDateTime = DateTime.ParseExact(article.publishedDate, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
@@ -209,6 +210,7 @@ namespace Prototype.ModelControllers
                 catch (Exception e) { Debug.Print(e.Message); }
             }
 
+            //The first article in the list is a top article
             if (articles.Count > 0)
             {
                 articles[0].isTopArticle = true;
@@ -229,9 +231,10 @@ namespace Prototype.ModelControllers
         }
 
         //Helper methods
-        private Article PrepareArticle(Article article)
+        public Article PrepareArticle(Article article)
         {
-            article = StripArticle(article);
+            article = ArticleStripper.StripArticleBodyText(article);
+            article = ArticleStripper.StripArticleTeasers(article);
 
             if (article.topImages?.Count > 0)
             {
@@ -241,42 +244,6 @@ namespace Prototype.ModelControllers
             return article;
         }
 
-        private Article StripArticle(Article article)
-        {
-            article.bodyText = StripRelatedArticles(article.bodyText);
-            if (article.teasers != null)
-            {
-                article.teasers.FRONTPAGE = StripAllHtmlParagraphTags(article.teasers.FRONTPAGE);
-                article.teasers.DEFAULT = StripAllHtmlParagraphTags(article.teasers.DEFAULT);
-            }
-            return article;
-        }
 
-
-        private string StripAllHtmlParagraphTags(string html)
-        {
-            if (html == null)
-            {
-                return "";
-            }
-            var pattern = "<p>|<\\/p>";
-            return Regex.Replace(html, pattern, "");
-        }
-
-        /// <summary>
-        /// Strips html text with related articles from a html string. Used in every article at the end of its bodytext.
-        /// Works by stripping <ul></ul> tags, so it might strip lists who arent meant to be stripped.
-        /// </summary>
-        /// <param name="html"></param>
-        /// <returns></returns>
-        private string StripRelatedArticles(string html)
-        {
-            if (html == null)
-            {
-                return "";
-            }
-            var pattern = "<ul.*</ul>";
-            return Regex.Replace(html, pattern, "");
-        }
     }
 }
