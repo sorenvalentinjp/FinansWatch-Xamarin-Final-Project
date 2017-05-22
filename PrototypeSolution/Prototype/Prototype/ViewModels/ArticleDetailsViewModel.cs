@@ -66,6 +66,10 @@ namespace Prototype.ViewModels
             _stateController.LoginController.LoginEventSucceeded += LoginEvent;
         }
 
+        /// <summary>
+        /// When the loginEvent is invoked, all then calculate if the related articles should be locked
+        /// </summary>
+        /// <param name="subscriber"></param>
         private void LoginEvent(Subscriber subscriber)
         {
             foreach (var relatedArticleViewModel in RelatedArticleViewModels)
@@ -74,15 +78,18 @@ namespace Prototype.ViewModels
             }
         }
 
+        /// <summary>
+        /// Downloads all the articles related articles
+        /// </summary>
+        /// <param name="article"></param>
         private async void GetRelatedArticleViewModels(Article article)
         {
-
             IList<ArticleViewModel> toReturn = new List<ArticleViewModel>();
             foreach (var relatedArticle in await _stateController.ArticleController.GetRelatedArticlesAsync(article))
             {
                 toReturn.Add(new ArticleViewModel(_stateController, relatedArticle));
             }
-            RelatedArticleViewModels = toReturn;
+            this.RelatedArticleViewModels = toReturn;
         }
 
         /// <summary>
