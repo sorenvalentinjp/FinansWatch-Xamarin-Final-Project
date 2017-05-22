@@ -13,7 +13,7 @@ namespace Prototype.UITest.UnitTests.Database
     public class LocalStorageTest
     {
         [Test]
-        public void SerializeToJson()
+        public void SerializeToJsonShouldNotThrow()
         {
             //arrange
             StateController stateController = new StateController();
@@ -26,7 +26,7 @@ namespace Prototype.UITest.UnitTests.Database
         }
 
         [Test]
-        public void DeserializeFromJson()
+        public void DeserializeFromJsonShouldReturnEqualObject()
         {
             //arrange
             string str = "serialize me";
