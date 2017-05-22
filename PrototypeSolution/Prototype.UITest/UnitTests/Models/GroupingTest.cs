@@ -15,7 +15,7 @@ namespace Prototype.UITest.UnitTests.Models
         [Test]
         public void GroupingShouldContain()
         {
-            //Prepare
+            //arrange
             var article1 = new Article();
             var article2 = new Article();
             var article3 = new Article();
@@ -30,6 +30,7 @@ namespace Prototype.UITest.UnitTests.Models
             articleList2.Add(article3);
             articleList2.Add(article4);
 
+            //act
             string groupingKey = "Group1";
             var grouping = new Grouping<string, Article>(groupingKey, articleList);
 
@@ -44,7 +45,6 @@ namespace Prototype.UITest.UnitTests.Models
             Assert.Contains(article2, grouping);
             Assert.Contains(article3, grouping2);
             Assert.Contains(article4, grouping2);
-
         }
     }
 }

@@ -42,8 +42,6 @@ namespace Prototype.UITest.UnitTests.ModelControllers
             _mock.Setup(m => m.DownloadArticle(It.IsAny<string>())).Returns(Task.FromResult(_validArticleResponse));
             _mock.Setup(m => m.DownloadSection(_validSectionUrl)).Returns(Task.FromResult(_validSectionResponse));
             _mock.Setup(m => m.DownloadLatestArticles()).Returns(Task.FromResult(_validLatestArticlesResponse));
-
-
         }
 
         [SetUp]
@@ -66,7 +64,7 @@ namespace Prototype.UITest.UnitTests.ModelControllers
         [Test]
         public void SavedArticlesChangedEventShouldBeFired()
         {
-            //Prepare
+            //Arrange
             bool invoked = false;
             _articleController.SavedArticlesChangedEvent += () => { invoked = true; };
             var article = new Article();
@@ -81,7 +79,7 @@ namespace Prototype.UITest.UnitTests.ModelControllers
         [Test]
         public async void GetBucket1FrontpageShouldReturnArticles()
         {
-            //Prepare
+            //Arrange
             IList<Article> articles = new List<Article>();
 
             //Act
@@ -94,8 +92,8 @@ namespace Prototype.UITest.UnitTests.ModelControllers
         [Test]
         public async void GetBucket2ShouldPopulateLatestArticlesAndAllSections()
         {
-            //Prepare
-            await  _articleController.GetBucket1FrontPageAsync();
+            //Arrange
+            await _articleController.GetBucket1FrontPageAsync();
 
             //Act
             await _articleController.GetBucket2Async();
@@ -112,34 +110,31 @@ namespace Prototype.UITest.UnitTests.ModelControllers
         public async void GetArticlesAndDetailsForSectionShouldReturnSectionWithArticles()
         {
             //Act
-            IList<Article> articles = await _articleController.GetArticlesAndDetailsForSectionAsync(_articleController.Sections.FirstOrDefault());
+            IList<Article> articles = await _articleController.GetArticlesAndDetailsForSectionAsync(_articleController.Sections[0]);
             
             //Assert
             Assert.IsNotEmpty(articles);
-            Assert.IsNotNull(articles.FirstOrDefault().bodyText);
-
-
+            Assert.IsNotNull(articles[0].bodyText);
         }
 
         [Test]
         public async void GetArticleDetailsForCollectionShouldReturnArticles()
         {
-            //Prepare
-            IList<Article> articles = await _articleController.GetSectionArticlesAsync(_articleController.Sections.FirstOrDefault());
+            //Arrange
+            IList<Article> articles = await _articleController.GetSectionArticlesAsync(_articleController.Sections[0]);
 
             //Act
             articles = await _articleController.GetArticleDetailsForCollectionAsync(articles);
 
             //Assert
             Assert.IsNotEmpty(articles);
-            Assert.IsNotNull(articles.FirstOrDefault().bodyText);
-
+            Assert.IsNotNull(articles[0].bodyText);
         }
 
         [Test]
         public async void GetLatestArticlesAsyncShouldReturnLatestArticles()
         {
-            //Prepare
+            //Arrange
             IList<Article> articles = await _articleController.GetLatestArticlesAsync();
 
             //Assert
@@ -149,7 +144,7 @@ namespace Prototype.UITest.UnitTests.ModelControllers
         [Test]
         public async void GetRelatedArticlesAsyncShouldReturnRelatedArticles()
         {
-            //Prepare
+            //Arrange
             Article article = new Article {contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291" };
             article = await _articleController.GetArticleDetailsAsync(article);
 
@@ -158,13 +153,12 @@ namespace Prototype.UITest.UnitTests.ModelControllers
 
             //Assert
             Assert.IsNotEmpty(relatedArticles);
-
         }
 
         [Test]
         public async void GetArticleDetailsAsyncWithArticleShouldReturnDetailedArticle()
         {
-            //Prepare
+            //Arrange
             Article article = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291" };
 
             //Act
@@ -172,13 +166,12 @@ namespace Prototype.UITest.UnitTests.ModelControllers
 
             //Assert
             Assert.IsNotNull(article.bodyText);
-
         }
 
         [Test]
         public async void GetArticleDetailsAsyncWithStringShouldReturnDetailedArticle()
         {
-            //Prepare
+            //Arrange
             Article article = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291" };
 
             //Act
@@ -191,7 +184,7 @@ namespace Prototype.UITest.UnitTests.ModelControllers
         [Test]
         public void AddOrRemoveSavedArticleShouldAddArticle()
         {
-            //Prepare
+            //Arrange
             Article article = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291" };
             Article article2 = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9591111" };
 
@@ -202,14 +195,12 @@ namespace Prototype.UITest.UnitTests.ModelControllers
             //Assert
             Assert.Contains(article, _articleController.SavedArticles);
             Assert.Contains(article2, _articleController.SavedArticles);
-
-
         }
 
         [Test]
         public void AddOrRemoveSavedArticleShouldRemoveArticle()
         {
-            //Prepare
+            //Arrange
             Article article = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291" };
             Article article2 = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9591111" };
             _articleController.AddOrRemoveSavedArticle(article);
@@ -222,13 +213,12 @@ namespace Prototype.UITest.UnitTests.ModelControllers
             //Assert
             CollectionAssert.DoesNotContain(_articleController.SavedArticles, article);
             CollectionAssert.DoesNotContain(_articleController.SavedArticles, article2);
-
         }
 
         [Test]
-        public async void PrepareArticleShouldSetTopImage()
+        public void PrepareArticleShouldSetTopImage()
         {
-            //Prepare
+            //Arrange
             List<TopImage> topImages = new List<TopImage>();
             TopImage topImage = new TopImage();
             topImages.Add(topImage);
@@ -239,13 +229,12 @@ namespace Prototype.UITest.UnitTests.ModelControllers
 
             //Assert
             Assert.IsNotNull(article.topImage);
-
         }
 
         [Test]
-        public async void PrepareArticleShouldNotSetTopImage()
+        public void PrepareArticleShouldNotSetTopImage()
         {
-            //Prepare
+            //Arrange
             Article article = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291"};
 
             //Act
