@@ -35,6 +35,7 @@ namespace Prototype.UITest.UnitTests.ViewModels
         [Test]
         public void IsRefreshingShouldRaisePropertyChangedEvent()
         {
+            _allArticlesViewModel.IsRefreshing = true;
             PropertyChangedAsserter.AssertPropertyChanged(_allArticlesViewModel, (x) => x.IsRefreshing = false, "IsRefreshing");
         }
 
