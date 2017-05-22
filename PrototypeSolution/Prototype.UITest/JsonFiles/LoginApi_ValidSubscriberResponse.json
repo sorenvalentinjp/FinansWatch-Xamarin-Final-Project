@@ -1,0 +1,23 @@
+﻿{
+  "featureAccessList": [
+    {
+      "access": true,
+      "denyReasonText": "",
+      "obtainAccessText": "",
+      "code": "FINANSWATCH",
+      "expiration": 1524952800000,
+      "name": "Adgang til lï¿½st indhold"
+    }
+  ],
+  "error": {
+    "friendlyErrorText": "",
+    "code": 0,
+    "description": "",
+    "name": ""
+  },
+  "user": {
+    "userId": 123456,
+    "email": "Hans.Hansen@gmail.com",
+    "name": "Hans Hansen"
+  }
+}

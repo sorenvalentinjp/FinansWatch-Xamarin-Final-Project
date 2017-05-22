@@ -3,6 +3,7 @@ using NUnit.Framework;
 using Prototype.Database;
 using Prototype.ModelControllers;
 using Prototype.Models;
+using Prototype.UITest.UnitTests.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,13 +26,13 @@ namespace Prototype.UITest.UnitTests.ModelControllers
         string _validSubscriberResponse;
 
         [SetUp]
-        public void init()
+        public void Init()
         {
             _mockLoginApi = new Mock<ILoginApi>();
             _loginController = new LoginController(_mockLoginApi.Object);
 
-            _validTokenResponse = "{\"token\":\"721cb6c8-c670-4082-a674-f283eac296a1\",\"error\":{\"friendlyErrorText\":\"\",\"code\":0,\"description\":\"\",\"name\":\"\"}}";
-            _invalidTokenResponse = "{\"token\":null,\"error\":{\"friendlyErrorText\":\"Login mislykkedes. Forkert email eller adgangskode.\",\"code\":2,\"description\":\"Ugyldigt login forsï¿½g\",\"name\":\"Login fejl\"}}";
+            _validTokenResponse = ReadJsonFile.GetFileFromDisk("/../../JsonFiles/LoginApi_ValidTokenResponse.json");
+            _invalidTokenResponse = ReadJsonFile.GetFileFromDisk("/../../JsonFiles/LoginApi_InvalidTokenResponse.json");
             _validUser = "validUser";
             _validPassword = "validPassword";
             _invalidPassword = "invalidPassword";
@@ -40,7 +41,7 @@ namespace Prototype.UITest.UnitTests.ModelControllers
             _mockLoginApi.Setup(m => m.DownloadLoginToken(_validUser, _invalidPassword)).Returns(Task.FromResult(_invalidTokenResponse));
 
             //setting up for fetching subscriber using a token
-            _validSubscriberResponse = "{\"featureAccessList\":[{\"access\":true,\"denyReasonText\":\"\",\"obtainAccessText\":\"\",\"code\":\"FINANSWATCH\",\"expiration\":1524952800000,\"name\":\"Adgang til lï¿½st indhold\"}],\"error\":{\"friendlyErrorText\":\"\",\"code\":0,\"description\":\"\",\"name\":\"\"},\"user\":{\"userId\":123123,\"email\":\"hans.hansen@gmail.com\",\"name\":\"Hans Hansen\"}}";
+            _validSubscriberResponse = ReadJsonFile.GetFileFromDisk("/../../JsonFiles/LoginApi_ValidSubscriberResponse.json");
 
             Error myError = new Error() { code = -1 };
 

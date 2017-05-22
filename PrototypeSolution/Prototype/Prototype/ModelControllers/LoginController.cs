@@ -9,7 +9,7 @@ namespace Prototype.ModelControllers
 {
     public class LoginController
     {
-        private readonly LoginApi _loginApi;
+        private readonly ILoginApi _loginApi;
         public event Action<Error> LoginEventErrorOccured;
         public event Action<Subscriber> LoginEventSucceeded;
         public Subscriber Subscriber;
@@ -17,6 +17,12 @@ namespace Prototype.ModelControllers
         public LoginController()
         {
             _loginApi = new LoginApi();
+        }
+
+        //for mock test only
+        public LoginController(ILoginApi loginApi)
+        {
+            _loginApi = loginApi;
         }
 
         public async void LoginAsync(string email, string password)
