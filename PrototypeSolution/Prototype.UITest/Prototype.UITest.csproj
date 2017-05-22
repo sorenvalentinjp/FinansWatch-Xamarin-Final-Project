@@ -86,11 +86,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mocks\ArticleControllerMockGenerator.cs" />
+    <Compile Include="Mocks\ContentApiMockGenerator.cs" />
+    <Compile Include="Mocks\LoginApiMockGenerator.cs" />
+    <Compile Include="Mocks\StateControllerMockGenerator.cs" />
+    <Compile Include="UnitTests\ViewModels\AllArticlesViewModelTest.cs" />
     <None Include="JsonFiles\LoginApi_InvalidTokenResponse.json" />
     <Compile Include="UnitTests\Database\LoginApiTest.cs" />
     <Compile Include="UnitTests\Helpers\ArticleStripperTest.cs" />
-    <Compile Include="UnitTests\Helpers\PropertyChangedAsserter.cs" />
-    <Compile Include="UnitTests\Helpers\ReadJsonFile.cs" />
+    <Compile Include="Helpers\PropertyChangedAsserter.cs" />
+    <Compile Include="Helpers\ReadJsonFile.cs" />
     <Compile Include="UnitTests\ModelControllers\ArticleControllerTest.cs" />
     <Compile Include="UnitTests\ModelControllers\LoginControllerTest.cs" />
     <Compile Include="UnitTests\Models\ArticleTest.cs" />
@@ -114,7 +119,6 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UnitTests\ViewModels\" />
     <Folder Include="UnitTests\Views\" />
   </ItemGroup>
   <Import Project="..\Prototype\Prototype\Prototype.projitems" Label="Shared" />

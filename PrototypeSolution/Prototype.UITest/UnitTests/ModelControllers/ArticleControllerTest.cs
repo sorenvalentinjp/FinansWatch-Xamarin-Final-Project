@@ -9,6 +9,7 @@ using NUnit.Framework;
 using Prototype.Database;
 using Prototype.ModelControllers;
 using Prototype.Models;
+using Prototype.UITest.Mocks;
 using Prototype.UITest.UnitTests.Helpers;
 
 namespace Prototype.UITest.UnitTests.ModelControllers
@@ -18,48 +19,10 @@ namespace Prototype.UITest.UnitTests.ModelControllers
     {
         ArticleController _articleController;
 
-        Mock<IContentApi> _mock;
-
-        string _validSectionUrl;
-
-        string _validArticleResponse;
-        string _validLatestArticlesResponse;
-        string _validSectionResponse;        
-
-        [TestFixtureSetUp]
-        public void Init()
-        {
-            //setting up mock
-            _mock = new Mock<IContentApi>();
-            _validSectionUrl = "https://content.watchmedier.dk/api/finanswatch/content/latest?hoursago=500&max=30&section=fw_finansnyt_penge";
-
-            //setting up for fetching articles
-            _validArticleResponse = ReadJsonFile.GetFileFromDisk("/../../JsonFiles/ContentApiArticle.json");
-            _validSectionResponse = ReadJsonFile.GetFileFromDisk("/../../JsonFiles/ContentApiSection.json");
-            _validLatestArticlesResponse = ReadJsonFile.GetFileFromDisk("/../../JsonFiles/ContentApiLatestArticles.json");
-
-            //Setup methods
-            _mock.Setup(m => m.DownloadArticle(It.IsAny<string>())).Returns(Task.FromResult(_validArticleResponse));
-            _mock.Setup(m => m.DownloadSection(_validSectionUrl)).Returns(Task.FromResult(_validSectionResponse));
-            _mock.Setup(m => m.DownloadLatestArticles()).Returns(Task.FromResult(_validLatestArticlesResponse));
-
-
-        }
-
         [SetUp]
         public void Setup()
         {
-            //Create ArticleController with mock LoginApi
-            IList<Section> sections = new List<Section>();
-            sections.Add(new Section("FORSIDE", _validSectionUrl));
-            sections.Add(new Section("PENGEINSTITUTTER", _validSectionUrl));
-            sections.Add(new Section("FORSIKRINGER", _validSectionUrl));
-            sections.Add(new Section("PENSION", _validSectionUrl));
-            sections.Add(new Section("REALKREDIT", _validSectionUrl));
-            sections.Add(new Section("NAVNE OG JOB", _validSectionUrl));
-            sections.Add(new Section("KLUMMER", _validSectionUrl));
-
-            _articleController = new ArticleController(_mock.Object, sections);
+            _articleController = ArticleControllerMockGenerator.GenerateMock();
         }
 
 

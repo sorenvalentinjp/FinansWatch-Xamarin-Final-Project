@@ -1,4 +1,5 @@
-﻿using Prototype.ModelControllers;
+﻿using System.Collections;
+using Prototype.ModelControllers;
 using Prototype.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -81,7 +82,7 @@ namespace Prototype.ViewModels
             }
             else
             {
-                GroupArticles(_stateController.ArticleController.LatestArticles);
+                GroupArticlesAsync();
             }
 
 
@@ -97,7 +98,7 @@ namespace Prototype.ViewModels
                 {
                     articleViewModel.CalculateIfArticleShouldBeLocked();
                 }
-                
+
             }
         }
 
@@ -117,14 +118,14 @@ namespace Prototype.ViewModels
 
         private async void RefreshLatestArticlesAsync()
         {
-            IsRefreshing = true;            
-            GroupArticles(await _stateController.ArticleController.GetLatestArticlesAsync());
+            IsRefreshing = true;
+            Grouped = await GroupArticles(await _stateController.ArticleController.GetLatestArticlesAsync());
             IsRefreshing = false;
         }
 
-        private void GroupArticles(IList<Article> articles)
+        public Task<List<Grouping<string, ArticleViewModel>>> GroupArticles(IList<Article> articles)
         {
-            Task.Run(() =>
+            return Task.Run((() =>
             {
                 IList<ArticleViewModel> articleViewModels = new List<ArticleViewModel>();
 
@@ -142,20 +143,19 @@ namespace Prototype.ViewModels
 
                 var groupedArticleViewModels = new List<Grouping<string, ArticleViewModel>>(sortedArticleViewModels);
 
-                Grouped = groupedArticleViewModels;
-            });
+                return groupedArticleViewModels;
+            }));
+        }
+
+        public async void GroupArticlesAsync()
+        {
+            Grouped = await GroupArticles(_stateController.ArticleController.LatestArticles);
         }
 
         /// <summary>
         /// When the user refreshed the view, this.articles is updated.
         /// </summary>
-        public ICommand RefreshCommand
-        {
-            get
-            {
-                return new Command(RefreshLatestArticlesAsync);
-            }
-        }
+        public ICommand RefreshCommand => new Command(RefreshLatestArticlesAsync);
 
         protected void Notify(string propName)
         {
