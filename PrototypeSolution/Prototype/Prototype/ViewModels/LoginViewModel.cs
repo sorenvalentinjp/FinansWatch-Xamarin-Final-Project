@@ -44,17 +44,29 @@ namespace Prototype.ViewModels
             _stateController = stateController;
         }
 
+        /// <summary>
+        /// Invoked when the user fails to log in.
+        /// </summary>
+        /// <param name="error"></param>
         private void LoginErrorOccured(Error error)
         {
             App.Navigation.NavigationStack.First().DisplayAlert("", error.friendlyErrorText, "OK");
             Password = ""; //password is reset, but we keep the entered email
         }
 
+        /// <summary>
+        /// Invoked when the user successfully logs in.
+        /// </summary>
+        /// <param name="subscriber"></param>
         private void LoginSucceeded(Subscriber subscriber)
         {
-            _stateController.LoginController.Subscriber = subscriber; //setting the subscriber, so we can reference him from other pages
+            _stateController.LoginController.Subscriber = subscriber; //setting the subscriber as the user is now logged in
         }
 
+        /// <summary>
+        /// Tries to log the user in. Depending on the result an event are invoked.
+        /// See LoginErrorOccured and LoginSucceeded in this class.
+        /// </summary>
         public ICommand LoginCommand
         {
             get
@@ -81,26 +93,30 @@ namespace Prototype.ViewModels
             }
         }
 
+        /// <summary>
+        /// Subscribes the viewModel to events for successfull and failed login
+        /// </summary>
+        public void SubscribeToLoginEvents()
+        {
+            _stateController.LoginController.LoginEventErrorOccured += LoginErrorOccured;
+            _stateController.LoginController.LoginEventSucceeded += LoginSucceeded;
+        }
+
+        /// <summary>
+        /// Unsubscribes the viewModel to events for successfull and failed login
+        /// </summary>
+        public void UnsubscribeLoginEvents()
+        {
+            _stateController.LoginController.LoginEventErrorOccured -= LoginErrorOccured;
+            _stateController.LoginController.LoginEventSucceeded -= LoginSucceeded;
+        }
+
         protected void Notify(string propName)
         {
             if (this.PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
-        }
-
-        public void SubscribeToLoginEvents()
-        {
-            //events for successfull and failed login
-            _stateController.LoginController.LoginEventErrorOccured += LoginErrorOccured;
-            _stateController.LoginController.LoginEventSucceeded += LoginSucceeded;
-        }
-
-        public void UnsubscribeLoginEvents()
-        {
-            //events for successfull and failed login
-            _stateController.LoginController.LoginEventErrorOccured -= LoginErrorOccured;
-            _stateController.LoginController.LoginEventSucceeded -= LoginSucceeded;
         }
     }
 }
