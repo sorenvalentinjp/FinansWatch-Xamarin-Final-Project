@@ -21,11 +21,6 @@ namespace Prototype.Database
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
         }
 
-        /// <summary>
-        /// Downloads a single article and returns it as a task json string
-        /// </summary>
-        /// <param name="contentUrl"></param>
-        /// <returns></returns>
         public Task<string> DownloadArticle(string contentUrl)
         {
             //Full url example: https://content.watchmedier.dk/api/finanswatch/content/article/9517468
@@ -33,11 +28,7 @@ namespace Prototype.Database
 
             return DownloadJson(uri);
         }
-
-        /// <summary>
-        /// Downloads allArticles page articles and returns them as a string
-        /// </summary>
-        /// <returns></returns>
+        
         public Task<string> DownloadLatestArticles()
         {
             //Full url example: "https://content.watchmedier.dk/api/finanswatch/content/latest?hoursago=168&max=100"
@@ -52,11 +43,6 @@ namespace Prototype.Database
             return DownloadJson(uri);
         }
 
-        /// <summary>
-        /// Downloads and returns json using an Uri.
-        /// </summary>
-        /// <param name="uri"></param>
-        /// <returns></returns>
         public async Task<string> DownloadJson(Uri uri)
         {
             try

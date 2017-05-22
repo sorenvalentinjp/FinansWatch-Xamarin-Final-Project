@@ -8,8 +8,17 @@ using Prototype.ModelControllers;
 
 namespace Prototype.Database
 {
+    /// <summary>
+    /// This class serializing/deserializing of object to and from json.
+    /// This is used when data needs to be stored locally on the user's device.
+    /// </summary>
     public static class LocalStorage
     {
+        /// <summary>
+        /// Serializes an object to a string containing the object represented as json.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static string SerializeToJson(object obj)
         {
             try
@@ -30,6 +39,12 @@ namespace Prototype.Database
             }
         }
 
+        /// <summary>
+        /// Deserializes a string containing an object represented as json.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="jsonObj"></param>
+        /// <returns></returns>
         public static T DeserializeFromJson<T>(string jsonObj)
         {
             try

@@ -14,22 +14,21 @@ namespace Prototype.UITest.UnitTests.Models
 {
     public class Tests
     {
-
         [Test]
-        public  void ArticlePropertyChangedShouldBeFired()
+        public void ArticlePropertyChangedShouldBeFired()
         {
-            //Prepare
+            //arrange
             var article = new Article();
 
             //Assert
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.locked = true, "locked");
-            PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.IsSaved= true, "IsSaved");
+            PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.IsSaved = true, "IsSaved");
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.bodyText = "test", "bodyText");
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.contentUrl = "test", "contentUrl");
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.homeSectionId = 1, "homeSectionId");
-            PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.homeSectionName= "test", "homeSectionName");
-            PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.id= 1, "id");
-            PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.image= new Image(), "image");
+            PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.homeSectionName = "test", "homeSectionName");
+            PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.id = 1, "id");
+            PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.image = new Image(), "image");
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.isTopArticle = true, "isTopArticle");
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.lastModified = "19-12-15", "lastModified");
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.publishData = new PublishData(), "publishData");
@@ -40,12 +39,13 @@ namespace Prototype.UITest.UnitTests.Models
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.titles = new Titles(), "titles");
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.topImage = new TopImage(), "topImage");
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.topImages = new List<TopImage>(), "topImages");
+            PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.publishedDate = "19-11-17", "publishedDate");
         }
 
         [Test]
         public void ArticleShouldEqual()
         {
-            //Prepare
+            //arrange
             var article = new Article {contentUrl = "testUrl"};
             var article2 = new Article { contentUrl = "testUrl" };
 
@@ -56,7 +56,7 @@ namespace Prototype.UITest.UnitTests.Models
         [Test]
         public void ArticleShouldNotEqual()
         {
-            //Prepare
+            //arrange
             var article = new Article { contentUrl = "testUrl" };
             var article2 = new Article { contentUrl = "anotherTestUrl" };
 
@@ -67,7 +67,7 @@ namespace Prototype.UITest.UnitTests.Models
         [Test]
         public void TitlesPropertyChangedShouldBeFired()
         {
-            //Prepare
+            //arrange
             var titles = new Titles();
 
             //Assert
@@ -79,7 +79,7 @@ namespace Prototype.UITest.UnitTests.Models
         [Test]
         public void TeasersPropertyChangedShouldBeFired()
         {
-            //Prepare
+            //arrange
             var teasers = new Teasers();
 
             //Assert
@@ -90,7 +90,7 @@ namespace Prototype.UITest.UnitTests.Models
         [Test]
         public void MetadataPropertyChangedShouldBeFired()
         {
-            //Prepare
+            //arrange
             var metadata = new Metadata();
 
             //Assert
@@ -103,7 +103,7 @@ namespace Prototype.UITest.UnitTests.Models
         [Test]
         public void TeaserPropertyChangedShouldBeFired()
         {
-            //Prepare
+            //arrange
             var teaser = new Teaser();
 
             //Assert
@@ -114,7 +114,7 @@ namespace Prototype.UITest.UnitTests.Models
         [Test]
         public void RelatedArticlePropertyChangedShouldBeFired()
         {
-            //Prepare
+            //arrange
             var realedArticle = new RelatedArticle();
 
             //Assert
@@ -124,7 +124,7 @@ namespace Prototype.UITest.UnitTests.Models
         [Test]
         public void PublishDataPropertyChangedShouldBeFired()
         {
-            //Prepare
+            //arrange
             var publishData = new PublishData();
 
             //Assert
@@ -132,6 +132,5 @@ namespace Prototype.UITest.UnitTests.Models
         }
 
     }
-
 }
 

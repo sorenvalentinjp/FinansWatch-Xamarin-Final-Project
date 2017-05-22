@@ -19,7 +19,7 @@ namespace Prototype.UITest.UnitTests.Database
             StateController stateController = new StateController();
 
             //act
-
+            //act is done in assert
 
             //assert
             Assert.DoesNotThrow(() => LocalStorage.SerializeToJson(stateController));

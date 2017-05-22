@@ -13,6 +13,9 @@ using Prototype.UITest.Mocks;
 
 namespace Prototype.UITest.UnitTests.ModelControllers
 {
+    /// <summary>
+    /// Testing the LoginController by mocking the calls to LoginApi.
+    /// </summary>
     [TestFixture]
     public class LoginControllerTest
     {

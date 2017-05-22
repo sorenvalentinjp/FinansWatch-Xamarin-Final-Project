@@ -10,7 +10,6 @@ namespace Prototype.UITest.UnitTests.Helpers
 {
     public static class PropertyChangedAsserter
     {
-
         public static void AssertPropertyChanged<T>(T instance, Action<T> actionPropertySetter, string propertyName) where T : INotifyPropertyChanged
         {
             string actual = null;

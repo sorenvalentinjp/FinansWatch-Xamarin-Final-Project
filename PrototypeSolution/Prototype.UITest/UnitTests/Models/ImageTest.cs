@@ -14,7 +14,7 @@ namespace Prototype.UITest.UnitTests.Models
         [Test]
         public void ImagePropertyChangedShouldBeFired()
         {
-            //Prepare
+            //arrange
             var image = new Image();
 
             //Assert
@@ -25,7 +25,7 @@ namespace Prototype.UITest.UnitTests.Models
         [Test]
         public void VersionsPropertyChangedShouldBeFired()
         {
-            //Prepare
+            //arrange
             var versions = new Versions();
 
             //Assert
@@ -37,7 +37,7 @@ namespace Prototype.UITest.UnitTests.Models
         [Test]
         public void ImageVersionsPropertyChangedShouldBeFired()
         {
-            //Prepare
+            //arrange
             var big_article_460 = new BigArticle460();
             var f = new F();
             var small_article_220 = new SmallArticle220();
@@ -52,7 +52,7 @@ namespace Prototype.UITest.UnitTests.Models
         [Test]
         public void TopImagePropertyChangedShouldBeFired()
         {
-            //Prepare
+            //arrange
             var topImage = new TopImage();
 
             //Assert
@@ -63,7 +63,7 @@ namespace Prototype.UITest.UnitTests.Models
 
         public void TopImageVersionsPropertyChangedShouldBeFired()
         {
-            //Prepare
+            //arrange
             var small = new Small();
             var thumb = new Thumb();
 

@@ -12,52 +12,15 @@ namespace Prototype.UITest.UnitTests.Models
     public class SectionTest
     {
         [Test]
-        public void SubscriberShouldHaveAccesToSite()
+        public void SectionPropertyChangedShouldBeFired()
         {
-            //Prepare
-            var subscriber = new Subscriber();
-            var featureAccessList = new FeatureAccessList { access = true, code = "FINANSWATCH" };
-            subscriber.featureAccessList = new List<FeatureAccessList>();
-            subscriber.featureAccessList.Add(featureAccessList);
+            //arrange
+            var section = new Section("myTestSection", "www.myTestSectionUrl.com");
 
-            //Act
-            var hasAcces = subscriber.HasAccessToSite();
-
-            //Assert
-            Assert.True(hasAcces);
+            //assert
+            PropertyChangedAsserter.AssertPropertyChanged(section, (x) => x.Name = "newName", "Name");
+            PropertyChangedAsserter.AssertPropertyChanged(section, (x) => x.SectionContentUrl = "newUrl", "Area");
+            PropertyChangedAsserter.AssertPropertyChanged(section, (x) => x.Articles = new List<Article>(), "Articles");
         }
-
-        [Test]
-        public void SubscriberShouldNotHaveAccesToSite()
-        {
-            //Prepare
-            var subscriber = new Subscriber();
-            var featureAccessList = new FeatureAccessList { access = true, code = "falsesite" };
-            subscriber.featureAccessList = new List<FeatureAccessList>();
-            subscriber.featureAccessList.Add(featureAccessList);
-
-            //Act
-            var hasAcces = subscriber.HasAccessToSite();
-
-            //Assert
-            Assert.False(hasAcces);
-        }
-
-        [Test]
-        public void SubscriberShouldNotHaveAccesToSite2()
-        {
-            //Prepare
-            var subscriber = new Subscriber();
-            var featureAccessList = new FeatureAccessList { access = false, code = "finanswatch" };
-            subscriber.featureAccessList = new List<FeatureAccessList>();
-            subscriber.featureAccessList.Add(featureAccessList);
-
-            //Act
-            var hasAcces = subscriber.HasAccessToSite();
-
-            //Assert
-            Assert.False(hasAcces);
-        }
-
     }
 }
