@@ -8,6 +8,11 @@ namespace Prototype.Helpers
 {
     public static class ArticleStripper
     {
+        /// <summary>
+        /// Removes all html unordered list tags and their contents from an article's bodytext
+        /// </summary>
+        /// <param name="article"></param>
+        /// <returns></returns>
         public static Article StripArticleBodyText(Article article)
         {
             if (!string.IsNullOrEmpty(article.bodyText))
@@ -17,6 +22,11 @@ namespace Prototype.Helpers
             return article;
         }
 
+        /// <summary>
+        /// Removes all html paragraph tags from an article's teasers.
+        /// </summary>
+        /// <param name="article"></param>
+        /// <returns></returns>
         public static Article StripArticleTeasers(Article article)
         {
             if (article.teasers != null)
@@ -27,7 +37,11 @@ namespace Prototype.Helpers
             return article;
         }
 
-
+        /// <summary>
+        /// Strips the input string for all html paragraph tags
+        /// </summary>
+        /// <param name="html"></param>
+        /// <returns></returns>
         public static string StripAllHtmlParagraphTags(string html)
         {
             if (html == null)
@@ -50,7 +64,9 @@ namespace Prototype.Helpers
             {
                 return "";
             }
-            var pattern = "<ul.*</ul>";
+
+            var pattern = "<ul>[\\s\\S]*?</ul>";
+
             return Regex.Replace(html, pattern, "");
         }
     }
