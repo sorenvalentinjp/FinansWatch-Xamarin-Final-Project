@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace Prototype.UITest.UnitTests.ModelControllers
 {
+    /// <summary>
+    /// Testing the LoginController by mocking the calls to LoginApi.
+    /// </summary>
     [TestFixture]
     public class LoginControllerTest
     {

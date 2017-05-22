@@ -27,5 +27,10 @@ namespace Prototype.Database
         /// <param name="request">The HttpRequestMessage</param>
         /// <returns>The result as json string</returns>
         Task<string> DownloadJson(HttpRequestMessage request);
+
+        /// <summary>
+        /// To dispose the client when testing.
+        /// </summary>
+        void DisposeClient();
     }
 }

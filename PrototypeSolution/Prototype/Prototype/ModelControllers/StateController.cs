@@ -12,11 +12,13 @@ using Xamarin.Forms;
 
 namespace Prototype.ModelControllers
 {
-    public class StateController : INotifyPropertyChanged
+    /// <summary>
+    /// This class is linking the view models to the different controllers (eg. ArticleController, LoginController and so on).
+    /// This way the StateController contains information about the state of the app (which articles are downloaded, is the user logged in etc),
+    /// which means, we can store the app's StateController locally, when the app is put into the background and load it again on resume.
+    /// </summary>
+    public class StateController
     {
-        //events
-        public event PropertyChangedEventHandler PropertyChanged;
-
         //controllers
         public ArticleController ArticleController;
         public LoginController LoginController;
@@ -27,14 +29,21 @@ namespace Prototype.ModelControllers
             this.LoginController = new LoginController();
         }
 
+        /// <summary>
+        /// Downloads and return bucket 1.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IList<Article>> GetBucket1()
         {
             return await this.ArticleController.GetBucket1FrontPageAsync();
         }
 
-        public void GetBucket2()
+        /// <summary>
+        /// Downloads and returns bucket 2.
+        /// </summary>
+        public async void GetBucket2()
         {
-            this.ArticleController.GetBucket2Async();
+            await this.ArticleController.GetBucket2Async();
         }
 
         /// <summary>
@@ -44,32 +53,40 @@ namespace Prototype.ModelControllers
         public async Task<IList<Article>> RefreshLatestArticles()
         {
             await this.ArticleController.GetLatestArticlesAsync();
-            this.ArticleController.GetArticleDetailsForCollectionAsync(this.ArticleController.LatestArticles);
+            await this.ArticleController.GetArticleDetailsForCollectionAsync(this.ArticleController.LatestArticles);
             return this.ArticleController.LatestArticles;
         }
 
+        /// <summary>
+        /// Given a section all it's articles and their details are downloaded and returned.
+        /// Used when the user pulls down to refresh a SectionView.
+        /// </summary>
+        /// <param name="section"></param>
+        /// <returns></returns>
         public async Task<Section> GetArticlesForSection(Section section)
         {
             section.Articles = await this.ArticleController.GetArticlesAndDetailsForSectionAsync(section);
             return section;
         } 
 
+        /// <summary>
+        /// Given an article, all it's related articles are downloaded and returned.
+        /// </summary>
+        /// <param name="article"></param>
+        /// <returns></returns>
         public Task<IList<Article>> GetRelatedArticles(Article article)
         {
             return ArticleController.GetRelatedArticlesAsync(article);
         }
 
+        /// <summary>
+        /// Given an article, all it's details are downloaded and returned, so it contains all nessecary data to view the article in ArticleDetailsView.
+        /// </summary>
+        /// <param name="article"></param>
+        /// <returns></returns>
         public Task<Article> GetArticleDetails(Article article)
         {
             return this.ArticleController.GetArticleDetailsAsync(article);
-        }
-
-        protected void Notify(string propName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
         }
     }
 }

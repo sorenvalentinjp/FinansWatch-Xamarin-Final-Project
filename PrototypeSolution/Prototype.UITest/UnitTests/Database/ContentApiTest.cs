@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Prototype.UITest.UnitTests.Database
 {
+    /// <summary>
+    /// These test gives little value as they more or less only tests, that we are using the HttpClient properly.
+    /// </summary>
     [TestFixture]
     public class ContentApiTest
     {

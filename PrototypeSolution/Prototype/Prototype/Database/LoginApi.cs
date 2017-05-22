@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Prototype.Database
 {
+    /// <summary>
+    /// This class is responsible for communicating with Jyllands-Postens LoginAPI.
+    /// </summary>
     public class LoginApi : ILoginApi
     {
         private readonly HttpClient _client;
@@ -20,12 +23,6 @@ namespace Prototype.Database
             _client.MaxResponseContentBufferSize = 256000;
         }
 
-        /// <summary>
-        /// Downloads the token using an email and password
-        /// </summary>
-        /// <param name="email">the subscribers email</param>
-        /// <param name="password">the subscribers password</param>
-        /// <returns>The token represented as a json string</returns>
         public Task<string> DownloadLoginToken(string email, string password)
         {
             string authData = $"{email}:{password}";
@@ -45,11 +42,6 @@ namespace Prototype.Database
             return DownloadJson(request);
         }
 
-        /// <summary>
-        /// Using the aquired token, the subscriber itself can be downloaded.
-        /// </summary>
-        /// <param name="token">The subscribers token</param>
-        /// <returns>The subscriber respresented as a json string</returns>
         public Task<string> DownloadSubscriber(SubscriberToken token)
         {
             string url = $"{Constants.GetUserUrl}{token.token}";
@@ -61,11 +53,6 @@ namespace Prototype.Database
             return DownloadJson(request);
         }
 
-        /// <summary>
-        /// Downloads the httprequestmessage and returns the result as a string
-        /// </summary>
-        /// <param name="request">The HttpRequestMessage</param>
-        /// <returns>The result as json string</returns>
         public async Task<string> DownloadJson(HttpRequestMessage request)
         {
             try
