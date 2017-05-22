@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,6 @@ namespace Prototype.UITest.UnitTests.ModelControllers
         Mock<IContentApi> _mock;
 
         string _validSectionUrl;
-        string _validArticleUrl;
 
         string _validArticleResponse;
         string _validLatestArticlesResponse;
@@ -32,7 +32,6 @@ namespace Prototype.UITest.UnitTests.ModelControllers
             //setting up mock
             _mock = new Mock<IContentApi>();
             _validSectionUrl = "https://content.watchmedier.dk/api/finanswatch/content/latest?hoursago=500&max=30&section=fw_finansnyt_penge";
-            _validArticleUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291";
 
             //setting up for fetching articles
             _validArticleResponse = ReadJsonFile.GetFileFromDisk("/../../JsonFiles/ContentApiArticle.json");
@@ -163,29 +162,47 @@ namespace Prototype.UITest.UnitTests.ModelControllers
         }
 
         [Test]
-        public void GetArticleDetailsAsyncWithArticleShouldReturnDetailedArticle()
+        public async void GetArticleDetailsAsyncWithArticleShouldReturnDetailedArticle()
         {
             //Prepare
+            Article article = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291" };
+
+            //Act
+            article = await _articleController.GetArticleDetailsAsync(article);
 
             //Assert
+            Assert.IsNotNull(article.bodyText);
 
         }
 
         [Test]
-        public void GetArticleDetailsAsyncWithStringShouldReturnDetailedArticle()
+        public async void GetArticleDetailsAsyncWithStringShouldReturnDetailedArticle()
         {
             //Prepare
+            Article article = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291" };
+
+            //Act
+            article = await _articleController.GetArticleDetailsAsync(article.contentUrl);
 
             //Assert
-
+            Assert.IsNotNull(article.bodyText);
         }
 
         [Test]
         public void AddOrRemoveSavedArticleShouldAddArticle()
         {
             //Prepare
+            Article article = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291" };
+            Article article2 = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9591111" };
+
+            //Act
+            _articleController.AddOrRemoveSavedArticle(article);
+            _articleController.AddOrRemoveSavedArticle(article2);
 
             //Assert
+            Assert.Contains(article, _articleController.SavedArticles);
+            Assert.Contains(article2, _articleController.SavedArticles);
+
 
         }
 
@@ -193,44 +210,61 @@ namespace Prototype.UITest.UnitTests.ModelControllers
         public void AddOrRemoveSavedArticleShouldRemoveArticle()
         {
             //Prepare
+            Article article = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291" };
+            Article article2 = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9591111" };
+            _articleController.AddOrRemoveSavedArticle(article);
+            _articleController.AddOrRemoveSavedArticle(article2);
+
+            //Act
+            _articleController.AddOrRemoveSavedArticle(article);
+            _articleController.AddOrRemoveSavedArticle(article2);
+
+            //Assert
+            CollectionAssert.DoesNotContain(_articleController.SavedArticles, article);
+            CollectionAssert.DoesNotContain(_articleController.SavedArticles, article2);
+
+        }
+
+        [Test]
+        public async void PrepareArticleShouldSetTopImage()
+        {
+            //Prepare
+            Article article = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291" };
+
+            //Act
+            //_articleController.PrepareArticle()
 
             //Assert
 
         }
 
         [Test]
-        public void DeserializeArticlesFromJsonShouldDeserializeToArticles()
+        public async void PrepareArticleShouldNotSetTopImage()
         {
             //Prepare
+            List<TopImage> topImages = new List<TopImage>();
+            TopImage topImage = new TopImage();
+            topImages.Add(topImage);
+            Article article = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291", topImages = topImages};
+
+            //Act
+            _articleController.PrepareArticle(article);
 
             //Assert
-
-        }
-
-        [Test]
-        public void DeserializeArticleShouldDeserialeArticle()
-        {
-            //Prepare
-
-            //Assert
-
-        }
-
-        [Test]
-        public void PrepareArticleShouldPrepareArticle()
-        {
-            //Prepare
-
-            //Assert
-
+            Assert.IsNotNull(article.topImage);
         }
 
         [Test]
         public void StripArticleShouldStripArticle()
         {
             //Prepare
+            Article article = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291"};
+
+            //Act
+            _articleController.PrepareArticle(article);
 
             //Assert
+            Assert.IsNull(article.topImage);
 
         }
 

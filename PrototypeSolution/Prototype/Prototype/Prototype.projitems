@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Database\ILoginApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\LocalStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\LoginApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ArticleStripper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ModelControllers\ArticleController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ModelControllers\LoginController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ModelControllers\StateController.cs" />
