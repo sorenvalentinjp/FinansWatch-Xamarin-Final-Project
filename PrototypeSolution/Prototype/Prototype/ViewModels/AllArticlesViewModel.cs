@@ -84,26 +84,26 @@ namespace Prototype.ViewModels
             {
                 GroupArticlesAsync();
             }
-
-
         }
 
-        //Subscribed Event
-        //If the user just logged in, recalculate if the article should display as locked
+        /// <summary>
+        /// If the user just logged in then recalculate if the articles should display as locked
+        /// </summary>
+        /// <param name="subscriber"></param>
         private void LoginEvent(Subscriber subscriber)
         {
-            foreach (var grouping in Grouped)
+            foreach (var grouping in this.Grouped)
             {
                 foreach (var articleViewModel in grouping)
                 {
                     articleViewModel.CalculateIfArticleShouldBeLocked();
                 }
-
             }
         }
 
-        //Subscribed Event
-        //If the user adds an article to saved articles, notify article viewm models to update the cell icons
+        /// <summary>
+        /// If the user adds an article to saved articles, notify article viewm models to update the cell icons
+        /// </summary>
         private void SavedArticlesChanged()
         {
             foreach (var grouping in Grouped)
@@ -112,10 +112,12 @@ namespace Prototype.ViewModels
                 {
                     articleViewModel.SavedArticlesChanged();
                 }
-
             }
         }
 
+        /// <summary>
+        /// Refreshes the articles by downloading them again.
+        /// </summary>
         private async void RefreshLatestArticlesAsync()
         {
             IsRefreshing = true;
@@ -123,6 +125,17 @@ namespace Prototype.ViewModels
             IsRefreshing = false;
         }
 
+        /// <summary>
+        /// Groups the articles by the date they are published
+        /// </summary>
+        public async void GroupArticlesAsync()
+        {
+            Grouped = await GroupArticles(_stateController.ArticleController.LatestArticles);
+        }
+
+        /// <summary>
+        /// Helper for GroupArticlesAsync
+        /// </summary>
         public Task<List<Grouping<string, ArticleViewModel>>> GroupArticles(IList<Article> articles)
         {
             return Task.Run((() =>
@@ -145,11 +158,6 @@ namespace Prototype.ViewModels
 
                 return groupedArticleViewModels;
             }));
-        }
-
-        public async void GroupArticlesAsync()
-        {
-            Grouped = await GroupArticles(_stateController.ArticleController.LatestArticles);
         }
 
         /// <summary>

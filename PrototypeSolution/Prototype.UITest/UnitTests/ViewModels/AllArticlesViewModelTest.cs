@@ -35,7 +35,7 @@ namespace Prototype.UITest.UnitTests.ViewModels
         [Test]
         public void IsRefreshingShouldRaisePropertyChangedEvent()
         {
-            _allArticlesViewModel.IsRefreshing = true;
+            _allArticlesViewModel.IsRefreshing = true; //to avoid issues with async methods as slow com cs. fast com could mess with the result
             PropertyChangedAsserter.AssertPropertyChanged(_allArticlesViewModel, (x) => x.IsRefreshing = false, "IsRefreshing");
         }
 
@@ -54,7 +54,7 @@ namespace Prototype.UITest.UnitTests.ViewModels
         [Test]
         public async void GroupArticlesShouldGroupArticles()
         {
-            //Prepare 
+            //Arrange 
             Article articleToday = new Article {publishedDateTime = DateTime.Now};
             Article articleYesterday = new Article {publishedDateTime = DateTime.Now.AddDays(-1)};
             IList<Article> articles = new List<Article>();
@@ -72,7 +72,5 @@ namespace Prototype.UITest.UnitTests.ViewModels
             Assert.AreEqual(todayArray[0].Article, articleToday);
             Assert.AreEqual(yesterdayArray[0].Article, articleYesterday);
         }
-
-
     }
 }
