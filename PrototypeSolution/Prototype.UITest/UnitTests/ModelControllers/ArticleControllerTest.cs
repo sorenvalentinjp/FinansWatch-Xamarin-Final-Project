@@ -229,33 +229,21 @@ namespace Prototype.UITest.UnitTests.ModelControllers
         public async void PrepareArticleShouldSetTopImage()
         {
             //Prepare
-            Article article = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291" };
-
-            //Act
-            //_articleController.PrepareArticle()
-
-            //Assert
-
-        }
-
-        [Test]
-        public async void PrepareArticleShouldNotSetTopImage()
-        {
-            //Prepare
             List<TopImage> topImages = new List<TopImage>();
             TopImage topImage = new TopImage();
             topImages.Add(topImage);
-            Article article = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291", topImages = topImages};
+            Article article = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291", topImages = topImages };
 
             //Act
             _articleController.PrepareArticle(article);
 
             //Assert
             Assert.IsNotNull(article.topImage);
+
         }
 
         [Test]
-        public void StripArticleShouldStripArticle()
+        public async void PrepareArticleShouldNotSetTopImage()
         {
             //Prepare
             Article article = new Article { contentUrl = "https://content.watchmedier.dk/api/finanswatch/content/article/9590291"};
@@ -265,27 +253,6 @@ namespace Prototype.UITest.UnitTests.ModelControllers
 
             //Assert
             Assert.IsNull(article.topImage);
-
-        }
-
-        [Test]
-        public void StripAllHtmlParagraphTagsShouldStrippAllHtmlParagraphs()
-        {
-            //Prepare
-
-            //Assert
-
-        }
-
-        [Test]
-        public void StripRelatedArticlesShouldStripRelatedArticles()
-        {
-            //Prepare
-
-            //Assert
-
-        }
-
-
+        }       
     }
 }

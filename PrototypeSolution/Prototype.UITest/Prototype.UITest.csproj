@@ -88,6 +88,7 @@
   <ItemGroup>
     <None Include="JsonFiles\LoginApi_InvalidTokenResponse.json" />
     <Compile Include="UnitTests\Database\LoginApiTest.cs" />
+    <Compile Include="UnitTests\Helpers\ArticleStripperTest.cs" />
     <Compile Include="UnitTests\Helpers\PropertyChangedAsserter.cs" />
     <Compile Include="UnitTests\Helpers\ReadJsonFile.cs" />
     <Compile Include="UnitTests\ModelControllers\ArticleControllerTest.cs" />
