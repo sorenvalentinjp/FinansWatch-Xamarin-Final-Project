@@ -17,16 +17,15 @@ namespace Prototype.UITest.UnitTests.ModelControllers
     {
         LoginController _loginController;
         Mock<ILoginApi> _mockLoginApi;
-        string _validTokenResponse;
-        string _invalidTokenResponse;
         string _validUser;
         string _validPassword;
         string _invalidPassword;
-        SubscriberToken _token;
+        string _validTokenResponse;
+        string _invalidTokenResponse;
         string _validSubscriberResponse;
 
         [SetUp]
-        public void Init()
+        public void Setup()
         {
             _mockLoginApi = new Mock<ILoginApi>();
             _loginController = new LoginController(_mockLoginApi.Object);
@@ -43,11 +42,7 @@ namespace Prototype.UITest.UnitTests.ModelControllers
             //setting up for fetching subscriber using a token
             _validSubscriberResponse = ReadJsonFile.GetFileFromDisk("/../../JsonFiles/LoginApi_ValidSubscriberResponse.json");
 
-            Error myError = new Error() { code = -1 };
-
-            _token = new SubscriberToken() { error = myError, token = "721cb6c8-c670-4082-a674-f283eac296a1" };
-
-            _mockLoginApi.Setup(m => m.DownloadSubscriber(_token)).Returns(Task.FromResult(_validSubscriberResponse));
+            _mockLoginApi.Setup(m => m.DownloadSubscriber(It.IsAny<SubscriberToken>())).Returns(Task.FromResult(_validSubscriberResponse));
         }
 
         [Test]
@@ -68,19 +63,35 @@ namespace Prototype.UITest.UnitTests.ModelControllers
         }
 
         [Test]
+        public void LoginAsyncInvalidToken()
+        {
+            //arrange
+            bool loginEventSuccededIsInvoked = false;
+            bool loginEventErrorOccuredIsInvoked = false;
+            _loginController.LoginEventSucceeded += (subscriber) => { loginEventSuccededIsInvoked = true; };
+            _loginController.LoginEventErrorOccured += (error) => { loginEventErrorOccuredIsInvoked = true; };
+
+            //act
+            _loginController.LoginAsync(_validUser, _invalidPassword);
+
+            //assert
+            Assert.False(loginEventSuccededIsInvoked);
+            Assert.True(loginEventErrorOccuredIsInvoked);
+        }
+
+        [Test]
         public void LogoutEventAction()
         {
             //arrange
-            LoginController loginController = new LoginController() { Subscriber = new Subscriber() };
-            bool isInvoked = false;
-            loginController.LoginEventSucceeded += (subscriber) => { isInvoked = true; };
-            
+            bool loginEventSuccededIsInvoked = false;
+            _loginController.LoginEventSucceeded += (subscriber) => { loginEventSuccededIsInvoked = true; };
+
             //act
-            loginController.LogoutEventAction();
+            _loginController.LogoutEventAction();
 
             //assert
-            Assert.IsNull(loginController.Subscriber);
-            Assert.True(isInvoked);
+            Assert.IsNull(_loginController.Subscriber);
+            Assert.True(loginEventSuccededIsInvoked);
         }
     }
 }
