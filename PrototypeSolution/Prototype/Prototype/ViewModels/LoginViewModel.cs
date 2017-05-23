@@ -78,6 +78,9 @@ namespace Prototype.ViewModels
             }
         }
 
+        /// <summary>
+        /// Directs the user to the website, so he can reset his password
+        /// </summary>
         public ICommand ForgotPasswordCommand
         {
             get
