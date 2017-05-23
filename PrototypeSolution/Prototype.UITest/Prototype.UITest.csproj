@@ -94,6 +94,7 @@
     <Compile Include="UnitTests\ViewModels\ArticleDetailsViewModelTest.cs" />
     <Compile Include="UnitTests\ViewModels\LoginViewModelTest.cs" />
     <Compile Include="UnitTests\ViewModels\ArticleViewModelTest.cs" />
+    <Compile Include="UnitTests\ViewModels\MasterDetailViewModelTest.cs" />
     <None Include="JsonFiles\LoginApi_InvalidTokenResponse.json" />
     <Compile Include="UnitTests\Database\LoginApiTest.cs" />
     <Compile Include="UnitTests\Helpers\ArticleStripperTest.cs" />
