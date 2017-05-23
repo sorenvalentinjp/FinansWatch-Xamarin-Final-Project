@@ -6,7 +6,7 @@
              Title="ALLE NYHEDER">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="ALL" Command="{helpers:ToolBarExtension}"/>
+        <ToolbarItem Command="{helpers:ToolBarExtension}" Icon="{helpers:ImageFromFile LatestNewsBig.png}"/> 
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>

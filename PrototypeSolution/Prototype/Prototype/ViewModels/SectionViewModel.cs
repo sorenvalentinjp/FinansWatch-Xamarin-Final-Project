@@ -66,7 +66,7 @@ namespace Prototype.ViewModels
 
         public SectionViewModel(StateController stateController, Section section)
         {
-            IsRefreshing = true;
+            IsRefreshing = false;
             _stateController = stateController;
             this.ArticleViewModels = new List<ArticleViewModel>();
             Section = section;
