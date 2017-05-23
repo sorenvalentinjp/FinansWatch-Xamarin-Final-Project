@@ -4,7 +4,6 @@
              xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:customRenderers="clr-namespace:Prototype.Views.CustomRenderers"
-             xmlns:helpers="clr-namespace:Prototype.Views.Helpers"
              xmlns:components="clr-namespace:Prototype.Views.ViewComponents"
              x:Class="Prototype.Views.Cells.LargeCellNoImage"
              Tapped="TappedGesture"
