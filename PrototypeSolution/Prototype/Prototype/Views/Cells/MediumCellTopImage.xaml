@@ -20,10 +20,12 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
+            <!--LoadingPlaceholder="{helpers:ImageFromFile imageTransparentSmall.png}"-->
+
             <ffimageloading:CachedImage x:Name="image"
                                         Grid.Row="0" 
                                         Grid.Column="0" 
-                                        LoadingPlaceholder="{helpers:ImageFromFile imageTransparentSmall.png}"
+                                        
                                         Source="{Binding Article.topImage.thumb.url}"
                                         BitmapOptimizations="True"
                                         DownsampleToViewSize="True"

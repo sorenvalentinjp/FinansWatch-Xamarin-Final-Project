@@ -12,8 +12,7 @@
 
     <ViewCell.View>
         <StackLayout Orientation="Vertical">
-            <ffimageloading:CachedImage Source="{helpers:ImageFromFile imagePlaceholderBig.png}"
-                                        BitmapOptimizations="True"
+            <ffimageloading:CachedImage BitmapOptimizations="True"
                                         DownsampleToViewSize="True"
                                         IsOpaque="True"/>
             <StackLayout Orientation="Vertical"

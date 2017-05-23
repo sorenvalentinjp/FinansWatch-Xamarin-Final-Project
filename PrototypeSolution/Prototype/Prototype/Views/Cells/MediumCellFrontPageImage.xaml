@@ -20,8 +20,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
+            <!--LoadingPlaceholder="{Binding Article.image.versions.f.url}"-->
+            
             <ffimageloading:CachedImage x:Name="image"
-                LoadingPlaceholder="{Binding Article.image.versions.f.url}"
+                
                 Source="{Binding Article.image.versions.small_article_220.url}"
                 BitmapOptimizations="True"
                 DownsampleToViewSize="True"
