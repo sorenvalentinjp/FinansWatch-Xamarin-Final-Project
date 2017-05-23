@@ -3,6 +3,8 @@ using Prototype.Database;
 using Prototype.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Text;
 
 namespace Prototype.ModelControllers
@@ -38,24 +40,36 @@ namespace Prototype.ModelControllers
         /// <param name="password"></param>
         public async void LoginAsync(string email, string password)
         {
-            SubscriberToken token = JsonConvert.DeserializeObject<SubscriberToken>(await _loginApi.DownloadLoginToken(email, password));
-
-            //code = 0 means email and password was correctly entered
-            if(token.error.code == 0)
+            try
             {
-                Subscriber subscriber = JsonConvert.DeserializeObject<Subscriber>(await _loginApi.DownloadSubscriber(token));
+                SubscriberToken token = JsonConvert.DeserializeObject<SubscriberToken>(await _loginApi.DownloadLoginToken(email, password));
 
-                //code = 0 once again means no error occured
-                if (subscriber.error.code == 0)
+                //code = 0 means email and password was correctly entered
+                if (token.error.code == 0)
                 {
-                    Subscriber = subscriber;
-                    LoginEventSucceeded?.Invoke(subscriber);
+                    Subscriber subscriber = JsonConvert.DeserializeObject<Subscriber>(await _loginApi.DownloadSubscriber(token));
+
+                    //code = 0 once again means no error occured
+                    if (subscriber.error.code == 0)
+                    {
+                        Subscriber = subscriber;
+                        LoginEventSucceeded?.Invoke(subscriber);
+                    }
+                    else
+                        LoginEventErrorOccured?.Invoke(subscriber.error);
                 }
                 else
-                    LoginEventErrorOccured?.Invoke(subscriber.error);
+                    LoginEventErrorOccured?.Invoke(token.error);
             }
-            else
-                LoginEventErrorOccured?.Invoke(token.error);
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+
+                //Invoke event with a custom error text
+                var error = new Error();
+                error.friendlyErrorText = "Der opstod en fejl. Måske har du ikke forbindelse til internettet?";
+                LoginEventErrorOccured?.Invoke(error);
+            }
         }
 
         /// <summary>
