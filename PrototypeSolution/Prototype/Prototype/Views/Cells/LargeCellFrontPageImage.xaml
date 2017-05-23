@@ -12,8 +12,10 @@
 
     <ViewCell.View>
         <StackLayout Orientation="Vertical">
+
+            <!--LoadingPlaceholder="{Binding Article.image.versions.f.url}"-->
+
             <ffimageloading:CachedImage Source="{Binding Article.topImage.small.url}"
-                                        LoadingPlaceholder="{Binding Article.image.versions.f.url}"
                                         BitmapOptimizations="True"
                                         DownsampleToViewSize="True"
                                         CacheType="All"/>
