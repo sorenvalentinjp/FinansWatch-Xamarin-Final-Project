@@ -446,7 +446,7 @@ namespace Prototype.Models
             }
         }
 
-        private byte[] _imageByteArray;
+        private byte[] _imageByteArray = new byte[0];
         public byte[] ImageByteArray
         {
             get { return _imageByteArray; }
@@ -486,7 +486,7 @@ namespace Prototype.Models
             }
         }
 
-        private byte[] _imageByteArray;
+        private byte[] _imageByteArray = new byte[0];
         public byte[] ImageByteArray
         {
             get { return _imageByteArray; }

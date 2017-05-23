@@ -18,17 +18,9 @@ namespace Prototype.Views.Helpers
             {
                 return null;
             }
+            var imageSource = ImageSource.FromFile(Source);
 
-            return GenerateImageSourceFromFileSource(Source);
-        }
-
-        public static ImageSource GenerateImageSourceFromFileSource(string source)
-        {
-            if (!string.IsNullOrEmpty(source))
-            {
-                return ImageSource.FromResource(source);
-            }
-            else return null;
+            return imageSource;
         }
     }
 }

@@ -15,9 +15,7 @@ namespace Prototype.Views.TemplateSelectors
     public class SectionTemplateSelector : DataTemplateSelector
     {
         public DataTemplate LargeCellTopImageTemplate { get; set; }
-        public DataTemplate LargeCellNoImageTemplate { get; set; }
         public DataTemplate MediumCellTopImageTemplate { get; set; }
-        public DataTemplate MediumCellNoImageTemplate { get; set; }
 
         public SectionTemplateSelector(StateController stateController)
         {

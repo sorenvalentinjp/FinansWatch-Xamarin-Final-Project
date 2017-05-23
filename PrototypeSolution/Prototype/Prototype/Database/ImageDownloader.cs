@@ -22,7 +22,9 @@ namespace Prototype.Database
         {
             //Download the image async
             var uri = new Uri(url);
-            return await _client.GetByteArrayAsync(uri); // get the downloaded data            
+            var byteArray = await _client.GetByteArrayAsync(uri); // get the downloaded data 
+            return byteArray;
+
         }
     }
 }

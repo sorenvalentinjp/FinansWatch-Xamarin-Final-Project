@@ -16,14 +16,14 @@ namespace Prototype.Views.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var byteArray = (byte[])value;
-            if (byteArray != null)
+            if (byteArray != null && byteArray.Length > 0)
             {
                 return (StreamImageSource)Xamarin.Forms.ImageSource.FromStream(
                     () => new MemoryStream(byteArray));
             }
             else
             {
-                return ImageFromFileExtension.GenerateImageSourceFromFileSource("imageTransparentSmall.png");
+                return ImageSource.FromFile("imageTransparentSmall.png");
             }
         }
 

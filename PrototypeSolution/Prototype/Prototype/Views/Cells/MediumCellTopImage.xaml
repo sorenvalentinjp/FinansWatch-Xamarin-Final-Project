@@ -21,16 +21,14 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <!--LoadingPlaceholder="{helpers:ImageFromFile imageTransparentSmall.png}"-->
-
             <ffimageloading:CachedImage x:Name="image"
                                         Grid.Row="0" 
                                         Grid.Column="0"                                         
-                                        Source="{Binding Article.topImage.thumb.ImageByteArray, Converter={converters:ByteArrayToImageSourceConverter}}"
+                                        Source="{Binding Article.topImage.thumb.ImageByteArray, Converter={converters:ByteArrayToImageSourceConverter}}"                                        
                                         BitmapOptimizations="True"
                                         DownsampleToViewSize="True"
-                                        HorizontalOptions="StartAndExpand"
-                                        IsOpaque="false"/>
+                                        HorizontalOptions="StartAndExpand"/>
+            
             <Label Text="{Binding Article.titles.FRONTPAGE}" 
                    Grid.Row="0" 
                    Grid.Column="1" 
