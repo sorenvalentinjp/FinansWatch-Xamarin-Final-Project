@@ -75,9 +75,9 @@ namespace Prototype.ViewModels
 
             _stateController.LoginController.LoginEventSucceeded += LoginEvent;
             _stateController.ArticleController.SavedArticlesChangedEvent += SavedArticlesChanged;
-            
+
             this.Section.ArticlesChanged += BucketIsReady;
-            if(this.Section.Articles != null)
+            if (this.Section.Articles != null)
             {
                 BucketIsReady();
             }
@@ -107,7 +107,7 @@ namespace Prototype.ViewModels
         }
 
         /// <summary>
-        /// When the bucket is ready, then create ArticleViewModels for each article in the section.
+        /// When the bucket is ready, then create ArticleViewModels for each article in the section. 
         /// </summary>
         public void BucketIsReady()
         {
@@ -122,7 +122,7 @@ namespace Prototype.ViewModels
                 IsRefreshing = false;
             });
         }
-        
+
         /// <summary>
         /// Refreshes the section by downloading its article again
         /// </summary>

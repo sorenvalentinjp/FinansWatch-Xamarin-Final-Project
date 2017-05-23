@@ -98,7 +98,7 @@ namespace Prototype.ModelControllers
         }
 
         /// <summary>
-        /// This method downloads articles for a given section + the details for each article in the section.
+        /// This method downloads articles for a given section + the details for each article in the section. If there is no internet connections, it returns the last known collection of articles.
         /// </summary>
         /// <param name="section"></param>
         /// <returns></returns>
@@ -106,8 +106,16 @@ namespace Prototype.ModelControllers
         {
             string json = await _contentApi.DownloadSection(section.SectionContentUrl);
             IList<Article> articles = DeserializeArticlesFromJson(json);
-            GetArticleDetailsForCollectionAsync(articles);
-            return articles;
+            if (articles != null && articles.Count > 0)
+            {
+                GetArticleDetailsForCollectionAsync(articles);
+                return articles;
+            }
+            else
+            {
+                return section.Articles;
+            }
+            
         }
 
         /// <summary>
@@ -124,17 +132,25 @@ namespace Prototype.ModelControllers
         }
 
         /// <summary>
-        /// Downloading latest articles without their details
+        /// Downloading latest articles without their details. If there is no internet connections, it returns the last known collection of latest articles.
         /// </summary>
         /// <returns></returns>
         public async Task<IList<Article>> GetLatestArticlesAsync()
         {
-            this.LatestArticles = DeserializeArticlesFromJson(await _contentApi.DownloadLatestArticles());
-            return this.LatestArticles;
+            var latestArticles = DeserializeArticlesFromJson(await _contentApi.DownloadLatestArticles());
+            if (latestArticles != null && latestArticles.Count > 0)
+            {
+                this.LatestArticles = latestArticles;
+                return this.LatestArticles;
+            }
+            else
+            {
+                return this.LatestArticles;
+            }           
         }
 
         /// <summary>
-        /// Downloading a sections articles without the details.
+        /// Downloading a sections articles without the details. If there is no internet connections, it returns the last known collection of articles.
         /// </summary>
         /// <param name="section"></param>
         /// <returns></returns>
@@ -142,11 +158,18 @@ namespace Prototype.ModelControllers
         {
             IList<Article> articles = DeserializeArticlesFromJson(await _contentApi.DownloadSection(section.SectionContentUrl));
 
-            foreach (var article in articles)
+            if (articles != null && articles.Count > 0)
             {
-                PrepareArticle(article);
-            }            
-            return articles;
+                foreach (var article in articles)
+                {
+                    PrepareArticle(article);
+                }
+                return articles;
+            }
+            else
+            {
+                return section.Articles;
+            }
         }
 
         /// <summary>
