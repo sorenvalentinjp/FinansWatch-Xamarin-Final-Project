@@ -7,7 +7,7 @@
 
     <!--Adds the button at the navigation bar-->
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="ALL" Command="{helpers:ToolBarExtension}"/>
+        <ToolbarItem Command="{helpers:ToolBarExtension}" Icon="{helpers:ImageFromFile LatestNewsBig.png}"/>
     </ContentPage.ToolbarItems>
 
     <!--This view only contains a listview. The template is set by the created templateselector-->
