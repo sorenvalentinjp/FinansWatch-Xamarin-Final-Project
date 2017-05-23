@@ -1,19 +1,12 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Prototype.Database;
 using Prototype.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Linq;
-using Newtonsoft.Json.Converters;
-using Prototype.ViewModels;
-using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using Prototype.Helpers;
 
@@ -27,7 +20,7 @@ namespace Prototype.ModelControllers
     public class ArticleController
     {
         private readonly IContentApi _contentApi;
-        private ImageDownloader _imageDownloader;
+        private readonly ImageDownloader _imageDownloader;
 
         //events
         public event Action SavedArticlesChangedEvent;
@@ -165,7 +158,6 @@ namespace Prototype.ModelControllers
                 foreach (var article in articles)
                 {
                     PrepareArticle(article);
-                    DownloadFrontPageImage(article);
                 }
                 return articles;
             }
@@ -191,7 +183,6 @@ namespace Prototype.ModelControllers
                     var newRelatedArticle = await GetArticleDetailsAsync(relatedArticle.url);
                     //We reuse the url from the related article in order to make equals work
                     newRelatedArticle.contentUrl = relatedArticle.url;
-                    DownloadTopImageThumb(newRelatedArticle);
                     newRelatedArticles.Add(newRelatedArticle);
 
                 }
@@ -214,7 +205,7 @@ namespace Prototype.ModelControllers
             Article detailedArticle = DeserializeArticle(await _contentApi.DownloadArticle(article.contentUrl));
             article.AddFieldsFromAnotherArticle(detailedArticle);
             PrepareArticle(article);
-            DownloadTopImageSmall(article);
+            DownloadTopImages(article);
 
             return article;
         }
@@ -227,7 +218,7 @@ namespace Prototype.ModelControllers
         public async Task<Article> GetArticleDetailsAsync(string contentUrl)
         {
             var article = DeserializeArticle(await _contentApi.DownloadArticle(contentUrl));
-            DownloadTopImageSmall(article);
+            DownloadTopImages(article);
             return article;
 
         }
@@ -317,38 +308,12 @@ namespace Prototype.ModelControllers
             }
         }
 
-        public async Task<Article> DownloadFrontPageImage(Article article)
-        {
-            if (article.image != null)
-            {
-                if (article.isTopArticle)
-                {
-                    article.image.versions.big_article_460.ImageByteArray = 
-                        await _imageDownloader.DownloadImage(article.image.versions.big_article_460.url);
-                }
-                else
-                {
-                    article.image.versions.small_article_220.ImageByteArray = await _imageDownloader.DownloadImage(article.image.versions.small_article_220.url);
-                }
-            }
-            return article;
-        }
-
-        public async Task<Article> DownloadTopImageSmall(Article article)
+        public async Task<Article> DownloadTopImages(Article article)
         {
             var topImage = article.topImages?.FirstOrDefault();
             if (topImage != null)
             {
                 article.topImage.small.ImageByteArray = await _imageDownloader.DownloadImage(article.topImage.small.url);
-            }
-            return article;
-        }
-
-        public async Task<Article> DownloadTopImageThumb(Article article)
-        {
-            var topImage = article.topImages?.FirstOrDefault();
-            if (topImage != null)
-            {
                 article.topImage.thumb.ImageByteArray = await _imageDownloader.DownloadImage(article.topImage.thumb.url);
             }
             return article;

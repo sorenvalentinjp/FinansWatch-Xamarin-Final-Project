@@ -11,43 +11,6 @@ namespace Prototype.UITest.UnitTests.Models
 {
     public class ImageTest
     {
-        [Test]
-        public void ImagePropertyChangedShouldBeFired()
-        {
-            //arrange
-            var image = new Image();
-
-            //Assert
-            PropertyChangedAsserter.AssertPropertyChanged(image, (x) => x.versions = new Versions(), "versions");
-            PropertyChangedAsserter.AssertPropertyChanged(image, (x) => x.imageCaption = "test", "imageCaption");
-        }
-
-        [Test]
-        public void VersionsPropertyChangedShouldBeFired()
-        {
-            //arrange
-            var versions = new Versions();
-
-            //Assert
-            PropertyChangedAsserter.AssertPropertyChanged(versions, (x) => x.big_article_460 = new BigArticle460(), "big_article_460");
-            PropertyChangedAsserter.AssertPropertyChanged(versions, (x) => x.f = new F(), "f");
-            PropertyChangedAsserter.AssertPropertyChanged(versions, (x) => x.small_article_220 = new SmallArticle220(), "small_article_220");
-        }
-
-        [Test]
-        public void ImageVersionsPropertyChangedShouldBeFired()
-        {
-            //arrange
-            var big_article_460 = new BigArticle460();
-            var f = new F();
-            var small_article_220 = new SmallArticle220();
-
-            //Assert
-            PropertyChangedAsserter.AssertPropertyChanged(big_article_460, (x) => x.url = "test", "url");
-            PropertyChangedAsserter.AssertPropertyChanged(f, (x) => x.url = "test", "url");
-            PropertyChangedAsserter.AssertPropertyChanged(small_article_220, (x) => x.url = "test", "url");
-
-        }
 
         [Test]
         public void TopImagePropertyChangedShouldBeFired()

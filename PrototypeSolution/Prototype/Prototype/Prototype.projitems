@@ -54,16 +54,12 @@
       <DependentUpon>DateTimeCellGroupHeader.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\LargeCellFrontPageImage.xaml.cs">
-      <DependentUpon>LargeCellFrontPageImage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\LargeCellTopImage.xaml.cs">
+      <DependentUpon>LargeCellTopImage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\LargeCellNoImage.xaml.cs">
       <DependentUpon>LargeCellNoImage.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\MediumCellFrontPageImage.xaml.cs">
-      <DependentUpon>MediumCellFrontPageImage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\Cells\MediumCellNoImage.xaml.cs">
@@ -163,19 +159,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Cells\MediumCellFrontPageImage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Cells\MediumCellNoImage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Cells\LargeCellFrontPageImage.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Cells\LargeCellTopImage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

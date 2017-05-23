@@ -28,7 +28,6 @@ namespace Prototype.UITest.UnitTests.Models
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.homeSectionId = 1, "homeSectionId");
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.homeSectionName = "test", "homeSectionName");
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.id = 1, "id");
-            PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.image = new Image(), "image");
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.isTopArticle = true, "isTopArticle");
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.lastModified = "19-12-15", "lastModified");
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.publishData = new PublishData(), "publishData");

@@ -14,18 +14,18 @@ namespace Prototype.Models
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        //Generated fields start
-        private Image _image;
-        public Image image
-        {
-            get { return _image; }
-            set
-            {
-                if (_image == value) { return; }
-                _image = value;
-                Notify("image");
-            }
-        }
+        ////Generated fields start
+        //private Image _image;
+        //public Image image
+        //{
+        //    get { return _image; }
+        //    set
+        //    {
+        //        if (_image == value) { return; }
+        //        _image = value;
+        //        Notify("image");
+        //    }
+        //}
 
         private string _desktopUrl;
         public string desktopUrl

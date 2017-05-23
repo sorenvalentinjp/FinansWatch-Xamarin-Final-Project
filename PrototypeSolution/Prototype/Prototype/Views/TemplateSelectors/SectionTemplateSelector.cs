@@ -21,7 +21,7 @@ namespace Prototype.Views.TemplateSelectors
 
         public SectionTemplateSelector(StateController stateController)
         {
-            this.MediumCellFrontPageImageTemplate = new DataTemplate(() => new MediumCellFrontPageImage(stateController));
+            this.MediumCellFrontPageImageTemplate = new DataTemplate(() => new MediumCellTopImage(stateController));
             this.MediumCellNoImageTemplate = new DataTemplate(() => new MediumCellNoImage(stateController));
             this.LargeCellFrontPageImageTemplate = new DataTemplate(() => new LargeCellFrontPageImage(stateController));
             this.LargeCellNoImageTemplate = new DataTemplate(() => new LargeCellNoImage(stateController));
@@ -33,14 +33,14 @@ namespace Prototype.Views.TemplateSelectors
 
             if (articleViewModel.Article.isTopArticle)
             {
-                if (articleViewModel.Article.image == null)
+                if (articleViewModel.Article.topImage == null)
                     return this.LargeCellNoImageTemplate;
                 else
                     return this.LargeCellFrontPageImageTemplate;
             }
             else
             {
-                if (articleViewModel.Article.image == null)
+                if (articleViewModel.Article.topImage == null)
                     return this.MediumCellNoImageTemplate;
                 else
                     return this.MediumCellFrontPageImageTemplate;
