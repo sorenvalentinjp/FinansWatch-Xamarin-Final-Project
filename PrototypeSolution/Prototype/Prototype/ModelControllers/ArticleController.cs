@@ -236,32 +236,32 @@ namespace Prototype.ModelControllers
             try
             {
                 articles = JsonConvert.DeserializeObject<List<Article>>(json);
+
+                foreach (var article in articles)
+                {
+                    //Strip teasers to remove unwanted html tags
+                    ArticleStripper.StripArticleTeasers(article);
+                    try
+                    {
+                        DateTime publishedDateTime = DateTime.ParseExact(article.publishedDate, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
+                        article.publishedDateTime = publishedDateTime;
+                    }
+                    catch (Exception e) { Debug.Print(e.Message); }
+                }
+
+                //The first article in the list is a top article
+                if (articles.Count > 0)
+                {
+                    articles[0].isTopArticle = true;
+                }
+
+                return articles;
             }
             catch (Exception e)
             {
                 Debug.Print("Could not deserialize articles: " + e.Message);
                 return articles;
-            }
-
-            foreach (var article in articles)
-            {
-                //Strip teasers to remove unwanted html tags
-                ArticleStripper.StripArticleTeasers(article);
-                try
-                {
-                    DateTime publishedDateTime = DateTime.ParseExact(article.publishedDate, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
-                    article.publishedDateTime = publishedDateTime;
-                }
-                catch (Exception e) { Debug.Print(e.Message); }
-            }
-
-            //The first article in the list is a top article
-            if (articles.Count > 0)
-            {
-                articles[0].isTopArticle = true;
             }            
-
-            return articles;
         }
 
         /// <summary>
