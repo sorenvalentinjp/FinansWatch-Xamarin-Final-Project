@@ -78,6 +78,18 @@ namespace Prototype.ViewModels
             }
         }
 
+        public ICommand ForgotPasswordCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    string url = "https://secure.finanswatch.dk/user/forgotPassword/";
+                    Device.OpenUri(new Uri(url));
+                });
+            }
+        }
+
         /// <summary>
         /// Directs the user to the watch website using the device's default browser
         /// </summary>
