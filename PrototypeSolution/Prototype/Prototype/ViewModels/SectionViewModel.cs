@@ -83,8 +83,10 @@ namespace Prototype.ViewModels
             }
         }
 
-        //Subscribed Event
-        //If the user just logged in, recalculate if the article should display as locked
+        /// <summary>
+        /// If the user just logged in, recalculate if the article should display as locked
+        /// </summary>
+        /// <param name="subscriber"></param>
         private void LoginEvent(Subscriber subscriber)
         {
             foreach (var articleViewModel in ArticleViewModels)
@@ -93,8 +95,9 @@ namespace Prototype.ViewModels
             }
         }
 
-        //Subscribed Event
-        //If the user adds an article to saved articles, notify article viewm models to update the cell icons
+        /// <summary>
+        /// If the user adds an article to saved articles, notify article viewm models to update the cell icons.
+        /// </summary>
         private void SavedArticlesChanged()
         {
             foreach (var articleViewModel in ArticleViewModels)
@@ -103,6 +106,9 @@ namespace Prototype.ViewModels
             }
         }
 
+        /// <summary>
+        /// When the bucket is ready, then create ArticleViewModels for each article in the section.
+        /// </summary>
         public void BucketIsReady()
         {
             Task.Run(() =>
@@ -116,18 +122,10 @@ namespace Prototype.ViewModels
                 IsRefreshing = false;
             });
         }
-
-        public async void DownloadSectionArticles(Section section)
-        {
-            section.Articles = await this._stateController.ArticleController.GetArticlesAndDetailsForSectionAsync(section);
-            IList<ArticleViewModel> articleViewModels = new List<ArticleViewModel>();
-            foreach (var article in section.Articles)
-            {
-                articleViewModels.Add(new ArticleViewModel(_stateController, article));
-            }
-            this.ArticleViewModels = articleViewModels;
-        }
-
+        
+        /// <summary>
+        /// Refreshes the section by downloading its article again
+        /// </summary>
         public ICommand RefreshCommand
         {
             get
@@ -140,7 +138,6 @@ namespace Prototype.ViewModels
                 });
             }
         }
-
 
         protected void Notify(string propName)
         {

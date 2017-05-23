@@ -28,7 +28,6 @@ namespace Prototype.Views
             var viewModel = new MasterDetailViewModel(stateController, this, frontPageSection);
 
             //Set frontpagebutton to navigate to frontPageSection and set first pageload to frontpage section   
-            
             FrontPageButton.Command = new Command(() =>
             {
                 viewModel.SectionViewAction(frontPageSection);
@@ -52,8 +51,8 @@ namespace Prototype.Views
                     });
                 }
             }
-         
         }
+
         /// <summary>
         /// The first section in the statecontrollers Sections list, is always the frontpage section
         /// </summary>

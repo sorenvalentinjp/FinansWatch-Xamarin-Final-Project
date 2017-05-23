@@ -80,18 +80,27 @@ namespace Prototype.ViewModels
             
         }
 
+        /// <summary>
+        /// Initiates download of bucket 1 and 2.
+        /// </summary>
         private async void InitBucketsDownload()
         {
             await _stateController.GetBucket1();
             _stateController.GetBucket2();
         }
 
+        /// <summary>
+        /// Downloads bucket 2.
+        /// </summary>
         public void GetBucket2()
         {
             _stateController.GetBucket2();
         }
 
-        //This event fires when the user logs in successfully. The detail's view is then set to direct the user back to the last visisted view.
+        /// <summary>
+        /// This event fires when the user logs in successfully. The detail's view is then set to direct the user back to the last visisted view.
+        /// </summary>
+        /// <param name="subscriber"></param>
         private void LoginSucceeded(Subscriber subscriber)
         {
             //Set login button text to "LOG UD"
@@ -114,7 +123,9 @@ namespace Prototype.ViewModels
             }
         }
 
-        //This event fires when the user taps the shorcut button placed in the navigation bar to show AllArticlesView
+        /// <summary>
+        /// This event fires when the user taps the shorcut button placed in the navigation bar to show AllArticlesView
+        /// </summary>
         private void AllArticlesShortcutActionOccured()
         {
             if (this._allArticlesView == null)
@@ -134,6 +145,9 @@ namespace Prototype.ViewModels
                 LoginButtonText = "LOG UD";
         }
 
+        /// <summary>
+        /// Directs the user to AllArticlesView
+        /// </summary>
         public ICommand AllArticlesAction
         {
             get
@@ -149,6 +163,9 @@ namespace Prototype.ViewModels
             }
         }
 
+        /// <summary>
+        /// Directs the user to SavedArticlesView
+        /// </summary>
         public ICommand SavedArticlesAction
         {
             get
@@ -167,12 +184,17 @@ namespace Prototype.ViewModels
             }
         }
 
+        /// <summary>
+        /// This method is used in MasterDetailView.xaml.cs to create
+        /// Directs the user to the SectionView
+        /// </summary>
+        /// <param name="section">The section to display</param>
+        /// <returns></returns>
         public SectionView SectionViewAction(Section section)
         {
             //If a view for this section already exists, save it in var so we can navigate directly to it.
             SectionView sectionView = _sectionViews.FirstOrDefault(
                 (s) => ((SectionViewModel) s.BindingContext).Section.Equals(section));
-
 
             if (sectionView == null)
             {
@@ -228,6 +250,9 @@ namespace Prototype.ViewModels
             }
         }
 
+        /// <summary>
+        /// Directs the user to SearchArticlesView
+        /// </summary>
         public ICommand SearchArticlesAction
         {
             get
