@@ -20,6 +20,7 @@ namespace Prototype.ViewModels
         private Page _allArticlesView;
         private LoginView _loginView;
         private Page _searchArticlesView;
+        private Page _sectionSelectorView;
         private readonly StateController _stateController;
 
         private IList<SectionView> _sectionViews;
@@ -172,12 +173,12 @@ namespace Prototype.ViewModels
             {
                 return new Command(() =>
                 {
-                    if (this._savedArticlesView == null)
+                    if (_savedArticlesView == null)
                     {
-                        this._savedArticlesView = new SavedArticlesView(new SavedArticlesViewModel(_stateController));
+                        _savedArticlesView = new SavedArticlesView(new SavedArticlesViewModel(_stateController));
                     }
 
-                    _masterDetail.Detail = this._savedArticlesView;
+                    _masterDetail.Detail = _savedArticlesView;
 
                     _masterDetail.IsPresented = false;
                 });
@@ -185,7 +186,7 @@ namespace Prototype.ViewModels
         }
 
         /// <summary>
-        /// This method is used in MasterDetailView.xaml.cs to create
+        /// This method is used in MasterDetailView.xaml.cs to create a button for each section
         /// Directs the user to the SectionView
         /// </summary>
         /// <param name="section">The section to display</param>
@@ -222,7 +223,7 @@ namespace Prototype.ViewModels
                     //If logget out, then present the log in view
                     if (LoginButtonText == "LOG IND")
                     {
-                        this._loginView = new LoginView(new LoginViewModel(_stateController));
+                        _loginView = new LoginView(new LoginViewModel(_stateController));
 
                         _latestVisitedView = _masterDetail.Detail;
                         _masterDetail.Detail = this._loginView;
