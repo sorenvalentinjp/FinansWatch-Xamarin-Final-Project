@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:components="clr-namespace:Prototype.Views.Components"
+             xmlns:components="clr-namespace:Prototype.Views.ViewComponents"
              x:Class="Prototype.Views.MasterDetailView"
              MasterBehavior="Default"
              Title="{Binding MasterDetail.Detail.Title}">
@@ -11,12 +11,14 @@
             <ContentPage.Content>
                 <ScrollView>
                     <StackLayout x:Name="StackLayoutButtons"
-                    Padding="5,30,5,5"
-                             BackgroundColor="#213c68">
+                                 Padding="5,30,5,5"
+                                 BackgroundColor="#213c68">
 
                         <components:MasterButton Text="FORSIDE" Command="{Binding FrontPageAction}" x:Name="FrontPageButton"/>
                         <components:MasterButton Text="ALLE NYHEDER" Command="{Binding AllArticlesAction}"/>
                         <components:MasterButton Text="LÆSELISTE" Command="{Binding SavedArticlesAction}"/>
+                        <components:MasterButton x:Name="btnSections" Text="SEKTIONER"/>
+                        <StackLayout x:Name="StackLayoutSectionButtons" Orientation="Vertical" IsVisible="False" Margin="20,1,0,0"/>
                         <components:MasterButton Text="{Binding LoginButtonText}" Command="{Binding LoginAction}"/>
                         <components:MasterButton Text="SØG ARTIKLER" Command="{Binding SearchArticlesAction}"/>
 

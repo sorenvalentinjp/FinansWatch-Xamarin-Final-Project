@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows.Input;
 using Prototype.Models;
 using Prototype.ViewModels;
-using Prototype.Views.Components;
+using Prototype.Views.ViewComponents;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -35,12 +35,19 @@ namespace Prototype.Views
 
             BindingContext = viewModel;
 
+
+            //Setting up btnSections to toggle the visibility of stacklayout containing the section buttons
+            btnSections.Command = new Command(() =>
+            {
+                StackLayoutSectionButtons.IsVisible = !StackLayoutSectionButtons.IsVisible;
+            });
+
             //Create a button for each section except the frontpage, and make a command that handles navigation on button press.
             foreach (var section in _stateController.ArticleController.Sections)
             {
                 if (section != frontPageSection)
                 {
-                    StackLayoutButtons.Children.Add(new MasterButton
+                    StackLayoutSectionButtons.Children.Add(new MasterButton
                     {
                         Text = section.Name,
                         Command = new Command(() =>

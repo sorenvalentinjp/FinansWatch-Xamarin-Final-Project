@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XLabs.Forms.Controls;
 
-namespace Prototype.Views.Components
+namespace Prototype.Views.ViewComponents
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MasterButton : Button
+	public partial class MasterButton : ExtendedButton
 	{
 		public MasterButton ()
 		{
