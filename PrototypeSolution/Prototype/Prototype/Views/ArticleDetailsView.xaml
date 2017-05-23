@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:customRenderers="clr-namespace:Prototype.Views.CustomRenderers"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:helpers="clr-namespace:Prototype.Views.Helpers"
              xmlns:converters="clr-namespace:Prototype.Views.Converters;"
              x:Class="Prototype.Views.ArticleDetailsView"
              Title="{Binding ArticleViewModel.Article.homeSectionName}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="DEL" Command="{Binding ShareCommand}"/>
+        <ToolbarItem Command="{Binding ShareCommand}" Icon="{helpers:ImageFromFile ShareIcon.png}"/>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
