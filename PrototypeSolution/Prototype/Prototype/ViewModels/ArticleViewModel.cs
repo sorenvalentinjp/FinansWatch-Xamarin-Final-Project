@@ -82,6 +82,10 @@ namespace Prototype.ViewModels
             SavedArticlesChanged();
         }
 
+        /// <summary>
+        /// Checks if the article is saved by the user and sets IsSaved accordingly. 
+        /// If IsSaved == true, then an icon indicating this state is shown
+        /// </summary>
         public void SavedArticlesChanged()
         {
             if (_stateController.ArticleController.SavedArticles.Contains(Article))
@@ -92,7 +96,6 @@ namespace Prototype.ViewModels
             {
                 Article.IsSaved = false;
             }
-
         }
 
         /// <summary>
@@ -137,6 +140,10 @@ namespace Prototype.ViewModels
             return locked;
         }
 
+        /// <summary>
+        /// Downloads the details for the article.
+        /// </summary>
+        /// <returns></returns>
         public async Task<ArticleViewModel> GetArticleDetails()
         {
             try
@@ -164,6 +171,5 @@ namespace Prototype.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
-
     }
 }
