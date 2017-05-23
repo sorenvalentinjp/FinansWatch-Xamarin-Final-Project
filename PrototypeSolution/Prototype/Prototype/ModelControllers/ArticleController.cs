@@ -27,6 +27,7 @@ namespace Prototype.ModelControllers
     public class ArticleController
     {
         private readonly IContentApi _contentApi;
+        private ImageDownloader _imageDownloader;
 
         //events
         public event Action SavedArticlesChangedEvent;
@@ -41,6 +42,7 @@ namespace Prototype.ModelControllers
             _contentApi = new ContentApi();
             this.SavedArticles = new ObservableCollection<Article>();
             this.Sections = new List<Section>();
+            _imageDownloader = new ImageDownloader();
         }
 
         /// <summary>
@@ -51,6 +53,7 @@ namespace Prototype.ModelControllers
             _contentApi = contentApi;
             this.SavedArticles = new ObservableCollection<Article>();
             this.Sections = sections;
+            _imageDownloader = new ImageDownloader();
         }
 
         /// <summary>
@@ -82,7 +85,7 @@ namespace Prototype.ModelControllers
             if (frontPageSection != null)
             {
                 GetArticleDetailsForCollectionAsync(frontPageSection.Articles);
-            }            
+            }
 
             //Latest articles is downloaded and awaited. Afterwards the details are downloaded
             //This is to speed up the loading of LatestArticlesView
@@ -90,7 +93,7 @@ namespace Prototype.ModelControllers
             GetArticleDetailsForCollectionAsync(latestArticles);
 
             //Downloading sections
-            for(int i = 1; i < this.Sections.Count; i++)
+            for (int i = 1; i < this.Sections.Count; i++)
             {
                 Section currentSection = this.Sections[i];
                 currentSection.Articles = await GetArticlesAndDetailsForSectionAsync(currentSection);
@@ -104,8 +107,7 @@ namespace Prototype.ModelControllers
         /// <returns></returns>
         public async Task<IList<Article>> GetArticlesAndDetailsForSectionAsync(Section section)
         {
-            string json = await _contentApi.DownloadSection(section.SectionContentUrl);
-            IList<Article> articles = DeserializeArticlesFromJson(json);
+            IList<Article> articles = await GetSectionArticlesAsync(section);
             if (articles != null && articles.Count > 0)
             {
                 GetArticleDetailsForCollectionAsync(articles);
@@ -115,7 +117,7 @@ namespace Prototype.ModelControllers
             {
                 return section.Articles;
             }
-            
+
         }
 
         /// <summary>
@@ -146,7 +148,7 @@ namespace Prototype.ModelControllers
             else
             {
                 return this.LatestArticles;
-            }           
+            }
         }
 
         /// <summary>
@@ -163,6 +165,7 @@ namespace Prototype.ModelControllers
                 foreach (var article in articles)
                 {
                     PrepareArticle(article);
+                    DownloadFrontPageImage(article);
                 }
                 return articles;
             }
@@ -182,14 +185,15 @@ namespace Prototype.ModelControllers
             IList<Article> newRelatedArticles = new List<Article>();
             try
             {
-                
+
                 foreach (var relatedArticle in article.relatedArticles)
                 {
                     var newRelatedArticle = await GetArticleDetailsAsync(relatedArticle.url);
                     //We reuse the url from the related article in order to make equals work
                     newRelatedArticle.contentUrl = relatedArticle.url;
-
+                    DownloadTopImageThumb(newRelatedArticle);
                     newRelatedArticles.Add(newRelatedArticle);
+
                 }
                 return newRelatedArticles;
             }
@@ -210,6 +214,7 @@ namespace Prototype.ModelControllers
             Article detailedArticle = DeserializeArticle(await _contentApi.DownloadArticle(article.contentUrl));
             article.AddFieldsFromAnotherArticle(detailedArticle);
             PrepareArticle(article);
+            DownloadTopImageSmall(article);
 
             return article;
         }
@@ -221,7 +226,10 @@ namespace Prototype.ModelControllers
         /// <returns></returns>
         public async Task<Article> GetArticleDetailsAsync(string contentUrl)
         {
-            return DeserializeArticle(await _contentApi.DownloadArticle(contentUrl));
+            var article = DeserializeArticle(await _contentApi.DownloadArticle(contentUrl));
+            DownloadTopImageSmall(article);
+            return article;
+
         }
 
 
@@ -284,7 +292,7 @@ namespace Prototype.ModelControllers
             {
                 Debug.Print("Could not deserialize articles: " + e.Message);
                 return articles;
-            }            
+            }
         }
 
         /// <summary>
@@ -308,6 +316,44 @@ namespace Prototype.ModelControllers
                 return null;
             }
         }
+
+        public async Task<Article> DownloadFrontPageImage(Article article)
+        {
+            if (article.image != null)
+            {
+                if (article.isTopArticle)
+                {
+                    article.image.versions.big_article_460.ImageByteArray = 
+                        await _imageDownloader.DownloadImage(article.image.versions.big_article_460.url);
+                }
+                else
+                {
+                    article.image.versions.small_article_220.ImageByteArray = await _imageDownloader.DownloadImage(article.image.versions.small_article_220.url);
+                }
+            }
+            return article;
+        }
+
+        public async Task<Article> DownloadTopImageSmall(Article article)
+        {
+            var topImage = article.topImages?.FirstOrDefault();
+            if (topImage != null)
+            {
+                article.topImage.small.ImageByteArray = await _imageDownloader.DownloadImage(article.topImage.small.url);
+            }
+            return article;
+        }
+
+        public async Task<Article> DownloadTopImageThumb(Article article)
+        {
+            var topImage = article.topImages?.FirstOrDefault();
+            if (topImage != null)
+            {
+                article.topImage.thumb.ImageByteArray = await _imageDownloader.DownloadImage(article.topImage.thumb.url);
+            }
+            return article;
+        }
+
 
         /// <summary>
         /// Prepares the an article so it looks good in the app.

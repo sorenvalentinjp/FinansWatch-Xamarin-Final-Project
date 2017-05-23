@@ -4,8 +4,8 @@
              xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:customRenderers="clr-namespace:Prototype.Views.CustomRenderers"
-             xmlns:components="clr-namespace:Prototype.Views.Components"
              xmlns:viewComponents="clr-namespace:Prototype.Views.ViewComponents"
+             xmlns:converters="clr-namespace:Prototype.Views.Converters;assembly=Prototype.Android"
              x:Class="Prototype.Views.Cells.LargeCellFrontPageImage"
              Tapped="TappedGesture"
              LongPressing="LongPressingGesture">
@@ -15,7 +15,7 @@
 
             <!--LoadingPlaceholder="{Binding Article.image.versions.f.url}"-->
 
-            <ffimageloading:CachedImage Source="{Binding Article.topImage.small.url}"
+            <ffimageloading:CachedImage Source="{Binding Article.topImage.small.ImageByteArray, Converter={converters:ByteArrayToImageSourceConverter}}"
                                         BitmapOptimizations="True"
                                         DownsampleToViewSize="True"
                                         CacheType="All"/>

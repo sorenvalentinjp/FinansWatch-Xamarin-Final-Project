@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Xamarin.Forms;
@@ -233,6 +234,17 @@ namespace Prototype.Models
                 Notify("url");
             }
         }
+        private byte[] _imageByteArray;
+        public byte[] ImageByteArray
+        {
+            get { return _imageByteArray; }
+            set
+            {
+                if (_imageByteArray == value) { return; }
+                _imageByteArray = value;
+                Notify("ImageByteArray");
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -262,6 +274,19 @@ namespace Prototype.Models
             }
         }
 
+        private byte[] _imageByteArray;
+        public byte[] ImageByteArray
+        {
+            get { return _imageByteArray; }
+            set
+            {
+                if (_imageByteArray == value) { return; }
+                _imageByteArray = value;
+                Notify("ImageByteArray");
+            }
+        }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void Notify(string propName)
@@ -287,6 +312,18 @@ namespace Prototype.Models
                 if (_url == value) { return; }
                 _url = value;
                 Notify("url");
+            }
+        }
+
+        private byte[] _imageByteArray;
+        public byte[] ImageByteArray
+        {
+            get { return _imageByteArray; }
+            set
+            {
+                if (_imageByteArray == value) { return; }
+                _imageByteArray = value;
+                Notify("ImageByteArray");
             }
         }
 
@@ -409,6 +446,18 @@ namespace Prototype.Models
             }
         }
 
+        private byte[] _imageByteArray;
+        public byte[] ImageByteArray
+        {
+            get { return _imageByteArray; }
+            set
+            {
+                if (_imageByteArray == value) { return; }
+                _imageByteArray = value;
+                Notify("ImageByteArray");
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void Notify(string propName)
@@ -434,6 +483,18 @@ namespace Prototype.Models
                 if (_url == value) { return; }
                 _url = value;
                 Notify("url");
+            }
+        }
+
+        private byte[] _imageByteArray;
+        public byte[] ImageByteArray
+        {
+            get { return _imageByteArray; }
+            set
+            {
+                if (_imageByteArray == value) { return; }
+                _imageByteArray = value;
+                Notify("ImageByteArray");
             }
         }
 

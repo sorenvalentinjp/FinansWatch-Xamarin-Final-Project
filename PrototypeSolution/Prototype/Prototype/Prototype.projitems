@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Database\ContentApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\IContentApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\ILoginApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Database\ImageDownloader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\LocalStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\LoginApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ArticleStripper.cs" />
@@ -73,6 +74,7 @@
       <DependentUpon>MediumCellTopImage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Converters\ByteArrayToImageSourceConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ViewComponents\MasterButton.xaml.cs">
       <DependentUpon>MasterButton.xaml</DependentUpon>
       <SubType>Code</SubType>

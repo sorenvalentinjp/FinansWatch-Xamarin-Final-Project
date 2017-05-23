@@ -5,6 +5,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:helpers="clr-namespace:Prototype.Views.Helpers"
              xmlns:components="clr-namespace:Prototype.Views.ViewComponents"
+             xmlns:converters="clr-namespace:Prototype.Views.Converters;assembly=Prototype.Android"
              x:Class="Prototype.Views.Cells.MediumCellTopImage"
              Tapped="TappedGesture"
              LongPressing="LongPressingGesture">
@@ -26,7 +27,7 @@
                                         Grid.Row="0" 
                                         Grid.Column="0" 
                                         
-                                        Source="{Binding Article.topImage.thumb.url}"
+                                        Source="{Binding Article.topImage.thumb.ImageByteArray, Converter={converters:ByteArrayToImageSourceConverter}}"
                                         BitmapOptimizations="True"
                                         DownsampleToViewSize="True"
                                         HorizontalOptions="StartAndExpand"
