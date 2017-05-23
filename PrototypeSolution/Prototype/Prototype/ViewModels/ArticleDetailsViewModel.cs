@@ -11,6 +11,9 @@ using Prototype.Views;
 using Prototype.Views.Helpers;
 using Prototype.Views.TemplateSelectors;
 using Xamarin.Forms;
+using Plugin.Share;
+using Plugin.Share.Abstractions;
+using System.Linq;
 
 namespace Prototype.ViewModels
 {
@@ -117,6 +120,30 @@ namespace Prototype.ViewModels
                 {
                     string url = "https://secure.finanswatch.dk/user/create?mode=trial";
                     Device.OpenUri(new Uri(url));
+                });
+            }
+        }
+
+        /// <summary>
+        /// Allows the user to share the article using the native interface og the users device
+        /// </summary>
+        public ICommand ShareCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    ShareMessage msg = new ShareMessage();
+                    msg.Url = this.ArticleViewModel.Article.desktopUrl;
+
+                    if (msg.Url != null)
+                    {
+                        await CrossShare.Current.Share(msg);
+                    }
+                    else
+                    {
+                        await App.Navigation.NavigationStack.First().DisplayAlert("", "Artiklen kan desværre ikke deles, fordi artiklens web adresse ikke kunne findes.", "OK");
+                    }
                 });
             }
         }

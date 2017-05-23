@@ -7,6 +7,10 @@
              x:Class="Prototype.Views.ArticleDetailsView"
              Title="{Binding ArticleViewModel.Article.homeSectionName}">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="DEL" Command="{Binding ShareCommand}"/>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <ListView x:Name="listView"
                 ItemsSource="{Binding RelatedArticleViewModels}"
