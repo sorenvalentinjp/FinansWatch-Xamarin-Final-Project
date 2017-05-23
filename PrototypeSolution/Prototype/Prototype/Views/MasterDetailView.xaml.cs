@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows.Input;
 using Prototype.Models;
 using Prototype.ViewModels;
-using Prototype.Views.Components;
+using Prototype.Views.ViewComponents;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
