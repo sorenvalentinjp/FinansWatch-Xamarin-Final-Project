@@ -62,10 +62,5 @@ namespace Prototype
             Application.Current.Properties["stateController"] = LocalStorage.SerializeToJson(_stateController);
 
         }
-
-        public static bool IsSubscriberLoggedIn()
-        {
-            return _stateController.LoginController.Subscriber != null;
-        }
     }
 }
