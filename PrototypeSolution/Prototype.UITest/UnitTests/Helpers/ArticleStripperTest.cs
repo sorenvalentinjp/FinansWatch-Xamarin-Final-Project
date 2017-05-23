@@ -80,7 +80,7 @@ namespace Prototype.UITest.UnitTests.Helpers
         }
 
         [Test]
-        public void StripAllHtmlParagraphTagsShouldStrippAllHtmlParagraphs()
+        public void StripAllHtmlParagraphTagsShouldStripAllHtmlParagraphs()
         {
             //Arrange
             string str = "<p>This</p> string contains <p>some</p> html <p>paragraph tags</p>";
@@ -93,7 +93,7 @@ namespace Prototype.UITest.UnitTests.Helpers
         }
 
         [Test]
-        public void StropRelatedArticlesShouldNotThrowExceptionWhenInputIsNull()
+        public void StripRelatedArticlesShouldNotThrowExceptionWhenInputIsNull()
         {
             //Arrange
             string str = null;

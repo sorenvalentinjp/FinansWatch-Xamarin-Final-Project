@@ -27,7 +27,7 @@ namespace Prototype.Views.Helpers
             {
                 return new Command(() =>
                 {
-                    AllArticlesShortcutActionOccured();
+                    AllArticlesShortcutActionOccured?.Invoke();
                 });
             }
         }
