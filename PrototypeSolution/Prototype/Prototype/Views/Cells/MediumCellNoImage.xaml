@@ -25,7 +25,8 @@
                                         Grid.Column="0" 
                                         Source="{helpers:ImageFromFile imageTransparentSmall.png}"
                                         BitmapOptimizations="True"
-                                        DownsampleToViewSize="True"/>
+                                        DownsampleToViewSize="True"
+                                        IsOpaque="True"/>
             <Label Text="{Binding Article.titles.FRONTPAGE}" 
                    Grid.Row="0" 
                    Grid.Column="1" 

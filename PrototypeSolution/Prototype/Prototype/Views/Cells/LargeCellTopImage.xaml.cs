@@ -13,11 +13,11 @@ using Xamarin.Forms.Xaml;
 namespace Prototype.Views.Cells
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class LargeCellFrontPageImage : MR.Gestures.ViewCell
+	public partial class LargeCellTopImage : MR.Gestures.ViewCell
 	{
         private readonly StateController _stateController;
 
-        public LargeCellFrontPageImage(StateController stateController)
+        public LargeCellTopImage(StateController stateController)
 		{
 			InitializeComponent();
             this._stateController = stateController;

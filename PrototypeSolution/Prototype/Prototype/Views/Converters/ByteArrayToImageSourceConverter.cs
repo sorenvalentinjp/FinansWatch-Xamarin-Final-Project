@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using Prototype.Views.Helpers;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,7 +23,7 @@ namespace Prototype.Views.Converters
             }
             else
             {
-                return null;
+                return ImageFromFileExtension.GenerateImageSourceFromFileSource("imageTransparentSmall.png");
             }
         }
 

@@ -5,6 +5,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:components="clr-namespace:Prototype.Views.ViewComponents"
              xmlns:converters="clr-namespace:Prototype.Views.Converters"
+             xmlns:helpers="clr-namespace:Prototype.Views.Helpers"
              x:Class="Prototype.Views.Cells.MediumCellTopImage"
              Tapped="TappedGesture"
              LongPressing="LongPressingGesture">
@@ -24,13 +25,12 @@
 
             <ffimageloading:CachedImage x:Name="image"
                                         Grid.Row="0" 
-                                        Grid.Column="0" 
-                                        
+                                        Grid.Column="0"                                         
                                         Source="{Binding Article.topImage.thumb.ImageByteArray, Converter={converters:ByteArrayToImageSourceConverter}}"
                                         BitmapOptimizations="True"
                                         DownsampleToViewSize="True"
                                         HorizontalOptions="StartAndExpand"
-                                        IsOpaque="True"/>
+                                        IsOpaque="false"/>
             <Label Text="{Binding Article.titles.FRONTPAGE}" 
                    Grid.Row="0" 
                    Grid.Column="1" 

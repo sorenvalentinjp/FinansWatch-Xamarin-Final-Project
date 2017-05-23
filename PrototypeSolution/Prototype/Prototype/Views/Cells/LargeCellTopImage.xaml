@@ -6,7 +6,7 @@
              xmlns:customRenderers="clr-namespace:Prototype.Views.CustomRenderers"
              xmlns:viewComponents="clr-namespace:Prototype.Views.ViewComponents"
              xmlns:converters="clr-namespace:Prototype.Views.Converters"
-             x:Class="Prototype.Views.Cells.LargeCellFrontPageImage"
+             x:Class="Prototype.Views.Cells.LargeCellTopImage"
              Tapped="TappedGesture"
              LongPressing="LongPressingGesture">
 
@@ -18,7 +18,7 @@
             <ffimageloading:CachedImage Source="{Binding Article.topImage.small.ImageByteArray, Converter={converters:ByteArrayToImageSourceConverter}}"
                                         BitmapOptimizations="True"
                                         DownsampleToViewSize="True"
-                                        CacheType="All"/>
+                                        IsOpaque="false"/>
             <StackLayout Orientation="Vertical"
                          Padding="10,0,10,10">
                 <Label Text="{Binding Article.titles.FRONTPAGE}"

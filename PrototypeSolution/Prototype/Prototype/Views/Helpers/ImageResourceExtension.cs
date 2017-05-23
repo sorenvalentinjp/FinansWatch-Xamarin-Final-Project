@@ -18,7 +18,7 @@ namespace Prototype.Views.Helpers
             {
                 return null;
             }
-            // Do your translation lookup here, using whatever method you require
+
             var imageSource = ImageSource.FromResource(Source);
 
             return imageSource;

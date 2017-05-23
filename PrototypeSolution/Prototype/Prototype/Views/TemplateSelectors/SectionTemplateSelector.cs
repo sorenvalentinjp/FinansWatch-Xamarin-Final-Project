@@ -14,17 +14,15 @@ namespace Prototype.Views.TemplateSelectors
     /// </summary>
     public class SectionTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate LargeCellFrontPageImageTemplate { get; set; }
+        public DataTemplate LargeCellTopImageTemplate { get; set; }
         public DataTemplate LargeCellNoImageTemplate { get; set; }
-        public DataTemplate MediumCellFrontPageImageTemplate { get; set; }
+        public DataTemplate MediumCellTopImageTemplate { get; set; }
         public DataTemplate MediumCellNoImageTemplate { get; set; }
 
         public SectionTemplateSelector(StateController stateController)
         {
-            this.MediumCellFrontPageImageTemplate = new DataTemplate(() => new MediumCellTopImage(stateController));
-            this.MediumCellNoImageTemplate = new DataTemplate(() => new MediumCellNoImage(stateController));
-            this.LargeCellFrontPageImageTemplate = new DataTemplate(() => new LargeCellFrontPageImage(stateController));
-            this.LargeCellNoImageTemplate = new DataTemplate(() => new LargeCellNoImage(stateController));
+            this.MediumCellTopImageTemplate = new DataTemplate(() => new MediumCellTopImage(stateController));
+            this.LargeCellTopImageTemplate = new DataTemplate(() => new LargeCellTopImage(stateController));
         }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
@@ -33,17 +31,11 @@ namespace Prototype.Views.TemplateSelectors
 
             if (articleViewModel.Article.isTopArticle)
             {
-                if (articleViewModel.Article.topImage == null)
-                    return this.LargeCellNoImageTemplate;
-                else
-                    return this.LargeCellFrontPageImageTemplate;
+                    return this.LargeCellTopImageTemplate;
             }
             else
             {
-                if (articleViewModel.Article.topImage == null)
-                    return this.MediumCellNoImageTemplate;
-                else
-                    return this.MediumCellFrontPageImageTemplate;
+                    return this.MediumCellTopImageTemplate;
             }
         }
     }
