@@ -40,6 +40,7 @@ namespace Prototype.UITest.UnitTests.Models
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.topImage = new TopImage(), "topImage");
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.topImages = new List<TopImage>(), "topImages");
             PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.publishedDate = "19-11-17", "publishedDate");
+            PropertyChangedAsserter.AssertPropertyChanged(article, (x) => x.desktopUrl = "someUrl", "desktopUrl");
         }
 
         [Test]

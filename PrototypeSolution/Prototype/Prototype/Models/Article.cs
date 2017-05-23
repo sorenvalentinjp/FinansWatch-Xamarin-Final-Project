@@ -26,7 +26,19 @@ namespace Prototype.Models
                 Notify("image");
             }
         }
-        //public string desktopUrl { get; set; }
+
+        private string _desktopUrl;
+        public string desktopUrl
+        {
+            get { return _desktopUrl; }
+            set
+            {
+                if (_desktopUrl == value) { return; }
+                _desktopUrl = value;
+                Notify("desktopUrl");
+            }
+        }
+
         private string _homeSectionName;
         public string homeSectionName
         {
