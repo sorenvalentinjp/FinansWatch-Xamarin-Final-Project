@@ -8,8 +8,7 @@
              xmlns:converters="clr-namespace:Prototype.Views.Converters"
              x:Class="Prototype.Views.Cells.LargeCellTopImage"
              Tapped="TappedGesture"
-             LongPressing="LongPressingGesture"
-    Height="600">
+             LongPressing="LongPressingGesture">
 
     <ViewCell.View>
         <StackLayout Orientation="Vertical">

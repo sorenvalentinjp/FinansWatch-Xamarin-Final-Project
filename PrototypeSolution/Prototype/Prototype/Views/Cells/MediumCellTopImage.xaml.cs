@@ -16,11 +16,14 @@ namespace Prototype.Views.Cells
     public partial class MediumCellTopImage : MR.Gestures.ViewCell
     {
         private readonly StateController _stateController;
+        public int CellHeight;
 
         public MediumCellTopImage(StateController stateController)
         {
             InitializeComponent();
             this._stateController = stateController;
+            this.Height = App.ScreenHeight / 7;
+
         }
 
         private void TappedGesture(object sender, MR.Gestures.TapEventArgs e)

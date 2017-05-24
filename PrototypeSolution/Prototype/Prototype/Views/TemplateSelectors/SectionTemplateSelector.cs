@@ -22,7 +22,6 @@ namespace Prototype.Views.TemplateSelectors
         {
             this.MediumCellTopImageTemplate = new DataTemplate(() => new MediumCellTopImage(stateController));
             this.LargeCellTopImageTemplate = new DataTemplate(() => new LargeCellTopImage(stateController));
-            this.MediumCellNoImageTemplate = new DataTemplate(() => new MediumCellNoImage(stateController));
         }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
@@ -35,14 +34,8 @@ namespace Prototype.Views.TemplateSelectors
             }
             else
             {
-                if(articleViewModel.Article.topImage != null)
-                {
                     return this.MediumCellTopImageTemplate;
-                }
-                else
-                {
-                    return this.MediumCellNoImageTemplate;
-                }
+
             }
         }
     }

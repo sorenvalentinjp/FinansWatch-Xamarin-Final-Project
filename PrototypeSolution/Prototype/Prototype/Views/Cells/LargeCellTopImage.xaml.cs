@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,6 +20,11 @@ namespace Prototype.Views.Cells
 		{
 			InitializeComponent();
             this._stateController = stateController;
+
+            if (Device.RuntimePlatform == "iOS")
+            {
+                this.Height = App.ScreenHeight / 2;
+            } 
         }
 
         private void TappedGesture(object sender, MR.Gestures.TapEventArgs e)
