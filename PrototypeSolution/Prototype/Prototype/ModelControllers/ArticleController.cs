@@ -58,13 +58,13 @@ namespace Prototype.ModelControllers
             Section frontPageSection = this.Sections.FirstOrDefault();
             if (frontPageSection != null)
             {
-                frontPageSection.Articles = await GetSectionArticlesAsync(frontPageSection);
+                var articles = await GetSectionArticlesAsync(frontPageSection);
 
-                if (frontPageSection.Articles != null)
+                if (articles != null)
                 {
-                    await GetArticleDetailsForCollectionAsync(frontPageSection.Articles);
+                    await GetArticleDetailsForCollectionAsync(articles);
                 }
-
+                frontPageSection.Articles = articles;
                 return frontPageSection.Articles;
             }
             else

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <mr:ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mr="clr-namespace:MR.Gestures;assembly=MR.Gestures"
@@ -7,7 +7,8 @@
              xmlns:components="clr-namespace:Prototype.Views.ViewComponents"
              x:Class="Prototype.Views.Cells.MediumCellNoImage"
              Tapped="TappedGesture"
-             LongPressing="LongPressingGesture">
+             LongPressing="LongPressingGesture"
+    Height="150">
 
     <ViewCell.View>
         <Grid Margin="10,10,10,10">
