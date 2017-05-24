@@ -59,11 +59,6 @@ namespace Prototype.ModelControllers
             if (frontPageSection != null)
             {
                 var articles = await GetSectionArticlesAsync(frontPageSection);
-
-                if (articles != null)
-                {
-                    await GetArticleDetailsForCollectionAsync(articles);
-                }
                 frontPageSection.Articles = articles;
                 return frontPageSection.Articles;
             }
@@ -79,7 +74,12 @@ namespace Prototype.ModelControllers
         /// <returns></returns>
         public async Task GetBucket2Async()
         {
-
+            //Get Details for frontpage articles
+            var frontPageSection = Sections.FirstOrDefault();
+            if (frontPageSection != null)
+            {
+                frontPageSection.Articles = await GetArticleDetailsForCollectionAsync(frontPageSection.Articles);
+            }
 
             //Latest articles is downloaded and awaited. Afterwards the details are downloaded
             //This is to speed up the loading of LatestArticlesView
@@ -206,7 +206,7 @@ namespace Prototype.ModelControllers
             Article detailedArticle = DeserializeArticle(await _contentApi.DownloadArticle(article.contentUrl));
             article.AddFieldsFromAnotherArticle(detailedArticle);
             PrepareArticle(article);
-            await DownloadTopImages(article);
+            DownloadTopImages(article);
 
             return article;
         }
@@ -219,7 +219,7 @@ namespace Prototype.ModelControllers
         public async Task<Article> GetArticleDetailsAsync(string contentUrl)
         {
             var article = DeserializeArticle(await _contentApi.DownloadArticle(contentUrl));
-            await DownloadTopImages(article);
+            DownloadTopImages(article);
             return article;
 
         }
