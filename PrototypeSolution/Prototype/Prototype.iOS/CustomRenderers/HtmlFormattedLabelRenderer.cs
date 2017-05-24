@@ -43,7 +43,7 @@ namespace Prototype.iOS.CustomRenderers
 
                     if (Element.Text != null && Element.Text != "")
                     {
-                        var myHtmlData = NSData.FromString(Element.Text, NSStringEncoding.Unicode);
+                        var myHtmlData = NSData.FromString(Element.Text, NSStringEncoding.UTF8);
                         Control.Lines = 0;
                         Control.AttributedText = new NSAttributedString(myHtmlData, attr, ref nsError);
                     }
