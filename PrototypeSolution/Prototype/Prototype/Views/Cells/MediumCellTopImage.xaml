@@ -8,8 +8,7 @@
              xmlns:helpers="clr-namespace:Prototype.Views.Helpers"
              x:Class="Prototype.Views.Cells.MediumCellTopImage"
              Tapped="TappedGesture"
-             LongPressing="LongPressingGesture"
-             PropertyChanged="MediumCellTopImage_OnPropertyChanged">
+             LongPressing="LongPressingGesture">
 
     <ViewCell.View>
         <Grid Margin="10,10,10,10">

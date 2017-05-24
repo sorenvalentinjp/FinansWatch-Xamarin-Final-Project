@@ -3,7 +3,6 @@ using Prototype.Models;
 using Prototype.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,11 +33,6 @@ namespace Prototype.Views.Cells
         {
             ArticleViewModel articleViewModel = (ArticleViewModel)BindingContext;
             CellGestures.LongPressingGesture(_stateController, articleViewModel);
-        }
-
-        private void MediumCellTopImage_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            this.ForceUpdateSize();
         }
     }
 }
