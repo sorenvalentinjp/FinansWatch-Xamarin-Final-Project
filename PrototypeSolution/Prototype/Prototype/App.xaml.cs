@@ -10,6 +10,7 @@ using Prototype.ViewModels;
 using Xamarin.Forms;
 using Prototype.Database;
 using Xamarin.Forms.Xaml;
+using System.Diagnostics;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Prototype
@@ -18,6 +19,8 @@ namespace Prototype
     {
         public static INavigation Navigation { get; set; }
         private static StateController _stateController;
+        public static int ScreenWidth { get; set; }
+        public static int ScreenHeight { get; set; }
 
         public App()
         {
@@ -26,6 +29,7 @@ namespace Prototype
 
         protected override void OnStart()
         {
+            Debug.Print(ScreenWidth + " --- " + ScreenHeight);
             // Handle when your app starts
             if (Application.Current.Properties.ContainsKey("stateController"))
             {

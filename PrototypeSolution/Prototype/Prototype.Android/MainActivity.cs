@@ -31,7 +31,10 @@ namespace Prototype.Droid
             LoadApplication (new Prototype.App ());
 
             
-            Window.SetStatusBarColor(Android.Graphics.Color.Rgb(0, 0, 0));            
+            Window.SetStatusBarColor(Android.Graphics.Color.Rgb(0, 0, 0));
+
+            App.ScreenWidth = (int)(Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density);
+            App.ScreenHeight = (int)(Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density);
         }
 	}
 }
