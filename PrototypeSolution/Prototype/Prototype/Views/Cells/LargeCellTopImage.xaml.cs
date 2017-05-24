@@ -21,10 +21,18 @@ namespace Prototype.Views.Cells
 			InitializeComponent();
             this._stateController = stateController;
 
-            if (Device.RuntimePlatform == "iOS")
+            if(Device.RuntimePlatform == "iOS")
             {
-                this.Height = App.ScreenHeight / 2;
-            } 
+                if (Device.Idiom == TargetIdiom.Tablet)
+                {
+                    this.Height = App.ScreenHeight * 0.6;
+                }
+                else if (Device.Idiom == TargetIdiom.Phone)
+                {
+                    this.Height = App.ScreenHeight * 0.8;
+                }
+            }
+
         }
 
         private void TappedGesture(object sender, MR.Gestures.TapEventArgs e)
