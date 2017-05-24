@@ -20,6 +20,15 @@ namespace Prototype.Views.Cells
 		{
 			InitializeComponent ();
             this._stateController = stateController;
+
+            if (Device.Idiom == TargetIdiom.Tablet)
+            {
+                this.Height = App.ScreenHeight / 10;
+            }
+            else if (Device.Idiom == TargetIdiom.Phone)
+            {
+                this.Height = App.ScreenHeight / 7;
+            }
         }
 
         private void TappedGesture(object sender, MR.Gestures.TapEventArgs e)

@@ -32,7 +32,6 @@ namespace Prototype.Views.Cells
                     this.Height = App.ScreenHeight * 0.8;
                 }
             }
-
         }
 
         private void TappedGesture(object sender, MR.Gestures.TapEventArgs e)

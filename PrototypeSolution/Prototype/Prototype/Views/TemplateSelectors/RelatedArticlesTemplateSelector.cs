@@ -15,21 +15,16 @@ namespace Prototype.Views.TemplateSelectors
     public class RelatedArticlesTemplateSelector : DataTemplateSelector
     {
         public DataTemplate MediumCellTopImageTemplate { get; set; }
-        public DataTemplate MediumCellNoImageTemplate { get; set; }
 
         public RelatedArticlesTemplateSelector(StateController stateController)
         {
-            this.MediumCellTopImageTemplate = new DataTemplate(() => new MediumCellTopImage(stateController));
-            this.MediumCellNoImageTemplate = new DataTemplate(() => new MediumCellNoImage(stateController));            
+            this.MediumCellTopImageTemplate = new DataTemplate(() => new MediumCellTopImage(stateController));       
         }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
             ArticleViewModel articleViewModel = (ArticleViewModel)item;
 
-            if (articleViewModel.Article.topImage == null)
-                return this.MediumCellNoImageTemplate;
-            else
                 return this.MediumCellTopImageTemplate;
         }
     }
