@@ -10,7 +10,7 @@
              LongPressing="LongPressingGesture">
 
     <ViewCell.View>
-        <Grid Margin="10,5,10,5">
+        <Grid Margin="10,10,10,10">
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -26,7 +26,8 @@
                                         Source="{helpers:ImageFromFile imageTransparentSmall.png}"
                                         BitmapOptimizations="True"
                                         DownsampleToViewSize="True"
-                                        IsOpaque="True"/>
+                                        IsOpaque="True"
+                                        HorizontalOptions="StartAndExpand"/>
             <Label Text="{Binding Article.titles.FRONTPAGE}" 
                    Grid.Row="0" 
                    Grid.Column="1" 
