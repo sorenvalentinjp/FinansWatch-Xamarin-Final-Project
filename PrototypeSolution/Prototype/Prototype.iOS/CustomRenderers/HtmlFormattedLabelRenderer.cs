@@ -24,9 +24,11 @@ namespace Prototype.iOS.CustomRenderers
             var attr = new NSAttributedStringDocumentAttributes();
             var nsError = new NSError();
             attr.DocumentType = NSDocumentType.HTML;
+            attr.StringEncoding = NSStringEncoding.UTF8;
 
+            var myHtmlData = NSData.FromString(Element.Text, NSStringEncoding.UTF8);
             Control.Lines = 1000;
-            Control.AttributedText = new NSAttributedString(view.Text, attr, ref nsError);
+            Control.AttributedText = new NSAttributedString(myHtmlData, attr, ref nsError);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -40,6 +42,7 @@ namespace Prototype.iOS.CustomRenderers
                     var attr = new NSAttributedStringDocumentAttributes();
                     var nsError = new NSError();
                     attr.DocumentType = NSDocumentType.HTML;
+                    attr.StringEncoding = NSStringEncoding.UTF8;
 
                     if (Element.Text != null && Element.Text != "")
                     {
