@@ -242,7 +242,7 @@
     <BundleResource Include="Resources\LatestNewsBig.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\ShareIcon.png" />
+    <BundleResource Include="Resources\ShareIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
