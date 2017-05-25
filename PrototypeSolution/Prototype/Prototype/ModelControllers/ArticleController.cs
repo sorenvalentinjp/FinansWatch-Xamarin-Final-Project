@@ -135,8 +135,9 @@ namespace Prototype.ModelControllers
         {
             var latestArticles = DeserializeArticlesFromJson(await _contentApi.DownloadLatestArticles());
             if (latestArticles != null && latestArticles.Count > 0)
-            {
+            {                
                 this.LatestArticles = latestArticles;
+                GetArticleDetailsForCollectionAsync(this.LatestArticles);
                 return this.LatestArticles;
             }
             else
