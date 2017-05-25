@@ -52,6 +52,11 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <IOSDebugOverWiFi>False</IOSDebugOverWiFi>
     <IOSDebuggerPort>10000</IOSDebuggerPort>
+    <CodesignProvision>
+    </CodesignProvision>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <DeviceSpecificBuild>true</DeviceSpecificBuild>
+    <MtouchFastDev>true</MtouchFastDev>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
