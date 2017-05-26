@@ -26,9 +26,16 @@ namespace Prototype.iOS.CustomRenderers
             attr.DocumentType = NSDocumentType.HTML;
             attr.StringEncoding = NSStringEncoding.UTF8;
 
-            var myHtmlData = NSData.FromString(Element.Text, NSStringEncoding.UTF8);
-            Control.Lines = 1000;
+            //Append the html string with a style tag. This will make the fontsize and fontfamily attribute on a label work on HtmlFormattedLabel
+            var styles = @"<style>body{font - family: " + Element.FontFamily + "; font-size:" + Element.FontSize + "px;}</style>";
+            var htmlStringWithStyle = Element.Text + styles;
+
+            var myHtmlData = NSData.FromString(htmlStringWithStyle, NSStringEncoding.UTF8);
+
+            Control.Lines = 0;
             Control.AttributedText = new NSAttributedString(myHtmlData, attr, ref nsError);
+
+            
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -46,7 +53,12 @@ namespace Prototype.iOS.CustomRenderers
 
                     if (Element.Text != null && Element.Text != "")
                     {
-                        var myHtmlData = NSData.FromString(Element.Text, NSStringEncoding.UTF8);
+                        //Append the html string with a style tag. This will make the fontsize and fontfamily attribute on a label work on HtmlFormattedLabel
+                        var styles = @"<style>body{font - family: " + Element.FontFamily + "; font-size:" + Element.FontSize + "px;}</style>";
+                        var htmlStringWithStyle = Element.Text + styles;
+
+                        var myHtmlData = NSData.FromString(htmlStringWithStyle, NSStringEncoding.UTF8);
+
                         Control.Lines = 0;
                         Control.AttributedText = new NSAttributedString(myHtmlData, attr, ref nsError);
                     }
