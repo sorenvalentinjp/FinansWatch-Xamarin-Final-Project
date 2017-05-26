@@ -7,7 +7,7 @@
 
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{helpers:ToolBarExtension}" Icon="{helpers:ImageFromFile LatestNewsBig.png}"/>
+        <ToolbarItem Command="{helpers:ToolBarExtension}" Icon="{helpers:ImageFromFile ic_action_latest_articles.png}"/>
     </ContentPage.ToolbarItems>
 
     <StackLayout Margin="35">

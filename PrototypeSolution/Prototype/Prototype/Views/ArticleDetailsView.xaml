@@ -9,7 +9,7 @@
              Title="{Binding ArticleViewModel.Article.homeSectionName}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding ShareCommand}" Icon="{helpers:ImageFromFile ShareIcon.png}"/>
+        <ToolbarItem Command="{Binding ShareCommand}" Icon="{helpers:ImageFromFile ic_action_share.png}"/>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>

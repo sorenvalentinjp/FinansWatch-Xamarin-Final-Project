@@ -10,7 +10,7 @@ using FFImageLoading.Forms.Droid;
 
 namespace Prototype.Droid
 {
-	[Activity (Label = "Prototype", Icon = "@drawable/icon", Theme="@style/splashscreen", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+	[Activity (Label = "Prototype", Icon = "@drawable/ic_launcher", Theme="@style/splashscreen", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
 		protected override void OnCreate (Bundle bundle)

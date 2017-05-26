@@ -5,7 +5,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:helpers="clr-namespace:Prototype.Views.Helpers;assembly">
 
-    <ffimageloading:CachedImage Source="{helpers:ImageFromFile saved.png}"  
+    <ffimageloading:CachedImage Source="{helpers:ImageFromFile ic_action_saved.png}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"
@@ -14,7 +14,7 @@
                                             IsOpaque="True"
                                             CacheType="All"/>
 
-    <ffimageloading:CachedImage Source="{helpers:ImageFromFile locked.png}"  
+    <ffimageloading:CachedImage Source="{helpers:ImageFromFile ic_action_locked.png}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"
@@ -23,7 +23,7 @@
                                             IsOpaque="True"
                                             CacheType="All"/>
 
-    <ffimageloading:CachedImage Source="{helpers:ImageFromFile unlocked.png}"  
+    <ffimageloading:CachedImage Source="{helpers:ImageFromFile ic_action_unlocked.png}"  
                                             HeightRequest="24"
                                             WidthRequest="24"
                                             BitmapOptimizations="True"
