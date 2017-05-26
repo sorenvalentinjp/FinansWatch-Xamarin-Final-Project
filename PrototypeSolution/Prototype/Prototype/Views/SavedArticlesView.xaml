@@ -14,6 +14,10 @@
                   ItemsSource="{Binding SavedArticles}"
                   ItemTemplate="{Binding DataTemplate}"
                   CachingStrategy="RecycleElement"
-                  HasUnevenRows="true"/>
+                  HasUnevenRows="true">
+            <ListView.Footer>
+                <Label Text="This label is to avoid seperator lines between empty cells on iOS" IsVisible="False"/>
+            </ListView.Footer>
+        </ListView>
     </ContentPage.Content>
 </ContentPage>
