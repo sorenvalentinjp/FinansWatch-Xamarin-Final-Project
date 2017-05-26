@@ -65,7 +65,7 @@ namespace Prototype.Helpers
                 return "";
             }
 
-            var pattern = "<ul>[\\s\\S]*?</ul>";
+            var pattern = "<ul>*.*?</ul>";
 
             return Regex.Replace(html, pattern, "");
         }

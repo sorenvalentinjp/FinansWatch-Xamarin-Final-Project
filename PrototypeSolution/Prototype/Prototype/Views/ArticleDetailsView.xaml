@@ -40,7 +40,7 @@
                            FontSize="Micro" />
                     <customRenderers:HtmlFormattedLabel IsVisible="{Binding ArticleViewModel.SubscriberHasAccess}"
                                                         Text="{Binding ArticleViewModel.Article.bodyText}" 
-                                                        Margin="10,15,20,10" 
+                                                        Margin="10,15,20,0" 
                                                         FontSize="Small"/>
                     <StackLayout IsVisible="{Binding ArticleViewModel.SubscriberHasAccess, Converter={converters:InverseBooleanConverter}}" 
                                  Orientation="Vertical"
