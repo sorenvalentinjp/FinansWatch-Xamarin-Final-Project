@@ -11,7 +11,7 @@
             <ContentPage.Content>
                 <ScrollView>
                     <StackLayout x:Name="StackLayoutButtons"
-                                 Padding="5,30,5,5"
+                                 Padding="5,5,5,5"
                                  BackgroundColor="#213c68">
 
                         <components:MasterButton Text="FORSIDE" Command="{Binding FrontPageAction}" x:Name="FrontPageButton"/>

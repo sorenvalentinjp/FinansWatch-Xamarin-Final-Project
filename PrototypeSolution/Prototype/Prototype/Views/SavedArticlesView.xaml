@@ -15,6 +15,7 @@
                   ItemTemplate="{Binding DataTemplate}"
                   CachingStrategy="RecycleElement"
                   HasUnevenRows="true">
+            <!--The footer is added to hide empty cell on iOS-->
             <ListView.Footer>
                 <Label Text="This label is to avoid seperator lines between empty cells on iOS" IsVisible="False"/>
             </ListView.Footer>
