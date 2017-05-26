@@ -13,7 +13,7 @@
                         <viewControllerLayoutGuide type="top" id="Y8P-hJ-Z43"/>
                         <viewControllerLayoutGuide type="bottom" id="9ZL-r4-8FZ"/>
                     </layoutGuides>
-                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="49" key="view" image="VeryBigIcon.png">
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="49" key="view" image="ic_launcher.png">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
@@ -25,7 +25,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Icon-60.png" width="60" height="60"/>
         <image name="BigIcon.png" width="144" height="144"/>
         <image name="Default-568h.png" width="320" height="568"/>
         <image name="Default-Portrait.png" width="768" height="1004"/>
@@ -46,6 +45,12 @@
         <image name="SmallIcon.png" width="72" height="72"/>
         <image name="unlocked.png" width="24" height="24"/>
         <image name="VeryBigIcon.png" width="192" height="192"/>
+        <image name="ic_action_latest_articles.png" width="24" height="24"/>
+        <image name="ic_action_locked.png" width="24" height="24"/>
+        <image name="ic_action_saved.png" width="24" height="24"/>
+        <image name="ic_action_share.png" width="24" height="24"/>
+        <image name="ic_action_unlocked.png" width="24" height="24"/>
+        <image name="ic_launcher.png" width="48" height="48"/>
     </resources>
     <color key="tintColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
 </document>
