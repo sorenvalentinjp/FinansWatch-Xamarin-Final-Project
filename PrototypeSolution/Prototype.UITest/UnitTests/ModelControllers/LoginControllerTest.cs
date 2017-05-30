@@ -33,8 +33,7 @@ namespace Prototype.UITest.UnitTests.ModelControllers
             _validUser = "validUser";
             _validPassword = "validPassword";
             _invalidPassword = "invalidPassword";
-
-     }
+        }
 
         [Test]
         public void LoginAsyncValidTokenShouldRaiseLoginEventSucceeded()
