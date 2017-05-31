@@ -15,18 +15,6 @@ namespace Prototype.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         ////Generated fields start
-        //private Image _image;
-        //public Image image
-        //{
-        //    get { return _image; }
-        //    set
-        //    {
-        //        if (_image == value) { return; }
-        //        _image = value;
-        //        Notify("image");
-        //    }
-        //}
-
         private string _desktopUrl;
         public string desktopUrl
         {
@@ -140,20 +128,7 @@ namespace Prototype.Models
                 Notify("isTopArticle");
             }
         }
-        //private List<object> _inlineImages;
-        //public List<object> inlineImages
-        //{
-        //    get { return _inlineImages; }
-        //    set
-        //    {
-        //        if (_inlineImages == value) { return; }
-        //        _inlineImages = value;
-        //        Notify("inlineImages");
-        //    }
-        //}
-        //public Metadata metadata { get; set; }
-        //public bool breakingNews { get; set; }
-        //public object partner { get; set; }
+
         private string _bodyText;
         public string bodyText
         {
@@ -165,9 +140,7 @@ namespace Prototype.Models
                 Notify("bodyText");
             }
         }
-        //public string c_name { get; set; }
-        //public string c_category { get; set; }
-        //public List<object> tags { get; set; }
+
         private List<RelatedArticle> _relatedArticles;
         public List<RelatedArticle> relatedArticles
         {
@@ -190,11 +163,6 @@ namespace Prototype.Models
                 Notify("topImages");
             }
         }
-        //public object video { get; set; }
-        //public List<object> quoteBoxes { get; set; }
-        //public List<object> reviewBoxes { get; set; }
-        //public List<object> factsBoxes { get; set; }
-        //public object updateInfo { get; set; }
         private PublishData _publishData;
         public PublishData publishData
         {
@@ -232,7 +200,6 @@ namespace Prototype.Models
 
 
         //Manually made fields start
-
         private bool _isSaved;
         public bool IsSaved
         {
@@ -302,30 +269,9 @@ namespace Prototype.Models
 
         public void AddFieldsFromAnotherArticle(Article article)
         {
-            //image = article.image;
-            //desktopUrl = article.desktopUrl;
-            //homeSectionName = article.homeSectionName;
-            //contentUrl = article.contentUrl;
-            //titles = article.titles;
-            //teasers = article.teasers;
-            //homeSectionId = article.homeSectionId;
-            //publishedDate = article.publishedDate;
-            //locked = article.locked;
-            //isTopArticle = article.isTopArticle;
-            //inlineImages = article.inlineImages;
-            //metadata = article.metadata;
-            //breakingNews = article.breakingNews;
-            //partner = article.partner;
             bodyText = article.bodyText;
-            //c_name = article.c_name;
-            //c_category = article.c_category;
-            //tags = article.tags;
             relatedArticles = article.relatedArticles;
             topImages = article.topImages;
-            //video = article.video;
-            //quoteBoxes = article.quoteBoxes;
-            //reviewBoxes = article.reviewBoxes;
-            //updateInfo = article.updateInfo;
             publishData = article.publishData;
             lastModified = article.lastModified;
             id = article.id;
@@ -551,11 +497,6 @@ namespace Prototype.Models
                 Notify("url");
             }
         }
-        //public string title { get; set; }
-        //public string sectionName { get; set; }
-        //public string publishedTime { get; set; }
-        //public Teaser teaser { get; set; }
-        //public bool locked { get; set; }
 
         protected void Notify(string propName)
         {
@@ -572,7 +513,6 @@ namespace Prototype.Models
     public class PublishData : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        //public List<object> authors { get; set; }
         private string _publishInfo;
         public string publishInfo
         {
@@ -584,8 +524,6 @@ namespace Prototype.Models
                 Notify("publishInfo");
             }
         }
-        //public string publishedTime { get; set; }
-        //public string publishedTimeFormatted { get; set; }
 
         protected void Notify(string propName)
         {
