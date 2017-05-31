@@ -125,12 +125,12 @@ namespace Prototype.ViewModels
         }
 
         /// <summary>
-        /// This event fires when the user taps the shorcut button placed in the navigation bar to show AllArticlesView
+        /// This event fires when the user taps the shorcut button placed in the navigation bar to show LatestArticlesView
         /// </summary>
         private void AllArticlesShortcutActionOccured()
         {
             if (this._allArticlesView == null)
-                this._allArticlesView = new AllArticlesView(new AllArticlesViewModel(this._stateController));
+                this._allArticlesView = new LatestArticlesView(new LatestArticlesViewModel(this._stateController));
 
             _masterDetail.Detail = _allArticlesView;
         }
@@ -147,7 +147,7 @@ namespace Prototype.ViewModels
         }
 
         /// <summary>
-        /// Directs the user to AllArticlesView
+        /// Directs the user to LatestArticlesView
         /// </summary>
         public ICommand AllArticlesAction
         {
@@ -156,7 +156,7 @@ namespace Prototype.ViewModels
                 return new Command(() =>
                 {
                     if (this._allArticlesView == null)
-                        this._allArticlesView = new AllArticlesView(new AllArticlesViewModel(this._stateController));
+                        this._allArticlesView = new LatestArticlesView(new LatestArticlesViewModel(this._stateController));
 
                     _masterDetail.Detail = _allArticlesView;
                     _masterDetail.IsPresented = false;

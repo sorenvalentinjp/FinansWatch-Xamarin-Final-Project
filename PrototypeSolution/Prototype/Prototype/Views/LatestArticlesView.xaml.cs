@@ -8,9 +8,9 @@ using Xamarin.Forms.Xaml;
 namespace Prototype.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AllArticlesView : ContentPage
+	public partial class LatestArticlesView : ContentPage
     {
-        public AllArticlesView(AllArticlesViewModel viewModel)
+        public LatestArticlesView(LatestArticlesViewModel viewModel)
         {
             BindingContext = viewModel;
 

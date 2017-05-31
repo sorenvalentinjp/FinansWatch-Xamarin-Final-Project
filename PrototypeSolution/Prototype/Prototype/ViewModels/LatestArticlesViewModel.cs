@@ -12,7 +12,7 @@ using Xamarin.Forms;
 
 namespace Prototype.ViewModels
 {
-    public class AllArticlesViewModel : INotifyPropertyChanged
+    public class LatestArticlesViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly StateController _stateController;
@@ -65,7 +65,7 @@ namespace Prototype.ViewModels
             }
         }
 
-        public AllArticlesViewModel(StateController stateController)
+        public LatestArticlesViewModel(StateController stateController)
         {
             this._stateController = stateController;
             IsRefreshing = false;

@@ -18,12 +18,12 @@ namespace Prototype.UITest.UnitTests.ViewModels
 {
     public class AllArticlesViewModelTest
     {
-        private AllArticlesViewModel _allArticlesViewModel;
+        private LatestArticlesViewModel _allArticlesViewModel;
 
         [SetUp]
         public void Setup()
         {
-            _allArticlesViewModel = new AllArticlesViewModel(StateControllerMockGenerator.GenerateMock());    
+            _allArticlesViewModel = new LatestArticlesViewModel(StateControllerMockGenerator.GenerateMock());    
         }
 
         [Test]

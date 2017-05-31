@@ -31,14 +31,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\SubscriberToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ArticleDetailsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ArticleViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AllArticlesViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LatestArticlesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MasterDetailViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SavedArticlesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SearchArticlesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SectionViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\AllArticlesView.xaml.cs">
-      <DependentUpon>AllArticlesView.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\LatestArticlesView.xaml.cs">
+      <DependentUpon>LatestArticlesView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\ArticleDetailsView.xaml.cs">
@@ -115,7 +115,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\AllArticlesView.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\LatestArticlesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
