@@ -1,4 +1,4 @@
-# Xamarin-app
+# Finanswatch Xamarin-app
 My final project and Intern project at Jyllands-Posten A/S.
 
 App for www.finanswatch.dk made with Xamarin Forms. Supports Android and iOS.
