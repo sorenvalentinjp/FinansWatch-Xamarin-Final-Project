@@ -5,4 +5,4 @@ App for www.finanswatch.dk made with Xamarin Forms. Supports Android and iOS.
 
 Code share 99%
 
-Confidential files and API'keys are out from this repository. You cannot run it without these. But you can look through my code.
+Confidential files and API'keys are left out from this repository. You cannot run it without these. But you can look through my code.
