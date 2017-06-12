@@ -1,6 +1,8 @@
 # Finanswatch Xamarin-app
 My final project and Intern project at JP/Politikens Hus A/S.
 
+Made by Søren Valentin Silkjær & Michael Møller-Hansen
+
 App for www.finanswatch.dk made with Xamarin Forms. Supports Android and iOS.
 
 Development time : 6 weeks
